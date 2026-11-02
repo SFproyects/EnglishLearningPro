@@ -121,7 +121,7 @@
                     <span class="text-[10px] font-extrabold uppercase tracking-widest text-emerald-700 bg-emerald-100 px-3 py-1 rounded-full border border-emerald-200" id="course-subtitle">Intermediate B1 Mastery Course</span>
                     <h2 class="text-2xl sm:text-3xl font-extrabold text-slate-900 mt-2 tracking-tight" id="welcome-title">Welcome back!</h2>
                     <p class="text-slate-600 mt-1.5 text-xs sm:text-sm bg-white/80 border border-slate-200 px-4 py-2.5 rounded-2xl italic shadow-sm" id="motivational-quote">
-                        "Master greetings and farewells in real conversational scenarios!"
+                        "Master professional greetings and introductions naturally!"
                     </p>
                 </div>
 
@@ -135,7 +135,7 @@
                         <div id="session-bar" class="bg-gradient-to-r from-sky-400 to-emerald-500 h-full w-0 rounded-full transition-all duration-500 shadow-sm"></div>
                     </div>
                     <div class="mt-3 text-center text-xs text-slate-500 font-bold" id="auto-advance-notice">
-                        ✨ Complete 4 turns of greetings & farewells
+                        ✨ Complete 4 conversational turns of greetings & farewells
                     </div>
                 </div>
             </div>
@@ -232,15 +232,15 @@
                     </div>
                 </div>
 
-                <!-- Chat sobre Saludos y Despedidas -->
+                <!-- Chat de Saludos y Presentaciones -->
                 <div class="grid grid-cols-1 lg:grid-cols-3 gap-5">
                     <div class="vibrant-card lg:col-span-3 rounded-3xl p-5 sm:p-7 flex flex-col justify-between shadow-lg h-[480px]">
                         <div>
                             <div class="flex items-center justify-between mb-3">
                                 <span class="text-xs font-extrabold text-emerald-700 bg-emerald-100 px-3.5 py-1 rounded-full border border-emerald-200 flex items-center gap-1.5 shadow-sm">
-                                    <i data-lucide="messages-square" class="w-3.5 h-3.5"></i> Step 2: Greetings & Farewells Roleplay (4 Turns)
+                                    <i data-lucide="messages-square" class="w-3.5 h-3.5"></i> Step 2: Greetings & Introductions Roleplay (4 Turns)
                                 </span>
-                                <span class="text-[11px] font-bold text-slate-500" id="roleplay-scenario-tag">Casual Encounter</span>
+                                <span class="text-[11px] font-bold text-slate-500" id="roleplay-scenario-tag">Professional Introduction</span>
                             </div>
                         </div>
 
@@ -255,7 +255,7 @@
                                 </button>
                             </div>
                             <div class="flex gap-2">
-                                <input type="text" id="roleplay-user-input" class="vibrant-input flex-grow rounded-2xl px-4 py-3 text-xs sm:text-sm text-slate-800 focus:outline-none transition font-semibold" placeholder="Reply using greetings or farewell expressions..." onkeypress="if(event.key === 'Enter') sendRoleplayMessage()">
+                                <input type="text" id="roleplay-user-input" class="vibrant-input flex-grow rounded-2xl px-4 py-3 text-xs sm:text-sm text-slate-800 focus:outline-none transition font-semibold" placeholder="Reply using a greeting or introduction expression..." onkeypress="if(event.key === 'Enter') sendRoleplayMessage()">
                                 <button onclick="sendRoleplayMessage()" class="bg-gradient-to-r from-sky-500 to-emerald-500 hover:from-sky-600 hover:to-emerald-600 text-white px-5 py-3 rounded-2xl text-xs font-extrabold transition shadow-md cursor-pointer flex items-center gap-1">
                                     <i data-lucide="send" class="w-4 h-4"></i> Send
                                 </button>
@@ -462,12 +462,12 @@
             let fSlang2 = "Alright, I'm heading out. Take care!";
             let fSlang2Es = "Bien, ya me voy. ¡Cuídate!";
 
-            // Saludo inicial enfocado en saludos y presentaciones
-            let tutorIntro = "Hey! Great to run into you. How are you doing today?";
+            // Saludo inicial 100% enfocado en saludos y presentaciones
+            let tutorIntro = "Hello! It's a pleasure to meet you. Please introduce yourself using a greeting expression.";
 
             if (i === 1) {
                 themeName = "Professional Greetings & Introductions";
-                tutorIntro = "Hello! It's a real pleasure to meet you. How is your day going so far?";
+                tutorIntro = "Hello! It's a pleasure to meet you. Please introduce yourself using a greeting expression.";
             } else if (i === 2) {
                 themeName = "Shopping & Asking Prices (Transactions)";
                 gForm1 = "Good day, I would like to inquire about an item.";
@@ -632,7 +632,7 @@
             switchTab('speaking');
         }
 
-        // CHAT NATURAL CENTRADO EN SALUDOS Y DESPIDAS
+        // CHAT NATURAL CONVERSACIONAL DE SALUDOS Y DESPIDAS
         function sendRoleplayMessage() {
             const input = document.getElementById('roleplay-user-input');
             const text = input.value.trim();
@@ -682,13 +682,13 @@
 
                 let tutorReply = "";
                 if (roleplayInteractionCount === 1) {
-                    tutorReply = `I'm doing great, thanks for asking! It's awesome catching up with you. What have you been up to lately?`;
+                    tutorReply = `Wonderful introduction! It's great to connect with you. How are you doing today?`;
                 } else if (roleplayInteractionCount === 2) {
-                    tutorReply = `That sounds really interesting! I'm glad things are going well for you.`;
+                    tutorReply = `I'm doing fantastic, thanks for asking. It's a pleasure talking with you.`;
                 } else if (roleplayInteractionCount === 3) {
-                    tutorReply = `It was wonderful talking to you today. Whenever you're ready, feel free to use a farewell expression to close our chat!`;
+                    tutorReply = `We've had a great chat. Whenever you're ready, feel free to use a farewell expression to wrap things up!`;
                 } else {
-                    tutorReply = `Take care and see you around! You nailed the greeting and farewell conversation. Click 'Validate Roleplay & Proceed' to continue!`;
+                    tutorReply = `Take care and see you around! You mastered greetings and farewells. Click 'Validate Roleplay & Proceed' to continue!`;
                 }
 
                 chatBox.innerHTML += `
