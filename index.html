@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>English Pro - Ultimate Progressive Edition</title>
     <!-- Tailwind CSS CDN -->
-    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://tailwindcss.com"></script>
     <!-- Lucide Icons -->
     <script src="https://unpkg.com/lucide@latest"></script>
     <style>
@@ -135,7 +135,7 @@
                         <div id="session-bar" class="bg-gradient-to-r from-sky-400 to-emerald-500 h-full w-0 rounded-full transition-all duration-500 shadow-sm"></div>
                     </div>
                     <div class="mt-3 text-center text-xs text-slate-500 font-bold" id="auto-advance-notice">
-                        ✨ Complete 6 roleplay interactions based on Step 1 to unlock next phase
+                        ✨ Complete 6 sequential interactions based on Step 1 to unlock next phase
                     </div>
                 </div>
             </div>
@@ -183,7 +183,7 @@
                         <div>
                             <div class="flex items-center justify-between mb-3">
                                 <span class="text-xs font-extrabold text-emerald-700 bg-emerald-100 px-3.5 py-1 rounded-full border border-emerald-200 flex items-center gap-1.5 shadow-sm">
-                                    <i data-lucide="messages-square" class="w-3.5 h-3.5"></i> Step 2: Guided Roleplay (Strictly Following Lesson Theme)
+                                    <i data-lucide="messages-square" class="w-3.5 h-3.5"></i> Step 2: Sequential Guided Roleplay (6 Turns)
                                 </span>
                                 <span class="text-[11px] font-bold text-slate-500" id="roleplay-scenario-tag">B1 Mastery Scenario</span>
                             </div>
@@ -485,7 +485,8 @@
                         "That's a solid introduction. Now, how do you usually structure your daily professional routine using your home workspace?",
                         "Very efficient. What productivity targets or goals do you focus on during your morning workflow?",
                         "Great consistency! How do you handle client communications or scheduling when working remotely?",
-                        "Excellent points. Can you summarize how your professional introduction and daily workflow connect to your overall career goals?"
+                        "Excellent points. Can you summarize how your professional introduction and daily workflow connect to your overall career goals?",
+                        "Fantastic completion of Step 1! You have successfully mastered professional introductions and daily routine workflows."
                     ];
                 }
                 else if (i === 2) { 
@@ -499,7 +500,8 @@
                         "That sounds organized. What specific tasks do you manage first thing in your daily schedule?",
                         "Very structured. How do you maintain high efficiency when working independently from home?",
                         "That is a great approach. How do you handle distractions while managing your home office?",
-                        "Excellent! Can you summarize your ideal remote workflow using formal or casual expressions?"
+                        "Excellent! Can you summarize your ideal remote workflow using formal or casual expressions?",
+                        "Great job completing remote work management! You are ready for vocabulary mastery."
                     ];
                 }
                 else if (i === 3) { 
@@ -513,7 +515,8 @@
                         "That sounds professional. What details would you discuss during the business meeting over lunch?",
                         "Very good. How do you transition from casual conversation to project details during a client meal?",
                         "That is a smart negotiation tactic. How do you follow up after a client business lunch?",
-                        "Awesome! Can you phrase a casual invitation to grab lunch and discuss project workflow?"
+                        "Awesome! Can you phrase a casual invitation to grab lunch and discuss project workflow?",
+                        "Fantastic! Business dining roleplay successfully completed."
                     ];
                 }
                 else { 
@@ -527,7 +530,8 @@
                         "That is a great perspective. What specific tools or habits help you stay locked in on your targets?",
                         "Very impressive discipline. How do you measure your daily achievements against your project goals?",
                         "That makes total sense. How do you overcome unexpected roadblocks in your routine?",
-                        "Excellent workflow discussion! Are you ready to review the core vocabulary for this lesson?"
+                        "Excellent workflow discussion! How do you prepare for upcoming professional challenges?",
+                        "Great completion of the core lesson topic! Ready for vocabulary review."
                     ];
                 }
                 
@@ -548,7 +552,8 @@
                     "That is precise methodology. Why should you inspect the circuit board wiring before powering on the device?",
                     "Very true. What diagnostic tools (like a multimeter or oscilloscope) do you rely on for voltage testing?",
                     "Excellent technical practice. How do you explain a complex hardware repair step to a customer?",
-                    "Great engineering insight! Can you summarize your diagnostic workflow using modal verbs like should or must?"
+                    "Great engineering insight! How do you document your troubleshooting steps for future repairs?",
+                    "Fantastic troubleshooting session! You are ready to review technical vocabulary."
                 ];
                 words = [
                     {w:"Troubleshoot",d:"Depurar o diagnosticar",e:"Diagnosticar 🔧"}, {w:"Schematic",d:"Plano o diagrama",e:"Esquema 🔌"}, 
@@ -568,7 +573,8 @@
                     "That sounds robust. What framework or database integration do you prefer for scalable system design?",
                     "Very advanced! Why is performance optimization critical in modern cloud environments?",
                     "That is an impressive technical milestone. How do you test system reliability before launching a deployment?",
-                    "Fantastic software engineering discussion! Are you ready to review the architecture vocabulary?"
+                    "Fantastic software engineering discussion! How do you handle version control during team development?",
+                    "Excellent architecture roleplay completed! Ready for vocabulary mastery."
                 ];
                 words = [
                     {w:"Deployment",d:"Lanzamiento al servidor",e:"Despliegue 🚀"}, {w:"Architecture",d:"Estructura de sistema",e:"Arquitectura 🏛️"}, 
@@ -588,7 +594,8 @@
                     "That is high-level strategic thinking. How do you demonstrate professional leadership during complex project negotiations?",
                     "Very persuasive argument. What breakthrough innovations have transformed your professional proficiency recently?",
                     "That is a remarkable achievement. How do you lock in long-term goals using advanced conditionals in English?",
-                    "Outstanding B1 mastery discussion! Are you ready to master the advanced vocabulary for this milestone?"
+                    "Outstanding B1 mastery discussion! How do you evaluate the success of your long-term strategies?",
+                    "Brilliant execution of the B1 leadership roleplay! Moving to vocabulary."
                 ];
                 words = [
                     {w:"Metrics",d:"Medidas de rendimiento",e:"Métricas 📊"}, {w:"Leadership",d:"Liderazgo",e:"Liderazgo 👑"}, 
@@ -769,7 +776,7 @@
                 <div class="flex items-start gap-2.5">
                     <div class="w-8 h-8 rounded-full bg-sky-500 text-white flex items-center justify-center font-bold text-xs flex-shrink-0">🤖</div>
                     <div class="bg-white border border-slate-200 p-3.5 rounded-2xl shadow-sm text-xs text-slate-800 max-w-[85%]">
-                        <p class="font-extrabold text-sky-700 mb-0.5">Tutor (Roleplay - Lesson Topic):</p>
+                        <p class="font-extrabold text-sky-700 mb-0.5">Tutor (Step 1 - Question 1):</p>
                         <p class="font-medium">${currentRoleplayData.tutorOpening}</p>
                     </div>
                 </div>
@@ -804,30 +811,25 @@
                 roleplayInteractionCount++;
                 document.getElementById('roleplay-counter-label').innerText = `Interactions: ${roleplayInteractionCount} / ${requiredRoleplayTurns} completed`;
 
+                let promptsArr = currentRoleplayData.prompts || [];
+                
                 if (roleplayInteractionCount >= requiredRoleplayTurns) {
                     chatBox.innerHTML += `
                         <div class="flex items-start gap-2.5">
                             <div class="w-8 h-8 rounded-full bg-emerald-500 text-white flex items-center justify-center font-bold text-xs flex-shrink-0">🌟</div>
                             <div class="bg-emerald-50 border border-emerald-200 p-3.5 rounded-2xl shadow-sm text-xs text-emerald-900 max-w-[85%]">
                                 <p class="font-extrabold mb-0.5">Tutor (Great job!):</p>
-                                <p class="font-medium">You have successfully completed the lesson's guided conversation! You can now click 'Validate Roleplay & Proceed'.</p>
+                                <p class="font-medium">You have successfully completed all 6 sequential turns! Click 'Validate Roleplay & Proceed' to continue.</p>
                             </div>
                         </div>
                     `;
                 } else {
-                    let promptsArr = currentRoleplayData.prompts || [
-                        "That's a solid point. How does this relate directly to our lesson topic?",
-                        "Very interesting. Can you elaborate further using the expressions from Step 1?",
-                        "Great perspective! Why is mastering this specific concept important for your professional growth?",
-                        "That makes total sense. How would you apply this in a real-world project scenario?",
-                        "Awesome progress! Are you ready to advance to vocabulary mastery?"
-                    ];
-                    let nextPrompt = promptsArr[roleplayInteractionCount % promptsArr.length];
+                    let nextPrompt = promptsArr[roleplayInteractionCount] || "That's great! Let's continue discussing our core lesson topic.";
                     chatBox.innerHTML += `
                         <div class="flex items-start gap-2.5">
                             <div class="w-8 h-8 rounded-full bg-sky-500 text-white flex items-center justify-center font-bold text-xs flex-shrink-0">🤖</div>
                             <div class="bg-white border border-slate-200 p-3.5 rounded-2xl shadow-sm text-xs text-slate-800 max-w-[85%]">
-                                <p class="font-extrabold text-sky-700 mb-0.5">Tutor (Roleplay - Lesson Topic):</p>
+                                <p class="font-extrabold text-sky-700 mb-0.5">Tutor (Step 1 - Question ${roleplayInteractionCount + 1}):</p>
                                 <p class="font-medium">${nextPrompt}</p>
                             </div>
                         </div>
@@ -839,11 +841,11 @@
 
         function completeRoleplayPhase() {
             if (roleplayInteractionCount < requiredRoleplayTurns) {
-                showCustomModal("Incomplete Conversation ⚠️", `You need at least ${requiredRoleplayTurns} conversational interactions with your tutor (you have ${roleplayInteractionCount}). Keep chatting!`, "💬");
+                showCustomModal("Incomplete Conversation ⚠️", `You need to complete all ${requiredRoleplayTurns} sequential turns with your tutor (you have ${roleplayInteractionCount}). Keep chatting!`, "💬");
                 return;
             }
 
-            showCustomModal("Roleplay Approved! 🌟", "Tutor: Excellent fluency and lesson adherence! Moving to Vocabulary Mastery.", "💬");
+            showCustomModal("Roleplay Approved! 🌟", "Tutor: Excellent sequential fluency! Moving to Vocabulary Mastery.", "💬");
             setTimeout(() => {
                 closeModal();
                 unlockNextStep('speaking', 'flashcards');
