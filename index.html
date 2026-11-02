@@ -79,7 +79,7 @@
                         <i data-lucide="zap" class="w-5 h-5"></i>
                     </div>
                     <h1 class="font-extrabold text-lg text-slate-900 flex items-center gap-2 tracking-tight">
-                        <a href="url?id=0" class="hover:text-emerald-600 transition">English Pro</a>
+                        <a href="https://sfproyects.github.io/EnglishLearningPro/" class="hover:text-emerald-600 transition">English Pro</a>
                         <span class="text-[10px] font-bold uppercase tracking-wider bg-emerald-100 text-emerald-700 border border-emerald-200 px-2.5 py-0.5 rounded-full" id="header-badge">Lesson 1 / 40</span>
                     </h1>
                 </div>
@@ -387,147 +387,75 @@
         const curriculum40 = [];
         for (let i = 1; i <= 40; i++) {
             let blockNum = Math.ceil(i / 10);
-            let themeName = "";
-            let formalText = "";
-            let formalEs = "";
-            let casualText = "";
-            let casualEs = "";
+            let themeName = `Lesson Topic ${i}`;
+            let formalText = `It is a pleasure to connect with you regarding lesson ${i} objectives.`;
+            let formalEs = `Es un placer conectar contigo respecto a los objetivos de la lección ${i}.`;
+            let casualText = `Hey there! Let's crush lesson ${i} goals right now.`;
+            let casualEs = `¡Hola! Vamos a romper las metas de la lección ${i} ahora mismo.`;
             let words = [];
-            let grammarLevelTitle = "";
-            let roleplayPrompts = [];
+            let grammarLevelTitle = "Advanced B1 Mastery Workflow";
+            let roleplayPrompts = [
+                `Turn 1: How would you introduce your main professional goal using the formal style from Step 1?`,
+                `Turn 2: Excellent! Now, how do you manage your daily workflow or tasks for this topic?`,
+                `Turn 3: Very good. What specific challenges do you face when executing this workflow?`,
+                `Turn 4: That is a solid point. How do you maintain consistency and discipline?`,
+                `Turn 5: Almost done! Can you summarize your overall strategy using a casual or formal expression?`,
+                `Turn 6: Fantastic completion! You have mastered all 6 sequential turns.`
+            ];
 
             if (blockNum === 1) {
-                grammarLevelTitle = "Advanced Present Simple & Daily Professional Routine";
-                if (i === 1) { 
-                    themeName = "Professional Greetings & Introductions"; 
-                    formalText = "Hello, my name is Kevin and I am pleased to connect with you today."; 
-                    formalEs = "Hola, mi nombre es Kevin y me alegra conectar contigo hoy."; 
-                    casualText = "Hey there! I'm Kevin, great to meet you."; 
-                    casualEs = "¡Hola! Soy Kevin, un placer conocerte."; 
+                grammarLevelTitle = "Advanced Present Simple & Professional Routine";
+                if (i === 1) {
+                    themeName = "Professional Greetings & Introductions";
+                    formalText = "Hello, my name is Kevin and I am pleased to connect with you today.";
+                    formalEs = "Hola, mi nombre es Kevin y me alegra conectar contigo hoy.";
+                    casualText = "Hey there! I'm Kevin, great to meet you.";
+                    casualEs = "¡Hola! Soy Kevin, un placer conocerte.";
                     roleplayPrompts = [
-                        "Hello! Welcome to our professional introduction session. How would you introduce yourself formally in a business context using the style from Step 1?",
-                        "That's a solid introduction. Now, how do you usually structure your daily professional routine using your home workspace?",
-                        "Very efficient. What productivity targets or goals do you focus on during your morning workflow?",
-                        "Great consistency! How do you handle client communications or scheduling when working remotely?",
-                        "Excellent points. Can you summarize how your professional introduction and daily workflow connect to your overall career goals?",
-                        "Fantastic completion of Step 1! You have successfully mastered professional introductions and daily routine workflows."
+                        "Turn 1: Hello! How would you introduce yourself formally in a business context using the style from Step 1?",
+                        "Turn 2: That's a solid introduction. Now, how do you usually structure your daily professional routine using your home workspace?",
+                        "Turn 3: Very efficient. What productivity targets or goals do you focus on during your morning workflow?",
+                        "Turn 4: Great consistency! How do you handle client communications or scheduling when working remotely?",
+                        "Turn 5: Excellent points. Can you summarize how your professional introduction and daily workflow connect to your career goals?",
+                        "Turn 6: Fantastic completion of Step 1! You have successfully mastered professional introductions."
+                    ];
+                } else if (i === 2) {
+                    themeName = "Remote Work & Home Office Management";
+                    formalText = "I manage my professional tasks efficiently from my home workspace.";
+                    formalEs = "Gestiono mis tareas profesionales eficientemente desde mi espacio de trabajo en casa.";
+                    casualText = "I usually handle everything right from my home setup.";
+                    casualEs = "Suelo manejar todo directo desde mi estación en casa.";
+                    roleplayPrompts = [
+                        "Turn 1: Let's discuss remote work. How do you set up your professional workspace at home?",
+                        "Turn 2: That sounds organized. What specific tasks do you manage first thing in your schedule?",
+                        "Turn 3: Very structured. How do you maintain high efficiency when working independently?",
+                        "Turn 4: That is a great approach. How do you handle distractions while managing your office?",
+                        "Turn 5: Excellent! Can you summarize your ideal remote workflow using lesson expressions?",
+                        "Turn 6: Great job completing remote work management! Ready for vocabulary."
                     ];
                 }
-                else if (i === 2) { 
-                    themeName = "Remote Work & Home Office Management"; 
-                    formalText = "I manage my professional tasks efficiently from my home workspace."; 
-                    formalEs = "Gestiono mis tareas profesionales eficientemente desde mi espacio de trabajo en casa."; 
-                    casualText = "I usually handle everything right from my home setup."; 
-                    casualEs = "Suelo manejar todo directo desde mi estación en casa."; 
-                    roleplayPrompts = [
-                        "Let's discuss remote work management. How do you set up your professional workspace at home?",
-                        "That sounds organized. What specific tasks do you manage first thing in your daily schedule?",
-                        "Very structured. How do you maintain high efficiency when working independently from home?",
-                        "That is a great approach. How do you handle distractions while managing your home office?",
-                        "Excellent! Can you summarize your ideal remote workflow using formal or casual expressions?",
-                        "Great job completing remote work management! You are ready for vocabulary mastery."
-                    ];
-                }
-                else if (i === 3) { 
-                    themeName = "Business Dining & Client Meetings"; 
-                    formalText = "I would like to schedule a formal business lunch with our key client."; 
-                    formalEs = "Me gustaría programar un almuerzo de negocios formal con nuestro cliente clave."; 
-                    casualText = "Let's grab a quick lunch and discuss the project details."; 
-                    casualEs = "Vamos a comer algo rápido y discutimos los detalles del proyecto."; 
-                    roleplayPrompts = [
-                        "Today we focus on business meetings and dining. How would you schedule a formal lunch with a key client?",
-                        "That sounds professional. What details would you discuss during the business meeting over lunch?",
-                        "Very good. How do you transition from casual conversation to project details during a client meal?",
-                        "That is a smart negotiation tactic. How do you follow up after a client business lunch?",
-                        "Awesome! Can you phrase a casual invitation to grab lunch and discuss project workflow?",
-                        "Fantastic! Business dining roleplay successfully completed."
-                    ];
-                }
-                else { 
-                    themeName = `Advanced Routine & Workflow (${i})`; 
-                    formalText = `It is essential to maintain high productivity standards in professional workflows.`; 
-                    formalEs = `Es esencial mantener altos estándares de productividad en los flujos de trabajo profesionales.`; 
-                    casualText = `I always stay locked in on my daily targets and project goals.`; 
-                    casualEs = `Siempre me mantengo enfocado en mis metas diarias y objetivos de proyecto.`; 
-                    roleplayPrompts = [
-                        `Welcome to lesson ${i}. How do you maintain high productivity standards in your daily professional workflow?`,
-                        "That is a great perspective. What specific tools or habits help you stay locked in on your targets?",
-                        "Very impressive discipline. How do you measure your daily achievements against your project goals?",
-                        "That makes total sense. How do you overcome unexpected roadblocks in your routine?",
-                        "Excellent workflow discussion! How do you prepare for upcoming professional challenges?",
-                        "Great completion of the core lesson topic! Ready for vocabulary review."
-                    ];
-                }
-                
-                words = [
-                    {w:"Introduction",d:"Presentación formal",e:"Presentación 🤝"}, {w:"Workflow",d:"Flujo de trabajo",e:"Flujo ⚡"}, {w:"Productivity",d:"Rendimiento laboral",e:"Productividad 📈"}, 
-                    {w:"Schedule",d:"Agendar cita",e:"Horario 📅"}, {w:"Client",d:"Cliente corporativo",e:"Cliente 💼"}, {w:"Workspace",d:"Área de trabajo",e:"Oficina 💻"}, 
-                    {w:"Efficiency",d:"Eficacia",e:"Eficacia ⚡"}, {w:"Target",d:"Blanco u objetivo",e:"Meta 🎯"}
-                ];
             } else if (blockNum === 2) {
-                grammarLevelTitle = "Advanced Modals (should, must, can) & Technical Troubleshooting";
-                themeName = `Technical Troubleshooting & Engineering (${i})`;
-                formalText = `It is critical to analyze the electronic schematic before diagnosing the hardware failure.`;
-                formalEs = `Es fundamental analizar el esquema electrónico antes de diagnosticar la falla de hardware.`;
-                casualText = `I always check the circuit board wiring and fix the bug right away.`;
-                casualEs = `Siempre reviso el cableado de la placa y soluciono el problema de inmediato.`;
+                grammarLevelTitle = "Advanced Modals & Technical Troubleshooting";
+                themeName = `Technical Troubleshooting (${i})`;
+                formalText = "It is critical to analyze the electronic schematic before diagnosing the hardware failure.";
+                formalEs = "Es fundamental analizar el esquema electrónico antes de diagnosticar la falla de hardware.";
+                casualText = "I always check the circuit board wiring and fix the bug right away.";
+                casualEs = "Siempre reviso el cableado de la placa y soluciono el problema de inmediato.";
                 roleplayPrompts = [
-                    "Let's focus on technical troubleshooting. How do you approach analyzing an electronic schematic or hardware failure?",
-                    "That is precise methodology. Why should you inspect the circuit board wiring before powering on the device?",
-                    "Very true. What diagnostic tools (like a multimeter or oscilloscope) do you rely on for voltage testing?",
-                    "Excellent technical practice. How do you explain a complex hardware repair step to a customer?",
-                    "Great engineering insight! How do you document your troubleshooting steps for future repairs?",
-                    "Fantastic troubleshooting session! You are ready to review technical vocabulary."
-                ];
-                words = [
-                    {w:"Troubleshoot",d:"Depurar o diagnosticar",e:"Diagnosticar 🔧"}, {w:"Schematic",d:"Plano o diagrama",e:"Esquema 🔌"}, 
-                    {w:"Diagnostic",d:"Análisis de falla",e:"Diagnóstico 📊"}, {w:"Hardware",d:"Componentes físicos",e:"Hardware 🛠️"}, 
-                    {w:"Voltage",d:"Tensión eléctrica",e:"Voltaje ⚡"}, {w:"Engineering",d:"Ingeniería",e:"Ingeniería ⚙️"}, 
-                    {w:"Component",d:"Pieza o elemento",e:"Componente 🧩"}, {w:"Resolution",d:"Solución de problema",e:"Resolución 💡"}
-                ];
-            } else if (blockNum === 3) {
-                grammarLevelTitle = "Passive Voice, Present Perfect & Advanced Software Architecture";
-                themeName = `Software Architecture & System Deployment (${i})`;
-                formalText = `Robust enterprise solutions have been successfully deployed across multiple cloud environments.`;
-                formalEs = `Se han implementado con éxito soluciones empresariales robustas en múltiples entornos de nube.`;
-                casualText = `We totally nailed the app deployment ahead of schedule, bro!`;
-                casualEs = `¡Reventamos el despliegue de la app antes de tiempo, bro!`;
-                roleplayPrompts = [
-                    "Today we explore software architecture and cloud deployment. How have you deployed software solutions in your projects?",
-                    "That sounds robust. What framework or database integration do you prefer for scalable system design?",
-                    "Very advanced! Why is performance optimization critical in modern cloud environments?",
-                    "That is an impressive technical milestone. How do you test system reliability before launching a deployment?",
-                    "Fantastic software engineering discussion! How do you handle version control during team development?",
-                    "Excellent architecture roleplay completed! Ready for vocabulary mastery."
-                ];
-                words = [
-                    {w:"Deployment",d:"Lanzamiento al servidor",e:"Despliegue 🚀"}, {w:"Architecture",d:"Estructura de sistema",e:"Arquitectura 🏛️"}, 
-                    {w:"Optimization",d:"Mejora de rendimiento",e:"Optimización 📈"}, {w:"Environment",d:"Entorno de ejecución",e:"Entorno 🌐"}, 
-                    {w:"Framework",d:"Marco de desarrollo",e:"Framework 🛠️"}, {w:"Scalability",d:"Capacidad de crecimiento",e:"Escalabilidad 📊"}, 
-                    {w:"Database",d:"Base de datos",e:"Base de datos 🗄️"}, {w:"Integration",d:"Conexión de sistemas",e:"Integración 🔗"}
-                ];
-            } else {
-                grammarLevelTitle = "Advanced Conditionals, Professional Slang & Complex Argumentation";
-                themeName = `B1 Mastery & Professional Leadership (${i})`;
-                formalText = `If we optimize our systemic architecture, we will achieve superior performance metrics.`;
-                formalEs = `Si optimizamos nuestra arquitectura sistémica, lograremos métricas de rendimiento superiores.`;
-                casualText = `If we lock in this workflow right now, we'll crush all our quarterly goals!`;
-                casualEs = `¡Si aseguramos este flujo de trabajo ahora mismo, destruiremos todas nuestras metas trimestrales!`;
-                roleplayPrompts = [
-                    "Welcome to B1 Mastery level leadership and argumentation. If we optimize our systemic architecture, what performance metrics will improve?",
-                    "That is high-level strategic thinking. How do you demonstrate professional leadership during complex project negotiations?",
-                    "Very persuasive argument. What breakthrough innovations have transformed your professional proficiency recently?",
-                    "That is a remarkable achievement. How do you lock in long-term goals using advanced conditionals in English?",
-                    "Outstanding B1 mastery discussion! How do you evaluate the success of your long-term strategies?",
-                    "Brilliant execution of the B1 leadership roleplay! Moving to vocabulary."
-                ];
-                words = [
-                    {w:"Metrics",d:"Medidas de rendimiento",e:"Métricas 📊"}, {w:"Leadership",d:"Liderazgo",e:"Liderazgo 👑"}, 
-                    {w:"Strategic",d:"Estratégico",e:"Estratégico ♟️"}, {w:"Breakthrough",d:"Gran innovación",e:"Avance 💡"}, 
-                    {w:"Proficiency",d:"Dominio experto",e:"Dominio 🎯"}, {w:"Negotiation",d:"Acuerdo comercial",e:"Negociación 🤝"}, 
-                    {w:"Achievement",d:"Logro destacado",e:"Triunfo 🏆"}, {w:"Mastery",d:"Dominio total",e:"Maestría ⭐"}
+                    `Turn 1: How do you approach analyzing an electronic schematic or hardware failure in lesson ${i}?`,
+                    `Turn 2: Why should you inspect the circuit board wiring before powering on the device?`,
+                    `Turn 3: What diagnostic tools (like a multimeter) do you rely on for voltage testing?`,
+                    `Turn 4: How do you explain a complex hardware repair step to a customer clearly?`,
+                    `Turn 5: How do you document your troubleshooting steps for future reference?`,
+                    `Turn 6: Fantastic troubleshooting session! Ready for vocabulary mastery.`
                 ];
             }
+
+            words = [
+                {w:"Workflow",d:"Flujo de trabajo",e:"Flujo ⚡"}, {w:"Efficiency",d:"Eficacia",e:"Eficacia ⚡"}, 
+                {w:"Target",d:"Objetivo",e:"Meta 🎯"}, {w:"Analysis",d:"Análisis",e:"Análisis 📊"}, 
+                {w:"Professional",d:"Profesional",e:"Pro 💼"}, {w:"System",d:"Sistema",e:"Sistema 💻"}
+            ];
 
             curriculum40.push({
                 id: i,
@@ -546,13 +474,7 @@
                 flashcards: words.map((w, idx) => ({ id: i*10 + idx, term: w.w, def: w.d, es: w.e, img: w.e.split(' ').pop() })),
                 quizzes: [
                     { id: `l${i}_q1`, type: 'mc', title: `Grammar (Block ${blockNum})`, desc: "We ___ our best to optimize the system every single day.", options: [{text: 'A) do', correct: true}, {text: 'B) does', correct: false}], correction: "Con el pronombre 'We' siempre se utiliza 'do'." },
-                    { id: `l${i}_q2`, type: 'repair', title: 'Essential Vocabulary', desc: `Type in English for '${words[0].d}':`, answer: words[0].w.toLowerCase(), correction: `Se escribe '${words[0].w}'.` },
-                    { id: `l${i}_q3`, type: 'mc', title: 'Structure Check', desc: "He ___ professional engineering work.", options: [{text: 'A) does', correct: true}, {text: 'B) do', correct: false}], correction: "En tercera persona singular se utiliza 'does'." },
-                    { id: `l${i}_q4`, type: 'repair', title: 'Essential Vocabulary', desc: `Type in English for '${words[1].d}':`, answer: words[1].w.toLowerCase(), correction: `Se escribe '${words[1].w}'.` },
-                    { id: `l${i}_q5`, type: 'mc', title: 'Modals & Connectors', desc: "You ___ inspect the circuit board before repairing it.", options: [{text: 'A) should', correct: true}, {text: 'B) might not', correct: false}], correction: "Se utiliza 'should' para recomendaciones y consejos profesionales." },
-                    { id: `l${i}_q6`, type: 'repair', title: 'Translation', desc: "Traduce 'tiempo':", answer: "time", correction: "Se escribe 'time'." },
-                    { id: `l${i}_q7`, type: 'mc', title: 'Prepositions', desc: "I work on software architecture ___ the morning.", options: [{text: 'A) in', correct: true}, {text: 'B) on', correct: false}], correction: "Para referirse a la mañana se usa la preposición 'in'." },
-                    { id: `l${i}_q8`, type: 'repair', title: 'Vocabulary', desc: "Traduce 'meta':", answer: "goal", correction: "Se escribe 'goal'." }
+                    { id: `l${i}_q2`, type: 'repair', title: 'Essential Vocabulary', desc: `Type in English for '${words[0].d}':`, answer: words[0].w.toLowerCase(), correction: `Se escribe '${words[0].w}'.` }
                 ],
                 listening: `We are successfully mastering advanced professional English workflows today`,
                 shadow: formalText
@@ -648,7 +570,7 @@
                     <div class="w-8 h-8 rounded-full bg-sky-500 text-white flex items-center justify-center font-bold text-xs flex-shrink-0">🤖</div>
                     <div class="bg-white border border-slate-200 p-3.5 rounded-2xl shadow-sm text-xs text-slate-800 max-w-[85%]">
                         <p class="font-extrabold text-sky-700 mb-0.5">Tutor (Turn 1 / 6):</p>
-                        <p class="font-medium">${currentRoleplayData.tutorOpening}</p>
+                        <p class="font-medium">${currentRoleplayData.prompts[0]}</p>
                     </div>
                 </div>
             `;
@@ -660,7 +582,7 @@
             switchTab('speaking');
         }
 
-        // VALIDACIÓN ESTRICTA DE ROLEPLAY CONTEXTUAL
+        // VALIDACIÓN ESTRICTA CON FILTRO DE CONTEXTO DE LECCIÓN
         function sendRoleplayMessage() {
             const input = document.getElementById('roleplay-user-input');
             const text = input.value.trim();
@@ -669,7 +591,18 @@
             const chatBox = document.getElementById('chat-messages-container');
             const wordCount = text.split(/\s+/).length;
 
-            if (wordCount < 3) {
+            // Filtro estricto: exige longitud mínima y relevancia temática de la lección
+            const lowerText = text.toLowerCase();
+            const hasValidContext = wordCount >= 4 && (
+                lowerText.includes('name') || lowerText.includes('kevin') || 
+                lowerText.includes('work') || lowerText.includes('routine') || 
+                lowerText.includes('manage') || lowerText.includes('goal') || 
+                lowerText.includes('workflow') || lowerText.includes('system') ||
+                lowerText.includes('meet') || lowerText.includes('hello') ||
+                lowerText.includes('handle') || lowerText.includes('target')
+            );
+
+            if (!hasValidContext) {
                 chatBox.innerHTML += `
                     <div class="flex items-start gap-2.5 justify-end">
                         <div class="bg-rose-500 text-white p-3.5 rounded-2xl shadow-sm text-xs max-w-[85%]">
@@ -682,7 +615,7 @@
                         <div class="w-8 h-8 rounded-full bg-amber-500 text-white flex items-center justify-center font-bold text-xs flex-shrink-0">🤖</div>
                         <div class="bg-amber-50 border border-amber-200 p-3.5 rounded-2xl shadow-sm text-xs text-amber-900 max-w-[85%]">
                             <p class="font-extrabold mb-0.5">Tutor (Corrección Estricta):</p>
-                            <p class="font-medium">⚠️ ¡Oración muy corta! Debes responder con una estructura completa aplicando el vocabulario o estilo formal/casual de la lección (ej: <em>"${currentRoleplayData.formal}"</em>).</p>
+                            <p class="font-medium">⚠️ ¡Fuera de contexto o muy corto! Debes responder con una oración completa (mínimo 4 palabras) relacionada con el tema de la lección (ej: <em>"${currentRoleplayData.formal}"</em>).</p>
                         </div>
                     </div>
                 `;
