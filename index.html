@@ -121,7 +121,7 @@
                     <span class="text-[10px] font-extrabold uppercase tracking-widest text-emerald-700 bg-emerald-100 px-3 py-1 rounded-full border border-emerald-200" id="course-subtitle">Intermediate B1 Mastery Course</span>
                     <h2 class="text-2xl sm:text-3xl font-extrabold text-slate-900 mt-2 tracking-tight" id="welcome-title">Welcome back!</h2>
                     <p class="text-slate-600 mt-1.5 text-xs sm:text-sm bg-white/80 border border-slate-200 px-4 py-2.5 rounded-2xl italic shadow-sm" id="motivational-quote">
-                        "Consistency is the key to mastery. Let's crush our goals today!"
+                        "Master greetings and farewells in real conversational scenarios!"
                     </p>
                 </div>
 
@@ -135,7 +135,7 @@
                         <div id="session-bar" class="bg-gradient-to-r from-sky-400 to-emerald-500 h-full w-0 rounded-full transition-all duration-500 shadow-sm"></div>
                     </div>
                     <div class="mt-3 text-center text-xs text-slate-500 font-bold" id="auto-advance-notice">
-                        ✨ Complete 4 natural conversational turns to proceed
+                        ✨ Complete 4 turns of greetings & farewells
                     </div>
                 </div>
             </div>
@@ -144,7 +144,7 @@
         <!-- VISTA DE LECCIÓN ÚNICA EN PANTALLA -->
         <div id="lesson-view-container" class="space-y-4">
 
-            <!-- FASE 1: TEORÍA + CHAT NATURAL -->
+            <!-- FASE 1: TEORÍA + CHAT DE SALUDOS Y DESPIDAS -->
             <div id="content-speaking" class="space-y-4">
                 
                 <!-- Guía Teórica de Saludos y Despedidas -->
@@ -232,15 +232,15 @@
                     </div>
                 </div>
 
-                <!-- Chat Natural con Saludo Inicial -->
+                <!-- Chat sobre Saludos y Despedidas -->
                 <div class="grid grid-cols-1 lg:grid-cols-3 gap-5">
                     <div class="vibrant-card lg:col-span-3 rounded-3xl p-5 sm:p-7 flex flex-col justify-between shadow-lg h-[480px]">
                         <div>
                             <div class="flex items-center justify-between mb-3">
                                 <span class="text-xs font-extrabold text-emerald-700 bg-emerald-100 px-3.5 py-1 rounded-full border border-emerald-200 flex items-center gap-1.5 shadow-sm">
-                                    <i data-lucide="messages-square" class="w-3.5 h-3.5"></i> Step 2: Natural Tutor Chat (4 Turns)
+                                    <i data-lucide="messages-square" class="w-3.5 h-3.5"></i> Step 2: Greetings & Farewells Roleplay (4 Turns)
                                 </span>
-                                <span class="text-[11px] font-bold text-slate-500" id="roleplay-scenario-tag">B1 Mastery Scenario</span>
+                                <span class="text-[11px] font-bold text-slate-500" id="roleplay-scenario-tag">Casual Encounter</span>
                             </div>
                         </div>
 
@@ -255,13 +255,13 @@
                                 </button>
                             </div>
                             <div class="flex gap-2">
-                                <input type="text" id="roleplay-user-input" class="vibrant-input flex-grow rounded-2xl px-4 py-3 text-xs sm:text-sm text-slate-800 focus:outline-none transition font-semibold" placeholder="Type naturally in English..." onkeypress="if(event.key === 'Enter') sendRoleplayMessage()">
+                                <input type="text" id="roleplay-user-input" class="vibrant-input flex-grow rounded-2xl px-4 py-3 text-xs sm:text-sm text-slate-800 focus:outline-none transition font-semibold" placeholder="Reply using greetings or farewell expressions..." onkeypress="if(event.key === 'Enter') sendRoleplayMessage()">
                                 <button onclick="sendRoleplayMessage()" class="bg-gradient-to-r from-sky-500 to-emerald-500 hover:from-sky-600 hover:to-emerald-600 text-white px-5 py-3 rounded-2xl text-xs font-extrabold transition shadow-md cursor-pointer flex items-center gap-1">
                                     <i data-lucide="send" class="w-4 h-4"></i> Send
                                 </button>
                             </div>
                             <div class="mt-3 flex justify-between items-center">
-                                <span class="text-[11px] font-bold text-sky-700 bg-sky-50 px-3 py-1 rounded-xl border border-sky-200" id="roleplay-counter-label">Interactions: 0 / 4 completed</span>
+                                <span class="text-[11px] font-bold text-sky-700 bg-sky-50 px-3 py-1 rounded-xl border border-sky-200" id="roleplay-counter-label">Turns: 0 / 4 completed</span>
                                 <button onclick="completeRoleplayPhase()" class="bg-purple-600 hover:bg-purple-700 text-white font-extrabold px-6 py-2.5 rounded-xl text-xs transition cursor-pointer shadow-md">
                                     Validate Roleplay & Proceed ➔
                                 </button>
@@ -462,12 +462,12 @@
             let fSlang2 = "Alright, I'm heading out. Take care!";
             let fSlang2Es = "Bien, ya me voy. ¡Cuídate!";
 
-            // Saludo inicial limpio y respuestas naturales dinámicas
-            let tutorIntro = "Hello! It's great to connect with you. How is your day going?";
+            // Saludo inicial enfocado en saludos y presentaciones
+            let tutorIntro = "Hey! Great to run into you. How are you doing today?";
 
             if (i === 1) {
                 themeName = "Professional Greetings & Introductions";
-                tutorIntro = "Hello! It's a pleasure to meet you. How is your day going?";
+                tutorIntro = "Hello! It's a real pleasure to meet you. How is your day going so far?";
             } else if (i === 2) {
                 themeName = "Shopping & Asking Prices (Transactions)";
                 gForm1 = "Good day, I would like to inquire about an item.";
@@ -479,7 +479,7 @@
                 gSlang2 = "What's up? Can you tell me the price?";
                 gSlang2Es = "¿Qué tal? ¿Me dices el precio?";
 
-                tutorIntro = "Hello! Welcome to our store. How can I help you today?";
+                tutorIntro = "Good day! Welcome to our store. How can I help you today?";
             }
 
             let words = [
@@ -609,7 +609,7 @@
 
             document.getElementById('shadow-text').innerText = `"${lessonData.shadow}"`;
             document.getElementById('flashcard-phase-title').innerText = `Phase 2: Vocabulary Mastery (Lesson ${currLesson})`;
-            document.getElementById('roleplay-counter-label').innerText = `Interactions: 0 / 4 completed`;
+            document.getElementById('roleplay-counter-label').innerText = `Turns: 0 / 4 completed`;
 
             activeFlashcards = lessonData.flashcards;
             activeQuizzes = lessonData.quizzes;
@@ -632,7 +632,7 @@
             switchTab('speaking');
         }
 
-        // CHAT NATURAL: SALUDA AL INICIO Y LUEGO RESPONDE A LO QUE LE DICES
+        // CHAT NATURAL CENTRADO EN SALUDOS Y DESPIDAS
         function sendRoleplayMessage() {
             const input = document.getElementById('roleplay-user-input');
             const text = input.value.trim();
@@ -678,17 +678,17 @@
 
             setTimeout(() => {
                 roleplayInteractionCount++;
-                document.getElementById('roleplay-counter-label').innerText = `Interactions: ${roleplayInteractionCount} / 4 completed`;
+                document.getElementById('roleplay-counter-label').innerText = `Turns: ${roleplayInteractionCount} / 4 completed`;
 
                 let tutorReply = "";
                 if (roleplayInteractionCount === 1) {
-                    tutorReply = `That's great to hear! "${text}" is a solid response. What are your main goals or tasks for today?`;
+                    tutorReply = `I'm doing great, thanks for asking! It's awesome catching up with you. What have you been up to lately?`;
                 } else if (roleplayInteractionCount === 2) {
-                    tutorReply = `Awesome! Sounds like you have a productive plan. How are you feeling about your progress so far?`;
+                    tutorReply = `That sounds really interesting! I'm glad things are going well for you.`;
                 } else if (roleplayInteractionCount === 3) {
-                    tutorReply = `That's fantastic! You're doing amazing. To wrap up, could you use one of our lesson farewells to close?`;
+                    tutorReply = `It was wonderful talking to you today. Whenever you're ready, feel free to use a farewell expression to close our chat!`;
                 } else {
-                    tutorReply = `Wonderful conversation! You completed all 4 turns like a pro. Click 'Validate Roleplay & Proceed' to continue!`;
+                    tutorReply = `Take care and see you around! You nailed the greeting and farewell conversation. Click 'Validate Roleplay & Proceed' to continue!`;
                 }
 
                 chatBox.innerHTML += `
@@ -850,7 +850,7 @@
             const userText = document.getElementById('listening-input').value.trim().toLowerCase();
             if (userText.length > 3) {
                 document.getElementById('listening-result').innerHTML = '<span class="text-emerald-700 font-extrabold">🎯 Dictation approved! Moving to Shadowing.</span>';
-                setTimeout(() => unlockNewStep('listening', 'shadowing'), 1000);
+                setTimeout(() => unlockNextStep('listening', 'shadowing'), 1000);
             } else {
                 document.getElementById('listening-result').innerHTML = '<span class="text-rose-600 font-bold">⚠️ Try again.</span>';
             }
