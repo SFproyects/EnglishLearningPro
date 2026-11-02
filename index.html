@@ -340,7 +340,7 @@
     </main>
 
     <!-- MODAL INICIAL (SELECCIÓN DE NIVEL AL ENTRAR) -->
-    <div id="level-selector-modal" class="fixed inset-0 bg-slate-900/85 backdrop-blur-md z-50 flex items-center justify-center p-4">
+    <div id="level-selector-modal" class="fixed inset-0 bg-slate-900/85 backdrop-blur-md z-50 flex items-center justify-center p-4 hidden">
         <div class="vibrant-card max-w-md w-full rounded-3xl p-6 shadow-2xl relative border border-emerald-300 text-center">
             <div class="w-16 h-16 bg-gradient-to-tr from-sky-500 to-emerald-400 rounded-3xl p-1 shadow-lg flex items-center justify-center text-3xl mx-auto mb-3">🎯</div>
             <h3 class="font-extrabold text-xl text-slate-900 mb-1">Welcome to English Pro</h3>
@@ -532,7 +532,6 @@
                 roleplay: {
                     title: `Lección ${i}: ${themeName}`,
                     tutorOpening: `Hey Kevin! Welcome to lesson ${i}. Today we are focusing on ${grammarLevelTitle}. Let's start our conversation. How are you doing today?`,
-                    tutorOpeningEs: `¡Hola Kevin! Bienvenido a la lección ${i}. Hoy nos enfocamos en ${grammarLevelTitle}. Empecemos nuestra conversación. ¿Cómo estás hoy?`,
                     formal: formalText,
                     formalEs: formalEs,
                     informal: casualText,
@@ -626,6 +625,7 @@
             if (!appState.hasStarted) {
                 document.getElementById('level-selector-modal').classList.remove('hidden');
             } else {
+                document.getElementById('level-selector-modal').classList.add('hidden');
                 loadCurrentLesson();
                 updateUIStats();
             }
@@ -705,7 +705,6 @@
                     <div class="bg-white border border-slate-200 p-3.5 rounded-2xl shadow-sm text-xs text-slate-800 max-w-[85%]">
                         <p class="font-extrabold text-sky-700 mb-0.5">Tutor (Roleplay):</p>
                         <p class="font-medium">${currentRoleplayData.tutorOpening}</p>
-                        <p class="text-[10px] text-slate-500 italic mt-1">(${currentRoleplayData.tutorOpeningEs})</p>
                     </div>
                 </div>
             `;
@@ -718,11 +717,11 @@
         }
 
         const roleplayPromptsList = [
-            { en: "Nice to meet you too! Tell me, what do you usually do in your daily routine?", es: "¡Mucho gusto en conocerte también! Dime, ¿qué sueles hacer en tu rutina diaria?" },
-            { en: "That sounds very interesting. How do you practice your English or your projects every day?", es: "Eso suena muy interesante. ¿Cómo practicas tu inglés o tus proyectos todos los días?" },
-            { en: "Great persistence! Why do you think consistency is so important to reach level B1?", es: "¡Gran constancia! ¿Por qué crees que la constancia es tan importante para alcanzar el nivel B1?" },
-            { en: "Exactly! Tell me about a challenge you recently solved successfully.", es: "¡Exactamente! Cuéntame sobre un desafío que hayas resuelto con éxito recientemente." },
-            { en: "That is an awesome achievement. Are you ready to level up your vocabulary?", es: "¡Ese es un logro impresionante. ¿Estás listo para subir de nivel tu vocabulario?" }
+            "That sounds great! Tell me, what do you usually do in your daily routine?",
+            "Very interesting. How do you practice your English or your technical projects every day?",
+            "Great persistence! Why do you think consistency is so important to reach level B1?",
+            "That is true. Tell me about a challenge or repair you recently solved successfully.",
+            "Awesome achievement! Are you ready to level up your professional vocabulary?"
         ];
 
         function sendRoleplayMessage() {
@@ -752,20 +751,19 @@
                         <div class="flex items-start gap-2.5">
                             <div class="w-8 h-8 rounded-full bg-emerald-500 text-white flex items-center justify-center font-bold text-xs flex-shrink-0">🌟</div>
                             <div class="bg-emerald-50 border border-emerald-200 p-3.5 rounded-2xl shadow-sm text-xs text-emerald-900 max-w-[85%]">
-                                <p class="font-extrabold mb-0.5">Tutor (¡Excelente!):</p>
-                                <p class="font-medium">¡Has completado con éxito la conversación guiada! Ya puedes hacer clic en 'Validar Roleplay y Avanzar'.</p>
+                                <p class="font-extrabold mb-0.5">Tutor (Great job!):</p>
+                                <p class="font-medium">You have successfully completed the guided conversation! You can now click 'Validar Roleplay y Avanzar'.</p>
                             </div>
                         </div>
                     `;
                 } else {
-                    let promptItem = roleplayPromptsList[(roleplayInteractionCount - 1) % roleplayPromptsList.length];
+                    let nextPrompt = roleplayPromptsList[(roleplayInteractionCount - 1) % roleplayPromptsList.length];
                     chatBox.innerHTML += `
                         <div class="flex items-start gap-2.5">
                             <div class="w-8 h-8 rounded-full bg-sky-500 text-white flex items-center justify-center font-bold text-xs flex-shrink-0">🤖</div>
                             <div class="bg-white border border-slate-200 p-3.5 rounded-2xl shadow-sm text-xs text-slate-800 max-w-[85%]">
                                 <p class="font-extrabold text-sky-700 mb-0.5">Tutor (Roleplay):</p>
-                                <p class="font-medium">${promptItem.en}</p>
-                                <p class="text-[10px] text-slate-500 italic mt-1">(${promptItem.es})</p>
+                                <p class="font-medium">${nextPrompt}</p>
                             </div>
                         </div>
                     `;
