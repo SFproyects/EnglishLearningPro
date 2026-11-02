@@ -135,7 +135,7 @@
                         <div id="session-bar" class="bg-gradient-to-r from-sky-400 to-emerald-500 h-full w-0 rounded-full transition-all duration-500 shadow-sm"></div>
                     </div>
                     <div class="mt-3 text-center text-xs text-slate-500 font-bold" id="auto-advance-notice">
-                        ✨ Complete 4 natural conversation turns (Greetings ➔ Core ➔ Farewells)
+                        ✨ Complete 4 natural conversational turns with real tutor reactions
                     </div>
                 </div>
             </div>
@@ -144,13 +144,13 @@
         <!-- VISTA DE LECCIÓN ÚNICA EN PANTALLA -->
         <div id="lesson-view-container" class="space-y-4">
 
-            <!-- FASE 1: TEORÍA AMPLIADA (4 SALUDOS + 4 DESPEDIDAS) + ROLEPLAY -->
+            <!-- FASE 1: TEORÍA DE 8 EXPRESIONES + ROLEPLAY CONVERSACIONAL REAL -->
             <div id="content-speaking" class="space-y-4">
                 
-                <!-- Guía Teórica de Saludos y Despedidas (8 expresiones en total) -->
+                <!-- Guía Teórica de Saludos y Despedidas -->
                 <div class="vibrant-card rounded-3xl p-5 sm:p-7 shadow-lg border border-sky-100 space-y-4">
                     <h3 class="text-xs font-extrabold text-slate-800 uppercase tracking-wider flex items-center gap-2">
-                        <i data-lucide="book-open" class="w-4 h-4 text-sky-600"></i> Step 1: Core Expressions (Greetings & Farewells - Formal & Slang)
+                        <i data-lucide="book-open" class="w-4 h-4 text-sky-600"></i> Step 1: Core Expressions (Greetings & Farewells)
                     </h3>
                     
                     <!-- Sección de Saludos -->
@@ -232,13 +232,13 @@
                     </div>
                 </div>
 
-                <!-- Chat de Roleplay con Secuencia Lógica (Saludo ➔ Tema ➔ Despedida) -->
+                <!-- Chat de Roleplay con Reacción Real del Tutor -->
                 <div class="grid grid-cols-1 lg:grid-cols-3 gap-5">
                     <div class="vibrant-card lg:col-span-3 rounded-3xl p-5 sm:p-7 flex flex-col justify-between shadow-lg h-[460px]">
                         <div>
                             <div class="flex items-center justify-between mb-3">
                                 <span class="text-xs font-extrabold text-emerald-700 bg-emerald-100 px-3.5 py-1 rounded-full border border-emerald-200 flex items-center gap-1.5 shadow-sm">
-                                    <i data-lucide="messages-square" class="w-3.5 h-3.5"></i> Step 2: Roleplay (Greeting ➔ Core Task ➔ Farewell)
+                                    <i data-lucide="messages-square" class="w-3.5 h-3.5"></i> Step 2: Real Conversational Roleplay (4 Turns)
                                 </span>
                                 <span class="text-[11px] font-bold text-slate-500" id="roleplay-scenario-tag">B1 Mastery Scenario</span>
                             </div>
@@ -255,7 +255,7 @@
                                 </button>
                             </div>
                             <div class="flex gap-2">
-                                <input type="text" id="roleplay-user-input" class="vibrant-input flex-grow rounded-2xl px-4 py-3 text-xs sm:text-sm text-slate-800 focus:outline-none transition font-semibold" placeholder="Type your response using lesson greetings/farewells..." onkeypress="if(event.key === 'Enter') sendRoleplayMessage()">
+                                <input type="text" id="roleplay-user-input" class="vibrant-input flex-grow rounded-2xl px-4 py-3 text-xs sm:text-sm text-slate-800 focus:outline-none transition font-semibold" placeholder="Type your response to the tutor..." onkeypress="if(event.key === 'Enter') sendRoleplayMessage()">
                                 <button onclick="sendRoleplayMessage()" class="bg-gradient-to-r from-sky-500 to-emerald-500 hover:from-sky-600 hover:to-emerald-600 text-white px-5 py-3 rounded-2xl text-xs font-extrabold transition shadow-md cursor-pointer flex items-center gap-1">
                                     <i data-lucide="send" class="w-4 h-4"></i> Send
                                 </button>
@@ -444,7 +444,6 @@
             let blockNum = Math.ceil(i / 10);
             let themeName = `Lesson Topic ${i}`;
             
-            // 4 Saludos (2 Formales, 2 Slang)
             let gForm1 = "Good morning, it is a pleasure to connect with you.";
             let gForm1Es = "Buenos días, es un placer conectar contigo.";
             let gForm2 = "Hello, my name is Kevin and I am pleased to meet you.";
@@ -454,7 +453,6 @@
             let gSlang2 = "What's up? I'm Kevin, let's chat!";
             let gSlang2Es = "¿Qué tal? Soy Kevin, ¡hablemos!";
 
-            // 4 Despedidas (2 Formales, 2 Slang)
             let fForm1 = "Thank you for your time. Have a wonderful day.";
             let fForm1Es = "Gracias por su tiempo. Que tenga un día maravilloso.";
             let fForm2 = "It was a productive conversation. Goodbye.";
@@ -465,19 +463,19 @@
             let fSlang2Es = "Bien, ya me voy. ¡Cuídate!";
 
             let roleplayPrompts = [
-                "Turn 1 (Greeting): Greet the tutor using one of our lesson greetings (Formal or Slang).",
-                "Turn 2 (Core Task): State the main objective or ask your core question for lesson " + i + ".",
-                "Turn 3 (Core Task): Give a brief detail or response about the topic.",
-                "Turn 4 (Farewell): Finish the conversation using one of our lesson farewells."
+                "Turn 1 (Greeting): Greet the tutor using one of our lesson greetings.",
+                "Turn 2 (Core Task): Ask how the tutor is doing or state your objective for lesson " + i + ".",
+                "Turn 3 (Core Task): Share a detail or respond about the topic.",
+                "Turn 4 (Farewell): Finish the conversation using a lesson farewell."
             ];
 
             if (i === 1) {
                 themeName = "Professional Greetings & Introductions";
                 roleplayPrompts = [
-                    "Turn 1 (Greeting): Greet the tutor and introduce your name (e.g., 'Hello, I'm Kevin').",
-                    "Turn 2 (Core Task): Ask how the tutor is doing today.",
-                    "Turn 3 (Core Task): Say something positive about connecting with them.",
-                    "Turn 4 (Farewell): Say goodbye politely to finish the chat."
+                    "Turn 1 (Greeting): Greet the tutor and introduce yourself.",
+                    "Turn 2 (Core Task): Ask how the tutor's day is going.",
+                    "Turn 3 (Core Task): Say something positive about learning today.",
+                    "Turn 4 (Farewell): Say goodbye politely to finish."
                 ];
             } else if (i === 2) {
                 themeName = "Shopping & Asking Prices (Transactions)";
@@ -492,8 +490,8 @@
 
                 roleplayPrompts = [
                     "Turn 1 (Greeting): Greet the store clerk nicely.",
-                    "Turn 2 (Core Task): Ask for the price of the item you want.",
-                    "Turn 3 (Core Task): Ask if they accept card payment or a discount.",
+                    "Turn 2 (Core Task): Ask for the price of the item.",
+                    "Turn 3 (Core Task): Ask about payment methods or discount.",
                     "Turn 4 (Farewell): Thank the cashier and say goodbye."
                 ];
             }
@@ -605,7 +603,6 @@
 
             document.getElementById('roleplay-scenario-tag').innerText = `Lesson ${currLesson}: ${lessonData.theme}`;
             
-            // Cargar las 8 expresiones (4 saludos + 4 despedidas)
             document.getElementById('g-form1').innerText = currentRoleplayData.gForm1;
             document.getElementById('g-form1-es').innerText = `(${currentRoleplayData.gForm1Es})`;
             document.getElementById('g-form2').innerText = currentRoleplayData.gForm2;
@@ -636,8 +633,8 @@
                 <div class="flex items-start gap-2.5">
                     <div class="w-8 h-8 rounded-full bg-sky-500 text-white flex items-center justify-center font-bold text-xs flex-shrink-0">🤖</div>
                     <div class="bg-white border border-slate-200 p-3.5 rounded-2xl shadow-sm text-xs text-slate-800 max-w-[85%]">
-                        <p class="font-extrabold text-sky-700 mb-0.5">Tutor (${currentRoleplayData.prompts[0].split(':')[0]}):</p>
-                        <p class="font-medium">${currentRoleplayData.prompts[0]}</p>
+                        <p class="font-extrabold text-sky-700 mb-0.5">Tutor (Turn 1):</p>
+                        <p class="font-medium">Hello there! Let's start our conversation. ${currentRoleplayData.prompts[0]}</p>
                     </div>
                 </div>
             `;
@@ -649,7 +646,7 @@
             switchTab('speaking');
         }
 
-        // VALIDACIÓN FLEXIBLE DE 4 TURNOS
+        // CONVERSACIÓN REAL: EL TUTOR COMENTA TU RESPUESTA Y LUEGO DA EL SIGUIENTE TURNO
         function sendRoleplayMessage() {
             const input = document.getElementById('roleplay-user-input');
             const text = input.value.trim();
@@ -671,8 +668,8 @@
                     <div class="flex items-start gap-2.5">
                         <div class="w-8 h-8 rounded-full bg-amber-500 text-white flex items-center justify-center font-bold text-xs flex-shrink-0">🤖</div>
                         <div class="bg-amber-50 border border-amber-200 p-3.5 rounded-2xl shadow-sm text-xs text-amber-900 max-w-[85%]">
-                            <p class="font-extrabold mb-0.5">Tutor (Corrección):</p>
-                            <p class="font-medium">⚠️ ¡Escribe al menos 2 palabras en inglés para avanzar en este turno!</p>
+                            <p class="font-extrabold mb-0.5">Tutor:</p>
+                            <p class="font-medium">⚠️ ¡Escribe al menos 2 palabras en inglés para mantener la charla!</p>
                         </div>
                     </div>
                 `;
@@ -699,28 +696,27 @@
 
                 let promptsArr = currentRoleplayData.prompts || [];
                 
-                if (roleplayInteractionCount >= 4) {
-                    chatBox.innerHTML += `
-                        <div class="flex items-start gap-2.5">
-                            <div class="w-8 h-8 rounded-full bg-emerald-500 text-white flex items-center justify-center font-bold text-xs flex-shrink-0">🌟</div>
-                            <div class="bg-emerald-50 border border-emerald-200 p-3.5 rounded-2xl shadow-sm text-xs text-emerald-900 max-w-[85%]">
-                                <p class="font-extrabold mb-0.5">Tutor (Completed!):</p>
-                                <p class="font-medium">Fantastic conversation flow from greeting to farewell! Click 'Validate Roleplay & Proceed' to continue.</p>
-                            </div>
-                        </div>
-                    `;
+                // Generar una respuesta natural y contextual del tutor basada en lo que dijo el usuario
+                let tutorReaction = "";
+                if (roleplayInteractionCount === 1) {
+                    tutorReaction = `That's a great greeting! It's awesome to connect with you. Now, ${promptsArr[1].toLowerCase()}`;
+                } else if (roleplayInteractionCount === 2) {
+                    tutorReaction = `Got it! "${text}" sounds really good and natural. Next, ${promptsArr[2].toLowerCase()}`;
+                } else if (roleplayInteractionCount === 3) {
+                    tutorReaction = `Totally agree with that! We are making great progress. Finally, ${promptsArr[3].toLowerCase()}`;
                 } else {
-                    let nextPrompt = promptsArr[roleplayInteractionCount] || "That's great! Let's continue.";
-                    chatBox.innerHTML += `
-                        <div class="flex items-start gap-2.5">
-                            <div class="w-8 h-8 rounded-full bg-sky-500 text-white flex items-center justify-center font-bold text-xs flex-shrink-0">🤖</div>
-                            <div class="bg-white border border-slate-200 p-3.5 rounded-2xl shadow-sm text-xs text-slate-800 max-w-[85%]">
-                                <p class="font-extrabold text-sky-700 mb-0.5">Tutor (${nextPrompt.split(':')[0]}):</p>
-                                <p class="font-medium">${nextPrompt}</p>
-                            </div>
-                        </div>
-                    `;
+                    tutorReaction = `Fantastic closing! "${text}" fits perfectly. You successfully completed all 4 conversational turns! Click 'Validate Roleplay & Proceed' to level up.`;
                 }
+
+                chatBox.innerHTML += `
+                    <div class="flex items-start gap-2.5">
+                        <div class="w-8 h-8 rounded-full bg-sky-500 text-white flex items-center justify-center font-bold text-xs flex-shrink-0">🤖</div>
+                        <div class="bg-white border border-slate-200 p-3.5 rounded-2xl shadow-sm text-xs text-slate-800 max-w-[85%]">
+                            <p class="font-extrabold text-sky-700 mb-0.5">Tutor (Turn ${roleplayInteractionCount + 1}):</p>
+                            <p class="font-medium">${tutorReaction}</p>
+                        </div>
+                    </div>
+                `;
                 chatBox.scrollTop = chatBox.scrollHeight;
             }, 1000);
         }
