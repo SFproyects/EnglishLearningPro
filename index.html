@@ -121,7 +121,7 @@
                     <span class="text-[10px] font-extrabold uppercase tracking-widest text-emerald-700 bg-emerald-100 px-3 py-1 rounded-full border border-emerald-200" id="course-subtitle">Intermediate B1 Mastery Course</span>
                     <h2 class="text-2xl sm:text-3xl font-extrabold text-slate-900 mt-2 tracking-tight" id="welcome-title">Welcome back!</h2>
                     <p class="text-slate-600 mt-1.5 text-xs sm:text-sm bg-white/80 border border-slate-200 px-4 py-2.5 rounded-2xl italic shadow-sm" id="motivational-quote">
-                        "Constant correction leads to true fluency!"
+                        "Real native flow: talk naturally and get instant corrections!"
                     </p>
                 </div>
 
@@ -135,7 +135,7 @@
                         <div id="session-bar" class="bg-gradient-to-r from-sky-400 to-emerald-500 h-full w-0 rounded-full transition-all duration-500 shadow-sm"></div>
                     </div>
                     <div class="mt-3 text-center text-xs text-slate-500 font-bold" id="auto-advance-notice">
-                        ✨ Active AI Tutor with Instant Error Correction
+                        ✨ 100% Native Conversational Flow
                     </div>
                 </div>
             </div>
@@ -144,34 +144,34 @@
         <!-- VISTA DE LECCIÓN ÚNICA EN PANTALLA -->
         <div id="lesson-view-container" class="space-y-4">
 
-            <!-- FASE 1: TEORÍA + CHAT CON CORRECCIÓN INMEDIATA -->
+            <!-- FASE 1: TEORÍA + CHAT NATIVO -->
             <div id="content-speaking" class="space-y-4">
                 
                 <!-- Guía Teórica de Saludos y Despedidas -->
                 <div class="vibrant-card rounded-3xl p-5 sm:p-7 shadow-lg border border-sky-100 space-y-4">
                     <h3 class="text-xs font-extrabold text-slate-800 uppercase tracking-wider flex items-center gap-2">
-                        <i data-lucide="book-open" class="w-4 h-4 text-sky-600"></i> Step 1: Core Expressions (Greetings & Farewells)
+                        <i data-lucide="book-open" class="w-4 h-4 text-sky-600"></i> Step 1: Core Expressions & Quick Replies (Cómo responder)
                     </h3>
                     
                     <!-- Saludos -->
                     <div>
-                        <span class="text-[11px] font-extrabold text-sky-700 uppercase tracking-wider block mb-2">👋 Section A: Greetings (Saludos)</span>
+                        <span class="text-[11px] font-extrabold text-sky-700 uppercase tracking-wider block mb-2">👋 Section A: Greetings & Quick Replies (Saludos y respuestas casuales)</span>
                         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
                             <div class="bg-sky-50 border border-sky-200 p-3 rounded-2xl flex flex-col justify-between">
                                 <div>
-                                    <span class="text-[10px] font-extrabold text-sky-700 uppercase block">👔 Formal 1:</span>
-                                    <p class="text-xs text-slate-800 italic font-semibold mb-1" id="g-form1">Loading...</p>
-                                    <p class="text-[10px] text-sky-800 font-bold mb-2" id="g-form1-es">Loading...</p>
+                                    <span class="text-[10px] font-extrabold text-sky-700 uppercase block">💬 Responder "¿Qué tal?":</span>
+                                    <p class="text-xs text-slate-800 italic font-semibold mb-1">"Pretty good, thanks!"</p>
+                                    <p class="text-[10px] text-sky-800 font-bold mb-2">(Bastante bien, ¡gracias!)</p>
                                 </div>
-                                <button onclick="speakSpecificText('gForm1')" class="self-start bg-white hover:bg-sky-100 text-sky-700 px-2 py-1 rounded-lg text-[10px] font-bold border border-sky-200 cursor-pointer">🔊 Listen</button>
+                                <button onclick="speakSpecificTextCustom('Pretty good, thanks!')" class="self-start bg-white hover:bg-sky-100 text-sky-700 px-2 py-1 rounded-lg text-[10px] font-bold border border-sky-200 cursor-pointer">🔊 Listen</button>
                             </div>
                             <div class="bg-sky-50 border border-sky-200 p-3 rounded-2xl flex flex-col justify-between">
                                 <div>
-                                    <span class="text-[10px] font-extrabold text-sky-700 uppercase block">👔 Formal 2:</span>
-                                    <p class="text-xs text-slate-800 italic font-semibold mb-1" id="g-form2">Loading...</p>
-                                    <p class="text-[10px] text-sky-800 font-bold mb-2" id="g-form2-es">Loading...</p>
+                                    <span class="text-[10px] font-extrabold text-sky-700 uppercase block">💬 Responder "¿Qué hay?":</span>
+                                    <p class="text-xs text-slate-800 italic font-semibold mb-1">"Not much, just chilling!"</p>
+                                    <p class="text-[10px] text-sky-800 font-bold mb-2">(Nada del otro mundo, ¡relajado!)</p>
                                 </div>
-                                <button onclick="speakSpecificText('gForm2')" class="self-start bg-white hover:bg-sky-100 text-sky-700 px-2 py-1 rounded-lg text-[10px] font-bold border border-sky-200 cursor-pointer">🔊 Listen</button>
+                                <button onclick="speakSpecificTextCustom('Not much, just chilling!')" class="self-start bg-white hover:bg-sky-100 text-sky-700 px-2 py-1 rounded-lg text-[10px] font-bold border border-sky-200 cursor-pointer">🔊 Listen</button>
                             </div>
                             <div class="bg-emerald-50 border border-emerald-200 p-3 rounded-2xl flex flex-col justify-between">
                                 <div>
@@ -232,15 +232,15 @@
                     </div>
                 </div>
 
-                <!-- Chat con Corrección en Vivo -->
+                <!-- Chat Nativo Real con Corrección y Respuestas Naturales -->
                 <div class="grid grid-cols-1 lg:grid-cols-3 gap-5">
                     <div class="vibrant-card lg:col-span-3 rounded-3xl p-5 sm:p-7 flex flex-col justify-between shadow-lg h-[480px]">
                         <div>
                             <div class="flex items-center justify-between mb-3">
                                 <span class="text-xs font-extrabold text-emerald-700 bg-emerald-100 px-3.5 py-1 rounded-full border border-emerald-200 flex items-center gap-1.5 shadow-sm">
-                                    <i data-lucide="messages-square" class="w-3.5 h-3.5"></i> Step 2: Interactive Roleplay (Instant Correction)
+                                    <i data-lucide="messages-square" class="w-3.5 h-3.5"></i> Step 2: Native Street Chat (Instant Correction)
                                 </span>
-                                <span class="text-[11px] font-bold text-slate-500" id="roleplay-scenario-tag">Greetings & Introductions</span>
+                                <span class="text-[11px] font-bold text-slate-500" id="roleplay-scenario-tag">Casual Street Encounter</span>
                             </div>
                         </div>
 
@@ -255,7 +255,7 @@
                                 </button>
                             </div>
                             <div class="flex gap-2">
-                                <input type="text" id="roleplay-user-input" class="vibrant-input flex-grow rounded-2xl px-4 py-3 text-xs sm:text-sm text-slate-800 focus:outline-none transition font-semibold" placeholder="Type your greeting or response..." onkeypress="if(event.key === 'Enter') sendRoleplayMessage()">
+                                <input type="text" id="roleplay-user-input" class="vibrant-input flex-grow rounded-2xl px-4 py-3 text-xs sm:text-sm text-slate-800 focus:outline-none transition font-semibold" placeholder="Reply naturally like a native speaker..." onkeypress="if(event.key === 'Enter') sendRoleplayMessage()">
                                 <button onclick="sendRoleplayMessage()" class="bg-gradient-to-r from-sky-500 to-emerald-500 hover:from-sky-600 hover:to-emerald-600 text-white px-5 py-3 rounded-2xl text-xs font-extrabold transition shadow-md cursor-pointer flex items-center gap-1">
                                     <i data-lucide="send" class="w-4 h-4"></i> Send
                                 </button>
@@ -462,11 +462,12 @@
             let fSlang2 = "Alright, I'm heading out. Take care!";
             let fSlang2Es = "Bien, ya me voy. ¡Cuídate!";
 
-            let tutorIntro = "Hello! It's a pleasure to meet you. Please introduce yourself using a greeting expression.";
+            // Saludo inicial 100% nativo y callejero/casual
+            let tutorIntro = "Hey Kevin! What's up man? Just grabbing a quick coffee. How's it going with you?";
 
             if (i === 1) {
                 themeName = "Professional Greetings & Introductions";
-                tutorIntro = "Hello! It's a pleasure to meet you. Please introduce yourself using a greeting expression.";
+                tutorIntro = "Hey Kevin! What's up man? Just grabbing a quick coffee. How's it going with you?";
             } else if (i === 2) {
                 themeName = "Shopping & Asking Prices (Transactions)";
                 gForm1 = "Good day, I would like to inquire about an item.";
@@ -478,7 +479,7 @@
                 gSlang2 = "What's up? Can you tell me the price?";
                 gSlang2Es = "¿Qué tal? ¿Me dices el precio?";
 
-                tutorIntro = "Good day! Welcome to our store. How can I help you today?";
+                tutorIntro = "Hey! Welcome in. What can I get for you today?";
             }
 
             let words = [
@@ -618,7 +619,7 @@
                 <div class="flex items-start gap-2.5">
                     <div class="w-8 h-8 rounded-full bg-sky-500 text-white flex items-center justify-center font-bold text-xs flex-shrink-0">🤖</div>
                     <div class="bg-white border border-slate-200 p-3.5 rounded-2xl shadow-sm text-xs text-slate-800 max-w-[85%]">
-                        <p class="font-extrabold text-sky-700 mb-0.5">Tutor:</p>
+                        <p class="font-extrabold text-sky-700 mb-0.5">Tutor (Nativo):</p>
                         <p class="font-medium">${currentRoleplayData.introLine}</p>
                     </div>
                 </div>
@@ -631,7 +632,7 @@
             switchTab('speaking');
         }
 
-        // CHAT CON CORRECCIÓN CONSTANTE E INMEDIATA
+        // CHAT NATIVO REAL CON CORRECCIÓN INSTANTÁNEA
         function sendRoleplayMessage() {
             const input = document.getElementById('roleplay-user-input');
             const text = input.value.trim();
@@ -679,9 +680,8 @@
                 let lowerText = text.toLowerCase();
                 let correctionNotice = "";
 
-                // Detector de errores comunes (ej: goof en lugar de good)
                 if (lowerText.includes("goof")) {
-                    correctionNotice = "💡 <strong>Corrección del Tutor:</strong> Ojo con eso, escribiste <em>'goof'</em> (que significa payaso o bobo). Para decir que estás bien se escribe <strong>'good'</strong> (con 'd'). ¡Inténtalo de nuevo corrigiendo esa palabra!<br><br>";
+                    correctionNotice = "💡 <strong>Corrección rápida:</strong> Escribiste <em>'goof'</em> (payaso/bobo). Para decir que estás bien se escribe <strong>'good'</strong> (con 'd'). ¡Inténtalo de nuevo con la corrección!<br><br>";
                 } else {
                     roleplayInteractionCount++;
                     document.getElementById('roleplay-counter-label').innerText = `Turns: ${roleplayInteractionCount} / 4 completed`;
@@ -689,22 +689,22 @@
 
                 let tutorReply = "";
                 if (correctionNotice !== "") {
-                    tutorReply = correctionNotice + "Por favor, vuelve a enviar tu oración corregida para avanzar al siguiente turno.";
+                    tutorReply = correctionNotice + "Vuelve a enviar tu respuesta corregida.";
                 } else if (roleplayInteractionCount === 1) {
-                    tutorReply = `¡Excelente saludo! "${text}" es muy natural. ¿Cómo va tu día hoy? (Puedes responder con 'Pretty good!').`;
+                    tutorReply = `Oh, nice! Pretty good here too, man. Hey, I gotta run soon. Catch you later! (Prueba respondiendo con una despedida).`;
                 } else if (roleplayInteractionCount === 2) {
-                    tutorReply = `¡Genial! Me alegra escuchar eso. ¿Qué tal te va con tu práctica de inglés?`;
+                    tutorReply = `Sounds good! Take care, see you around!`;
                 } else if (roleplayInteractionCount === 3) {
-                    tutorReply = `¡Muy bien estructurado! Para terminar, despídete usando una de nuestras expresiones de despedida de la lección.`;
+                    tutorReply = `Alright man, have a great rest of your day!`;
                 } else {
-                    tutorReply = `¡Perfecto! Has completado los 4 turnos de forma impecable. Haz clic en 'Validate Roleplay & Proceed' para continuar.`;
+                    tutorReply = `¡Excelente práctica nativa! Completaste los 4 turnos. Haz clic en 'Validate Roleplay & Proceed' para continuar.`;
                 }
 
                 chatBox.innerHTML += `
                     <div class="flex items-start gap-2.5">
                         <div class="w-8 h-8 rounded-full bg-sky-500 text-white flex items-center justify-center font-bold text-xs flex-shrink-0">🤖</div>
                         <div class="bg-white border border-slate-200 p-3.5 rounded-2xl shadow-sm text-xs text-slate-800 max-w-[85%]">
-                            <p class="font-extrabold text-sky-700 mb-0.5">Tutor:</p>
+                            <p class="font-extrabold text-sky-700 mb-0.5">Tutor (Nativo):</p>
                             <p class="font-medium">${tutorReply}</p>
                         </div>
                     </div>
@@ -715,11 +715,11 @@
 
         function completeRoleplayPhase() {
             if (roleplayInteractionCount < 4) {
-                showCustomModal("Incomplete Conversation ⚠️", `You need to complete all 4 conversational turns (you have ${roleplayInteractionCount}). Finish the farewell turn first!`, "💬");
+                showCustomModal("Incomplete Conversation ⚠️", `Completa los 4 turnos de charla conversacional primero (llevas ${roleplayInteractionCount}).`, "💬");
                 return;
             }
 
-            showCustomModal("Roleplay Approved! 🌟", "Tutor: Outstanding conversational flow! Moving to Vocabulary Mastery.", "💬");
+            showCustomModal("Roleplay Approved! 🌟", "Tutor: ¡Excelente fluidez nativa! Pasamos a la Bóveda de Vocabulario.", "💬");
             setTimeout(() => {
                 closeModal();
                 unlockNextStep('speaking', 'flashcards');
@@ -731,6 +731,13 @@
             if (window.speechSynthesis.speaking) window.speechSynthesis.cancel();
             let textToSpeak = currentRoleplayData[type] || "";
             const utterance = new SpeechSynthesisUtterance(textToSpeak);
+            utterance.lang = 'en-US';
+            window.speechSynthesis.speak(utterance);
+        }
+
+        function speakSpecificTextCustom(text) {
+            if (window.speechSynthesis.speaking) window.speechSynthesis.cancel();
+            const utterance = new SpeechSynthesisUtterance(text);
             utterance.lang = 'en-US';
             window.speechSynthesis.speak(utterance);
         }
