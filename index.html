@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>English Pro - Ultimate Progressive Edition</title>
+    <title>English Pro - Secure Edition</title>
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- Lucide Icons -->
@@ -147,7 +147,7 @@
             <!-- FASE 1: TEORÍA DE ESTILOS + ROLEPLAY INTERACTIVO CON VALIDACIÓN -->
             <div id="content-speaking" class="space-y-4">
                 
-                <!-- Guía Teórica Inicial (Aprende primero) -->
+                <!-- Guía Teórica Inicial -->
                 <div class="vibrant-card rounded-3xl p-5 sm:p-7 shadow-lg border border-sky-100">
                     <h3 class="text-xs font-extrabold text-slate-800 uppercase tracking-wider mb-3 flex items-center gap-2">
                         <i data-lucide="book-open" class="w-4 h-4 text-sky-600"></i> Paso 1: Aprende la Teoría de la Lección (Estilos Nativos)
@@ -177,7 +177,7 @@
                     </div>
                 </div>
 
-                <!-- Chat de Roleplay (Ponlo en práctica) -->
+                <!-- Chat de Roleplay -->
                 <div class="grid grid-cols-1 lg:grid-cols-3 gap-5">
                     <div class="vibrant-card lg:col-span-3 rounded-3xl p-5 sm:p-7 flex flex-col justify-between shadow-lg h-[460px]">
                         <div>
@@ -190,9 +190,7 @@
                         </div>
 
                         <!-- Historial de Conversación -->
-                        <div id="chat-messages-container" class="flex-grow overflow-y-auto space-y-3 my-3 pr-2 bg-slate-50/80 p-4 rounded-2xl border border-slate-200 shadow-inner">
-                            <!-- Mensaje inicial del tutor -->
-                        </div>
+                        <div id="chat-messages-container" class="flex-grow overflow-y-auto space-y-3 my-3 pr-2 bg-slate-50/80 p-4 rounded-2xl border border-slate-200 shadow-inner"></div>
 
                         <!-- Input de Chat -->
                         <div class="pt-2 border-t border-slate-200">
@@ -371,23 +369,23 @@
         </div>
     </div>
 
-    <!-- MODAL DE LOGIN PARA NIVEL INTERMEDIO -->
+    <!-- MODAL DE LOGIN PARA NIVEL INTERMEDIO (CAMPOS EN BLANCO Y SEGUROS) -->
     <div id="login-modal" class="fixed inset-0 bg-slate-900/80 backdrop-blur-md z-50 flex items-center justify-center hidden p-4">
         <div class="vibrant-card max-w-sm w-full rounded-3xl p-6 shadow-2xl relative border border-amber-300">
             <div class="text-center mb-4">
                 <span class="text-3xl">🔐</span>
                 <h3 class="font-extrabold text-lg text-slate-900 mt-1">Acceso Nivel Intermedio B1</h3>
-                <p class="text-xs text-slate-600">Ingresa tus credenciales:</p>
+                <p class="text-xs text-slate-600">Ingresa tus credenciales autorizadas:</p>
             </div>
             
             <div class="space-y-3 mb-4">
                 <div>
                     <label class="block text-[11px] font-extrabold text-slate-700 uppercase mb-1">Usuario:</label>
-                    <input type="text" id="login-user" class="vibrant-input w-full rounded-2xl px-4 py-3 text-xs font-semibold text-slate-800" value="kevin">
+                    <input type="text" id="login-user" class="vibrant-input w-full rounded-2xl px-4 py-3 text-xs font-semibold text-slate-800" placeholder="Ingresa el usuario...">
                 </div>
                 <div>
                     <label class="block text-[11px] font-extrabold text-slate-700 uppercase mb-1">Contraseña:</label>
-                    <input type="password" id="login-pass" class="vibrant-input w-full rounded-2xl px-4 py-3 text-xs font-semibold text-slate-800" value="b1pro">
+                    <input type="password" id="login-pass" class="vibrant-input w-full rounded-2xl px-4 py-3 text-xs font-semibold text-slate-800" placeholder="Ingresa la contraseña...">
                 </div>
             </div>
 
@@ -410,7 +408,7 @@
             </div>
             <div class="mb-4.5">
                 <label class="block text-xs font-extrabold text-slate-700 uppercase tracking-wider mb-1.5">Tu Nombre:</label>
-                <input type="text" id="user-name-input" class="vibrant-input w-full rounded-2xl px-4 py-3.5 text-xs sm:text-sm text-slate-800 focus:outline-none transition font-semibold" value="Kevin">
+                <input type="text" id="user-name-input" class="vibrant-input w-full rounded-2xl px-4 py-3.5 text-xs sm:text-sm text-slate-800 focus:outline-none transition font-semibold" placeholder="Ej: Kevin">
             </div>
             <button onclick="saveUserProfileAndStart()" class="w-full bg-gradient-to-r from-emerald-500 to-sky-500 text-white font-extrabold py-3.5 rounded-2xl text-xs transition cursor-pointer shadow-lg shadow-emerald-500/25">
                 Iniciar Entrenador 🚀
@@ -444,14 +442,14 @@
 
     <!-- FOOTER -->
     <footer class="border-t border-slate-200 bg-white/60 py-3 text-center text-xs text-slate-500 relative z-10 font-medium">
-        English Pro &copy; 2026 &bull; Ultimate Progressive Edition
+        English Pro &copy; 2026 &bull; Secure Edition
     </footer>
 
     <!-- SCRIPTS -->
     <script>
         lucide.createIcons();
 
-        let appState = JSON.parse(localStorage.getItem('english_pro_ultimate_state')) || {
+        let appState = JSON.parse(localStorage.getItem('english_pro_secure_state')) || {
             userName: '',
             streak: 1,
             currentMode: 'beginner',
@@ -567,7 +565,7 @@
         let roleplayErrorCount = 0;
 
         function saveState() {
-            localStorage.setItem('english_pro_ultimate_state', JSON.stringify(appState));
+            localStorage.setItem('english_pro_secure_state', JSON.stringify(appState));
         }
 
         function showCustomModal(title, message, icon = "✨") {
@@ -606,7 +604,7 @@
                 updateUIStats();
                 showCustomModal("¡Bienvenido, Kevin! 🟡", "Acceso concedido al Nivel Intermedio B1 Mastery.", "🚀");
             } else {
-                showCustomModal("Acceso Denegado ⚠️", "Usuario o contraseña incorrectos (kevin / b1pro).", "🔒");
+                showCustomModal("Acceso Denegado ⚠️", "Usuario o contraseña incorrectos.", "🔒");
             }
         }
 
@@ -731,7 +729,6 @@
             input.value = '';
             chatBox.scrollTop = chatBox.scrollHeight;
 
-            // Validación estricta simulada de errores en el chat
             setTimeout(() => {
                 let hasError = text.length < 5 || text.toLowerCase().includes("no se") || text.toLowerCase().includes("error");
                 if (hasError) {
@@ -742,7 +739,7 @@
                             <div class="w-8 h-8 rounded-full bg-rose-500 text-white flex items-center justify-center font-bold text-xs flex-shrink-0">⚠️</div>
                             <div class="bg-rose-50 border border-rose-200 p-3.5 rounded-2xl shadow-sm text-xs text-rose-900 max-w-[85%]">
                                 <p class="font-extrabold mb-0.5">Tutor (Corrección):</p>
-                                <p class="font-medium">Noté un pequeño detalle o frase incompleta. Intenta aplicar mejor la estructura formal o casual estudiada arriba.</p>
+                                <p class="font-medium">Noté un detalle o frase incompleta. Intenta aplicar mejor la estructura formal o casual estudiada arriba.</p>
                             </div>
                         </div>
                     `;
@@ -763,7 +760,7 @@
 
         function completeRoleplayPhase() {
             if (roleplayErrorCount >= 5) {
-                showCustomModal("Repaso Necesario ⚠️", `Has acumulado ${roleplayErrorCount} errores en el chat. El tutor requiere que hagas un breve repaso de la teoría superior y lo intentes de nuevo para dominarlo bien.`, "🔄");
+                showCustomModal("Repaso Necesario ⚠️", `Has acumulado ${roleplayErrorCount} errores en el chat. El tutor requiere que hagas un breve repaso de la teoría superior y lo intentes de nuevo.`, "🔄");
                 roleplayErrorCount = 0;
                 document.getElementById('roleplay-error-counter').innerText = `Errores detectados: 0 / 5`;
                 return;
