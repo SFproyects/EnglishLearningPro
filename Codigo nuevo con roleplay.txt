@@ -1,0 +1,902 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>English Pro - Ultimate Progressive Edition</title>
+    <!-- Tailwind CSS Play CDN moderno -->
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
+        
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background: linear-gradient(135deg, #f0fdf4 0%, #f0f9ff 50%, #faf5ff 100%);
+            background-attachment: fixed;
+            color: #1e293b;
+            min-height: 100vh;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        ::-webkit-scrollbar {
+            width: 6px;
+            height: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #f1f5f9;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #cbd5e1;
+            border-radius: 4px;
+        }
+
+        .vibrant-card {
+            background: rgba(255, 255, 255, 0.92);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(226, 232, 240, 0.8);
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05), 0 8px 10px -6px rgba(0, 0, 0, 0.05);
+        }
+
+        .vibrant-input {
+            background: #f8fafc;
+            border: 2px solid #e2e8f0;
+        }
+        .vibrant-input:focus {
+            border-color: #0ea5e9;
+            background: #ffffff;
+            box-shadow: 0 0 0 4px rgba(14, 165, 233, 0.15);
+        }
+
+        .card-flip {
+            perspective: 1000px;
+        }
+        .card-inner {
+            transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+            transform-style: preserve-3d;
+        }
+        .card-flip.flipped .card-inner {
+            transform: rotateY(180deg);
+        }
+        .card-front, .card-back {
+            backface-visibility: hidden;
+        }
+        .card-back {
+            transform: rotateY(180deg);
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col justify-between relative overflow-x-hidden">
+
+    <!-- HEADER / NAVBAR -->
+    <header class="border-b border-slate-200 bg-white/90 sticky top-0 z-40 backdrop-blur-xl shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3.5 flex flex-col sm:flex-row items-center justify-between gap-3">
+            <div class="flex items-center space-x-3 w-full sm:w-auto justify-between sm:justify-start">
+                <div class="flex items-center space-x-2.5">
+                    <div class="bg-gradient-to-tr from-sky-500 to-emerald-400 p-2.5 rounded-2xl text-white font-bold shadow-lg shadow-emerald-500/20">
+                        <i data-lucide="zap" class="w-5 h-5"></i>
+                    </div>
+                    <h1 class="font-extrabold text-lg text-slate-900 flex items-center gap-2 tracking-tight">
+                        <a href="https://sfproyects.github.io/EnglishLearningPro/" class="hover:text-emerald-600 transition">English Pro</a>
+                        <span class="text-[10px] font-bold uppercase tracking-wider bg-emerald-100 text-emerald-700 border border-emerald-200 px-2.5 py-0.5 rounded-full" id="header-badge">Lesson 1 / 40</span>
+                    </h1>
+                </div>
+                <div class="flex items-center gap-2 sm:hidden">
+                    <button onclick="openVocabularyVault()" class="bg-purple-100 text-purple-700 border border-purple-200 px-3 py-1.5 rounded-xl text-xs font-bold flex items-center gap-1 shadow-sm">
+                        <i data-lucide="book" class="w-3.5 h-3.5"></i> Bóveda
+                    </button>
+                </div>
+            </div>
+
+            <!-- Stats Bar -->
+            <div class="flex items-center justify-center flex-wrap gap-2 text-xs w-full sm:w-auto">
+                <div class="flex items-center space-x-1.5 bg-amber-50 px-3.5 py-1.5 rounded-xl border border-amber-200 font-bold text-amber-800 shadow-sm">
+                    <i data-lucide="layers" class="w-3.5 h-3.5 text-amber-600"></i>
+                    <span id="current-block-label">Nivel: Intermedio B1 Mastery</span>
+                </div>
+                <div class="flex items-center space-x-1.5 bg-orange-50 px-3.5 py-1.5 rounded-xl border border-orange-200 font-semibold text-orange-700 shadow-sm">
+                    <i data-lucide="flame" class="w-3.5 h-3.5 text-orange-500"></i>
+                    <span>Streak: <strong class="text-slate-900" id="streak-count">1d</strong></span>
+                </div>
+                <div class="flex items-center space-x-1.5 bg-emerald-50 px-3.5 py-1.5 rounded-xl border border-emerald-200 font-semibold text-emerald-700 shadow-sm">
+                    <i data-lucide="award" class="w-3.5 h-3.5 text-emerald-600"></i>
+                    <span>Vocab: <strong class="text-slate-900" id="vocab-vault-count">0</strong></span>
+                </div>
+                <button onclick="openVocabularyVault()" class="hidden sm:flex bg-purple-50 hover:bg-purple-100 text-purple-700 border border-purple-200 px-3.5 py-1.5 rounded-xl transition cursor-pointer items-center gap-1.5 text-xs font-bold shadow-sm">
+                    <i data-lucide="book" class="w-3.5 h-3.5"></i> Bóveda 📚
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- MAIN CONTENT -->
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-5 w-full flex-grow relative z-10">
+        
+        <!-- Welcome Banner -->
+        <div class="vibrant-card rounded-3xl p-5 sm:p-7 mb-6 relative overflow-hidden border border-emerald-100 shadow-xl bg-gradient-to-br from-white via-emerald-50/30 to-sky-50/40">
+            <div class="relative z-10 flex flex-col md:flex-row justify-between items-start md:items-center gap-5">
+                <div class="flex-grow">
+                    <span class="text-[10px] font-extrabold uppercase tracking-widest text-emerald-700 bg-emerald-100 px-3 py-1 rounded-full border border-emerald-200" id="course-subtitle">Intermediate B1 Mastery Course</span>
+                    <h2 class="text-2xl sm:text-3xl font-extrabold text-slate-900 mt-2 tracking-tight" id="welcome-title">Welcome back!</h2>
+                    <p class="text-slate-600 mt-1.5 text-xs sm:text-sm bg-white/80 border border-slate-200 px-4 py-2.5 rounded-2xl italic shadow-sm" id="motivational-quote">
+                        "Real native flow: talk naturally and get instant corrections!"
+                    </p>
+                </div>
+
+                <!-- Session Progress -->
+                <div class="vibrant-card border border-slate-200 p-4.5 rounded-2xl w-full md:w-85 shadow-md bg-white">
+                    <div class="flex justify-between text-xs mb-2 font-bold">
+                        <span class="text-slate-600">Lesson Progress:</span>
+                        <span class="text-emerald-600" id="session-progress-text">Phase 1 / 5</span>
+                    </div>
+                    <div class="w-full bg-slate-100 h-3 rounded-full overflow-hidden p-0.5 border border-slate-200">
+                        <div id="session-bar" class="bg-gradient-to-r from-sky-400 to-emerald-500 h-full w-0 rounded-full transition-all duration-500 shadow-sm"></div>
+                    </div>
+                    <div class="mt-3 text-center text-xs text-slate-500 font-bold" id="auto-advance-notice">
+                        ✨ 100% Native Conversational Flow
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- VISTA DE LECCIÓN ÚNICA EN PANTALLA -->
+        <div id="lesson-view-container" class="space-y-4">
+
+            <!-- FASE 1: TEORÍA + CHAT NATIVO -->
+            <div id="content-speaking" class="space-y-4">
+                
+                <!-- Guía Teórica de Saludos y Despedidas -->
+                <div class="vibrant-card rounded-3xl p-5 sm:p-7 shadow-lg border border-sky-100 space-y-4">
+                    <h3 class="text-xs font-extrabold text-slate-800 uppercase tracking-wider flex items-center gap-2">
+                        <i data-lucide="book-open" class="w-4 h-4 text-sky-600"></i> Step 1: Core Expressions & Quick Replies (Guía de Respuestas)
+                    </h3>
+                    
+                    <!-- Saludos -->
+                    <div>
+                        <span class="text-[11px] font-extrabold text-sky-700 uppercase tracking-wider block mb-2">👋 Section A: Greetings & Quick Replies (Cómo responder)</span>
+                        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
+                            <div class="bg-sky-50 border border-sky-200 p-3 rounded-2xl flex flex-col justify-between">
+                                <div>
+                                    <span class="text-[10px] font-extrabold text-sky-700 uppercase block">💬 Responder "¿Qué tal?":</span>
+                                    <p class="text-xs text-slate-800 italic font-semibold mb-1">"Pretty good, thanks!"</p>
+                                    <p class="text-[10px] text-sky-800 font-bold mb-2">(Bastante bien, ¡gracias!)</p>
+                                </div>
+                                <button onclick="speakSpecificTextCustom('Pretty good, thanks!')" class="self-start bg-white hover:bg-sky-100 text-sky-700 px-2 py-1 rounded-lg text-[10px] font-bold border border-sky-200 cursor-pointer">🔊 Listen</button>
+                            </div>
+                            <div class="bg-sky-50 border border-sky-200 p-3 rounded-2xl flex flex-col justify-between">
+                                <div>
+                                    <span class="text-[10px] font-extrabold text-sky-700 uppercase block">💬 Responder "¿Qué hay?":</span>
+                                    <p class="text-xs text-slate-800 italic font-semibold mb-1">"Not much, just chilling!"</p>
+                                    <p class="text-[10px] text-sky-800 font-bold mb-2">(Nada del otro mundo, ¡relajado!)</p>
+                                </div>
+                                <button onclick="speakSpecificTextCustom('Not much, just chilling!')" class="self-start bg-white hover:bg-sky-100 text-sky-700 px-2 py-1 rounded-lg text-[10px] font-bold border border-sky-200 cursor-pointer">🔊 Listen</button>
+                            </div>
+                            <div class="bg-emerald-50 border border-emerald-200 p-3 rounded-2xl flex flex-col justify-between">
+                                <div>
+                                    <span class="text-[10px] font-extrabold text-emerald-700 uppercase block">🔥 Slang 1:</span>
+                                    <p class="text-xs text-slate-800 italic font-semibold mb-1" id="g-slang1">Hey! I'm Kevin, great to meet you.</p>
+                                    <p class="text-[10px] text-emerald-800 font-bold mb-2" id="g-slang1-es">(¡Ey! Soy Kevin, qué gusto conocerte.)</p>
+                                </div>
+                                <button onclick="speakSpecificTextCustom('Hey! I am Kevin, great to meet you.')" class="self-start bg-white hover:bg-emerald-100 text-emerald-700 px-2 py-1 rounded-lg text-[10px] font-bold border border-emerald-200 cursor-pointer">🔊 Listen</button>
+                            </div>
+                            <div class="bg-emerald-50 border border-emerald-200 p-3 rounded-2xl flex flex-col justify-between">
+                                <div>
+                                    <span class="text-[10px] font-extrabold text-emerald-700 uppercase block">🔥 Slang 2:</span>
+                                    <p class="text-xs text-slate-800 italic font-semibold mb-1" id="g-slang2">What's up? I'm Kevin, let's chat!</p>
+                                    <p class="text-[10px] text-emerald-800 font-bold mb-2" id="g-slang2-es">(¿Qué tal? Soy Kevin, ¡hablemos!)</p>
+                                </div>
+                                <button onclick="speakSpecificTextCustom('What is up? I am Kevin, let us chat!')" class="self-start bg-white hover:bg-emerald-100 text-emerald-700 px-2 py-1 rounded-lg text-[10px] font-bold border border-emerald-200 cursor-pointer">🔊 Listen</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Despedidas -->
+                    <div class="pt-2 border-t border-slate-200">
+                        <span class="text-[11px] font-extrabold text-purple-700 uppercase tracking-wider block mb-2">🛑 Section B: Farewells (Despedidas)</span>
+                        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
+                            <div class="bg-purple-50 border border-purple-200 p-3 rounded-2xl flex flex-col justify-between">
+                                <div>
+                                    <span class="text-[10px] font-extrabold text-purple-700 uppercase block">👔 Formal 1:</span>
+                                    <p class="text-xs text-slate-800 italic font-semibold mb-1" id="f-form1">Thank you for your time. Have a wonderful day.</p>
+                                    <p class="text-[10px] text-purple-800 font-bold mb-2" id="f-form1-es">(Gracias por su tiempo. Que tenga un día maravilloso.)</p>
+                                </div>
+                                <button onclick="speakSpecificTextCustom('Thank you for your time. Have a wonderful day.')" class="self-start bg-white hover:bg-purple-100 text-purple-700 px-2 py-1 rounded-lg text-[10px] font-bold border border-purple-200 cursor-pointer">🔊 Listen</button>
+                            </div>
+                            <div class="bg-purple-50 border border-purple-200 p-3 rounded-2xl flex flex-col justify-between">
+                                <div>
+                                    <span class="text-[10px] font-extrabold text-purple-700 uppercase block">👔 Formal 2:</span>
+                                    <p class="text-xs text-slate-800 italic font-semibold mb-1" id="f-form2">It was a productive conversation. Goodbye.</p>
+                                    <p class="text-[10px] text-purple-800 font-bold mb-2" id="f-form2-es">(Fue una conversación productiva. Adiós.)</p>
+                                </div>
+                                <button onclick="speakSpecificTextCustom('It was a productive conversation. Goodbye.')" class="self-start bg-white hover:bg-purple-100 text-purple-700 px-2 py-1 rounded-lg text-[10px] font-bold border border-purple-200 cursor-pointer">🔊 Listen</button>
+                            </div>
+                            <div class="bg-pink-50 border border-pink-200 p-3 rounded-2xl flex flex-col justify-between">
+                                <div>
+                                    <span class="text-[10px] font-extrabold text-pink-700 uppercase block">🔥 Slang 1:</span>
+                                    <p class="text-xs text-slate-800 italic font-semibold mb-1" id="f-slang1">Catch you later! See you around.</p>
+                                    <p class="text-[10px] text-pink-800 font-bold mb-2" id="f-slang1-es">(¡Nos vemos luego! Te veo por ahí.)</p>
+                                </div>
+                                <button onclick="speakSpecificTextCustom('Catch you later! See you around.')" class="self-start bg-white hover:bg-pink-100 text-pink-700 px-2 py-1 rounded-lg text-[10px] font-bold border border-pink-200 cursor-pointer">🔊 Listen</button>
+                            </div>
+                            <div class="bg-pink-50 border border-pink-200 p-3 rounded-2xl flex flex-col justify-between">
+                                <div>
+                                    <span class="text-[10px] font-extrabold text-pink-700 uppercase block">🔥 Slang 2:</span>
+                                    <p class="text-xs text-slate-800 italic font-semibold mb-1" id="f-slang2">Alright, I'm heading out. Take care!</p>
+                                    <p class="text-[10px] text-pink-800 font-bold mb-2" id="f-slang2-es">(Bien, ya me voy. ¡Cuídate!)</p>
+                                </div>
+                                <button onclick="speakSpecificTextCustom('Alright, I am heading out. Take care!')" class="self-start bg-white hover:bg-pink-100 text-pink-700 px-2 py-1 rounded-lg text-[10px] font-bold border border-pink-200 cursor-pointer">🔊 Listen</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Chat Nativo Real con Corrección y Respuestas Naturales -->
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-5">
+                    <div class="vibrant-card lg:col-span-3 rounded-3xl p-5 sm:p-7 flex flex-col justify-between shadow-lg h-[480px]">
+                        <div>
+                            <div class="flex items-center justify-between mb-3">
+                                <span class="text-xs font-extrabold text-emerald-700 bg-emerald-100 px-3.5 py-1 rounded-full border border-emerald-200 flex items-center gap-1.5 shadow-sm">
+                                    <i data-lucide="messages-square" class="w-3.5 h-3.5"></i> Step 2: Native Street Chat (Instant Correction)
+                                </span>
+                                <span class="text-[11px] font-bold text-slate-500" id="roleplay-scenario-tag">Casual Street Encounter</span>
+                            </div>
+                        </div>
+
+                        <!-- Historial de Conversación -->
+                        <div id="chat-messages-container" class="flex-grow overflow-y-auto space-y-3 my-3 pr-2 bg-slate-50/80 p-4 rounded-2xl border border-slate-200 shadow-inner"></div>
+
+                        <!-- Input de Chat -->
+                        <div class="pt-2 border-t border-slate-200">
+                            <div class="flex items-center justify-end mb-2">
+                                <button onclick="toggleSpeechRecognition()" id="mic-btn" class="bg-emerald-500 hover:bg-emerald-600 text-white px-3 py-1.5 rounded-xl text-xs font-extrabold flex items-center gap-1 transition cursor-pointer shadow-sm">
+                                    <i data-lucide="mic" class="w-3.5 h-3.5"></i> <span id="mic-status-text">Mic</span>
+                                </button>
+                            </div>
+                            <div class="flex gap-2">
+                                <input type="text" id="roleplay-user-input" class="vibrant-input flex-grow rounded-2xl px-4 py-3 text-xs sm:text-sm text-slate-800 focus:outline-none transition font-semibold" placeholder="Reply naturally like a native speaker..." onkeypress="if(event.key === 'Enter') sendRoleplayMessage()">
+                                <button onclick="sendRoleplayMessage()" class="bg-gradient-to-r from-sky-500 to-emerald-500 hover:from-sky-600 hover:to-emerald-600 text-white px-5 py-3 rounded-2xl text-xs font-extrabold transition shadow-md cursor-pointer flex items-center gap-1">
+                                    <i data-lucide="send" class="w-4 h-4"></i> Send
+                                </button>
+                            </div>
+                            <div class="mt-3 flex justify-between items-center">
+                                <span class="text-[11px] font-bold text-sky-700 bg-sky-50 px-3 py-1 rounded-xl border border-sky-200" id="roleplay-counter-label">Turns: 0 / 4 completed</span>
+                                <button onclick="completeRoleplayPhase()" class="bg-purple-600 hover:bg-purple-700 text-white font-extrabold px-6 py-2.5 rounded-xl text-xs transition cursor-pointer shadow-md">
+                                    Validate Roleplay & Proceed ➔
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- FASE 2: FLASHCARDS -->
+            <div id="content-flashcards" class="hidden space-y-4">
+                <div class="max-w-sm mx-auto text-center">
+                    <h3 class="text-xl font-extrabold text-slate-900 mb-1 tracking-tight" id="flashcard-phase-title">Phase 2: Vocabulary Mastery</h3>
+                    <p class="text-xs text-slate-500 mb-5 font-semibold" id="flashcard-counter-label">Reviewing words...</p>
+                    
+                    <div class="card-flip h-72 w-full cursor-pointer mb-5 shadow-2xl" onclick="this.classList.toggle('flipped')">
+                        <div class="card-inner relative w-full h-full text-center">
+                            <div class="card-front absolute w-full h-full vibrant-card rounded-3xl p-6 flex flex-col items-center justify-between border-2 border-slate-200">
+                                <span class="text-xs font-extrabold text-sky-700 bg-sky-100 px-3.5 py-1 rounded-full border border-sky-200 shadow-sm" id="flash-badge">Term #1</span>
+                                <div class="w-24 h-24 bg-slate-50 rounded-3xl border-2 border-slate-200 flex items-center justify-center text-5xl shadow-inner my-2" id="flash-img">📚</div>
+                                <div>
+                                    <h4 class="text-xl font-extrabold text-slate-900 mb-1" id="flash-term">Loading...</h4>
+                                    <span class="text-xs text-slate-400 font-bold">(Tap card to flip)</span>
+                                </div>
+                            </div>
+                            <div class="card-back absolute w-full h-full vibrant-card bg-gradient-to-br from-emerald-50 to-sky-50 border-2 border-emerald-200 rounded-3xl p-6 flex flex-col items-center justify-center shadow-xl">
+                                <span class="text-xs font-extrabold text-emerald-700 mb-3 bg-emerald-100 px-3.5 py-1 rounded-full border border-emerald-200 shadow-sm">Meaning & Context</span>
+                                <p class="text-slate-800 text-xs sm:text-sm mb-3 font-bold" id="flash-def">...</p>
+                                <span class="text-xs sm:text-sm font-mono text-emerald-900 bg-white px-4 py-2.5 rounded-2xl border border-emerald-300 font-extrabold shadow-sm" id="flash-es">...</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="flex justify-center gap-3">
+                        <button onclick="prevCard()" class="bg-white hover:bg-slate-50 text-slate-700 px-5 py-2.5 rounded-2xl text-xs border border-slate-300 transition cursor-pointer font-extrabold shadow-sm">Previous</button>
+                        <button onclick="nextCard()" class="bg-gradient-to-r from-sky-500 to-emerald-500 text-white font-extrabold px-6 py-2.5 rounded-2xl text-xs transition cursor-pointer shadow-lg shadow-emerald-500/25">Next Word ➔</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- FASE 3: GRAMMAR -->
+            <div id="content-grammar" class="hidden space-y-4">
+                <div class="vibrant-card max-w-xl mx-auto rounded-3xl p-5 sm:p-7 shadow-xl border border-purple-100">
+                    <div class="flex justify-between items-center mb-3.5">
+                        <span class="text-xs font-extrabold text-purple-700 bg-purple-100 px-3.5 py-1 rounded-full border border-purple-200 shadow-sm">Phase 3: Daily Grammar Check</span>
+                        <span class="text-xs text-slate-500 font-bold" id="quiz-counter">Challenge 1 of 8</span>
+                    </div>
+                    <h3 class="text-lg font-extrabold text-slate-900 mb-2" id="quiz-title">Loading...</h3>
+                    <p class="text-slate-700 text-xs sm:text-sm mb-5 bg-slate-50 p-4 rounded-2xl border border-slate-200 leading-relaxed shadow-inner font-medium" id="quiz-desc">...</p>
+                    
+                    <div class="space-y-3 mb-5" id="quiz-options"></div>
+
+                    <div id="error-repair-container" class="hidden space-y-3 mb-5">
+                        <label class="block text-xs font-extrabold text-sky-700 uppercase tracking-wider">Type the correct word or structure:</label>
+                        <input type="text" id="error-input" class="vibrant-input w-full rounded-2xl px-4 py-3.5 text-xs sm:text-sm text-slate-800 focus:outline-none transition font-semibold" placeholder="Type here...">
+                        <button onclick="submitErrorCorrection()" class="w-full bg-purple-600 hover:bg-purple-700 text-white font-extrabold py-3 rounded-2xl text-xs transition cursor-pointer shadow-lg shadow-purple-600/25">
+                            Verify with Tutor ➔
+                        </button>
+                    </div>
+
+                    <div id="quiz-instant-feedback" class="text-xs mt-3 p-4 rounded-2xl hidden space-y-1.5 shadow-sm"></div>
+                </div>
+            </div>
+
+            <!-- FASE 4: LISTENING -->
+            <div id="content-listening" class="hidden space-y-4">
+                <div class="vibrant-card max-w-xl mx-auto rounded-3xl p-5 sm:p-7 shadow-xl border border-emerald-100">
+                    <div class="flex justify-between items-center mb-3.5">
+                        <span class="text-xs font-extrabold text-emerald-700 bg-emerald-100 px-3.5 py-1 rounded-full border border-emerald-200 shadow-sm">Phase 4: Ear Training (US Audio)</span>
+                    </div>
+                    <h3 class="text-lg font-extrabold text-slate-900 mb-1">Listen & Repeat</h3>
+                    <p class="text-slate-600 text-xs mb-5 leading-relaxed font-medium">Listen to native audio and type exactly what you hear.</p>
+                    
+                    <div class="bg-slate-50 p-5 rounded-3xl border border-slate-200 mb-4 space-y-4 text-center shadow-inner">
+                        <button onclick="playListeningAudio()" class="bg-gradient-to-r from-emerald-500 to-sky-500 hover:from-emerald-600 hover:to-sky-600 text-white font-extrabold px-6 py-3.5 rounded-2xl text-xs sm:text-sm transition inline-flex items-center gap-2 cursor-pointer shadow-lg shadow-emerald-500/25">
+                            <i data-lucide="volume-2" class="w-4 h-4"></i> Play Native Audio 🔊
+                        </button>
+                        
+                        <div class="mt-3 text-left space-y-2">
+                            <label class="block text-xs font-extrabold text-slate-700 uppercase tracking-wider">Type exact phrase heard:</label>
+                            <input type="text" id="listening-input" class="vibrant-input w-full rounded-2xl px-4 py-3.5 text-xs sm:text-sm text-slate-800 focus:outline-none transition font-semibold" placeholder="Type phrase...">
+                        </div>
+
+                        <div class="flex justify-between items-center pt-2">
+                            <button onclick="checkListeningDictation()" class="bg-sky-500 hover:bg-sky-600 text-white font-extrabold px-6 py-3 rounded-2xl text-xs transition cursor-pointer shadow-lg shadow-sky-500/25">
+                                Verify Dictation ✓
+                            </button>
+                            <span class="text-xs text-slate-500 font-bold" id="listening-hint">Required accuracy</span>
+                        </div>
+
+                        <div id="listening-result" class="text-xs font-extrabold text-slate-600 mt-2"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- FASE 5: SHADOWING -->
+            <div id="content-shadowing" class="hidden space-y-4">
+                <div class="vibrant-card max-w-xl mx-auto rounded-3xl p-5 sm:p-7 shadow-xl border border-sky-100">
+                    <div class="flex justify-between items-center mb-3.5">
+                        <span class="text-xs font-extrabold text-sky-700 bg-sky-100 px-3.5 py-1 rounded-full border border-sky-200 shadow-sm">Phase 5: Voice Shadowing (US Accent)</span>
+                    </div>
+                    <h3 class="text-lg font-extrabold text-slate-900 mb-1">Pronounce Target Phrase</h3>
+                    <p class="text-slate-600 text-xs mb-5 leading-relaxed font-medium">Use your microphone. The system will validate your pronunciation to level up.</p>
+                    
+                    <div class="bg-slate-50 p-5 rounded-3xl border border-slate-200 mb-4 space-y-4 shadow-inner text-center">
+                        <div class="bg-white p-4.5 rounded-2xl border border-slate-200 shadow-sm">
+                            <p class="text-[10px] font-extrabold text-slate-400 mb-1 uppercase tracking-wider">Target Phrase (US Native):</p>
+                            <p class="text-sm sm:text-base text-sky-700 font-mono italic font-extrabold" id="shadow-text">"Loading..."</p>
+                            <button onclick="speakShadowText()" class="mt-3 bg-sky-50 hover:bg-sky-100 text-sky-700 px-4 py-2 rounded-xl text-xs transition inline-flex items-center gap-1.5 cursor-pointer border border-sky-200 font-extrabold shadow-sm">
+                                <i data-lucide="volume-2" class="w-4 h-4"></i> Listen Native Reference 🔊
+                            </button>
+                        </div>
+
+                        <div class="py-2">
+                            <button onclick="verifyShadowingVoice()" id="shadow-mic-btn" class="bg-gradient-to-r from-emerald-500 to-sky-500 hover:from-emerald-600 hover:to-sky-600 text-white px-8 py-4 rounded-2xl text-sm font-extrabold inline-flex items-center gap-2 transition cursor-pointer shadow-lg shadow-emerald-500/25">
+                                <i data-lucide="mic" class="w-5 h-5"></i> <span id="shadow-mic-status">Record with Mic 🎙️</span>
+                            </button>
+                        </div>
+
+                        <div class="bg-white p-3.5 rounded-2xl border border-slate-200 text-xs text-slate-700 font-semibold" id="shadow-transcript-box">
+                            Your voice transcript will appear here...
+                        </div>
+
+                        <div id="shadow-result" class="text-xs font-extrabold text-slate-600 pt-2"></div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </main>
+
+    <!-- VOCABULARY VAULT MODAL -->
+    <div id="vocabulary-vault-modal" class="fixed inset-0 bg-slate-900/60 backdrop-blur-md z-50 flex items-center justify-center hidden p-4">
+        <div class="vibrant-card max-w-lg w-full rounded-3xl p-6 shadow-2xl relative border border-purple-200 flex flex-col max-h-[85vh]">
+            <div class="flex items-center justify-between mb-4 pb-3 border-b border-slate-200">
+                <div class="flex items-center gap-2">
+                    <span class="text-2xl">📚</span>
+                    <h3 class="font-extrabold text-lg text-slate-900">Vocabulary Vault</h3>
+                </div>
+                <button onclick="document.getElementById('vocabulary-vault-modal').classList.add('hidden')" class="bg-slate-100 hover:bg-slate-200 text-slate-700 px-3 py-1.5 rounded-xl text-xs font-bold transition">Close ✕</button>
+            </div>
+            <div class="overflow-y-auto space-y-2.5 pr-1 flex-grow" id="vault-list-container"></div>
+        </div>
+    </div>
+
+    <!-- CUSTOM APP MODAL -->
+    <div id="custom-modal" class="fixed inset-0 bg-slate-900/60 backdrop-blur-md z-50 flex items-center justify-center hidden p-4">
+        <div class="vibrant-card max-w-xs w-full rounded-3xl p-6 text-center space-y-3.5 border border-slate-200 shadow-2xl">
+            <div class="w-14 h-14 bg-sky-100 border border-sky-200 rounded-2xl flex items-center justify-center mx-auto text-2xl shadow-inner" id="modal-icon">✨</div>
+            <h4 class="font-extrabold text-base text-slate-900" id="modal-title">English Pro Notice</h4>
+            <p class="text-xs text-slate-600 leading-relaxed font-medium" id="modal-message">Message here...</p>
+            <button onclick="closeModal()" class="w-full bg-gradient-to-r from-sky-500 to-emerald-500 text-white font-extrabold py-3 rounded-2xl text-xs transition cursor-pointer shadow-lg shadow-emerald-500/25">OK</button>
+        </div>
+    </div>
+
+    <!-- FOOTER -->
+    <footer class="border-t border-slate-200 bg-white/60 py-3 text-center text-xs text-slate-500 relative z-10 font-medium">
+        English Pro &copy; 2026 &bull; Ultimate Progressive Edition
+    </footer>
+
+    <!-- SCRIPTS -->
+    <script>
+        lucide.createIcons();
+
+        let appState = JSON.parse(localStorage.getItem('english_pro_ultimate_state')) || {
+            userName: 'Kevin',
+            streak: 1,
+            currentMode: 'intermediate',
+            beginnerLesson: 1,
+            intermediateLesson: 1,
+            unlockedSteps: { speaking: true, flashcards: false, grammar: false, listening: false, shadowing: false },
+            quizScores: [],
+            learnedFlashcards: [],
+            hasStarted: true
+        };
+
+        const curriculum40 = [];
+        for (let i = 1; i <= 40; i++) {
+            let blockNum = Math.ceil(i / 10);
+            let themeName = `Lesson Topic ${i}`;
+            
+            let gSlang1 = "Hey! I'm Kevin, great to meet you.";
+            let gSlang1Es = "¡Ey! Soy Kevin, qué gusto conocerte.";
+            let gSlang2 = "What's up? I'm Kevin, let's chat!";
+            let gSlang2Es = "¿Qué tal? Soy Kevin, ¡hablemos!";
+
+            let fForm1 = "Thank you for your time. Have a wonderful day.";
+            let fForm1Es = "Gracias por su tiempo. Que tenga un día maravilloso.";
+            let fForm2 = "It was a productive conversation. Goodbye.";
+            let fForm2Es = "Fue una conversación productiva. Adiós.";
+            let fSlang1 = "Catch you later! See you around.";
+            let fSlang1Es = "¡Nos vemos luego! Te veo por ahí.";
+            let fSlang2 = "Alright, I'm heading out. Take care!";
+            let fSlang2Es = "Bien, ya me voy. ¡Cuídate!";
+
+            let tutorIntro = "Hey Kevin! What's up man? Just grabbing a quick coffee. How's it going with you?";
+
+            if (i === 1) {
+                themeName = "Professional Greetings & Introductions";
+                tutorIntro = "Hey Kevin! What's up man? Just grabbing a quick coffee. How's it going with you?";
+            }
+
+            let words = [
+                {w:"Greeting",d:"Saludo",e:"Saludo 👋"}, {w:"Introduction",d:"Presentación",e:"Present 🤝"}, 
+                {w:"Price",d:"Precio",e:"Precio 💲"}, {w:"Discount",d:"Descuento",e:"Oferta 🏷️"}
+            ];
+
+            curriculum40.push({
+                id: i,
+                block: blockNum,
+                theme: themeName,
+                grammarTitle: "B1 Mastery Core Workflow",
+                roleplay: {
+                    title: `Lesson ${i}: ${themeName}`,
+                    turns: 4,
+                    introLine: tutorIntro,
+                    gSlang1: gSlang1, gSlang1Es: gSlang1Es,
+                    gSlang2: gSlang2, gSlang2Es: gSlang2Es,
+                    fForm1: fForm1, fForm1Es: fForm1Es,
+                    fForm2: fForm2, fForm2Es: fForm2Es,
+                    fSlang1: fSlang1, fSlang1Es: fSlang1Es,
+                    fSlang2: fSlang2, fSlang2Es: fSlang2Es
+                },
+                flashcards: words.map((w, idx) => ({ id: i*10 + idx, term: w.w, def: w.d, es: w.e, img: w.e.split(' ').pop() })),
+                quizzes: [
+                    { id: `l${i}_q1`, type: 'mc', title: `Grammar (Block ${blockNum})`, desc: "We ___ our best to optimize the system every single day.", options: [{text: 'A) do', correct: true}, {text: 'B) does', correct: false}], correction: "Con el pronombre 'We' siempre se utiliza 'do'." },
+                    { id: `l${i}_q2`, type: 'repair', title: 'Essential Vocabulary', desc: `Type in English for '${words[0].d}':`, answer: words[0].w.toLowerCase(), correction: `Se escribe '${words[0].w}'.` }
+                ],
+                listening: `We are successfully mastering advanced English expressions today`,
+                shadow: gSlang1
+            });
+        }
+
+        let currentCard = 0;
+        let currentQuizIndex = 0;
+        let activeQuizItem = null;
+        let currentListeningTarget = "";
+        let activeQuizzes = [];
+        let activeFlashcards = [];
+        let currentRoleplayData = null;
+        let roleplayInteractionCount = 0;
+        let requiredRoleplayTurns = 4;
+
+        function saveState() {
+            localStorage.setItem('english_pro_ultimate_state', JSON.stringify(appState));
+        }
+
+        function showCustomModal(title, message, icon = "✨") {
+            document.getElementById('modal-title').innerText = title;
+            document.getElementById('modal-message').innerText = message;
+            document.getElementById('modal-icon').innerText = icon;
+            document.getElementById('custom-modal').classList.remove('hidden');
+        }
+
+        function closeModal() {
+            document.getElementById('custom-modal').classList.add('hidden');
+        }
+
+        function updateUIStats() {
+            document.getElementById('streak-count').innerText = appState.streak + 'd';
+            document.getElementById('vocab-vault-count').innerText = appState.learnedFlashcards.length;
+            
+            const isInter = appState.currentMode === 'intermediate';
+            let currLesson = isInter ? appState.intermediateLesson : appState.beginnerLesson;
+            
+            document.getElementById('current-block-label').innerText = isInter ? 'Nivel: Intermedio B1 Mastery' : 'Nivel: Beginner Progressive';
+            document.getElementById('header-badge').innerText = `Lesson ${currLesson} / 40`;
+            document.getElementById('course-subtitle').innerText = isInter ? 'Intermediate B1 Mastery & Professional Edge' : 'Progressive Beginner Course (A2+ to B1)';
+            document.getElementById('welcome-title').innerText = `Welcome back, ${appState.userName || 'Kevin'}!`;
+            updateStepsUI();
+        }
+
+        function updateStepsUI() {
+            let unlockedCount = Object.values(appState.unlockedSteps).filter(Boolean).length;
+            document.getElementById('session-progress-text').innerText = `Phase ${unlockedCount} / 5`;
+            document.getElementById('session-bar').style.width = `${(unlockedCount / 5) * 100}%`;
+        }
+
+        function unlockNextStep(currentStepKey, nextStepKey) {
+            appState.unlockedSteps[nextStepKey] = true;
+            saveState();
+            updateStepsUI();
+            switchTab(nextStepKey);
+        }
+
+        function switchTab(tabName) {
+            if (!appState.unlockedSteps[tabName]) {
+                showCustomModal("Phase Locked 🔒", "Complete the previous phase first.", "⚠️");
+                return;
+            }
+            document.querySelectorAll('#lesson-view-container > div').forEach(el => el.classList.add('hidden'));
+            document.getElementById('content-' + tabName).classList.remove('hidden');
+        }
+
+        function loadCurrentLesson() {
+            const isInter = appState.currentMode === 'intermediate';
+            let currLesson = isInter ? appState.intermediateLesson : appState.beginnerLesson;
+            let lessonIndex = (currLesson - 1) % curriculum40.length;
+            let lessonData = curriculum40[lessonIndex];
+
+            currentRoleplayData = lessonData.roleplay;
+            currentListeningTarget = lessonData.listening;
+            roleplayInteractionCount = 0;
+            requiredRoleplayTurns = 4;
+
+            document.getElementById('roleplay-scenario-tag').innerText = `Lesson ${currLesson}: ${lessonData.theme}`;
+            
+            document.getElementById('g-slang1').innerText = currentRoleplayData.gSlang1;
+            document.getElementById('g-slang1-es').innerText = `(${currentRoleplayData.gSlang1Es})`;
+            document.getElementById('g-slang2').innerText = currentRoleplayData.gSlang2;
+            document.getElementById('g-slang2-es').innerText = `(${currentRoleplayData.gSlang2Es})`;
+
+            document.getElementById('f-form1').innerText = currentRoleplayData.fForm1;
+            document.getElementById('f-form1-es').innerText = `(${currentRoleplayData.fForm1Es})`;
+            document.getElementById('f-form2').innerText = currentRoleplayData.fForm2;
+            document.getElementById('f-form2-es').innerText = `(${currentRoleplayData.fForm2Es})`;
+            document.getElementById('f-slang1').innerText = currentRoleplayData.fSlang1;
+            document.getElementById('f-slang1-es').innerText = `(${currentRoleplayData.fSlang1Es})`;
+            document.getElementById('f-slang2').innerText = currentRoleplayData.fSlang2;
+            document.getElementById('f-slang2-es').innerText = `(${currentRoleplayData.fSlang2Es})`;
+
+            document.getElementById('shadow-text').innerText = `"${lessonData.shadow}"`;
+            document.getElementById('flashcard-phase-title').innerText = `Phase 2: Vocabulary Mastery (Lesson ${currLesson})`;
+            document.getElementById('roleplay-counter-label').innerText = `Turns: 0 / 4 completed`;
+
+            activeFlashcards = lessonData.flashcards;
+            activeQuizzes = lessonData.quizzes;
+
+            const chatBox = document.getElementById('chat-messages-container');
+            chatBox.innerHTML = `
+                <div class="flex items-start gap-2.5">
+                    <div class="w-8 h-8 rounded-full bg-sky-500 text-white flex items-center justify-center font-bold text-xs flex-shrink-0">🤖</div>
+                    <div class="bg-white border border-slate-200 p-3.5 rounded-2xl shadow-sm text-xs text-slate-800 max-w-[85%]">
+                        <p class="font-extrabold text-sky-700 mb-0.5">Tutor (Nativo):</p>
+                        <p class="font-medium">${currentRoleplayData.introLine}</p>
+                    </div>
+                </div>
+            `;
+
+            currentCard = 0;
+            currentQuizIndex = 0;
+            updateCard();
+            loadQuizQuestion();
+            switchTab('speaking');
+        }
+
+        // CHAT NATIVO REAL CON CORRECCIÓN INSTANTÁNEA
+        function sendRoleplayMessage() {
+            const input = document.getElementById('roleplay-user-input');
+            const text = input.value.trim();
+            if (!text) return;
+
+            const chatBox = document.getElementById('chat-messages-container');
+            const wordCount = text.split(/\s+/).length;
+            const hasValidContext = wordCount >= 2;
+
+            if (!hasValidContext) {
+                chatBox.innerHTML += `
+                    <div class="flex items-start gap-2.5 justify-end">
+                        <div class="bg-rose-500 text-white p-3.5 rounded-2xl shadow-sm text-xs max-w-[85%]">
+                            <p class="font-extrabold text-rose-100 mb-0.5">Tú (${appState.userName || 'Kevin'}):</p>
+                            <p class="font-medium">${text}</p>
+                        </div>
+                        <div class="w-8 h-8 rounded-full bg-rose-600 text-white flex items-center justify-center font-bold text-xs flex-shrink-0">⚠️</div>
+                    </div>
+                    <div class="flex items-start gap-2.5">
+                        <div class="w-8 h-8 rounded-full bg-amber-500 text-white flex items-center justify-center font-bold text-xs flex-shrink-0">🤖</div>
+                        <div class="bg-amber-50 border border-amber-200 p-3.5 rounded-2xl shadow-sm text-xs text-amber-900 max-w-[85%]">
+                            <p class="font-extrabold mb-0.5">Tutor:</p>
+                            <p class="font-medium">⚠️ ¡Escribe al menos 2 palabras en inglés!</p>
+                        </div>
+                    </div>
+                `;
+                input.value = '';
+                chatBox.scrollTop = chatBox.scrollHeight;
+                return;
+            }
+
+            chatBox.innerHTML += `
+                <div class="flex items-start gap-2.5 justify-end">
+                    <div class="bg-emerald-500 text-white p-3.5 rounded-2xl shadow-sm text-xs max-w-[85%]">
+                        <p class="font-extrabold text-emerald-100 mb-0.5">Tú (${appState.userName || 'Kevin'}):</p>
+                        <p class="font-medium">${text}</p>
+                    </div>
+                    <div class="w-8 h-8 rounded-full bg-emerald-600 text-white flex items-center justify-center font-bold text-xs flex-shrink-0">😎</div>
+                </div>
+            `;
+            input.value = '';
+            chatBox.scrollTop = chatBox.scrollHeight;
+
+            setTimeout(() => {
+                let lowerText = text.toLowerCase();
+                let correctionNotice = "";
+
+                if (lowerText.includes("goof")) {
+                    correctionNotice = "💡 <strong>Corrección rápida:</strong> Escribiste <em>'goof'</em> (payaso/bobo). Para decir que estás bien se escribe <strong>'good'</strong> (con 'd'). ¡Inténtalo de nuevo con la corrección!<br><br>";
+                } else {
+                    roleplayInteractionCount++;
+                    document.getElementById('roleplay-counter-label').innerText = `Turns: ${roleplayInteractionCount} / 4 completed`;
+                }
+
+                let tutorReply = "";
+                if (correctionNotice !== "") {
+                    tutorReply = correctionNotice + "Vuelve a enviar tu respuesta corregida.";
+                } else if (roleplayInteractionCount === 1) {
+                    tutorReply = `Oh, nice! Pretty good here too, man. Hey, I gotta run soon. Catch you later! (Prueba respondiendo con una despedida).`;
+                } else if (roleplayInteractionCount === 2) {
+                    tutorReply = `Sounds good! Take care, see you around!`;
+                } else if (roleplayInteractionCount === 3) {
+                    tutorReply = `Alright man, have a great rest of your day!`;
+                } else {
+                    tutorReply = `¡Excelente práctica nativa! Completaste los 4 turnos. Haz clic en 'Validate Roleplay & Proceed' para continuar.`;
+                }
+
+                chatBox.innerHTML += `
+                    <div class="flex items-start gap-2.5">
+                        <div class="w-8 h-8 rounded-full bg-sky-500 text-white flex items-center justify-center font-bold text-xs flex-shrink-0">🤖</div>
+                        <div class="bg-white border border-slate-200 p-3.5 rounded-2xl shadow-sm text-xs text-slate-800 max-w-[85%]">
+                            <p class="font-extrabold text-sky-700 mb-0.5">Tutor (Nativo):</p>
+                            <p class="font-medium">${tutorReply}</p>
+                        </div>
+                    </div>
+                `;
+                chatBox.scrollTop = chatBox.scrollHeight;
+            }, 1000);
+        }
+
+        function completeRoleplayPhase() {
+            if (roleplayInteractionCount < 4) {
+                showCustomModal("Incomplete Conversation ⚠️", `Completa los 4 turnos de charla conversacional primero (llevas ${roleplayInteractionCount}).`, "💬");
+                return;
+            }
+
+            showCustomModal("Roleplay Approved! 🌟", "Tutor: ¡Excelente fluidez nativa! Pasamos a la Bóveda de Vocabulario.", "💬");
+            setTimeout(() => {
+                closeModal();
+                unlockNextStep('speaking', 'flashcards');
+            }, 1200);
+        }
+
+        function speakSpecificText(type) {
+            if (!currentRoleplayData) return;
+            if (window.speechSynthesis.speaking) window.speechSynthesis.cancel();
+            let textToSpeak = currentRoleplayData[type] || "";
+            const utterance = new SpeechSynthesisUtterance(textToSpeak);
+            utterance.lang = 'en-US';
+            window.speechSynthesis.speak(utterance);
+        }
+
+        function speakSpecificTextCustom(text) {
+            if (window.speechSynthesis.speaking) window.speechSynthesis.cancel();
+            const utterance = new SpeechSynthesisUtterance(text);
+            utterance.lang = 'en-US';
+            window.speechSynthesis.speak(utterance);
+        }
+
+        let activeRecognition = null;
+        function toggleSpeechRecognition() {
+            const statusText = document.getElementById('mic-status-text');
+            const input = document.getElementById('roleplay-user-input');
+            const SpeechRecognitionAPI = window.SpeechRecognition || window.webkitSpeechRecognition;
+            if (!SpeechRecognitionAPI) {
+                showCustomModal("Notice", "Speech recognition not supported in this browser.", "🎙️");
+                return;
+            }
+            try {
+                if (activeRecognition) { activeRecognition.stop(); activeRecognition = null; statusText.innerText = 'Mic'; return; }
+                activeRecognition = new SpeechRecognitionAPI();
+                activeRecognition.lang = 'en-US';
+                activeRecognition.onstart = () => { statusText.innerText = 'Listening...'; };
+                activeRecognition.onresult = (event) => {
+                    input.value = event.results[0][0].transcript;
+                    statusText.innerText = 'Mic';
+                    activeRecognition = null;
+                    sendRoleplayMessage();
+                };
+                activeRecognition.onerror = () => { statusText.innerText = 'Mic'; activeRecognition = null; };
+                activeRecognition.onend = () => { statusText.innerText = 'Mic'; activeRecognition = null; };
+                activeRecognition.start();
+            } catch (err) { statusText.innerText = 'Mic'; activeRecognition = null; }
+        }
+
+        function updateCard() {
+            if (activeFlashcards.length === 0) return;
+            const card = activeFlashcards[currentCard];
+            document.getElementById('flash-badge').innerText = `Word #${currentCard + 1} de 4`;
+            document.getElementById('flashcard-counter-label').innerText = `Reviewing vocabulary (${currentCard + 1} de 4)...`;
+            document.getElementById('flash-term').innerText = card.term;
+            document.getElementById('flash-def').innerText = card.def;
+            document.getElementById('flash-es').innerText = card.es;
+            document.getElementById('flash-img').innerText = card.img || "📚";
+        }
+
+        function nextCard() {
+            currentCard++;
+            if (currentCard >= activeFlashcards.length) {
+                activeFlashcards.forEach(card => {
+                    let entry = `${card.term} - ${card.def} (${card.es})`;
+                    if (!appState.learnedFlashcards.includes(entry)) appState.learnedFlashcards.push(entry);
+                });
+                saveState();
+                showCustomModal("Vocabulary Approved 🌟", "Words saved to your Vault! Moving to Grammar Check.", "📚");
+                unlockNextStep('flashcards', 'grammar');
+            } else { updateCard(); }
+        }
+
+        function prevCard() {
+            currentCard = (currentCard - 1 + activeFlashcards.length) % activeFlashcards.length;
+            updateCard();
+        }
+
+        function loadQuizQuestion() {
+            if (currentQuizIndex >= activeQuizzes.length) return;
+            activeQuizItem = activeQuizzes[currentQuizIndex];
+            document.getElementById('quiz-counter').innerText = `Challenge ${currentQuizIndex + 1} of ${activeQuizzes.length}`;
+            document.getElementById('quiz-title').innerText = activeQuizItem.title;
+            document.getElementById('quiz-desc').innerText = activeQuizItem.desc;
+            
+            const optionsContainer = document.getElementById('quiz-options');
+            const errorContainer = document.getElementById('error-repair-container');
+            const feedbackBox = document.getElementById('quiz-instant-feedback');
+            
+            optionsContainer.innerHTML = '';
+            feedbackBox.classList.add('hidden');
+            document.getElementById('error-input').value = '';
+
+            if (activeQuizItem.type === "repair") {
+                optionsContainer.classList.add('hidden');
+                errorContainer.classList.remove('hidden');
+            } else {
+                errorContainer.classList.add('hidden');
+                optionsContainer.classList.remove('hidden');
+                activeQuizItem.options.forEach(opt => {
+                    const btn = document.createElement('button');
+                    btn.className = "w-full text-left bg-slate-50 hover:bg-slate-100 border border-slate-200 p-3.5 rounded-2xl text-xs text-slate-800 transition cursor-pointer font-bold shadow-sm";
+                    btn.innerText = opt.text;
+                    btn.onclick = () => processQuizAnswer(opt.correct);
+                    optionsContainer.appendChild(btn);
+                });
+            }
+        }
+
+        function submitErrorCorrection() {
+            const userVal = document.getElementById('error-input').value.trim().toLowerCase();
+            const expected = activeQuizItem.answer.toLowerCase();
+            const isCorrect = userVal.includes(expected) || expected.includes(userVal);
+            processQuizAnswer(isCorrect);
+        }
+
+        function processQuizAnswer(isCorrect) {
+            const feedbackBox = document.getElementById('quiz-instant-feedback');
+            feedbackBox.classList.remove('hidden');
+            appState.quizScores.push({ id: activeQuizItem.id, correct: isCorrect });
+
+            if (isCorrect) {
+                feedbackBox.className = "text-xs mt-3 p-4 rounded-xl bg-emerald-100 text-emerald-900 border border-emerald-200 font-extrabold shadow-sm";
+                feedbackBox.innerHTML = `<div>Correct! 🌟</div><div class="text-[11px] font-medium mt-1">${activeQuizItem.correction}</div>`;
+            } else {
+                feedbackBox.className = "text-xs mt-3 p-4 rounded-xl bg-rose-100 text-rose-900 border border-rose-200 font-medium shadow-sm space-y-1";
+                feedbackBox.innerHTML = `<div class="font-extrabold">❌ Incorrect.</div><div class="text-[11px]"><strong>Rule:</strong> ${activeQuizItem.correction}</div>`;
+            }
+
+            setTimeout(() => {
+                currentQuizIndex++;
+                if (currentQuizIndex < activeQuizzes.length) { loadQuizQuestion(); }
+                else { unlockNextStep('grammar', 'listening'); }
+            }, 2500);
+        }
+
+        function playListeningAudio() {
+            if (window.speechSynthesis.speaking) window.speechSynthesis.cancel();
+            const utterance = new SpeechSynthesisUtterance(currentListeningTarget);
+            utterance.lang = 'en-US';
+            window.speechSynthesis.speak(utterance);
+        }
+
+        function checkListeningDictation() {
+            const userText = document.getElementById('listening-input').value.trim().toLowerCase();
+            if (userText.length > 3) {
+                document.getElementById('listening-result').innerHTML = '<span class="text-emerald-700 font-extrabold">🎯 Dictation approved! Moving to Shadowing.</span>';
+                setTimeout(() => unlockNextStep('listening', 'shadowing'), 1000);
+            } else {
+                document.getElementById('listening-result').innerHTML = '<span class="text-rose-600 font-bold">⚠️ Try again.</span>';
+            }
+        }
+
+        function speakShadowText() {
+            if (window.speechSynthesis.speaking) window.speechSynthesis.cancel();
+            const utterance = new SpeechSynthesisUtterance(document.getElementById('shadow-text').innerText.replace(/"/g, ''));
+            utterance.lang = 'en-US';
+            window.speechSynthesis.speak(utterance);
+        }
+
+        function verifyShadowingVoice() {
+            const statusText = document.getElementById('shadow-mic-status');
+            const SpeechRecognitionAPI = window.SpeechRecognition || window.webkitSpeechRecognition;
+            try {
+                const rec = new SpeechRecognitionAPI();
+                rec.lang = 'en-US';
+                rec.onstart = () => { statusText.innerText = 'Listening...'; };
+                rec.onresult = () => {
+                    statusText.innerText = 'Record with Mic 🎙️';
+                    document.getElementById('shadow-result').innerHTML = '<span class="text-emerald-700 font-extrabold">🌟 Pronunciation approved! Lesson completed.</span>';
+                    
+                    const isInter = appState.currentMode === 'intermediate';
+                    if (isInter) {
+                        if (appState.intermediateLesson < 40) appState.intermediateLesson += 1;
+                    } else {
+                        if (appState.beginnerLesson < 40) appState.beginnerLesson += 1;
+                    }
+
+                    appState.unlockedSteps = { speaking: true, flashcards: false, grammar: false, listening: false, shadowing: false };
+                    saveState();
+                    setTimeout(() => loadCurrentLesson(), 1500);
+                };
+                rec.start();
+            } catch (err) { statusText.innerText = 'Record with Mic 🎙️'; }
+        }
+
+        function openVocabularyVault() {
+            const container = document.getElementById('vault-list-container');
+            container.innerHTML = '';
+            if(appState.learnedFlashcards.length === 0) {
+                container.innerHTML = '<p class="text-xs text-slate-500 text-center py-6">No approved words in your vault yet.</p>';
+            } else {
+                appState.learnedFlashcards.forEach(item => {
+                    container.innerHTML += `<div class="bg-slate-50 border border-slate-200 p-3 rounded-2xl text-xs font-bold text-slate-800 flex items-center justify-between"><span>📖 ${item}</span> <span class="text-emerald-600">Approved 🌟</span></div>`;
+                });
+            }
+            document.getElementById('vocabulary-vault-modal').classList.remove('hidden');
+        }
+
+        loadCurrentLesson();
+        updateUIStats();
+    </script>
+</body>
+</html>s

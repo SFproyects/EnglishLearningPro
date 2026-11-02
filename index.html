@@ -84,8 +84,8 @@
                     </h1>
                 </div>
                 <div class="flex items-center gap-2 sm:hidden">
-                    <button onclick="openVocabularyVault()" class="bg-purple-100 text-purple-700 border border-purple-200 px-3 py-1.5 rounded-xl text-xs font-bold flex items-center gap-1 shadow-sm">
-                        <i data-lucide="book" class="w-3.5 h-3.5"></i> Bóveda
+                    <button onclick="openVocabularyVault()" class="bg-purple-100 text-purple-700 border border-purple-200 px-3.5 py-1.5 rounded-xl text-xs font-extrabold flex items-center gap-1.5 shadow-sm">
+                        📚 Bóveda
                     </button>
                 </div>
             </div>
@@ -104,8 +104,8 @@
                     <i data-lucide="award" class="w-3.5 h-3.5 text-emerald-600"></i>
                     <span>Vocab: <strong class="text-slate-900" id="vocab-vault-count">0</strong></span>
                 </div>
-                <button onclick="openVocabularyVault()" class="hidden sm:flex bg-purple-50 hover:bg-purple-100 text-purple-700 border border-purple-200 px-3.5 py-1.5 rounded-xl transition cursor-pointer items-center gap-1.5 text-xs font-bold shadow-sm">
-                    <i data-lucide="book" class="w-3.5 h-3.5"></i> Bóveda 📚
+                <button onclick="openVocabularyVault()" class="hidden sm:flex bg-purple-50 hover:bg-purple-100 text-purple-700 border border-purple-200 px-3.5 py-1.5 rounded-xl transition cursor-pointer items-center gap-1.5 text-xs font-extrabold shadow-sm">
+                    📚 Bóveda
                 </button>
             </div>
         </div>
@@ -394,17 +394,23 @@
 
     </main>
 
-    <!-- VOCABULARY VAULT MODAL -->
+    <!-- VOCABULARY VAULT MODAL RESTAURADO (CON EMOJIS, TARJETAS Y AUDIO) -->
     <div id="vocabulary-vault-modal" class="fixed inset-0 bg-slate-900/60 backdrop-blur-md z-50 flex items-center justify-center hidden p-4">
         <div class="vibrant-card max-w-lg w-full rounded-3xl p-6 shadow-2xl relative border border-purple-200 flex flex-col max-h-[85vh]">
             <div class="flex items-center justify-between mb-4 pb-3 border-b border-slate-200">
-                <div class="flex items-center gap-2">
-                    <span class="text-2xl">📚</span>
-                    <h3 class="font-extrabold text-lg text-slate-900">Vocabulary Vault</h3>
+                <div class="flex items-center gap-2.5">
+                    <div class="bg-purple-100 p-2 rounded-2xl text-purple-700 text-xl shadow-inner">📚</div>
+                    <div>
+                        <h3 class="font-extrabold text-base sm:text-lg text-slate-900 tracking-tight">Vocabulary Vault</h3>
+                        <p class="text-[11px] text-slate-500 font-semibold">Tus palabras aprobadas y guardadas</p>
+                    </div>
                 </div>
-                <button onclick="document.getElementById('vocabulary-vault-modal').classList.add('hidden')" class="bg-slate-100 hover:bg-slate-200 text-slate-700 px-3 py-1.5 rounded-xl text-xs font-bold transition">Close ✕</button>
+                <button onclick="document.getElementById('vocabulary-vault-modal').classList.add('hidden')" class="bg-slate-100 hover:bg-slate-200 text-slate-700 px-3.5 py-1.5 rounded-xl text-xs font-extrabold transition cursor-pointer">Close ✕</button>
             </div>
-            <div class="overflow-y-auto space-y-2.5 pr-1 flex-grow" id="vault-list-container"></div>
+            
+            <div class="overflow-y-auto space-y-3 pr-1 flex-grow" id="vault-list-container">
+                <!-- Se inyecta dinámicamente con diseño rico, emojis y botón de audio -->
+            </div>
         </div>
     </div>
 
@@ -466,8 +472,8 @@
             }
 
             let words = [
-                {w:"Greeting",d:"Saludo",e:"Saludo 👋"}, {w:"Introduction",d:"Presentación",e:"Present 🤝"}, 
-                {w:"Price",d:"Precio",e:"Precio 💲"}, {w:"Discount",d:"Descuento",e:"Oferta 🏷️"}
+                {w:"Greeting",d:"Saludo",e:"👋"}, {w:"Introduction",d:"Presentación",e:"🤝"}, 
+                {w:"Price",d:"Precio",e:"💲"}, {w:"Discount",d:"Descuento",e:"🏷️"}
             ];
 
             curriculum40.push({
@@ -486,7 +492,7 @@
                     fSlang1: fSlang1, fSlang1Es: fSlang1Es,
                     fSlang2: fSlang2, fSlang2Es: fSlang2Es
                 },
-                flashcards: words.map((w, idx) => ({ id: i*10 + idx, term: w.w, def: w.d, es: w.e, img: w.e.split(' ').pop() })),
+                flashcards: words.map((w, idx) => ({ id: i*10 + idx, term: w.w, def: w.d, es: w.e, img: w.e })),
                 quizzes: [
                     { id: `l${i}_q1`, type: 'mc', title: `Grammar (Block ${blockNum})`, desc: "We ___ our best to optimize the system every single day.", options: [{text: 'A) do', correct: true}, {text: 'B) does', correct: false}], correction: "Con el pronombre 'We' siempre se utiliza 'do'." },
                     { id: `l${i}_q2`, type: 'repair', title: 'Essential Vocabulary', desc: `Type in English for '${words[0].d}':`, answer: words[0].w.toLowerCase(), correction: `Se escribe '${words[0].w}'.` }
@@ -570,20 +576,6 @@
 
             document.getElementById('roleplay-scenario-tag').innerText = `Lesson ${currLesson}: ${lessonData.theme}`;
             
-            document.getElementById('g-slang1').innerText = currentRoleplayData.gSlang1;
-            document.getElementById('g-slang1-es').innerText = `(${currentRoleplayData.gSlang1Es})`;
-            document.getElementById('g-slang2').innerText = currentRoleplayData.gSlang2;
-            document.getElementById('g-slang2-es').innerText = `(${currentRoleplayData.gSlang2Es})`;
-
-            document.getElementById('f-form1').innerText = currentRoleplayData.fForm1;
-            document.getElementById('f-form1-es').innerText = `(${currentRoleplayData.fForm1Es})`;
-            document.getElementById('f-form2').innerText = currentRoleplayData.fForm2;
-            document.getElementById('f-form2-es').innerText = `(${currentRoleplayData.fForm2Es})`;
-            document.getElementById('f-slang1').innerText = currentRoleplayData.fSlang1;
-            document.getElementById('f-slang1-es').innerText = `(${currentRoleplayData.fSlang1Es})`;
-            document.getElementById('f-slang2').innerText = currentRoleplayData.fSlang2;
-            document.getElementById('f-slang2-es').innerText = `(${currentRoleplayData.fSlang2Es})`;
-
             document.getElementById('shadow-text').innerText = `"${lessonData.shadow}"`;
             document.getElementById('flashcard-phase-title').innerText = `Phase 2: Vocabulary Mastery (Lesson ${currLesson})`;
             document.getElementById('roleplay-counter-label').innerText = `Turns: 0 / 4 completed`;
@@ -609,7 +601,6 @@
             switchTab('speaking');
         }
 
-        // CHAT NATIVO REAL CON CORRECCIÓN INSTANTÁNEA
         function sendRoleplayMessage() {
             const input = document.getElementById('roleplay-user-input');
             const text = input.value.trim();
@@ -703,15 +694,6 @@
             }, 1200);
         }
 
-        function speakSpecificText(type) {
-            if (!currentRoleplayData) return;
-            if (window.speechSynthesis.speaking) window.speechSynthesis.cancel();
-            let textToSpeak = currentRoleplayData[type] || "";
-            const utterance = new SpeechSynthesisUtterance(textToSpeak);
-            utterance.lang = 'en-US';
-            window.speechSynthesis.speak(utterance);
-        }
-
         function speakSpecificTextCustom(text) {
             if (window.speechSynthesis.speaking) window.speechSynthesis.cancel();
             const utterance = new SpeechSynthesisUtterance(text);
@@ -760,8 +742,10 @@
             currentCard++;
             if (currentCard >= activeFlashcards.length) {
                 activeFlashcards.forEach(card => {
-                    let entry = `${card.term} - ${card.def} (${card.es})`;
-                    if (!appState.learnedFlashcards.includes(entry)) appState.learnedFlashcards.push(entry);
+                    let entryObj = { term: card.term, def: card.def, es: card.es, emoji: card.img || "📖" };
+                    if (!appState.learnedFlashcards.some(item => item.term === entryObj.term)) {
+                        appState.learnedFlashcards.push(entryObj);
+                    }
                 });
                 saveState();
                 showCustomModal("Vocabulary Approved 🌟", "Words saved to your Vault! Moving to Grammar Check.", "📚");
@@ -885,11 +869,35 @@
         function openVocabularyVault() {
             const container = document.getElementById('vault-list-container');
             container.innerHTML = '';
-            if(appState.learnedFlashcards.length === 0) {
-                container.innerHTML = '<p class="text-xs text-slate-500 text-center py-6">No approved words in your vault yet.</p>';
+            
+            if (!appState.learnedFlashcards || appState.learnedFlashcards.length === 0) {
+                container.innerHTML = `
+                    <div class="text-center py-8 space-y-2">
+                        <span class="text-4xl">📭</span>
+                        <p class="text-xs text-slate-500 font-semibold">Tu Bóveda está vacía aún. Completa la Fase 2 (Flashcards) para guardar tus palabras.</p>
+                    </div>
+                `;
             } else {
                 appState.learnedFlashcards.forEach(item => {
-                    container.innerHTML += `<div class="bg-slate-50 border border-slate-200 p-3 rounded-2xl text-xs font-bold text-slate-800 flex items-center justify-between"><span>📖 ${item}</span> <span class="text-emerald-600">Approved 🌟</span></div>`;
+                    let term = typeof item === 'object' ? item.term : item;
+                    let def = typeof item === 'object' ? item.def : '';
+                    let es = typeof item === 'object' ? item.es : '';
+                    let emoji = typeof item === 'object' ? item.emoji : '📖';
+
+                    container.innerHTML += `
+                        <div class="bg-gradient-to-r from-purple-50/60 to-sky-50/60 border border-purple-100 p-3.5 rounded-2xl flex items-center justify-between shadow-sm">
+                            <div class="flex items-center space-x-3">
+                                <span class="text-2xl bg-white p-2 rounded-xl border border-purple-100 shadow-inner">${emoji}</span>
+                                <div>
+                                    <h4 class="text-xs sm:text-sm font-extrabold text-slate-900">${term} <span class="text-slate-400 font-normal">(${def})</span></h4>
+                                    <p class="text-[11px] text-purple-700 font-bold">${es}</p>
+                                </div>
+                            </div>
+                            <button onclick="speakSpecificTextCustom('${term}')" class="bg-white hover:bg-purple-100 text-purple-700 border border-purple-200 px-3 py-1.5 rounded-xl text-xs font-extrabold shadow-sm cursor-pointer inline-flex items-center gap-1 transition">
+                                🔊 Listen
+                            </button>
+                        </div>
+                    `;
                 });
             }
             document.getElementById('vocabulary-vault-modal').classList.remove('hidden');
