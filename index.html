@@ -135,7 +135,7 @@
                         <div id="session-bar" class="bg-gradient-to-r from-sky-400 to-emerald-500 h-full w-0 rounded-full transition-all duration-500 shadow-sm"></div>
                     </div>
                     <div class="mt-3 text-center text-xs text-slate-500 font-bold" id="auto-advance-notice">
-                        ✨ Complete 6 roleplay interactions to unlock next phase
+                        ✨ Complete 6 roleplay interactions based on Step 1 to unlock next phase
                     </div>
                 </div>
             </div>
@@ -183,7 +183,7 @@
                         <div>
                             <div class="flex items-center justify-between mb-3">
                                 <span class="text-xs font-extrabold text-emerald-700 bg-emerald-100 px-3.5 py-1 rounded-full border border-emerald-200 flex items-center gap-1.5 shadow-sm">
-                                    <i data-lucide="messages-square" class="w-3.5 h-3.5"></i> Step 2: Guided Roleplay (6 Required Interactions)
+                                    <i data-lucide="messages-square" class="w-3.5 h-3.5"></i> Step 2: Guided Roleplay (Strictly Following Lesson Theme)
                                 </span>
                                 <span class="text-[11px] font-bold text-slate-500" id="roleplay-scenario-tag">B1 Mastery Scenario</span>
                             </div>
@@ -200,7 +200,7 @@
                                 </button>
                             </div>
                             <div class="flex gap-2">
-                                <input type="text" id="roleplay-user-input" class="vibrant-input flex-grow rounded-2xl px-4 py-3 text-xs sm:text-sm text-slate-800 focus:outline-none transition font-semibold" placeholder="Reply to your tutor in English..." onkeypress="if(event.key === 'Enter') sendRoleplayMessage()">
+                                <input type="text" id="roleplay-user-input" class="vibrant-input flex-grow rounded-2xl px-4 py-3 text-xs sm:text-sm text-slate-800 focus:outline-none transition font-semibold" placeholder="Reply using lesson expressions..." onkeypress="if(event.key === 'Enter') sendRoleplayMessage()">
                                 <button onclick="sendRoleplayMessage()" class="bg-gradient-to-r from-sky-500 to-emerald-500 hover:from-sky-600 hover:to-emerald-600 text-white px-5 py-3 rounded-2xl text-xs font-extrabold transition shadow-md cursor-pointer flex items-center gap-1">
                                     <i data-lucide="send" class="w-4 h-4"></i> Send
                                 </button>
@@ -470,13 +470,66 @@
             let casualEs = "";
             let words = [];
             let grammarLevelTitle = "";
+            let roleplayPrompts = [];
 
             if (blockNum === 1) {
                 grammarLevelTitle = "Advanced Present Simple & Daily Professional Routine";
-                if (i === 1) { themeName = "Professional Greetings & Introductions"; formalText = "Hello, my name is Kevin and I am pleased to connect with you today."; formalEs = "Hola, mi nombre es Kevin y me alegra conectar contigo hoy."; casualText = "Hey there! I'm Kevin, great to meet you."; casualEs = "¡Hola! Soy Kevin, un placer conocerte."; }
-                else if (i === 2) { themeName = "Remote Work & Home Office Management"; formalText = "I manage my professional tasks efficiently from my home workspace."; formalEs = "Gestiono mis tareas profesionales eficientemente desde mi espacio de trabajo en casa."; casualText = "I usually handle everything right from my home setup."; casualEs = "Suelo manejar todo directo desde mi estación en casa."; }
-                else if (i === 3) { themeName = "Business Dining & Client Meetings"; formalText = "I would like to schedule a formal business lunch with our key client."; formalEs = "Me gustaría programar un almuerzo de negocios formal con nuestro cliente clave."; casualText = "Let's grab a quick lunch and discuss the project details."; casualEs = "Vamos a comer algo rápido y discutimos los detalles del proyecto."; }
-                else { themeName = `Advanced Routine & Workflow (${i})`; formalText = `It is essential to maintain high productivity standards in professional workflows.`; formalEs = `Es esencial mantener altos estándares de productividad en los flujos de trabajo profesionales.`; casualText = `I always stay locked in on my daily targets and project goals.`; casualEs = `Siempre me mantengo enfocado en mis metas diarias y objetivos de proyecto.`; }
+                if (i === 1) { 
+                    themeName = "Professional Greetings & Introductions"; 
+                    formalText = "Hello, my name is Kevin and I am pleased to connect with you today."; 
+                    formalEs = "Hola, mi nombre es Kevin y me alegra conectar contigo hoy."; 
+                    casualText = "Hey there! I'm Kevin, great to meet you."; 
+                    casualEs = "¡Hola! Soy Kevin, un placer conocerte."; 
+                    roleplayPrompts = [
+                        "Hello! Welcome to our first professional introduction session. How would you introduce yourself formally in a business context using the style from Step 1?",
+                        "That's a solid introduction. Now, how do you usually structure your daily professional routine using your home workspace?",
+                        "Very efficient. What productivity targets or goals do you focus on during your morning workflow?",
+                        "Great consistency! How do you handle client communications or scheduling when working remotely?",
+                        "Excellent points. Can you summarize how your professional introduction and daily workflow connect to your overall career goals?"
+                    ];
+                }
+                else if (i === 2) { 
+                    themeName = "Remote Work & Home Office Management"; 
+                    formalText = "I manage my professional tasks efficiently from my home workspace."; 
+                    formalEs = "Gestiono mis tareas profesionales eficientemente desde mi espacio de trabajo en casa."; 
+                    casualText = "I usually handle everything right from my home setup."; 
+                    casualEs = "Suelo manejar todo directo desde mi estación en casa."; 
+                    roleplayPrompts = [
+                        "Let's discuss remote work management. How do you set up your professional workspace at home?",
+                        "That sounds organized. What specific tasks do you manage first thing in your daily schedule?",
+                        "Very structured. How do you maintain high efficiency when working independently from home?",
+                        "That is a great approach. How do you handle distractions while managing your home office?",
+                        "Excellent! Can you summarize your ideal remote workflow using formal or casual expressions?"
+                    ];
+                }
+                else if (i === 3) { 
+                    themeName = "Business Dining & Client Meetings"; 
+                    formalText = "I would like to schedule a formal business lunch with our key client."; 
+                    formalEs = "Me gustaría programar un almuerzo de negocios formal con nuestro cliente clave."; 
+                    casualText = "Let's grab a quick lunch and discuss the project details."; 
+                    casualEs = "Vamos a comer algo rápido y discutimos los detalles del proyecto."; 
+                    roleplayPrompts = [
+                        "Today we focus on business meetings and dining. How would you schedule a formal lunch with a key client?",
+                        "That sounds professional. What details would you discuss during the business meeting over lunch?",
+                        "Very good. How do you transition from casual conversation to project details during a client meal?",
+                        "That is a smart negotiation tactic. How do you follow up after a client business lunch?",
+                        "Awesome! Can you phrase a casual invitation to grab lunch and discuss project workflow?"
+                    ];
+                }
+                else { 
+                    themeName = `Advanced Routine & Workflow (${i})`; 
+                    formalText = `It is essential to maintain high productivity standards in professional workflows.`; 
+                    formalEs = `Es esencial mantener altos estándares de productividad en los flujos de trabajo profesionales.`; 
+                    casualText = `I always stay locked in on my daily targets and project goals.`; 
+                    casualEs = `Siempre me mantengo enfocado en mis metas diarias y objetivos de proyecto.`; 
+                    roleplayPrompts = [
+                        `Welcome to lesson ${i}. How do you maintain high productivity standards in your daily professional workflow?`,
+                        "That is a great perspective. What specific tools or habits help you stay locked in on your targets?",
+                        "Very impressive discipline. How do you measure your daily achievements against your project goals?",
+                        "That makes total sense. How do you overcome unexpected roadblocks in your routine?",
+                        "Excellent workflow discussion! Are you ready to review the core vocabulary for this lesson?"
+                    ];
+                }
                 
                 words = [
                     {w:"Introduction",d:"Presentación formal",e:"Presentación 🤝"}, {w:"Workflow",d:"Flujo de trabajo",e:"Flujo ⚡"}, {w:"Productivity",d:"Rendimiento laboral",e:"Productividad 📈"}, 
@@ -490,6 +543,13 @@
                 formalEs = `Es fundamental analizar el esquema electrónico antes de diagnosticar la falla de hardware.`;
                 casualText = `I always check the circuit board wiring and fix the bug right away.`;
                 casualEs = `Siempre reviso el cableado de la placa y soluciono el problema de inmediato.`;
+                roleplayPrompts = [
+                    "Let's focus on technical troubleshooting. How do you approach analyzing an electronic schematic or hardware failure?",
+                    "That is precise methodology. Why should you inspect the circuit board wiring before powering on the device?",
+                    "Very true. What diagnostic tools (like a multimeter or oscilloscope) do you rely on for voltage testing?",
+                    "Excellent technical practice. How do you explain a complex hardware repair step to a customer?",
+                    "Great engineering insight! Can you summarize your diagnostic workflow using modal verbs like should or must?"
+                ];
                 words = [
                     {w:"Troubleshoot",d:"Depurar o diagnosticar",e:"Diagnosticar 🔧"}, {w:"Schematic",d:"Plano o diagrama",e:"Esquema 🔌"}, 
                     {w:"Diagnostic",d:"Análisis de falla",e:"Diagnóstico 📊"}, {w:"Hardware",d:"Componentes físicos",e:"Hardware 🛠️"}, 
@@ -503,6 +563,13 @@
                 formalEs = `Se han implementado con éxito soluciones empresariales robustas en múltiples entornos de nube.`;
                 casualText = `We totally nailed the app deployment ahead of schedule, bro!`;
                 casualEs = `¡Reventamos el despliegue de la app antes de tiempo, bro!`;
+                roleplayPrompts = [
+                    "Today we explore software architecture and cloud deployment. How have you deployed software solutions in your projects?",
+                    "That sounds robust. What framework or database integration do you prefer for scalable system design?",
+                    "Very advanced! Why is performance optimization critical in modern cloud environments?",
+                    "That is an impressive technical milestone. How do you test system reliability before launching a deployment?",
+                    "Fantastic software engineering discussion! Are you ready to review the architecture vocabulary?"
+                ];
                 words = [
                     {w:"Deployment",d:"Lanzamiento al servidor",e:"Despliegue 🚀"}, {w:"Architecture",d:"Estructura de sistema",e:"Arquitectura 🏛️"}, 
                     {w:"Optimization",d:"Mejora de rendimiento",e:"Optimización 📈"}, {w:"Environment",d:"Entorno de ejecución",e:"Entorno 🌐"}, 
@@ -516,6 +583,13 @@
                 formalEs = `Si optimizamos nuestra arquitectura sistémica, lograremos métricas de rendimiento superiores.`;
                 casualText = `If we lock in this workflow right now, we'll crush all our quarterly goals!`;
                 casualEs = `¡Si aseguramos este flujo de trabajo ahora mismo, destruiremos todas nuestras metas trimestrales!`;
+                roleplayPrompts = [
+                    "Welcome to B1 Mastery level leadership and argumentation. If we optimize our systemic architecture, what performance metrics will improve?",
+                    "That is high-level strategic thinking. How do you demonstrate professional leadership during complex project negotiations?",
+                    "Very persuasive argument. What breakthrough innovations have transformed your professional proficiency recently?",
+                    "That is a remarkable achievement. How do you lock in long-term goals using advanced conditionals in English?",
+                    "Outstanding B1 mastery discussion! Are you ready to master the advanced vocabulary for this milestone?"
+                ];
                 words = [
                     {w:"Metrics",d:"Medidas de rendimiento",e:"Métricas 📊"}, {w:"Leadership",d:"Liderazgo",e:"Liderazgo 👑"}, 
                     {w:"Strategic",d:"Estratégico",e:"Estratégico ♟️"}, {w:"Breakthrough",d:"Gran innovación",e:"Avance 💡"}, 
@@ -531,7 +605,8 @@
                 grammarTitle: grammarLevelTitle,
                 roleplay: {
                     title: `Lesson ${i}: ${themeName}`,
-                    tutorOpening: `Hello Kevin! Welcome to lesson ${i}. Today we are focusing on ${grammarLevelTitle}. Let's start our conversation. How do you approach this in your daily professional workflow?`,
+                    tutorOpening: roleplayPrompts[0],
+                    prompts: roleplayPrompts,
                     formal: formalText,
                     formalEs: formalEs,
                     informal: casualText,
@@ -694,7 +769,7 @@
                 <div class="flex items-start gap-2.5">
                     <div class="w-8 h-8 rounded-full bg-sky-500 text-white flex items-center justify-center font-bold text-xs flex-shrink-0">🤖</div>
                     <div class="bg-white border border-slate-200 p-3.5 rounded-2xl shadow-sm text-xs text-slate-800 max-w-[85%]">
-                        <p class="font-extrabold text-sky-700 mb-0.5">Tutor (Roleplay):</p>
+                        <p class="font-extrabold text-sky-700 mb-0.5">Tutor (Roleplay - Lesson Topic):</p>
                         <p class="font-medium">${currentRoleplayData.tutorOpening}</p>
                     </div>
                 </div>
@@ -706,14 +781,6 @@
             loadQuizQuestion();
             switchTab('speaking');
         }
-
-        const roleplayPromptsList = [
-            "That sounds solid! Tell me, how do you manage this in your day-to-day work or projects?",
-            "Very interesting perspective. What tools or technical approach do you usually rely on for this?",
-            "Great persistence! Why do you believe consistency is essential to reach advanced B1 proficiency?",
-            "That is true. Can you share a recent challenge or hardware repair you successfully solved?",
-            "Awesome milestone! Are you ready to level up your professional vocabulary and system architecture?"
-        ];
 
         function sendRoleplayMessage() {
             const input = document.getElementById('roleplay-user-input');
@@ -743,17 +810,24 @@
                             <div class="w-8 h-8 rounded-full bg-emerald-500 text-white flex items-center justify-center font-bold text-xs flex-shrink-0">🌟</div>
                             <div class="bg-emerald-50 border border-emerald-200 p-3.5 rounded-2xl shadow-sm text-xs text-emerald-900 max-w-[85%]">
                                 <p class="font-extrabold mb-0.5">Tutor (Great job!):</p>
-                                <p class="font-medium">You have successfully completed the B1 guided conversation! You can now click 'Validate Roleplay & Proceed'.</p>
+                                <p class="font-medium">You have successfully completed the lesson's guided conversation! You can now click 'Validate Roleplay & Proceed'.</p>
                             </div>
                         </div>
                     `;
                 } else {
-                    let nextPrompt = roleplayPromptsList[(roleplayInteractionCount - 1) % roleplayPromptsList.length];
+                    let promptsArr = currentRoleplayData.prompts || [
+                        "That's a solid point. How does this relate directly to our lesson topic?",
+                        "Very interesting. Can you elaborate further using the expressions from Step 1?",
+                        "Great perspective! Why is mastering this specific concept important for your professional growth?",
+                        "That makes total sense. How would you apply this in a real-world project scenario?",
+                        "Awesome progress! Are you ready to advance to vocabulary mastery?"
+                    ];
+                    let nextPrompt = promptsArr[roleplayInteractionCount % promptsArr.length];
                     chatBox.innerHTML += `
                         <div class="flex items-start gap-2.5">
                             <div class="w-8 h-8 rounded-full bg-sky-500 text-white flex items-center justify-center font-bold text-xs flex-shrink-0">🤖</div>
                             <div class="bg-white border border-slate-200 p-3.5 rounded-2xl shadow-sm text-xs text-slate-800 max-w-[85%]">
-                                <p class="font-extrabold text-sky-700 mb-0.5">Tutor (Roleplay):</p>
+                                <p class="font-extrabold text-sky-700 mb-0.5">Tutor (Roleplay - Lesson Topic):</p>
                                 <p class="font-medium">${nextPrompt}</p>
                             </div>
                         </div>
@@ -769,7 +843,7 @@
                 return;
             }
 
-            showCustomModal("Roleplay Approved! 🌟", "Tutor: Excellent fluency and professional discussion! Moving to Vocabulary Mastery.", "💬");
+            showCustomModal("Roleplay Approved! 🌟", "Tutor: Excellent fluency and lesson adherence! Moving to Vocabulary Mastery.", "💬");
             setTimeout(() => {
                 closeModal();
                 unlockNextStep('speaking', 'flashcards');
@@ -814,8 +888,8 @@
         function updateCard() {
             if (activeFlashcards.length === 0) return;
             const card = activeFlashcards[currentCard];
-            document.getElementById('flash-badge').innerText = `Word #${currentCard + 1} of 8`;
-            document.getElementById('flashcard-counter-label').innerText = `Reviewing vocabulary (${currentCard + 1} of 8)...`;
+            document.getElementById('flash-badge').innerText = `Word #${currentCard + 1} de 8`;
+            document.getElementById('flashcard-counter-label').innerText = `Reviewing vocabulary (${currentCard + 1} de 8)...`;
             document.getElementById('flash-term').innerText = card.term;
             document.getElementById('flash-def').innerText = card.def;
             document.getElementById('flash-es').innerText = card.es;
