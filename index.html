@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>English Pro - Roleplay & Progressive Edition</title>
+    <title>English Pro - Ultimate Progressive Edition</title>
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- Lucide Icons -->
@@ -79,14 +79,11 @@
                         <i data-lucide="zap" class="w-5 h-5"></i>
                     </div>
                     <h1 class="font-extrabold text-lg text-slate-900 flex items-center gap-2 tracking-tight">
-                        <a href="url?id=0" class="hover:text-emerald-600 transition">English Pro</a>
+                        <a href="https://thebestprices.github.io/EnglishLearningPro/" class="hover:text-emerald-600 transition">English Pro</a>
                         <span class="text-[10px] font-bold uppercase tracking-wider bg-emerald-100 text-emerald-700 border border-emerald-200 px-2.5 py-0.5 rounded-full" id="header-badge">Lección 1 / 40</span>
                     </h1>
                 </div>
                 <div class="flex items-center gap-2 sm:hidden">
-                    <button onclick="openLevelSelectorModal()" class="bg-amber-100 text-amber-700 border border-amber-200 px-3 py-1.5 rounded-xl text-xs font-bold flex items-center gap-1 shadow-sm">
-                        <i data-lucide="layers" class="w-3.5 h-3.5"></i> Nivel
-                    </button>
                     <button onclick="openVocabularyVault()" class="bg-purple-100 text-purple-700 border border-purple-200 px-3 py-1.5 rounded-xl text-xs font-bold flex items-center gap-1 shadow-sm">
                         <i data-lucide="book" class="w-3.5 h-3.5"></i> Bóveda
                     </button>
@@ -95,10 +92,10 @@
 
             <!-- Stats Bar -->
             <div class="flex items-center justify-center flex-wrap gap-2 text-xs w-full sm:w-auto">
-                <button onclick="openLevelSelectorModal()" class="flex items-center space-x-1.5 bg-amber-50 hover:bg-amber-100 px-3.5 py-1.5 rounded-xl border border-amber-200 font-bold text-amber-800 shadow-sm transition cursor-pointer">
+                <div class="flex items-center space-x-1.5 bg-amber-50 px-3.5 py-1.5 rounded-xl border border-amber-200 font-bold text-amber-800 shadow-sm">
                     <i data-lucide="layers" class="w-3.5 h-3.5 text-amber-600"></i>
-                    <span>Modo: <strong id="current-mode-label">Beginner</strong> 🔄</span>
-                </button>
+                    <span id="current-block-label">Modo: Bloque 1 (Fundamentos)</span>
+                </div>
                 <div class="flex items-center space-x-1.5 bg-orange-50 px-3.5 py-1.5 rounded-xl border border-orange-200 font-semibold text-orange-700 shadow-sm">
                     <i data-lucide="flame" class="w-3.5 h-3.5 text-orange-500"></i>
                     <span>Streak: <strong class="text-slate-900" id="streak-count">1d</strong></span>
@@ -138,7 +135,7 @@
                         <div id="session-bar" class="bg-gradient-to-r from-sky-400 to-emerald-500 h-full w-0 rounded-full transition-all duration-500 shadow-sm"></div>
                     </div>
                     <div class="mt-3 text-center text-xs text-slate-500 font-bold" id="auto-advance-notice">
-                        ✨ Interactúa en el chat de rol para desbloquear las siguientes fases
+                        ✨ Aprende la teoría y completa el roleplay para avanzar
                     </div>
                 </div>
             </div>
@@ -147,20 +144,49 @@
         <!-- VISTA DE LECCIÓN ÚNICA EN PANTALLA -->
         <div id="lesson-view-container" class="space-y-4">
 
-            <!-- FASE 1: ROLEPLAY INTERACTIVO + ESTILOS FORMAL/CASUAL -->
+            <!-- FASE 1: TEORÍA DE ESTILOS + ROLEPLAY INTERACTIVO CON VALIDACIÓN -->
             <div id="content-speaking" class="space-y-4">
+                
+                <!-- Guía Teórica Inicial (Aprende primero) -->
+                <div class="vibrant-card rounded-3xl p-5 sm:p-7 shadow-lg border border-sky-100">
+                    <h3 class="text-xs font-extrabold text-slate-800 uppercase tracking-wider mb-3 flex items-center gap-2">
+                        <i data-lucide="book-open" class="w-4 h-4 text-sky-600"></i> Paso 1: Aprende la Teoría de la Lección (Estilos Nativos)
+                    </h3>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <div class="bg-sky-50 border border-sky-200 p-4 rounded-2xl shadow-sm flex flex-col justify-between">
+                            <div>
+                                <span class="text-[10px] font-extrabold text-sky-700 uppercase tracking-wider block mb-1">👔 Estilo Formal / Profesional:</span>
+                                <p class="text-xs text-slate-800 italic font-semibold mb-1" id="context-formal">...</p>
+                                <p class="text-[11px] text-sky-800 font-bold mb-3" id="context-formal-es">...</p>
+                            </div>
+                            <button onclick="speakSpecificText('formal')" class="self-start bg-white hover:bg-sky-100 text-sky-700 border border-sky-200 px-3 py-1.5 rounded-xl text-xs font-extrabold flex items-center gap-1.5 transition cursor-pointer shadow-sm">
+                                <i data-lucide="volume-2" class="w-3.5 h-3.5"></i> Escuchar Formal 🔊
+                            </button>
+                        </div>
+
+                        <div class="bg-emerald-50 border border-emerald-200 p-4 rounded-2xl shadow-sm flex flex-col justify-between">
+                            <div>
+                                <span class="text-[10px] font-extrabold text-emerald-700 uppercase tracking-wider block mb-1">🏠 Estilo Casual / Slang:</span>
+                                <p class="text-xs text-slate-800 italic font-semibold mb-1" id="context-informal">...</p>
+                                <p class="text-[11px] text-emerald-800 font-bold mb-3" id="context-informal-es">...</p>
+                            </div>
+                            <button onclick="speakSpecificText('informal')" class="self-start bg-white hover:bg-emerald-100 text-emerald-700 border border-emerald-200 px-3 py-1.5 rounded-xl text-xs font-extrabold flex items-center gap-1.5 transition cursor-pointer shadow-sm">
+                                <i data-lucide="volume-2" class="w-3.5 h-3.5"></i> Escuchar Casual 🔊
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Chat de Roleplay (Ponlo en práctica) -->
                 <div class="grid grid-cols-1 lg:grid-cols-3 gap-5">
-                    
-                    <!-- Chat de Rol en Vivo -->
-                    <div class="vibrant-card lg:col-span-2 rounded-3xl p-5 sm:p-7 flex flex-col justify-between shadow-lg h-[540px]">
+                    <div class="vibrant-card lg:col-span-3 rounded-3xl p-5 sm:p-7 flex flex-col justify-between shadow-lg h-[460px]">
                         <div>
                             <div class="flex items-center justify-between mb-3">
                                 <span class="text-xs font-extrabold text-emerald-700 bg-emerald-100 px-3.5 py-1 rounded-full border border-emerald-200 flex items-center gap-1.5 shadow-sm">
-                                    <i data-lucide="messages-square" class="w-3.5 h-3.5"></i> Fase 1 de 5: Interactive Roleplay (Live Chat)
+                                    <i data-lucide="messages-square" class="w-3.5 h-3.5"></i> Paso 2: Roleplay Practice (Aplica lo aprendido)
                                 </span>
                                 <span class="text-[11px] font-bold text-slate-500" id="roleplay-scenario-tag">Escenario Único</span>
                             </div>
-                            <h3 class="text-base font-extrabold text-slate-900 mb-1" id="prompt-title">Cargando lección...</h3>
                         </div>
 
                         <!-- Historial de Conversación -->
@@ -177,48 +203,17 @@
                                 </button>
                             </div>
                             <div class="flex gap-2">
-                                <input type="text" id="roleplay-user-input" class="vibrant-input flex-grow rounded-2xl px-4 py-3 text-xs sm:text-sm text-slate-800 focus:outline-none transition font-semibold" placeholder="Escribe tu respuesta respondiendo al tutor..." onkeypress="if(event.key === 'Enter') sendRoleplayMessage()">
+                                <input type="text" id="roleplay-user-input" class="vibrant-input flex-grow rounded-2xl px-4 py-3 text-xs sm:text-sm text-slate-800 focus:outline-none transition font-semibold" placeholder="Escribe tu respuesta aplicando lo aprendido..." onkeypress="if(event.key === 'Enter') sendRoleplayMessage()">
                                 <button onclick="sendRoleplayMessage()" class="bg-gradient-to-r from-sky-500 to-emerald-500 hover:from-sky-600 hover:to-emerald-600 text-white px-5 py-3 rounded-2xl text-xs font-extrabold transition shadow-md cursor-pointer flex items-center gap-1">
                                     <i data-lucide="send" class="w-4 h-4"></i> Enviar
                                 </button>
                             </div>
-                        </div>
-                    </div>
-
-                    <!-- Panel de Estilos Formal y Casual con Audios -->
-                    <div class="vibrant-card rounded-3xl p-5 sm:p-7 flex flex-col justify-between shadow-lg">
-                        <div class="space-y-4">
-                            <h3 class="text-xs font-extrabold text-slate-800 uppercase tracking-wider mb-2 flex items-center gap-2">
-                                <i data-lucide="bookmark" class="w-4 h-4 text-sky-600"></i> Guía de Estilos Nativos
-                            </h3>
-
-                            <div class="bg-sky-50 border border-sky-200 p-3.5 rounded-2xl shadow-sm flex flex-col justify-between">
-                                <div>
-                                    <span class="text-[10px] font-extrabold text-sky-700 uppercase tracking-wider block mb-1">👔 Estilo Formal / Profesional:</span>
-                                    <p class="text-xs text-slate-800 italic font-semibold mb-1" id="context-formal">...</p>
-                                    <p class="text-[11px] text-sky-800 font-bold mb-2" id="context-formal-es">...</p>
-                                </div>
-                                <button onclick="speakSpecificText('formal')" class="self-start bg-white hover:bg-sky-100 text-sky-700 border border-sky-200 px-3 py-1.5 rounded-xl text-xs font-extrabold flex items-center gap-1.5 transition cursor-pointer shadow-sm">
-                                    <i data-lucide="volume-2" class="w-3.5 h-3.5"></i> Escuchar Formal 🔊
+                            <div class="mt-3 flex justify-between items-center">
+                                <span class="text-[11px] text-slate-500 font-bold" id="roleplay-error-counter">Errores detectados: 0 / 5</span>
+                                <button onclick="completeRoleplayPhase()" class="bg-purple-600 hover:bg-purple-700 text-white font-extrabold px-6 py-2.5 rounded-xl text-xs transition cursor-pointer shadow-md">
+                                    Validar Roleplay y Avanzar ➔
                                 </button>
                             </div>
-
-                            <div class="bg-emerald-50 border border-emerald-200 p-3.5 rounded-2xl shadow-sm flex flex-col justify-between">
-                                <div>
-                                    <span class="text-[10px] font-extrabold text-emerald-700 uppercase tracking-wider block mb-1">🏠 Estilo Casual / Slang:</span>
-                                    <p class="text-xs text-slate-800 italic font-semibold mb-1" id="context-informal">...</p>
-                                    <p class="text-[11px] text-emerald-800 font-bold mb-2" id="context-informal-es">...</p>
-                                </div>
-                                <button onclick="speakSpecificText('informal')" class="self-start bg-white hover:bg-emerald-100 text-emerald-700 border border-emerald-200 px-3 py-1.5 rounded-xl text-xs font-extrabold flex items-center gap-1.5 transition cursor-pointer shadow-sm">
-                                    <i data-lucide="volume-2" class="w-3.5 h-3.5"></i> Escuchar Casual 🔊
-                                </button>
-                            </div>
-                        </div>
-
-                        <div class="mt-4 pt-4 border-t border-slate-200">
-                            <button onclick="completeRoleplayPhase()" class="w-full bg-purple-600 hover:bg-purple-700 text-white font-extrabold py-3 rounded-2xl text-xs transition cursor-pointer shadow-lg shadow-purple-600/25 flex items-center justify-center gap-2">
-                                <i data-lucide="check-circle" class="w-4 h-4"></i> ¡Aprobar Conversación y Avanzar ➔
-                            </button>
                         </div>
                     </div>
                 </div>
@@ -347,37 +342,32 @@
 
     </main>
 
-    <!-- MODAL SELECTOR DE NIVEL / BLOQUE -->
-    <div id="level-selector-modal" class="fixed inset-0 bg-slate-900/80 backdrop-blur-md z-50 flex items-center justify-center hidden p-4">
-        <div class="vibrant-card max-w-md w-full rounded-3xl p-6 shadow-2xl relative border border-amber-200 text-center">
-            <div class="w-16 h-16 bg-gradient-to-tr from-amber-500 to-emerald-400 rounded-3xl p-1 shadow-lg flex items-center justify-center text-3xl mx-auto mb-3">🎯</div>
-            <h3 class="font-extrabold text-xl text-slate-900 mb-1">Selecciona tu Nivel</h3>
-            <p class="text-xs text-slate-600 mb-5 font-medium">Elige el plan con el que deseas entrenar hoy:</p>
+    <!-- MODAL INICIAL (SELECCIÓN DE NIVEL AL ENTRAR) -->
+    <div id="level-selector-modal" class="fixed inset-0 bg-slate-900/85 backdrop-blur-md z-50 flex items-center justify-center p-4">
+        <div class="vibrant-card max-w-md w-full rounded-3xl p-6 shadow-2xl relative border border-emerald-300 text-center">
+            <div class="w-16 h-16 bg-gradient-to-tr from-sky-500 to-emerald-400 rounded-3xl p-1 shadow-lg flex items-center justify-center text-3xl mx-auto mb-3">🎯</div>
+            <h3 class="font-extrabold text-xl text-slate-900 mb-1">Welcome to English Pro</h3>
+            <p class="text-xs text-slate-600 mb-5 font-medium">Selecciona el nivel con el que deseas entrenar:</p>
             
             <div class="space-y-3 mb-4 text-left">
-                <!-- Beginner con Bloques y acceso libre por nombre -->
-                <div class="bg-emerald-50 border border-emerald-300 p-4 rounded-2xl space-y-2">
-                    <h4 class="font-extrabold text-emerald-900 text-xs">🟢 Nivel Beginner (40 Progressive Lessons)</h4>
-                    <p class="text-[10px] text-emerald-700">Acceso libre (solo ingresa tu nombre)</p>
-                    <div class="grid grid-cols-2 gap-2 pt-1">
-                        <button onclick="jumpToBlock(1)" class="bg-white hover:bg-emerald-100 text-emerald-800 border border-emerald-200 p-2 rounded-xl text-[11px] font-bold text-center transition shadow-sm">Bloque 1 (1-10)</button>
-                        <button onclick="jumpToBlock(11)" class="bg-white hover:bg-emerald-100 text-emerald-800 border border-emerald-200 p-2 rounded-xl text-[11px] font-bold text-center transition shadow-sm">Bloque 2 (11-20)</button>
-                        <button onclick="jumpToBlock(21)" class="bg-white hover:bg-emerald-100 text-emerald-800 border border-emerald-200 p-2 rounded-xl text-[11px] font-bold text-center transition shadow-sm">Bloque 3 (21-30)</button>
-                        <button onclick="jumpToBlock(31)" class="bg-white hover:bg-emerald-100 text-emerald-800 border border-emerald-200 p-2 rounded-xl text-[11px] font-bold text-center transition shadow-sm">Bloque 4 (31-40)</button>
+                <!-- Botón Beginner -->
+                <button onclick="selectLevel('beginner')" class="w-full bg-emerald-50 hover:bg-emerald-100 border-2 border-emerald-300 p-4 rounded-2xl flex items-center justify-between transition cursor-pointer shadow-sm">
+                    <div>
+                        <h4 class="font-extrabold text-emerald-900 text-sm">🟢 Nivel Beginner (40 Progressive Lessons)</h4>
+                        <p class="text-[11px] text-emerald-700">Acceso libre (solo ingresa tu nombre)</p>
                     </div>
-                </div>
+                    <span class="text-xl">➔</span>
+                </button>
 
-                <!-- Intermedio B1 con Login -->
+                <!-- Botón Intermedio (Pide Login) -->
                 <button onclick="openLoginModal()" class="w-full bg-amber-50 hover:bg-amber-100 border-2 border-amber-300 p-4 rounded-2xl flex items-center justify-between transition cursor-pointer shadow-sm">
-                    <div class="text-left">
-                        <h4 class="font-extrabold text-amber-900 text-xs">🟡 Nivel Intermedio (B1 Mastery) 🔒</h4>
-                        <p class="text-[10px] text-amber-700">Acceso protegido con usuario y contraseña</p>
+                    <div>
+                        <h4 class="font-extrabold text-amber-900 text-sm">🟡 Nivel Intermedio (B1 Mastery) 🔒</h4>
+                        <p class="text-[11px] text-amber-700">Acceso protegido con usuario y contraseña</p>
                     </div>
-                    <span class="text-lg">🔐</span>
+                    <span class="text-xl">🔐</span>
                 </button>
             </div>
-
-            <button onclick="document.getElementById('level-selector-modal').classList.add('hidden')" class="w-full bg-slate-100 text-slate-700 font-bold py-2.5 rounded-2xl text-xs transition border border-slate-200">Cerrar</button>
         </div>
     </div>
 
@@ -402,7 +392,7 @@
             </div>
 
             <div class="flex gap-2">
-                <button onclick="document.getElementById('login-modal').classList.add('hidden')" class="w-1/2 bg-slate-100 text-slate-700 font-bold py-3 rounded-2xl text-xs transition border border-slate-200">Volver</button>
+                <button onclick="document.getElementById('login-modal').classList.add('hidden'); document.getElementById('level-selector-modal').classList.remove('hidden');" class="w-1/2 bg-slate-100 text-slate-700 font-bold py-3 rounded-2xl text-xs transition border border-slate-200">Volver</button>
                 <button onclick="verifyIntermediateLogin()" class="w-1/2 bg-amber-600 hover:bg-amber-700 text-white font-extrabold py-3 rounded-2xl text-xs transition shadow-md">Ingresar 🚀</button>
             </div>
         </div>
@@ -454,26 +444,25 @@
 
     <!-- FOOTER -->
     <footer class="border-t border-slate-200 bg-white/60 py-3 text-center text-xs text-slate-500 relative z-10 font-medium">
-        English Pro &copy; 2026 &bull; Dual Progressive Edition
+        English Pro &copy; 2026 &bull; Ultimate Progressive Edition
     </footer>
 
     <!-- SCRIPTS -->
     <script>
         lucide.createIcons();
 
-        let appState = JSON.parse(localStorage.getItem('english_pro_clean_dual_state')) || {
+        let appState = JSON.parse(localStorage.getItem('english_pro_ultimate_state')) || {
             userName: '',
             streak: 1,
-            currentMode: 'beginner', // 'beginner' o 'intermediate'
+            currentMode: 'beginner',
             beginnerLesson: 1,
             intermediateLesson: 1,
             unlockedSteps: { speaking: true, flashcards: false, grammar: false, listening: false, shadowing: false },
             quizScores: [],
             learnedFlashcards: [],
-            tutorialCompleted: false
+            hasStarted: false
         };
 
-        // 40 Lecciones Beginner Progresivas
         const curriculum40 = [];
         for (let i = 1; i <= 40; i++) {
             let blockNum = Math.ceil(i / 10);
@@ -575,10 +564,10 @@
         let activeQuizzes = [];
         let activeFlashcards = [];
         let currentRoleplayData = null;
-        let grammarErrorsLog = [];
+        let roleplayErrorCount = 0;
 
         function saveState() {
-            localStorage.setItem('english_pro_clean_dual_state', JSON.stringify(appState));
+            localStorage.setItem('english_pro_ultimate_state', JSON.stringify(appState));
         }
 
         function showCustomModal(title, message, icon = "✨") {
@@ -592,8 +581,12 @@
             document.getElementById('custom-modal').classList.add('hidden');
         }
 
-        function openLevelSelectorModal() {
-            document.getElementById('level-selector-modal').classList.remove('hidden');
+        function selectLevel(mode) {
+            if (mode === 'beginner') {
+                appState.currentMode = 'beginner';
+                document.getElementById('level-selector-modal').classList.add('hidden');
+                document.getElementById('profile-modal').classList.remove('hidden');
+            }
         }
 
         function openLoginModal() {
@@ -606,6 +599,7 @@
             const pass = document.getElementById('login-pass').value.trim();
             if (user === 'kevin' && pass === 'b1pro') {
                 appState.currentMode = 'intermediate';
+                appState.hasStarted = true;
                 saveState();
                 document.getElementById('login-modal').classList.add('hidden');
                 loadCurrentLesson();
@@ -616,17 +610,6 @@
             }
         }
 
-        function jumpToBlock(lessonNumber) {
-            appState.currentMode = 'beginner';
-            appState.beginnerLesson = lessonNumber;
-            appState.unlockedSteps = { speaking: true, flashcards: false, grammar: false, listening: false, shadowing: false };
-            saveState();
-            document.getElementById('level-selector-modal').classList.add('hidden');
-            loadCurrentLesson();
-            updateUIStats();
-            showCustomModal("¡Bloque Beginner Actualizado! 🚀", `Has saltado a la Lección ${lessonNumber}. ¡A darle con todo!`, "🎯");
-        }
-
         function saveUserProfileAndStart() {
             const nameInput = document.getElementById('user-name-input').value.trim();
             if (!nameInput) {
@@ -634,19 +617,17 @@
                 return;
             }
             appState.userName = nameInput;
-            appState.tutorialCompleted = true;
+            appState.hasStarted = true;
             saveState();
             document.getElementById('profile-modal').classList.add('hidden');
             loadCurrentLesson();
             updateUIStats();
         }
 
-        function checkInitialFocus() {
-            if (!appState.userName || appState.userName.trim() === "") {
-                document.getElementById('user-name-input').value = 'Kevin';
-                document.getElementById('profile-modal').classList.remove('hidden');
+        function checkInitialAppFlow() {
+            if (!appState.hasStarted) {
+                document.getElementById('level-selector-modal').classList.remove('hidden');
             } else {
-                document.getElementById('profile-modal').classList.add('hidden');
                 loadCurrentLesson();
                 updateUIStats();
             }
@@ -661,7 +642,7 @@
             let blockNum = Math.ceil(currLesson / 10);
             let blockNames = ["", "Bloque 1 (Fundamentos)", "Bloque 2 (Work Life)", "Bloque 3 (Advanced)", "Bloque 4 (B1 Mastery)"];
 
-            document.getElementById('current-mode-label').innerText = isInter ? 'Intermediate (B1)' : blockNames[blockNum];
+            document.getElementById('current-block-label').innerText = isInter ? 'Modo: Intermedio (B1)' : `Modo: ${blockNames[blockNum]}`;
             document.getElementById('header-badge').innerText = `Lección ${currLesson} / 40`;
             document.getElementById('course-subtitle').innerText = isInter ? 'Intermediate A2+ to B1 Mastery Course' : 'Progressive Beginner Course (A2+ to B1)';
             document.getElementById('welcome-title').innerText = `Welcome back, ${appState.userName || 'Kevin'}!`;
@@ -698,6 +679,7 @@
 
             currentRoleplayData = lessonData.roleplay;
             currentListeningTarget = lessonData.listening;
+            roleplayErrorCount = 0;
 
             document.getElementById('prompt-title').innerText = currentRoleplayData.title;
             document.getElementById('roleplay-scenario-tag').innerText = isInter ? `Nivel Intermedio B1 Mastery` : `Bloque ${lessonData.block}: ${lessonData.grammarTitle}`;
@@ -707,11 +689,11 @@
             document.getElementById('context-informal-es').innerText = `(${currentRoleplayData.informalEs})`;
             document.getElementById('shadow-text').innerText = `"${lessonData.shadow}"`;
             document.getElementById('flashcard-phase-title').innerText = `Fase 2 de 5: Vocabulary Mastery (Lección ${currLesson})`;
+            document.getElementById('roleplay-error-counter').innerText = `Errores detectados: 0 / 5`;
 
             activeFlashcards = lessonData.flashcards;
             activeQuizzes = lessonData.quizzes;
 
-            // Inicializar Chat Roleplay
             const chatBox = document.getElementById('chat-messages-container');
             chatBox.innerHTML = `
                 <div class="flex items-start gap-2.5">
@@ -726,7 +708,6 @@
 
             currentCard = 0;
             currentQuizIndex = 0;
-            grammarErrorsLog = [];
             updateCard();
             loadQuizQuestion();
             switchTab('speaking');
@@ -741,7 +722,7 @@
             chatBox.innerHTML += `
                 <div class="flex items-start gap-2.5 justify-end">
                     <div class="bg-emerald-500 text-white p-3.5 rounded-2xl shadow-sm text-xs max-w-[85%]">
-                        <p class="font-extrabold text-emerald-100 mb-0.5">Tú (Kevin):</p>
+                        <p class="font-extrabold text-emerald-100 mb-0.5">Tú (${appState.userName || 'Kevin'}):</p>
                         <p class="font-medium">${text}</p>
                     </div>
                     <div class="w-8 h-8 rounded-full bg-emerald-600 text-white flex items-center justify-center font-bold text-xs flex-shrink-0">😎</div>
@@ -750,23 +731,45 @@
             input.value = '';
             chatBox.scrollTop = chatBox.scrollHeight;
 
+            // Validación estricta simulada de errores en el chat
             setTimeout(() => {
-                chatBox.innerHTML += `
-                    <div class="flex items-start gap-2.5">
-                        <div class="w-8 h-8 rounded-full bg-sky-500 text-white flex items-center justify-center font-bold text-xs flex-shrink-0">🤖</div>
-                        <div class="bg-white border border-slate-200 p-3.5 rounded-2xl shadow-sm text-xs text-slate-800 max-w-[85%]">
-                            <p class="font-extrabold text-sky-700 mb-0.5">Tutor (Roleplay):</p>
-                            <p class="font-medium">Awesome response! Your conversational flow is improving. Let's review vocabulary.</p>
-                            <p class="text-[10px] text-slate-500 italic mt-1">(¡Excelente respuesta! Tu fluidez está mejorando. Repasemos vocabulario.)</p>
+                let hasError = text.length < 5 || text.toLowerCase().includes("no se") || text.toLowerCase().includes("error");
+                if (hasError) {
+                    roleplayErrorCount++;
+                    document.getElementById('roleplay-error-counter').innerText = `Errores detectados: ${roleplayErrorCount} / 5`;
+                    chatBox.innerHTML += `
+                        <div class="flex items-start gap-2.5">
+                            <div class="w-8 h-8 rounded-full bg-rose-500 text-white flex items-center justify-center font-bold text-xs flex-shrink-0">⚠️</div>
+                            <div class="bg-rose-50 border border-rose-200 p-3.5 rounded-2xl shadow-sm text-xs text-rose-900 max-w-[85%]">
+                                <p class="font-extrabold mb-0.5">Tutor (Corrección):</p>
+                                <p class="font-medium">Noté un pequeño detalle o frase incompleta. Intenta aplicar mejor la estructura formal o casual estudiada arriba.</p>
+                            </div>
                         </div>
-                    </div>
-                `;
+                    `;
+                } else {
+                    chatBox.innerHTML += `
+                        <div class="flex items-start gap-2.5">
+                            <div class="w-8 h-8 rounded-full bg-sky-500 text-white flex items-center justify-center font-bold text-xs flex-shrink-0">🤖</div>
+                            <div class="bg-white border border-slate-200 p-3.5 rounded-2xl shadow-sm text-xs text-slate-800 max-w-[85%]">
+                                <p class="font-extrabold text-sky-700 mb-0.5">Tutor (Roleplay):</p>
+                                <p class="font-medium">Great sentence! Your structure looks solid.</p>
+                            </div>
+                        </div>
+                    `;
+                }
                 chatBox.scrollTop = chatBox.scrollHeight;
             }, 1000);
         }
 
         function completeRoleplayPhase() {
-            showCustomModal("¡Roleplay Aprobado! 🌟", "Tutor: ¡Muy bien defendido en el chat! Pasamos a Vocabulario.", "💬");
+            if (roleplayErrorCount >= 5) {
+                showCustomModal("Repaso Necesario ⚠️", `Has acumulado ${roleplayErrorCount} errores en el chat. El tutor requiere que hagas un breve repaso de la teoría superior y lo intentes de nuevo para dominarlo bien.`, "🔄");
+                roleplayErrorCount = 0;
+                document.getElementById('roleplay-error-counter').innerText = `Errores detectados: 0 / 5`;
+                return;
+            }
+
+            showCustomModal("¡Roleplay Aprobado! 🌟", "Tutor: ¡Excelente dominio del escenario! Pasamos a Vocabulario.", "💬");
             setTimeout(() => {
                 closeModal();
                 unlockNextStep('speaking', 'flashcards');
@@ -954,10 +957,10 @@
                     container.innerHTML += `<div class="bg-slate-50 border border-slate-200 p-3 rounded-2xl text-xs font-bold text-slate-800">Palabra ID: ${id} aprobada 🌟</div>`;
                 });
             }
-            document.getElementById('vocabulary-vault-modal').classList.add('hidden');
+            document.getElementById('vocabulary-vault-modal').classList.remove('hidden');
         }
 
-        checkInitialFocus();
+        checkInitialAppFlow();
     </script>
 </body>
 </html>
