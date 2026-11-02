@@ -394,7 +394,7 @@
 
     </main>
 
-    <!-- VOCABULARY VAULT MODAL LIMPIO Y BONITO -->
+    <!-- VOCABULARY VAULT MODAL CON CONTEXTO / RECORDATORIO ABAJO -->
     <div id="vocabulary-vault-modal" class="fixed inset-0 bg-slate-900/60 backdrop-blur-md z-50 flex items-center justify-center hidden p-4">
         <div class="vibrant-card max-w-lg w-full rounded-3xl p-6 shadow-2xl relative border border-purple-200 flex flex-col max-h-[85vh]">
             <div class="flex items-center justify-between mb-4 pb-3 border-b border-slate-200">
@@ -409,7 +409,7 @@
             </div>
             
             <div class="overflow-y-auto space-y-3 pr-1 flex-grow" id="vault-list-container">
-                <!-- Se inyecta limpio sin basura -->
+                <!-- Se inyecta limpio con contexto abajo -->
             </div>
         </div>
     </div>
@@ -869,11 +869,10 @@
             const container = document.getElementById('vault-list-container');
             container.innerHTML = '';
             
-            // Limpieza robusta de datos viejos en localStorage
+            // Limpieza de datos corruptos previos en localStorage
             if (appState.learnedFlashcards && appState.learnedFlashcards.length > 0) {
                 appState.learnedFlashcards = appState.learnedFlashcards.map(item => {
                     if (typeof item === 'object' && item.term) {
-                        // Asignar emoji limpio según la palabra si venía con texto corrupto
                         let cleanEmoji = "📖";
                         let t = item.term.toLowerCase();
                         if (t.includes('greet')) cleanEmoji = "👋";
@@ -882,7 +881,7 @@
                         else if (t.includes('disc')) cleanEmoji = "🏷️";
                         return { term: item.term, def: item.def || 'Vocabulario', es: item.es || '', emoji: cleanEmoji };
                     }
-                    return { term: "Vocabulary", def: "Término guardado", es: "", emoji: "📖" };
+                    return { term: "Vocabulary", def: "Término guardado", es: "Recordatorio de vocabulario B1", emoji: "📖" };
                 });
             }
 
@@ -897,11 +896,12 @@
                 appState.learnedFlashcards.forEach(item => {
                     container.innerHTML += `
                         <div class="bg-gradient-to-r from-purple-50/60 to-sky-50/60 border border-purple-100 p-3.5 rounded-2xl flex items-center justify-between shadow-sm">
-                            <div class="flex items-center space-x-3">
-                                <span class="text-2xl bg-white p-2.5 rounded-xl border border-purple-100 shadow-inner flex items-center justify-center">${item.emoji || '📖'}</span>
+                            <div class="flex items-center space-x-3.5">
+                                <div class="w-11 h-11 bg-white rounded-2xl border border-purple-200 flex items-center justify-center text-xl shadow-inner flex-shrink-0">${item.emoji || '📖'}</div>
                                 <div>
                                     <h4 class="text-xs sm:text-sm font-extrabold text-slate-900">${item.term} <span class="text-slate-500 font-semibold">(${item.def})</span></h4>
-                                    <p class="text-[11px] text-purple-700 font-extrabold">${item.es || ''}</p>
+                                    <p class="text-[11px] text-purple-700 font-extrabold mt-0.5">${item.es || ''}</p>
+                                    <p class="text-[10px] text-slate-400 font-medium italic mt-0.5">💡 Recordatorio de dominio B1</p>
                                 </div>
                             </div>
                             <button onclick="speakSpecificTextCustom('${item.term}')" class="bg-white hover:bg-purple-100 text-purple-700 border border-purple-200 px-3.5 py-1.5 rounded-xl text-xs font-extrabold shadow-sm cursor-pointer inline-flex items-center gap-1.5 transition flex-shrink-0">
