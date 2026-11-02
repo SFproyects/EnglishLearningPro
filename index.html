@@ -135,7 +135,7 @@
                         <div id="session-bar" class="bg-gradient-to-r from-sky-400 to-emerald-500 h-full w-0 rounded-full transition-all duration-500 shadow-sm"></div>
                     </div>
                     <div class="mt-3 text-center text-xs text-slate-500 font-bold" id="auto-advance-notice">
-                        ✨ Complete 4 natural conversation turns (Greeting ➔ Body ➔ Farewell)
+                        ✨ Complete 4 natural conversation turns (Greetings ➔ Core ➔ Farewells)
                     </div>
                 </div>
             </div>
@@ -144,69 +144,101 @@
         <!-- VISTA DE LECCIÓN ÚNICA EN PANTALLA -->
         <div id="lesson-view-container" class="space-y-4">
 
-            <!-- FASE 1: TEORÍA DE 4 FORMAS (2 FORMALES + 2 SLANG) + ROLEPLAY CON INICIO Y FIN -->
+            <!-- FASE 1: TEORÍA AMPLIADA (4 SALUDOS + 4 DESPEDIDAS) + ROLEPLAY -->
             <div id="content-speaking" class="space-y-4">
                 
-                <!-- Guía Teórica de 4 Formas -->
-                <div class="vibrant-card rounded-3xl p-5 sm:p-7 shadow-lg border border-sky-100">
-                    <h3 class="text-xs font-extrabold text-slate-800 uppercase tracking-wider mb-3 flex items-center gap-2">
-                        <i data-lucide="book-open" class="w-4 h-4 text-sky-600"></i> Step 1: 4 Core Lesson Expressions (2 Formal & 2 Native Slang)
+                <!-- Guía Teórica de Saludos y Despedidas (8 expresiones en total) -->
+                <div class="vibrant-card rounded-3xl p-5 sm:p-7 shadow-lg border border-sky-100 space-y-4">
+                    <h3 class="text-xs font-extrabold text-slate-800 uppercase tracking-wider flex items-center gap-2">
+                        <i data-lucide="book-open" class="w-4 h-4 text-sky-600"></i> Step 1: Core Expressions (Greetings & Farewells - Formal & Slang)
                     </h3>
-                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3.5">
-                        <!-- Formal 1 -->
-                        <div class="bg-sky-50 border border-sky-200 p-3.5 rounded-2xl shadow-sm flex flex-col justify-between">
-                            <div>
-                                <span class="text-[10px] font-extrabold text-sky-700 uppercase tracking-wider block mb-1">👔 Formal 1:</span>
-                                <p class="text-xs text-slate-800 italic font-semibold mb-1" id="context-formal1">Loading...</p>
-                                <p class="text-[11px] text-sky-800 font-bold mb-3" id="context-formal1-es">Loading...</p>
+                    
+                    <!-- Sección de Saludos -->
+                    <div>
+                        <span class="text-[11px] font-extrabold text-sky-700 uppercase tracking-wider block mb-2">👋 Section A: Greetings (Saludos)</span>
+                        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
+                            <div class="bg-sky-50 border border-sky-200 p-3 rounded-2xl flex flex-col justify-between">
+                                <div>
+                                    <span class="text-[10px] font-extrabold text-sky-700 uppercase block">👔 Formal 1:</span>
+                                    <p class="text-xs text-slate-800 italic font-semibold mb-1" id="g-form1">Loading...</p>
+                                    <p class="text-[10px] text-sky-800 font-bold mb-2" id="g-form1-es">Loading...</p>
+                                </div>
+                                <button onclick="speakSpecificText('gForm1')" class="self-start bg-white hover:bg-sky-100 text-sky-700 px-2 py-1 rounded-lg text-[10px] font-bold border border-sky-200 cursor-pointer">🔊 Listen</button>
                             </div>
-                            <button onclick="speakSpecificText('formal1')" class="self-start bg-white hover:bg-sky-100 text-sky-700 border border-sky-200 px-2.5 py-1 rounded-xl text-[11px] font-extrabold flex items-center gap-1 transition cursor-pointer shadow-sm">
-                                <i data-lucide="volume-2" class="w-3 h-3"></i> Listen 🔊
-                            </button>
+                            <div class="bg-sky-50 border border-sky-200 p-3 rounded-2xl flex flex-col justify-between">
+                                <div>
+                                    <span class="text-[10px] font-extrabold text-sky-700 uppercase block">👔 Formal 2:</span>
+                                    <p class="text-xs text-slate-800 italic font-semibold mb-1" id="g-form2">Loading...</p>
+                                    <p class="text-[10px] text-sky-800 font-bold mb-2" id="g-form2-es">Loading...</p>
+                                </div>
+                                <button onclick="speakSpecificText('gForm2')" class="self-start bg-white hover:bg-sky-100 text-sky-700 px-2 py-1 rounded-lg text-[10px] font-bold border border-sky-200 cursor-pointer">🔊 Listen</button>
+                            </div>
+                            <div class="bg-emerald-50 border border-emerald-200 p-3 rounded-2xl flex flex-col justify-between">
+                                <div>
+                                    <span class="text-[10px] font-extrabold text-emerald-700 uppercase block">🔥 Slang 1:</span>
+                                    <p class="text-xs text-slate-800 italic font-semibold mb-1" id="g-slang1">Loading...</p>
+                                    <p class="text-[10px] text-emerald-800 font-bold mb-2" id="g-slang1-es">Loading...</p>
+                                </div>
+                                <button onclick="speakSpecificText('gSlang1')" class="self-start bg-white hover:bg-emerald-100 text-emerald-700 px-2 py-1 rounded-lg text-[10px] font-bold border border-emerald-200 cursor-pointer">🔊 Listen</button>
+                            </div>
+                            <div class="bg-emerald-50 border border-emerald-200 p-3 rounded-2xl flex flex-col justify-between">
+                                <div>
+                                    <span class="text-[10px] font-extrabold text-emerald-700 uppercase block">🔥 Slang 2:</span>
+                                    <p class="text-xs text-slate-800 italic font-semibold mb-1" id="g-slang2">Loading...</p>
+                                    <p class="text-[10px] text-emerald-800 font-bold mb-2" id="g-slang2-es">Loading...</p>
+                                </div>
+                                <button onclick="speakSpecificText('gSlang2')" class="self-start bg-white hover:bg-emerald-100 text-emerald-700 px-2 py-1 rounded-lg text-[10px] font-bold border border-emerald-200 cursor-pointer">🔊 Listen</button>
+                            </div>
                         </div>
-                        <!-- Formal 2 -->
-                        <div class="bg-sky-50 border border-sky-200 p-3.5 rounded-2xl shadow-sm flex flex-col justify-between">
-                            <div>
-                                <span class="text-[10px] font-extrabold text-sky-700 uppercase tracking-wider block mb-1">👔 Formal 2:</span>
-                                <p class="text-xs text-slate-800 italic font-semibold mb-1" id="context-formal2">Loading...</p>
-                                <p class="text-[11px] text-sky-800 font-bold mb-3" id="context-formal2-es">Loading...</p>
+                    </div>
+
+                    <!-- Sección de Despedidas -->
+                    <div class="pt-2 border-t border-slate-200">
+                        <span class="text-[11px] font-extrabold text-purple-700 uppercase tracking-wider block mb-2">🛑 Section B: Farewells (Despedidas)</span>
+                        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
+                            <div class="bg-purple-50 border border-purple-200 p-3 rounded-2xl flex flex-col justify-between">
+                                <div>
+                                    <span class="text-[10px] font-extrabold text-purple-700 uppercase block">👔 Formal 1:</span>
+                                    <p class="text-xs text-slate-800 italic font-semibold mb-1" id="f-form1">Loading...</p>
+                                    <p class="text-[10px] text-purple-800 font-bold mb-2" id="f-form1-es">Loading...</p>
+                                </div>
+                                <button onclick="speakSpecificText('fForm1')" class="self-start bg-white hover:bg-purple-100 text-purple-700 px-2 py-1 rounded-lg text-[10px] font-bold border border-purple-200 cursor-pointer">🔊 Listen</button>
                             </div>
-                            <button onclick="speakSpecificText('formal2')" class="self-start bg-white hover:bg-sky-100 text-sky-700 border border-sky-200 px-2.5 py-1 rounded-xl text-[11px] font-extrabold flex items-center gap-1 transition cursor-pointer shadow-sm">
-                                <i data-lucide="volume-2" class="w-3 h-3"></i> Listen 🔊
-                            </button>
-                        </div>
-                        <!-- Slang 1 -->
-                        <div class="bg-emerald-50 border border-emerald-200 p-3.5 rounded-2xl shadow-sm flex flex-col justify-between">
-                            <div>
-                                <span class="text-[10px] font-extrabold text-emerald-700 uppercase tracking-wider block mb-1">🔥 Slang / Casual 1:</span>
-                                <p class="text-xs text-slate-800 italic font-semibold mb-1" id="context-slang1">Loading...</p>
-                                <p class="text-[11px] text-emerald-800 font-bold mb-3" id="context-slang1-es">Loading...</p>
+                            <div class="bg-purple-50 border border-purple-200 p-3 rounded-2xl flex flex-col justify-between">
+                                <div>
+                                    <span class="text-[10px] font-extrabold text-purple-700 uppercase block">👔 Formal 2:</span>
+                                    <p class="text-xs text-slate-800 italic font-semibold mb-1" id="f-form2">Loading...</p>
+                                    <p class="text-[10px] text-purple-800 font-bold mb-2" id="f-form2-es">Loading...</p>
+                                </div>
+                                <button onclick="speakSpecificText('fForm2')" class="self-start bg-white hover:bg-purple-100 text-purple-700 px-2 py-1 rounded-lg text-[10px] font-bold border border-purple-200 cursor-pointer">🔊 Listen</button>
                             </div>
-                            <button onclick="speakSpecificText('slang1')" class="self-start bg-white hover:bg-emerald-100 text-emerald-700 border border-emerald-200 px-2.5 py-1 rounded-xl text-[11px] font-extrabold flex items-center gap-1 transition cursor-pointer shadow-sm">
-                                <i data-lucide="volume-2" class="w-3 h-3"></i> Listen 🔊
-                            </button>
-                        </div>
-                        <!-- Slang 2 -->
-                        <div class="bg-emerald-50 border border-emerald-200 p-3.5 rounded-2xl shadow-sm flex flex-col justify-between">
-                            <div>
-                                <span class="text-[10px] font-extrabold text-emerald-700 uppercase tracking-wider block mb-1">🔥 Slang / Casual 2:</span>
-                                <p class="text-xs text-slate-800 italic font-semibold mb-1" id="context-slang2">Loading...</p>
-                                <p class="text-[11px] text-emerald-800 font-bold mb-3" id="context-slang2-es">Loading...</p>
+                            <div class="bg-pink-50 border border-pink-200 p-3 rounded-2xl flex flex-col justify-between">
+                                <div>
+                                    <span class="text-[10px] font-extrabold text-pink-700 uppercase block">🔥 Slang 1:</span>
+                                    <p class="text-xs text-slate-800 italic font-semibold mb-1" id="f-slang1">Loading...</p>
+                                    <p class="text-[10px] text-pink-800 font-bold mb-2" id="f-slang1-es">Loading...</p>
+                                </div>
+                                <button onclick="speakSpecificText('fSlang1')" class="self-start bg-white hover:bg-pink-100 text-pink-700 px-2 py-1 rounded-lg text-[10px] font-bold border border-pink-200 cursor-pointer">🔊 Listen</button>
                             </div>
-                            <button onclick="speakSpecificText('slang2')" class="self-start bg-white hover:bg-emerald-100 text-emerald-700 border border-emerald-200 px-2.5 py-1 rounded-xl text-[11px] font-extrabold flex items-center gap-1 transition cursor-pointer shadow-sm">
-                                <i data-lucide="volume-2" class="w-3 h-3"></i> Listen 🔊
-                            </button>
+                            <div class="bg-pink-50 border border-pink-200 p-3 rounded-2xl flex flex-col justify-between">
+                                <div>
+                                    <span class="text-[10px] font-extrabold text-pink-700 uppercase block">🔥 Slang 2:</span>
+                                    <p class="text-xs text-slate-800 italic font-semibold mb-1" id="f-slang2">Loading...</p>
+                                    <p class="text-[10px] text-pink-800 font-bold mb-2" id="f-slang2-es">Loading...</p>
+                                </div>
+                                <button onclick="speakSpecificText('fSlang2')" class="self-start bg-white hover:bg-pink-100 text-pink-700 px-2 py-1 rounded-lg text-[10px] font-bold border border-pink-200 cursor-pointer">🔊 Listen</button>
+                            </div>
                         </div>
                     </div>
                 </div>
 
-                <!-- Chat de Roleplay con Inicio y Fin Fluido -->
+                <!-- Chat de Roleplay con Secuencia Lógica (Saludo ➔ Tema ➔ Despedida) -->
                 <div class="grid grid-cols-1 lg:grid-cols-3 gap-5">
                     <div class="vibrant-card lg:col-span-3 rounded-3xl p-5 sm:p-7 flex flex-col justify-between shadow-lg h-[460px]">
                         <div>
                             <div class="flex items-center justify-between mb-3">
                                 <span class="text-xs font-extrabold text-emerald-700 bg-emerald-100 px-3.5 py-1 rounded-full border border-emerald-200 flex items-center gap-1.5 shadow-sm">
-                                    <i data-lucide="messages-square" class="w-3.5 h-3.5"></i> Step 2: Roleplay (Greeting ➔ Core ➔ Farewell)
+                                    <i data-lucide="messages-square" class="w-3.5 h-3.5"></i> Step 2: Roleplay (Greeting ➔ Core Task ➔ Farewell)
                                 </span>
                                 <span class="text-[11px] font-bold text-slate-500" id="roleplay-scenario-tag">B1 Mastery Scenario</span>
                             </div>
@@ -223,7 +255,7 @@
                                 </button>
                             </div>
                             <div class="flex gap-2">
-                                <input type="text" id="roleplay-user-input" class="vibrant-input flex-grow rounded-2xl px-4 py-3 text-xs sm:text-sm text-slate-800 focus:outline-none transition font-semibold" placeholder="Type your response (Greeting, details, or farewell)..." onkeypress="if(event.key === 'Enter') sendRoleplayMessage()">
+                                <input type="text" id="roleplay-user-input" class="vibrant-input flex-grow rounded-2xl px-4 py-3 text-xs sm:text-sm text-slate-800 focus:outline-none transition font-semibold" placeholder="Type your response using lesson greetings/farewells..." onkeypress="if(event.key === 'Enter') sendRoleplayMessage()">
                                 <button onclick="sendRoleplayMessage()" class="bg-gradient-to-r from-sky-500 to-emerald-500 hover:from-sky-600 hover:to-emerald-600 text-white px-5 py-3 rounded-2xl text-xs font-extrabold transition shadow-md cursor-pointer flex items-center gap-1">
                                     <i data-lucide="send" class="w-4 h-4"></i> Send
                                 </button>
@@ -411,55 +443,58 @@
         for (let i = 1; i <= 40; i++) {
             let blockNum = Math.ceil(i / 10);
             let themeName = `Lesson Topic ${i}`;
-            let f1 = `It is a pleasure to connect with you regarding lesson ${i}.`;
-            let f1Es = `Es un placer conectar contigo respecto a la lección ${i}.`;
-            let f2 = `Allow me to introduce the primary objective for today.`;
-            let f2Es = `Permíteme presentar el objetivo principal de hoy.`;
-            let s1 = `Hey there! Let's crush lesson ${i} right now.`;
-            let s1Es = `¡Hola! Vamos a darle con todo a la lección ${i}.`;
-            let s2 = `What's up? Ready to master this topic?`;
-            let s2Es = `¿Qué tal? ¿Listos para dominar este tema?`;
-            let roleplayPrompts = [];
-            let turnsCount = 4; // 4 pasos exactos: Saludo ➔ Desarrollo ➔ Despedida
+            
+            // 4 Saludos (2 Formales, 2 Slang)
+            let gForm1 = "Good morning, it is a pleasure to connect with you.";
+            let gForm1Es = "Buenos días, es un placer conectar contigo.";
+            let gForm2 = "Hello, my name is Kevin and I am pleased to meet you.";
+            let gForm2Es = "Hola, mi nombre es Kevin y es un placer conocerte.";
+            let gSlang1 = "Hey! I'm Kevin, great to meet you.";
+            let gSlang1Es = "¡Ey! Soy Kevin, qué gusto conocerte.";
+            let gSlang2 = "What's up? I'm Kevin, let's chat!";
+            let gSlang2Es = "¿Qué tal? Soy Kevin, ¡hablemos!";
+
+            // 4 Despedidas (2 Formales, 2 Slang)
+            let fForm1 = "Thank you for your time. Have a wonderful day.";
+            let fForm1Es = "Gracias por su tiempo. Que tenga un día maravilloso.";
+            let fForm2 = "It was a productive conversation. Goodbye.";
+            let fForm2Es = "Fue una conversación productiva. Adiós.";
+            let fSlang1 = "Catch you later! See you around.";
+            let fSlang1Es = "¡Nos vemos luego! Te veo por ahí.";
+            let fSlang2 = "Alright, I'm heading out. Take care!";
+            let fSlang2Es = "Bien, ya me voy. ¡Cuídate!";
+
+            let roleplayPrompts = [
+                "Turn 1 (Greeting): Greet the tutor using one of our lesson greetings (Formal or Slang).",
+                "Turn 2 (Core Task): State the main objective or ask your core question for lesson " + i + ".",
+                "Turn 3 (Core Task): Give a brief detail or response about the topic.",
+                "Turn 4 (Farewell): Finish the conversation using one of our lesson farewells."
+            ];
 
             if (i === 1) {
                 themeName = "Professional Greetings & Introductions";
-                f1 = "Hello, my name is Kevin and I am pleased to meet you.";
-                f1Es = "Hola, mi nombre es Kevin y es un placer conocerte.";
-                f2 = "Good morning, it is an honor to connect with you today.";
-                f2Es = "Buenos días, es un honor conectar contigo hoy.";
-                s1 = "Hey! I'm Kevin, great to meet you.";
-                s1Es = "¡Ey! Soy Kevin, qué gusto conocerte.";
-                s2 = "What's up? I'm Kevin, let's chat!";
-                s2Es = "¿Qué tal? Soy Kevin, ¡hablemos!";
                 roleplayPrompts = [
-                    "Turn 1 (Greeting): Hello! Greet the tutor and introduce your name.",
-                    "Turn 2 (Core): How do you ask how the other person is doing?",
-                    "Turn 3 (Core): Share a brief polite comment about the conversation.",
+                    "Turn 1 (Greeting): Greet the tutor and introduce your name (e.g., 'Hello, I'm Kevin').",
+                    "Turn 2 (Core Task): Ask how the tutor is doing today.",
+                    "Turn 3 (Core Task): Say something positive about connecting with them.",
                     "Turn 4 (Farewell): Say goodbye politely to finish the chat."
                 ];
             } else if (i === 2) {
                 themeName = "Shopping & Asking Prices (Transactions)";
-                f1 = "Could you please inform me of the total cost for this item?";
-                f1Es = "¿Podría informarme el costo total de este artículo?";
-                f2 = "I would like to inquire about the pricing and available discounts.";
-                f2Es = "Me gustaría consultar sobre el precio y los descuentos disponibles.";
-                s1 = "How much is this? Is there any discount?";
-                s1Es = "¿Cuánto cuesta esto? ¿Hay algún descuento?";
-                s2 = "Hey, how much for this one? Can you cut me a deal?";
-                s2Es = "Ey, ¿cuánto por este? ¿Me haces un buen precio?";
+                gForm1 = "Good day, I would like to inquire about an item.";
+                gForm1Es = "Buen día, me gustaría consultar sobre un artículo.";
+                gForm2 = "Could you please inform me of the total cost?";
+                gForm2Es = "¿Podría informarme el costo total?";
+                gSlang1 = "Hey! How much for this one?";
+                gSlang1Es = "¡Ey! ¿Cuánto cuesta este?";
+                gSlang2 = "What's up? Can you tell me the price?";
+                gSlang2Es = "¿Qué tal? ¿Me dices el precio?";
+
                 roleplayPrompts = [
-                    "Turn 1 (Greeting): Hello! Greet the store clerk nicely.",
-                    "Turn 2 (Core): Ask for the price of the item you want.",
-                    "Turn 3 (Core): Ask if they accept card payment or offer a discount.",
+                    "Turn 1 (Greeting): Greet the store clerk nicely.",
+                    "Turn 2 (Core Task): Ask for the price of the item you want.",
+                    "Turn 3 (Core Task): Ask if they accept card payment or a discount.",
                     "Turn 4 (Farewell): Thank the cashier and say goodbye."
-                ];
-            } else {
-                roleplayPrompts = [
-                    `Turn 1 (Greeting): Hello! Greet your partner and introduce lesson ${i} topic.`,
-                    `Turn 2 (Core): Discuss the main objective or workflow of this lesson.`,
-                    `Turn 3 (Core): Ask a follow-up question about the topic.`,
-                    `Turn 4 (Farewell): Wrap up the conversation and say goodbye.`
                 ];
             }
 
@@ -475,13 +510,16 @@
                 grammarTitle: "B1 Mastery Core Workflow",
                 roleplay: {
                     title: `Lesson ${i}: ${themeName}`,
-                    turns: turnsCount,
-                    tutorOpening: roleplayPrompts[0],
+                    turns: 4,
                     prompts: roleplayPrompts,
-                    formal1: f1, formal1Es: f1Es,
-                    formal2: f2, formal2Es: f2Es,
-                    slang1: s1, slang1Es: s1Es,
-                    slang2: s2, slang2Es: s2Es
+                    gForm1: gForm1, gForm1Es: gForm1Es,
+                    gForm2: gForm2, gForm2Es: gForm2Es,
+                    gSlang1: gSlang1, gSlang1Es: gSlang1Es,
+                    gSlang2: gSlang2, gSlang2Es: gSlang2Es,
+                    fForm1: fForm1, fForm1Es: fForm1Es,
+                    fForm2: fForm2, fForm2Es: fForm2Es,
+                    fSlang1: fSlang1, fSlang1Es: fSlang1Es,
+                    fSlang2: fSlang2, fSlang2Es: fSlang2Es
                 },
                 flashcards: words.map((w, idx) => ({ id: i*10 + idx, term: w.w, def: w.d, es: w.e, img: w.e.split(' ').pop() })),
                 quizzes: [
@@ -489,7 +527,7 @@
                     { id: `l${i}_q2`, type: 'repair', title: 'Essential Vocabulary', desc: `Type in English for '${words[0].d}':`, answer: words[0].w.toLowerCase(), correction: `Se escribe '${words[0].w}'.` }
                 ],
                 listening: `We are successfully mastering advanced English expressions today`,
-                shadow: f1
+                shadow: gForm1
             });
         }
 
@@ -563,22 +601,32 @@
             currentRoleplayData = lessonData.roleplay;
             currentListeningTarget = lessonData.listening;
             roleplayInteractionCount = 0;
-            requiredRoleplayTurns = currentRoleplayData.turns || 4;
+            requiredRoleplayTurns = 4;
 
             document.getElementById('roleplay-scenario-tag').innerText = `Lesson ${currLesson}: ${lessonData.theme}`;
             
-            document.getElementById('context-formal1').innerText = currentRoleplayData.formal1;
-            document.getElementById('context-formal1-es').innerText = `(${currentRoleplayData.formal1Es})`;
-            document.getElementById('context-formal2').innerText = currentRoleplayData.formal2;
-            document.getElementById('context-formal2-es').innerText = `(${currentRoleplayData.formal2Es})`;
-            document.getElementById('context-slang1').innerText = currentRoleplayData.slang1;
-            document.getElementById('context-slang1-es').innerText = `(${currentRoleplayData.slang1Es})`;
-            document.getElementById('context-slang2').innerText = currentRoleplayData.slang2;
-            document.getElementById('context-slang2-es').innerText = `(${currentRoleplayData.slang2Es})`;
+            // Cargar las 8 expresiones (4 saludos + 4 despedidas)
+            document.getElementById('g-form1').innerText = currentRoleplayData.gForm1;
+            document.getElementById('g-form1-es').innerText = `(${currentRoleplayData.gForm1Es})`;
+            document.getElementById('g-form2').innerText = currentRoleplayData.gForm2;
+            document.getElementById('g-form2-es').innerText = `(${currentRoleplayData.gForm2Es})`;
+            document.getElementById('g-slang1').innerText = currentRoleplayData.gSlang1;
+            document.getElementById('g-slang1-es').innerText = `(${currentRoleplayData.gSlang1Es})`;
+            document.getElementById('g-slang2').innerText = currentRoleplayData.gSlang2;
+            document.getElementById('g-slang2-es').innerText = `(${currentRoleplayData.gSlang2Es})`;
+
+            document.getElementById('f-form1').innerText = currentRoleplayData.fForm1;
+            document.getElementById('f-form1-es').innerText = `(${currentRoleplayData.fForm1Es})`;
+            document.getElementById('f-form2').innerText = currentRoleplayData.fForm2;
+            document.getElementById('f-form2-es').innerText = `(${currentRoleplayData.fForm2Es})`;
+            document.getElementById('f-slang1').innerText = currentRoleplayData.fSlang1;
+            document.getElementById('f-slang1-es').innerText = `(${currentRoleplayData.fSlang1Es})`;
+            document.getElementById('f-slang2').innerText = currentRoleplayData.fSlang2;
+            document.getElementById('f-slang2-es').innerText = `(${currentRoleplayData.fSlang2Es})`;
 
             document.getElementById('shadow-text').innerText = `"${lessonData.shadow}"`;
             document.getElementById('flashcard-phase-title').innerText = `Phase 2: Vocabulary Mastery (Lesson ${currLesson})`;
-            document.getElementById('roleplay-counter-label').innerText = `Interactions: 0 / ${requiredRoleplayTurns} completed`;
+            document.getElementById('roleplay-counter-label').innerText = `Interactions: 0 / 4 completed`;
 
             activeFlashcards = lessonData.flashcards;
             activeQuizzes = lessonData.quizzes;
@@ -601,7 +649,7 @@
             switchTab('speaking');
         }
 
-        // VALIDACIÓN FLEXIBLE CONFLUAYENDO SALUDO Y DESPEDIDA
+        // VALIDACIÓN FLEXIBLE DE 4 TURNOS
         function sendRoleplayMessage() {
             const input = document.getElementById('roleplay-user-input');
             const text = input.value.trim();
@@ -647,11 +695,11 @@
 
             setTimeout(() => {
                 roleplayInteractionCount++;
-                document.getElementById('roleplay-counter-label').innerText = `Interactions: ${roleplayInteractionCount} / ${requiredRoleplayTurns} completed`;
+                document.getElementById('roleplay-counter-label').innerText = `Interactions: ${roleplayInteractionCount} / 4 completed`;
 
                 let promptsArr = currentRoleplayData.prompts || [];
                 
-                if (roleplayInteractionCount >= requiredRoleplayTurns) {
+                if (roleplayInteractionCount >= 4) {
                     chatBox.innerHTML += `
                         <div class="flex items-start gap-2.5">
                             <div class="w-8 h-8 rounded-full bg-emerald-500 text-white flex items-center justify-center font-bold text-xs flex-shrink-0">🌟</div>
@@ -678,8 +726,8 @@
         }
 
         function completeRoleplayPhase() {
-            if (roleplayInteractionCount < requiredRoleplayTurns) {
-                showCustomModal("Incomplete Conversation ⚠️", `You need to complete all ${requiredRoleplayTurns} turns (you have ${roleplayInteractionCount}). Complete the farewell to finish!`, "💬");
+            if (roleplayInteractionCount < 4) {
+                showCustomModal("Incomplete Conversation ⚠️", `You need to complete all 4 turns (you have ${roleplayInteractionCount}). Complete the farewell to finish!`, "💬");
                 return;
             }
 
