@@ -395,12 +395,12 @@
             let words = [];
             let grammarLevelTitle = "Advanced B1 Mastery Workflow";
             let roleplayPrompts = [
-                `Turn 1: How would you introduce your main professional goal using the formal style from Step 1?`,
-                `Turn 2: Excellent! Now, how do you manage your daily workflow or tasks for this topic?`,
-                `Turn 3: Very good. What specific challenges do you face when executing this workflow?`,
-                `Turn 4: That is a solid point. How do you maintain consistency and discipline?`,
-                `Turn 5: Almost done! Can you summarize your overall strategy using a casual or formal expression?`,
-                `Turn 6: Fantastic completion! You have mastered all 6 sequential turns.`
+                `Turn 1: Hello! How would you introduce yourself formally in a business context using the style from Step 1?`,
+                `Turn 2: That's a solid introduction. Now, how do you greet a colleague casually in the morning?`,
+                `Turn 3: Very good. What professional details do you share when meeting someone new?`,
+                `Turn 4: That is a great approach. How do you close a professional introduction politely?`,
+                `Turn 5: Excellent! Can you summarize your introduction using formal expressions?`,
+                `Turn 6: Fantastic completion! You have mastered professional greetings and introductions.`
             ];
 
             if (blockNum === 1) {
@@ -413,11 +413,11 @@
                     casualEs = "¡Hola! Soy Kevin, un placer conocerte.";
                     roleplayPrompts = [
                         "Turn 1: Hello! How would you introduce yourself formally in a business context using the style from Step 1?",
-                        "Turn 2: That's a solid introduction. Now, how do you usually structure your daily professional routine using your home workspace?",
-                        "Turn 3: Very efficient. What productivity targets or goals do you focus on during your morning workflow?",
-                        "Turn 4: Great consistency! How do you handle client communications or scheduling when working remotely?",
-                        "Turn 5: Excellent points. Can you summarize how your professional introduction and daily workflow connect to your career goals?",
-                        "Turn 6: Fantastic completion of Step 1! You have successfully mastered professional introductions."
+                        "Turn 2: That's a solid introduction. Now, how do you greet a colleague casually when starting a conversation?",
+                        "Turn 3: Very natural. What details do you share about your background when meeting someone new?",
+                        "Turn 4: That is a great approach. How do you ask about the other person's profession politely?",
+                        "Turn 5: Excellent conversation! Can you summarize your introduction using lesson expressions?",
+                        "Turn 6: Fantastic completion of Step 1! You have successfully mastered professional greetings."
                     ];
                 } else if (i === 2) {
                     themeName = "Remote Work & Home Office Management";
@@ -591,15 +591,13 @@
             const chatBox = document.getElementById('chat-messages-container');
             const wordCount = text.split(/\s+/).length;
 
-            // Filtro estricto: exige longitud mínima y relevancia temática de la lección
             const lowerText = text.toLowerCase();
-            const hasValidContext = wordCount >= 4 && (
+            const hasValidContext = wordCount >= 3 && (
                 lowerText.includes('name') || lowerText.includes('kevin') || 
-                lowerText.includes('work') || lowerText.includes('routine') || 
-                lowerText.includes('manage') || lowerText.includes('goal') || 
-                lowerText.includes('workflow') || lowerText.includes('system') ||
-                lowerText.includes('meet') || lowerText.includes('hello') ||
-                lowerText.includes('handle') || lowerText.includes('target')
+                lowerText.includes('meet') || lowerText.includes('hello') || 
+                lowerText.includes('hey') || lowerText.includes('pleased') || 
+                lowerText.includes('glad') || lowerText.includes('connect') ||
+                lowerText.includes('morning') || lowerText.includes('good')
             );
 
             if (!hasValidContext) {
@@ -615,7 +613,7 @@
                         <div class="w-8 h-8 rounded-full bg-amber-500 text-white flex items-center justify-center font-bold text-xs flex-shrink-0">🤖</div>
                         <div class="bg-amber-50 border border-amber-200 p-3.5 rounded-2xl shadow-sm text-xs text-amber-900 max-w-[85%]">
                             <p class="font-extrabold mb-0.5">Tutor (Corrección Estricta):</p>
-                            <p class="font-medium">⚠️ ¡Fuera de contexto o muy corto! Debes responder con una oración completa (mínimo 4 palabras) relacionada con el tema de la lección (ej: <em>"${currentRoleplayData.formal}"</em>).</p>
+                            <p class="font-medium">⚠️ ¡Usa una expresión de saludo o presentación! (ej: <em>"${currentRoleplayData.formal}"</em>).</p>
                         </div>
                     </div>
                 `;
