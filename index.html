@@ -79,7 +79,7 @@
                         <i data-lucide="zap" class="w-5 h-5"></i>
                     </div>
                     <h1 class="font-extrabold text-lg text-slate-900 flex items-center gap-2 tracking-tight">
-                        <a href="url?id=0" class="hover:text-emerald-600 transition">English Pro</a>
+                        <a href="https://sfproyects.github.io/EnglishLearningPro/" class="hover:text-emerald-600 transition">English Pro</a>
                         <span class="text-[10px] font-bold uppercase tracking-wider bg-emerald-100 text-emerald-700 border border-emerald-200 px-2.5 py-0.5 rounded-full" id="header-badge">Lesson 1 / 40</span>
                     </h1>
                 </div>
@@ -135,7 +135,7 @@
                         <div id="session-bar" class="bg-gradient-to-r from-sky-400 to-emerald-500 h-full w-0 rounded-full transition-all duration-500 shadow-sm"></div>
                     </div>
                     <div class="mt-3 text-center text-xs text-slate-500 font-bold" id="auto-advance-notice">
-                        ✨ Real human chat flow (Greeting ➔ Core ➔ Farewell)
+                        ✨ Complete 4 natural conversational turns to proceed
                     </div>
                 </div>
             </div>
@@ -144,7 +144,7 @@
         <!-- VISTA DE LECCIÓN ÚNICA EN PANTALLA -->
         <div id="lesson-view-container" class="space-y-4">
 
-            <!-- FASE 1: TEORÍA + CHAT HUMANO REAL -->
+            <!-- FASE 1: TEORÍA + CHAT NATURAL -->
             <div id="content-speaking" class="space-y-4">
                 
                 <!-- Guía Teórica de Saludos y Despedidas -->
@@ -232,9 +232,9 @@
                     </div>
                 </div>
 
-                <!-- Chat con respuestas naturales y fluidas -->
+                <!-- Chat Natural con Saludo Inicial -->
                 <div class="grid grid-cols-1 lg:grid-cols-3 gap-5">
-                    <div class="vibrant-card lg:col-span-3 rounded-3xl p-5 sm:p-7 flex flex-col justify-between shadow-lg h-[460px]">
+                    <div class="vibrant-card lg:col-span-3 rounded-3xl p-5 sm:p-7 flex flex-col justify-between shadow-lg h-[480px]">
                         <div>
                             <div class="flex items-center justify-between mb-3">
                                 <span class="text-xs font-extrabold text-emerald-700 bg-emerald-100 px-3.5 py-1 rounded-full border border-emerald-200 flex items-center gap-1.5 shadow-sm">
@@ -462,22 +462,12 @@
             let fSlang2 = "Alright, I'm heading out. Take care!";
             let fSlang2Es = "Bien, ya me voy. ¡Cuídate!";
 
-            // Conversaciones con turnos naturales y cortos
-            let tutorLines = [
-                "Hello there! Great to meet you. How are you doing today?",
-                "That's awesome! By the way, what are your plans for today?",
-                "Sounds like a solid plan. Is there anything else you would like to discuss?",
-                "Alright! It was great talking with you. Have an amazing day!"
-            ];
+            // Saludo inicial limpio y respuestas naturales dinámicas
+            let tutorIntro = "Hello! It's great to connect with you. How is your day going?";
 
             if (i === 1) {
                 themeName = "Professional Greetings & Introductions";
-                tutorLines = [
-                    "Hello! It's a pleasure to meet you. How is your day going?",
-                    "That's wonderful to hear! What kind of projects are you working on lately?",
-                    "That sounds really interesting and fun.",
-                    "Well, it was great chatting with you. Have a wonderful rest of your day!"
-                ];
+                tutorIntro = "Hello! It's a pleasure to meet you. How is your day going?";
             } else if (i === 2) {
                 themeName = "Shopping & Asking Prices (Transactions)";
                 gForm1 = "Good day, I would like to inquire about an item.";
@@ -489,12 +479,7 @@
                 gSlang2 = "What's up? Can you tell me the price?";
                 gSlang2Es = "¿Qué tal? ¿Me dices el precio?";
 
-                tutorLines = [
-                    "Hello! Welcome to our store. How can I help you today?",
-                    "Sure thing! That item is high quality. Would you like me to check for discounts?",
-                    "We accept cash and cards. Perfect choice!",
-                    "Thank you for shopping with us. Have a great day!"
-                ];
+                tutorIntro = "Hello! Welcome to our store. How can I help you today?";
             }
 
             let words = [
@@ -510,7 +495,7 @@
                 roleplay: {
                     title: `Lesson ${i}: ${themeName}`,
                     turns: 4,
-                    lines: tutorLines,
+                    introLine: tutorIntro,
                     gForm1: gForm1, gForm1Es: gForm1Es,
                     gForm2: gForm2, gForm2Es: gForm2Es,
                     gSlang1: gSlang1, gSlang1Es: gSlang1Es,
@@ -635,7 +620,7 @@
                     <div class="w-8 h-8 rounded-full bg-sky-500 text-white flex items-center justify-center font-bold text-xs flex-shrink-0">🤖</div>
                     <div class="bg-white border border-slate-200 p-3.5 rounded-2xl shadow-sm text-xs text-slate-800 max-w-[85%]">
                         <p class="font-extrabold text-sky-700 mb-0.5">Tutor:</p>
-                        <p class="font-medium">${currentRoleplayData.lines[0]}</p>
+                        <p class="font-medium">${currentRoleplayData.introLine}</p>
                     </div>
                 </div>
             `;
@@ -647,7 +632,7 @@
             switchTab('speaking');
         }
 
-        // FLUJO DE CHAT HUMANO: EL TUTOR CONTESTA NATURALMENTE
+        // CHAT NATURAL: SALUDA AL INICIO Y LUEGO RESPONDE A LO QUE LE DICES
         function sendRoleplayMessage() {
             const input = document.getElementById('roleplay-user-input');
             const text = input.value.trim();
@@ -695,13 +680,15 @@
                 roleplayInteractionCount++;
                 document.getElementById('roleplay-counter-label').innerText = `Interactions: ${roleplayInteractionCount} / 4 completed`;
 
-                let linesArr = currentRoleplayData.lines || [];
                 let tutorReply = "";
-
-                if (roleplayInteractionCount < 4) {
-                    tutorReply = linesArr[roleplayInteractionCount] || "That's wonderful! Let's keep going.";
+                if (roleplayInteractionCount === 1) {
+                    tutorReply = `That's great to hear! "${text}" is a solid response. What are your main goals or tasks for today?`;
+                } else if (roleplayInteractionCount === 2) {
+                    tutorReply = `Awesome! Sounds like you have a productive plan. How are you feeling about your progress so far?`;
+                } else if (roleplayInteractionCount === 3) {
+                    tutorReply = `That's fantastic! You're doing amazing. To wrap up, could you use one of our lesson farewells to close?`;
                 } else {
-                    tutorReply = "Fantastic! You completed all 4 conversational turns like a pro. Click 'Validate Roleplay & Proceed' to continue!";
+                    tutorReply = `Wonderful conversation! You completed all 4 turns like a pro. Click 'Validate Roleplay & Proceed' to continue!`;
                 }
 
                 chatBox.innerHTML += `
@@ -719,11 +706,11 @@
 
         function completeRoleplayPhase() {
             if (roleplayInteractionCount < 4) {
-                showCustomModal("Incomplete Conversation ⚠️", `You need to complete all 4 turns (you have ${roleplayInteractionCount}). Complete the farewell to finish!`, "💬");
+                showCustomModal("Incomplete Conversation ⚠️", `You need to complete all 4 conversational turns (you have ${roleplayInteractionCount}). Finish the farewell turn first!`, "💬");
                 return;
             }
 
-            showCustomModal("Roleplay Approved! 🌟", "Tutor: Outstanding natural flow! Moving to Vocabulary Mastery.", "💬");
+            showCustomModal("Roleplay Approved! 🌟", "Tutor: Outstanding conversational flow! Moving to Vocabulary Mastery.", "💬");
             setTimeout(() => {
                 closeModal();
                 unlockNextStep('speaking', 'flashcards');
@@ -863,7 +850,7 @@
             const userText = document.getElementById('listening-input').value.trim().toLowerCase();
             if (userText.length > 3) {
                 document.getElementById('listening-result').innerHTML = '<span class="text-emerald-700 font-extrabold">🎯 Dictation approved! Moving to Shadowing.</span>';
-                setTimeout(() => unlockNextStep('listening', 'shadowing'), 1000);
+                setTimeout(() => unlockNewStep('listening', 'shadowing'), 1000);
             } else {
                 document.getElementById('listening-result').innerHTML = '<span class="text-rose-600 font-bold">⚠️ Try again.</span>';
             }
