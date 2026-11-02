@@ -135,7 +135,7 @@
                         <div id="session-bar" class="bg-gradient-to-r from-sky-400 to-emerald-500 h-full w-0 rounded-full transition-all duration-500 shadow-sm"></div>
                     </div>
                     <div class="mt-3 text-center text-xs text-slate-500 font-bold" id="auto-advance-notice">
-                        ✨ Complete 6 strict sequential roleplay turns using lesson expressions
+                        ✨ Complete 4 natural conversation turns (Greeting ➔ Body ➔ Farewell)
                     </div>
                 </div>
             </div>
@@ -144,46 +144,69 @@
         <!-- VISTA DE LECCIÓN ÚNICA EN PANTALLA -->
         <div id="lesson-view-container" class="space-y-4">
 
-            <!-- FASE 1: TEORÍA DE ESTILOS + ROLEPLAY ESTRICTO -->
+            <!-- FASE 1: TEORÍA DE 4 FORMAS (2 FORMALES + 2 SLANG) + ROLEPLAY CON INICIO Y FIN -->
             <div id="content-speaking" class="space-y-4">
                 
-                <!-- Guía Teórica Inicial -->
+                <!-- Guía Teórica de 4 Formas -->
                 <div class="vibrant-card rounded-3xl p-5 sm:p-7 shadow-lg border border-sky-100">
                     <h3 class="text-xs font-extrabold text-slate-800 uppercase tracking-wider mb-3 flex items-center gap-2">
-                        <i data-lucide="book-open" class="w-4 h-4 text-sky-600"></i> Step 1: Mandatory Lesson Expressions (Use these in chat!)
+                        <i data-lucide="book-open" class="w-4 h-4 text-sky-600"></i> Step 1: 4 Core Lesson Expressions (2 Formal & 2 Native Slang)
                     </h3>
-                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                        <div class="bg-sky-50 border border-sky-200 p-4 rounded-2xl shadow-sm flex flex-col justify-between">
+                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3.5">
+                        <!-- Formal 1 -->
+                        <div class="bg-sky-50 border border-sky-200 p-3.5 rounded-2xl shadow-sm flex flex-col justify-between">
                             <div>
-                                <span class="text-[10px] font-extrabold text-sky-700 uppercase tracking-wider block mb-1">👔 Formal / Professional Style:</span>
-                                <p class="text-xs text-slate-800 italic font-semibold mb-1" id="context-formal">Loading...</p>
-                                <p class="text-[11px] text-sky-800 font-bold mb-3" id="context-formal-es">Loading...</p>
+                                <span class="text-[10px] font-extrabold text-sky-700 uppercase tracking-wider block mb-1">👔 Formal 1:</span>
+                                <p class="text-xs text-slate-800 italic font-semibold mb-1" id="context-formal1">Loading...</p>
+                                <p class="text-[11px] text-sky-800 font-bold mb-3" id="context-formal1-es">Loading...</p>
                             </div>
-                            <button onclick="speakSpecificText('formal')" class="self-start bg-white hover:bg-sky-100 text-sky-700 border border-sky-200 px-3 py-1.5 rounded-xl text-xs font-extrabold flex items-center gap-1.5 transition cursor-pointer shadow-sm">
-                                <i data-lucide="volume-2" class="w-3.5 h-3.5"></i> Listen Formal 🔊
+                            <button onclick="speakSpecificText('formal1')" class="self-start bg-white hover:bg-sky-100 text-sky-700 border border-sky-200 px-2.5 py-1 rounded-xl text-[11px] font-extrabold flex items-center gap-1 transition cursor-pointer shadow-sm">
+                                <i data-lucide="volume-2" class="w-3 h-3"></i> Listen 🔊
                             </button>
                         </div>
-
-                        <div class="bg-emerald-50 border border-emerald-200 p-4 rounded-2xl shadow-sm flex flex-col justify-between">
+                        <!-- Formal 2 -->
+                        <div class="bg-sky-50 border border-sky-200 p-3.5 rounded-2xl shadow-sm flex flex-col justify-between">
                             <div>
-                                <span class="text-[10px] font-extrabold text-emerald-700 uppercase tracking-wider block mb-1">🏠 Casual / Slang Style:</span>
-                                <p class="text-xs text-slate-800 italic font-semibold mb-1" id="context-informal">Loading...</p>
-                                <p class="text-[11px] text-emerald-800 font-bold mb-3" id="context-informal-es">Loading...</p>
+                                <span class="text-[10px] font-extrabold text-sky-700 uppercase tracking-wider block mb-1">👔 Formal 2:</span>
+                                <p class="text-xs text-slate-800 italic font-semibold mb-1" id="context-formal2">Loading...</p>
+                                <p class="text-[11px] text-sky-800 font-bold mb-3" id="context-formal2-es">Loading...</p>
                             </div>
-                            <button onclick="speakSpecificText('informal')" class="self-start bg-white hover:bg-emerald-100 text-emerald-700 border border-emerald-200 px-3 py-1.5 rounded-xl text-xs font-extrabold flex items-center gap-1.5 transition cursor-pointer shadow-sm">
-                                <i data-lucide="volume-2" class="w-3.5 h-3.5"></i> Listen Casual 🔊
+                            <button onclick="speakSpecificText('formal2')" class="self-start bg-white hover:bg-sky-100 text-sky-700 border border-sky-200 px-2.5 py-1 rounded-xl text-[11px] font-extrabold flex items-center gap-1 transition cursor-pointer shadow-sm">
+                                <i data-lucide="volume-2" class="w-3 h-3"></i> Listen 🔊
+                            </button>
+                        </div>
+                        <!-- Slang 1 -->
+                        <div class="bg-emerald-50 border border-emerald-200 p-3.5 rounded-2xl shadow-sm flex flex-col justify-between">
+                            <div>
+                                <span class="text-[10px] font-extrabold text-emerald-700 uppercase tracking-wider block mb-1">🔥 Slang / Casual 1:</span>
+                                <p class="text-xs text-slate-800 italic font-semibold mb-1" id="context-slang1">Loading...</p>
+                                <p class="text-[11px] text-emerald-800 font-bold mb-3" id="context-slang1-es">Loading...</p>
+                            </div>
+                            <button onclick="speakSpecificText('slang1')" class="self-start bg-white hover:bg-emerald-100 text-emerald-700 border border-emerald-200 px-2.5 py-1 rounded-xl text-[11px] font-extrabold flex items-center gap-1 transition cursor-pointer shadow-sm">
+                                <i data-lucide="volume-2" class="w-3 h-3"></i> Listen 🔊
+                            </button>
+                        </div>
+                        <!-- Slang 2 -->
+                        <div class="bg-emerald-50 border border-emerald-200 p-3.5 rounded-2xl shadow-sm flex flex-col justify-between">
+                            <div>
+                                <span class="text-[10px] font-extrabold text-emerald-700 uppercase tracking-wider block mb-1">🔥 Slang / Casual 2:</span>
+                                <p class="text-xs text-slate-800 italic font-semibold mb-1" id="context-slang2">Loading...</p>
+                                <p class="text-[11px] text-emerald-800 font-bold mb-3" id="context-slang2-es">Loading...</p>
+                            </div>
+                            <button onclick="speakSpecificText('slang2')" class="self-start bg-white hover:bg-emerald-100 text-emerald-700 border border-emerald-200 px-2.5 py-1 rounded-xl text-[11px] font-extrabold flex items-center gap-1 transition cursor-pointer shadow-sm">
+                                <i data-lucide="volume-2" class="w-3 h-3"></i> Listen 🔊
                             </button>
                         </div>
                     </div>
                 </div>
 
-                <!-- Chat de Roleplay Estricto -->
+                <!-- Chat de Roleplay con Inicio y Fin Fluido -->
                 <div class="grid grid-cols-1 lg:grid-cols-3 gap-5">
                     <div class="vibrant-card lg:col-span-3 rounded-3xl p-5 sm:p-7 flex flex-col justify-between shadow-lg h-[460px]">
                         <div>
                             <div class="flex items-center justify-between mb-3">
                                 <span class="text-xs font-extrabold text-emerald-700 bg-emerald-100 px-3.5 py-1 rounded-full border border-emerald-200 flex items-center gap-1.5 shadow-sm">
-                                    <i data-lucide="messages-square" class="w-3.5 h-3.5"></i> Step 2: Strict Lesson-Based Roleplay (6 Turns)
+                                    <i data-lucide="messages-square" class="w-3.5 h-3.5"></i> Step 2: Roleplay (Greeting ➔ Core ➔ Farewell)
                                 </span>
                                 <span class="text-[11px] font-bold text-slate-500" id="roleplay-scenario-tag">B1 Mastery Scenario</span>
                             </div>
@@ -200,13 +223,13 @@
                                 </button>
                             </div>
                             <div class="flex gap-2">
-                                <input type="text" id="roleplay-user-input" class="vibrant-input flex-grow rounded-2xl px-4 py-3 text-xs sm:text-sm text-slate-800 focus:outline-none transition font-semibold" placeholder="Type complete sentence using lesson expressions..." onkeypress="if(event.key === 'Enter') sendRoleplayMessage()">
+                                <input type="text" id="roleplay-user-input" class="vibrant-input flex-grow rounded-2xl px-4 py-3 text-xs sm:text-sm text-slate-800 focus:outline-none transition font-semibold" placeholder="Type your response (Greeting, details, or farewell)..." onkeypress="if(event.key === 'Enter') sendRoleplayMessage()">
                                 <button onclick="sendRoleplayMessage()" class="bg-gradient-to-r from-sky-500 to-emerald-500 hover:from-sky-600 hover:to-emerald-600 text-white px-5 py-3 rounded-2xl text-xs font-extrabold transition shadow-md cursor-pointer flex items-center gap-1">
                                     <i data-lucide="send" class="w-4 h-4"></i> Send
                                 </button>
                             </div>
                             <div class="mt-3 flex justify-between items-center">
-                                <span class="text-[11px] font-bold text-sky-700 bg-sky-50 px-3 py-1 rounded-xl border border-sky-200" id="roleplay-counter-label">Interactions: 0 / 6 completed</span>
+                                <span class="text-[11px] font-bold text-sky-700 bg-sky-50 px-3 py-1 rounded-xl border border-sky-200" id="roleplay-counter-label">Interactions: 0 / 4 completed</span>
                                 <button onclick="completeRoleplayPhase()" class="bg-purple-600 hover:bg-purple-700 text-white font-extrabold px-6 py-2.5 rounded-xl text-xs transition cursor-pointer shadow-md">
                                     Validate Roleplay & Proceed ➔
                                 </button>
@@ -388,96 +411,85 @@
         for (let i = 1; i <= 40; i++) {
             let blockNum = Math.ceil(i / 10);
             let themeName = `Lesson Topic ${i}`;
-            let formalText = `It is a pleasure to connect with you regarding lesson ${i} objectives.`;
-            let formalEs = `Es un placer conectar contigo respecto a los objetivos de la lección ${i}.`;
-            let casualText = `Hey there! Let's crush lesson ${i} goals right now.`;
-            let casualEs = `¡Hola! Vamos a romper las metas de la lección ${i} ahora mismo.`;
-            let words = [];
-            let grammarLevelTitle = "Advanced B1 Mastery Workflow";
-            let roleplayPrompts = [
-                `Turn 1: Hello! How would you introduce yourself formally in a business context using the style from Step 1?`,
-                `Turn 2: That's a solid introduction. Now, how do you greet a colleague casually in the morning?`,
-                `Turn 3: Very good. What professional details do you share when meeting someone new?`,
-                `Turn 4: That is a great approach. How do you close a professional introduction politely?`,
-                `Turn 5: Excellent! Can you summarize your introduction using formal expressions?`,
-                `Turn 6: Fantastic completion! You have mastered professional greetings and introductions.`
-            ];
+            let f1 = `It is a pleasure to connect with you regarding lesson ${i}.`;
+            let f1Es = `Es un placer conectar contigo respecto a la lección ${i}.`;
+            let f2 = `Allow me to introduce the primary objective for today.`;
+            let f2Es = `Permíteme presentar el objetivo principal de hoy.`;
+            let s1 = `Hey there! Let's crush lesson ${i} right now.`;
+            let s1Es = `¡Hola! Vamos a darle con todo a la lección ${i}.`;
+            let s2 = `What's up? Ready to master this topic?`;
+            let s2Es = `¿Qué tal? ¿Listos para dominar este tema?`;
+            let roleplayPrompts = [];
+            let turnsCount = 4; // 4 pasos exactos: Saludo ➔ Desarrollo ➔ Despedida
 
-            if (blockNum === 1) {
-                grammarLevelTitle = "Advanced Present Simple & Professional Routine";
-                if (i === 1) {
-                    themeName = "Professional Greetings & Introductions";
-                    formalText = "Hello, my name is Kevin and I am pleased to connect with you today.";
-                    formalEs = "Hola, mi nombre es Kevin y me alegra conectar contigo hoy.";
-                    casualText = "Hey there! I'm Kevin, great to meet you.";
-                    casualEs = "¡Hola! Soy Kevin, un placer conocerte.";
-                    roleplayPrompts = [
-                        "Turn 1: Hello! How would you introduce yourself formally in a business context using the style from Step 1?",
-                        "Turn 2: That's a solid introduction. Now, how do you greet a colleague casually when starting a conversation?",
-                        "Turn 3: Very natural. What details do you share about your background when meeting someone new?",
-                        "Turn 4: That is a great approach. How do you ask about the other person's profession politely?",
-                        "Turn 5: Excellent conversation! Can you summarize your introduction using lesson expressions?",
-                        "Turn 6: Fantastic completion of Step 1! You have successfully mastered professional greetings."
-                    ];
-                } else if (i === 2) {
-                    themeName = "Remote Work & Home Office Management";
-                    formalText = "I manage my professional tasks efficiently from my home workspace.";
-                    formalEs = "Gestiono mis tareas profesionales eficientemente desde mi espacio de trabajo en casa.";
-                    casualText = "I usually handle everything right from my home setup.";
-                    casualEs = "Suelo manejar todo directo desde mi estación en casa.";
-                    roleplayPrompts = [
-                        "Turn 1: Let's discuss remote work. How do you set up your professional workspace at home?",
-                        "Turn 2: That sounds organized. What specific tasks do you manage first thing in your schedule?",
-                        "Turn 3: Very structured. How do you maintain high efficiency when working independently?",
-                        "Turn 4: That is a great approach. How do you handle distractions while managing your office?",
-                        "Turn 5: Excellent! Can you summarize your ideal remote workflow using lesson expressions?",
-                        "Turn 6: Great job completing remote work management! Ready for vocabulary."
-                    ];
-                }
-            } else if (blockNum === 2) {
-                grammarLevelTitle = "Advanced Modals & Technical Troubleshooting";
-                themeName = `Technical Troubleshooting (${i})`;
-                formalText = "It is critical to analyze the electronic schematic before diagnosing the hardware failure.";
-                formalEs = "Es fundamental analizar el esquema electrónico antes de diagnosticar la falla de hardware.";
-                casualText = "I always check the circuit board wiring and fix the bug right away.";
-                casualEs = "Siempre reviso el cableado de la placa y soluciono el problema de inmediato.";
+            if (i === 1) {
+                themeName = "Professional Greetings & Introductions";
+                f1 = "Hello, my name is Kevin and I am pleased to meet you.";
+                f1Es = "Hola, mi nombre es Kevin y es un placer conocerte.";
+                f2 = "Good morning, it is an honor to connect with you today.";
+                f2Es = "Buenos días, es un honor conectar contigo hoy.";
+                s1 = "Hey! I'm Kevin, great to meet you.";
+                s1Es = "¡Ey! Soy Kevin, qué gusto conocerte.";
+                s2 = "What's up? I'm Kevin, let's chat!";
+                s2Es = "¿Qué tal? Soy Kevin, ¡hablemos!";
                 roleplayPrompts = [
-                    `Turn 1: How do you approach analyzing an electronic schematic or hardware failure in lesson ${i}?`,
-                    `Turn 2: Why should you inspect the circuit board wiring before powering on the device?`,
-                    `Turn 3: What diagnostic tools (like a multimeter) do you rely on for voltage testing?`,
-                    `Turn 4: How do you explain a complex hardware repair step to a customer clearly?`,
-                    `Turn 5: How do you document your troubleshooting steps for future reference?`,
-                    `Turn 6: Fantastic troubleshooting session! Ready for vocabulary mastery.`
+                    "Turn 1 (Greeting): Hello! Greet the tutor and introduce your name.",
+                    "Turn 2 (Core): How do you ask how the other person is doing?",
+                    "Turn 3 (Core): Share a brief polite comment about the conversation.",
+                    "Turn 4 (Farewell): Say goodbye politely to finish the chat."
+                ];
+            } else if (i === 2) {
+                themeName = "Shopping & Asking Prices (Transactions)";
+                f1 = "Could you please inform me of the total cost for this item?";
+                f1Es = "¿Podría informarme el costo total de este artículo?";
+                f2 = "I would like to inquire about the pricing and available discounts.";
+                f2Es = "Me gustaría consultar sobre el precio y los descuentos disponibles.";
+                s1 = "How much is this? Is there any discount?";
+                s1Es = "¿Cuánto cuesta esto? ¿Hay algún descuento?";
+                s2 = "Hey, how much for this one? Can you cut me a deal?";
+                s2Es = "Ey, ¿cuánto por este? ¿Me haces un buen precio?";
+                roleplayPrompts = [
+                    "Turn 1 (Greeting): Hello! Greet the store clerk nicely.",
+                    "Turn 2 (Core): Ask for the price of the item you want.",
+                    "Turn 3 (Core): Ask if they accept card payment or offer a discount.",
+                    "Turn 4 (Farewell): Thank the cashier and say goodbye."
+                ];
+            } else {
+                roleplayPrompts = [
+                    `Turn 1 (Greeting): Hello! Greet your partner and introduce lesson ${i} topic.`,
+                    `Turn 2 (Core): Discuss the main objective or workflow of this lesson.`,
+                    `Turn 3 (Core): Ask a follow-up question about the topic.`,
+                    `Turn 4 (Farewell): Wrap up the conversation and say goodbye.`
                 ];
             }
 
-            words = [
-                {w:"Workflow",d:"Flujo de trabajo",e:"Flujo ⚡"}, {w:"Efficiency",d:"Eficacia",e:"Eficacia ⚡"}, 
-                {w:"Target",d:"Objetivo",e:"Meta 🎯"}, {w:"Analysis",d:"Análisis",e:"Análisis 📊"}, 
-                {w:"Professional",d:"Profesional",e:"Pro 💼"}, {w:"System",d:"Sistema",e:"Sistema 💻"}
+            let words = [
+                {w:"Greeting",d:"Saludo",e:"Saludo 👋"}, {w:"Introduction",d:"Presentación",e:"Present 🤝"}, 
+                {w:"Price",d:"Precio",e:"Precio 💲"}, {w:"Discount",d:"Descuento",e:"Oferta 🏷️"}
             ];
 
             curriculum40.push({
                 id: i,
                 block: blockNum,
                 theme: themeName,
-                grammarTitle: grammarLevelTitle,
+                grammarTitle: "B1 Mastery Core Workflow",
                 roleplay: {
                     title: `Lesson ${i}: ${themeName}`,
+                    turns: turnsCount,
                     tutorOpening: roleplayPrompts[0],
                     prompts: roleplayPrompts,
-                    formal: formalText,
-                    formalEs: formalEs,
-                    informal: casualText,
-                    informalEs: casualEs
+                    formal1: f1, formal1Es: f1Es,
+                    formal2: f2, formal2Es: f2Es,
+                    slang1: s1, slang1Es: s1Es,
+                    slang2: s2, slang2Es: s2Es
                 },
                 flashcards: words.map((w, idx) => ({ id: i*10 + idx, term: w.w, def: w.d, es: w.e, img: w.e.split(' ').pop() })),
                 quizzes: [
                     { id: `l${i}_q1`, type: 'mc', title: `Grammar (Block ${blockNum})`, desc: "We ___ our best to optimize the system every single day.", options: [{text: 'A) do', correct: true}, {text: 'B) does', correct: false}], correction: "Con el pronombre 'We' siempre se utiliza 'do'." },
                     { id: `l${i}_q2`, type: 'repair', title: 'Essential Vocabulary', desc: `Type in English for '${words[0].d}':`, answer: words[0].w.toLowerCase(), correction: `Se escribe '${words[0].w}'.` }
                 ],
-                listening: `We are successfully mastering advanced professional English workflows today`,
-                shadow: formalText
+                listening: `We are successfully mastering advanced English expressions today`,
+                shadow: f1
             });
         }
 
@@ -489,7 +501,7 @@
         let activeFlashcards = [];
         let currentRoleplayData = null;
         let roleplayInteractionCount = 0;
-        const requiredRoleplayTurns = 6;
+        let requiredRoleplayTurns = 4;
 
         function saveState() {
             localStorage.setItem('english_pro_ultimate_state', JSON.stringify(appState));
@@ -551,12 +563,19 @@
             currentRoleplayData = lessonData.roleplay;
             currentListeningTarget = lessonData.listening;
             roleplayInteractionCount = 0;
+            requiredRoleplayTurns = currentRoleplayData.turns || 4;
 
-            document.getElementById('roleplay-scenario-tag').innerText = isInter ? `Intermediate B1 Mastery (Lesson ${currLesson})` : `Block ${lessonData.block}: ${lessonData.grammarTitle}`;
-            document.getElementById('context-formal').innerText = currentRoleplayData.formal;
-            document.getElementById('context-formal-es').innerText = `(${currentRoleplayData.formalEs})`;
-            document.getElementById('context-informal').innerText = currentRoleplayData.informal;
-            document.getElementById('context-informal-es').innerText = `(${currentRoleplayData.informalEs})`;
+            document.getElementById('roleplay-scenario-tag').innerText = `Lesson ${currLesson}: ${lessonData.theme}`;
+            
+            document.getElementById('context-formal1').innerText = currentRoleplayData.formal1;
+            document.getElementById('context-formal1-es').innerText = `(${currentRoleplayData.formal1Es})`;
+            document.getElementById('context-formal2').innerText = currentRoleplayData.formal2;
+            document.getElementById('context-formal2-es').innerText = `(${currentRoleplayData.formal2Es})`;
+            document.getElementById('context-slang1').innerText = currentRoleplayData.slang1;
+            document.getElementById('context-slang1-es').innerText = `(${currentRoleplayData.slang1Es})`;
+            document.getElementById('context-slang2').innerText = currentRoleplayData.slang2;
+            document.getElementById('context-slang2-es').innerText = `(${currentRoleplayData.slang2Es})`;
+
             document.getElementById('shadow-text').innerText = `"${lessonData.shadow}"`;
             document.getElementById('flashcard-phase-title').innerText = `Phase 2: Vocabulary Mastery (Lesson ${currLesson})`;
             document.getElementById('roleplay-counter-label').innerText = `Interactions: 0 / ${requiredRoleplayTurns} completed`;
@@ -569,7 +588,7 @@
                 <div class="flex items-start gap-2.5">
                     <div class="w-8 h-8 rounded-full bg-sky-500 text-white flex items-center justify-center font-bold text-xs flex-shrink-0">🤖</div>
                     <div class="bg-white border border-slate-200 p-3.5 rounded-2xl shadow-sm text-xs text-slate-800 max-w-[85%]">
-                        <p class="font-extrabold text-sky-700 mb-0.5">Tutor (Turn 1 / 6):</p>
+                        <p class="font-extrabold text-sky-700 mb-0.5">Tutor (${currentRoleplayData.prompts[0].split(':')[0]}):</p>
                         <p class="font-medium">${currentRoleplayData.prompts[0]}</p>
                     </div>
                 </div>
@@ -582,7 +601,7 @@
             switchTab('speaking');
         }
 
-        // VALIDACIÓN ESTRICTA CON FILTRO DE CONTEXTO DE LECCIÓN
+        // VALIDACIÓN FLEXIBLE CONFLUAYENDO SALUDO Y DESPEDIDA
         function sendRoleplayMessage() {
             const input = document.getElementById('roleplay-user-input');
             const text = input.value.trim();
@@ -590,15 +609,7 @@
 
             const chatBox = document.getElementById('chat-messages-container');
             const wordCount = text.split(/\s+/).length;
-
-            const lowerText = text.toLowerCase();
-            const hasValidContext = wordCount >= 3 && (
-                lowerText.includes('name') || lowerText.includes('kevin') || 
-                lowerText.includes('meet') || lowerText.includes('hello') || 
-                lowerText.includes('hey') || lowerText.includes('pleased') || 
-                lowerText.includes('glad') || lowerText.includes('connect') ||
-                lowerText.includes('morning') || lowerText.includes('good')
-            );
+            const hasValidContext = wordCount >= 2;
 
             if (!hasValidContext) {
                 chatBox.innerHTML += `
@@ -612,8 +623,8 @@
                     <div class="flex items-start gap-2.5">
                         <div class="w-8 h-8 rounded-full bg-amber-500 text-white flex items-center justify-center font-bold text-xs flex-shrink-0">🤖</div>
                         <div class="bg-amber-50 border border-amber-200 p-3.5 rounded-2xl shadow-sm text-xs text-amber-900 max-w-[85%]">
-                            <p class="font-extrabold mb-0.5">Tutor (Corrección Estricta):</p>
-                            <p class="font-medium">⚠️ ¡Usa una expresión de saludo o presentación! (ej: <em>"${currentRoleplayData.formal}"</em>).</p>
+                            <p class="font-extrabold mb-0.5">Tutor (Corrección):</p>
+                            <p class="font-medium">⚠️ ¡Escribe al menos 2 palabras en inglés para avanzar en este turno!</p>
                         </div>
                     </div>
                 `;
@@ -645,18 +656,18 @@
                         <div class="flex items-start gap-2.5">
                             <div class="w-8 h-8 rounded-full bg-emerald-500 text-white flex items-center justify-center font-bold text-xs flex-shrink-0">🌟</div>
                             <div class="bg-emerald-50 border border-emerald-200 p-3.5 rounded-2xl shadow-sm text-xs text-emerald-900 max-w-[85%]">
-                                <p class="font-extrabold mb-0.5">Tutor (Fantastic!):</p>
-                                <p class="font-medium">You successfully completed all 6 strict lesson turns with native structure! Click 'Validate Roleplay & Proceed' to continue.</p>
+                                <p class="font-extrabold mb-0.5">Tutor (Completed!):</p>
+                                <p class="font-medium">Fantastic conversation flow from greeting to farewell! Click 'Validate Roleplay & Proceed' to continue.</p>
                             </div>
                         </div>
                     `;
                 } else {
-                    let nextPrompt = promptsArr[roleplayInteractionCount] || "That's great! Let's continue discussing our core lesson topic.";
+                    let nextPrompt = promptsArr[roleplayInteractionCount] || "That's great! Let's continue.";
                     chatBox.innerHTML += `
                         <div class="flex items-start gap-2.5">
                             <div class="w-8 h-8 rounded-full bg-sky-500 text-white flex items-center justify-center font-bold text-xs flex-shrink-0">🤖</div>
                             <div class="bg-white border border-slate-200 p-3.5 rounded-2xl shadow-sm text-xs text-slate-800 max-w-[85%]">
-                                <p class="font-extrabold text-sky-700 mb-0.5">Tutor (Turn ${roleplayInteractionCount + 1} / 6):</p>
+                                <p class="font-extrabold text-sky-700 mb-0.5">Tutor (${nextPrompt.split(':')[0]}):</p>
                                 <p class="font-medium">${nextPrompt}</p>
                             </div>
                         </div>
@@ -668,11 +679,11 @@
 
         function completeRoleplayPhase() {
             if (roleplayInteractionCount < requiredRoleplayTurns) {
-                showCustomModal("Incomplete Conversation ⚠️", `You need to complete all ${requiredRoleplayTurns} turns with complete sentences (you have ${roleplayInteractionCount}). Keep practicing!`, "💬");
+                showCustomModal("Incomplete Conversation ⚠️", `You need to complete all ${requiredRoleplayTurns} turns (you have ${roleplayInteractionCount}). Complete the farewell to finish!`, "💬");
                 return;
             }
 
-            showCustomModal("Roleplay Approved! 🌟", "Tutor: Outstanding fluency and lesson adherence! Moving to Vocabulary Mastery.", "💬");
+            showCustomModal("Roleplay Approved! 🌟", "Tutor: Outstanding natural flow! Moving to Vocabulary Mastery.", "💬");
             setTimeout(() => {
                 closeModal();
                 unlockNextStep('speaking', 'flashcards');
@@ -682,7 +693,7 @@
         function speakSpecificText(type) {
             if (!currentRoleplayData) return;
             if (window.speechSynthesis.speaking) window.speechSynthesis.cancel();
-            let textToSpeak = type === 'formal' ? currentRoleplayData.formal : currentRoleplayData.informal;
+            let textToSpeak = currentRoleplayData[type] || "";
             const utterance = new SpeechSynthesisUtterance(textToSpeak);
             utterance.lang = 'en-US';
             window.speechSynthesis.speak(utterance);
@@ -717,8 +728,8 @@
         function updateCard() {
             if (activeFlashcards.length === 0) return;
             const card = activeFlashcards[currentCard];
-            document.getElementById('flash-badge').innerText = `Word #${currentCard + 1} de 8`;
-            document.getElementById('flashcard-counter-label').innerText = `Reviewing vocabulary (${currentCard + 1} de 8)...`;
+            document.getElementById('flash-badge').innerText = `Word #${currentCard + 1} de 4`;
+            document.getElementById('flashcard-counter-label').innerText = `Reviewing vocabulary (${currentCard + 1} de 4)...`;
             document.getElementById('flash-term').innerText = card.term;
             document.getElementById('flash-def').innerText = card.def;
             document.getElementById('flash-es').innerText = card.es;
