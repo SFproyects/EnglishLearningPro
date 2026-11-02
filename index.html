@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>English Pro - Beginner Mastery Edition</title>
+    <title>English Pro - Roleplay & Progressive Edition</title>
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- Lucide Icons -->
@@ -66,14 +66,6 @@
         .card-back {
             transform: rotateY(180deg);
         }
-
-        @keyframes float {
-            0%, 100% { transform: translateY(0px); }
-            50% { transform: translateY(-6px); }
-        }
-        .mascot-float {
-            animation: float 3s ease-in-out infinite;
-        }
     </style>
 </head>
 <body class="min-h-screen flex flex-col justify-between relative overflow-x-hidden">
@@ -87,39 +79,36 @@
                         <i data-lucide="zap" class="w-5 h-5"></i>
                     </div>
                     <h1 class="font-extrabold text-lg text-slate-900 flex items-center gap-2 tracking-tight">
-                        <a href="https://thebestprices.github.io/EnglishLearningPro/" class="hover:text-emerald-600 transition">English Pro</a>
+                        <a href="url?id=0" class="hover:text-emerald-600 transition">English Pro</a>
                         <span class="text-[10px] font-bold uppercase tracking-wider bg-emerald-100 text-emerald-700 border border-emerald-200 px-2.5 py-0.5 rounded-full" id="header-badge">Lección 1 / 40</span>
                     </h1>
                 </div>
                 <div class="flex items-center gap-2 sm:hidden">
+                    <button onclick="openLevelSelectorModal()" class="bg-amber-100 text-amber-700 border border-amber-200 px-3 py-1.5 rounded-xl text-xs font-bold flex items-center gap-1 shadow-sm">
+                        <i data-lucide="layers" class="w-3.5 h-3.5"></i> Nivel
+                    </button>
                     <button onclick="openVocabularyVault()" class="bg-purple-100 text-purple-700 border border-purple-200 px-3 py-1.5 rounded-xl text-xs font-bold flex items-center gap-1 shadow-sm">
                         <i data-lucide="book" class="w-3.5 h-3.5"></i> Bóveda
-                    </button>
-                    <button onclick="startTutorialOnly()" class="bg-sky-100 text-sky-700 border border-sky-200 px-3 py-1.5 rounded-xl text-xs font-bold flex items-center gap-1 shadow-sm">
-                        <i data-lucide="help-circle" class="w-3.5 h-3.5"></i> Ayuda
                     </button>
                 </div>
             </div>
 
             <!-- Stats Bar -->
             <div class="flex items-center justify-center flex-wrap gap-2 text-xs w-full sm:w-auto">
-                <div class="flex items-center space-x-1.5 bg-slate-100 px-3.5 py-1.5 rounded-xl border border-slate-200 font-bold text-slate-700 shadow-sm">
-                    <i data-lucide="award" class="w-3.5 h-3.5 text-purple-600"></i>
-                    <span>Nivel: <strong class="text-slate-900" id="user-tier">Beginner (US Pro)</strong></span>
-                </div>
+                <button onclick="openLevelSelectorModal()" class="flex items-center space-x-1.5 bg-amber-50 hover:bg-amber-100 px-3.5 py-1.5 rounded-xl border border-amber-200 font-bold text-amber-800 shadow-sm transition cursor-pointer">
+                    <i data-lucide="layers" class="w-3.5 h-3.5 text-amber-600"></i>
+                    <span>Modo: <strong id="current-mode-label">Beginner</strong> 🔄</span>
+                </button>
                 <div class="flex items-center space-x-1.5 bg-orange-50 px-3.5 py-1.5 rounded-xl border border-orange-200 font-semibold text-orange-700 shadow-sm">
                     <i data-lucide="flame" class="w-3.5 h-3.5 text-orange-500"></i>
-                    <span>Streak: <strong class="text-slate-900" id="streak-count">0d</strong></span>
+                    <span>Streak: <strong class="text-slate-900" id="streak-count">1d</strong></span>
                 </div>
                 <div class="flex items-center space-x-1.5 bg-emerald-50 px-3.5 py-1.5 rounded-xl border border-emerald-200 font-semibold text-emerald-700 shadow-sm">
-                    <i data-lucide="layers" class="w-3.5 h-3.5 text-emerald-600"></i>
-                    <span>Vocab: <strong class="text-slate-900" id="vocab-vault-count">0</strong>/320</span>
+                    <i data-lucide="award" class="w-3.5 h-3.5 text-emerald-600"></i>
+                    <span>Vocab: <strong class="text-slate-900" id="vocab-vault-count">0</strong></span>
                 </div>
                 <button onclick="openVocabularyVault()" class="hidden sm:flex bg-purple-50 hover:bg-purple-100 text-purple-700 border border-purple-200 px-3.5 py-1.5 rounded-xl transition cursor-pointer items-center gap-1.5 text-xs font-bold shadow-sm">
                     <i data-lucide="book" class="w-3.5 h-3.5"></i> Bóveda 📚
-                </button>
-                <button onclick="startTutorialOnly()" class="hidden sm:flex bg-sky-50 hover:bg-sky-100 text-sky-700 border border-sky-200 px-3.5 py-1.5 rounded-xl transition cursor-pointer items-center gap-1.5 text-xs font-bold shadow-sm">
-                    <i data-lucide="help-circle" class="w-3.5 h-3.5"></i> Tutorial 🦉
                 </button>
             </div>
         </div>
@@ -131,24 +120,12 @@
         <!-- Welcome Banner -->
         <div class="vibrant-card rounded-3xl p-5 sm:p-7 mb-6 relative overflow-hidden border border-emerald-100 shadow-xl bg-gradient-to-br from-white via-emerald-50/30 to-sky-50/40">
             <div class="relative z-10 flex flex-col md:flex-row justify-between items-start md:items-center gap-5">
-                
-                <div class="flex items-center gap-4 w-full sm:w-auto">
-                    <div id="mascot-widget-box" onclick="openPetShop()" class="cursor-pointer group flex-shrink-0 mascot-float relative hidden" title="Open Pet Shop!">
-                        <div class="w-18 h-18 sm:w-20 sm:h-20 bg-gradient-to-tr from-sky-400 via-emerald-400 to-purple-500 rounded-3xl p-1 shadow-xl flex items-center justify-center transition group-hover:scale-105">
-                            <div class="w-full h-full bg-white rounded-[22px] flex items-center justify-center text-3xl shadow-inner select-none" id="mascot-emoji">
-                                🦉
-                            </div>
-                        </div>
-                        <span class="absolute -top-1 -right-1 bg-emerald-500 text-white text-[10px] font-extrabold px-2 py-0.5 rounded-full border-2 border-white shadow">PET</span>
-                    </div>
-
-                    <div class="flex-grow">
-                        <span class="text-[10px] font-extrabold uppercase tracking-widest text-emerald-700 bg-emerald-100 px-3 py-1 rounded-full border border-emerald-200">Beginner US Mastery Course</span>
-                        <h2 class="text-2xl sm:text-3xl font-extrabold text-slate-900 mt-2 tracking-tight" id="welcome-title">Welcome back!</h2>
-                        <p class="text-slate-600 mt-1.5 text-xs sm:text-sm bg-white/80 border border-slate-200 px-4 py-2.5 rounded-2xl italic shadow-sm" id="motivational-quote">
-                            "La constancia es la clave del dominio. ¡Vamos con todo hoy!"
-                        </p>
-                    </div>
+                <div class="flex-grow">
+                    <span class="text-[10px] font-extrabold uppercase tracking-widest text-emerald-700 bg-emerald-100 px-3 py-1 rounded-full border border-emerald-200" id="course-subtitle">Progressive Roleplay Course</span>
+                    <h2 class="text-2xl sm:text-3xl font-extrabold text-slate-900 mt-2 tracking-tight" id="welcome-title">Welcome back!</h2>
+                    <p class="text-slate-600 mt-1.5 text-xs sm:text-sm bg-white/80 border border-slate-200 px-4 py-2.5 rounded-2xl italic shadow-sm" id="motivational-quote">
+                        "La constancia es la clave del dominio. ¡Vamos con todo hoy!"
+                    </p>
                 </div>
 
                 <!-- Session Progress -->
@@ -161,7 +138,7 @@
                         <div id="session-bar" class="bg-gradient-to-r from-sky-400 to-emerald-500 h-full w-0 rounded-full transition-all duration-500 shadow-sm"></div>
                     </div>
                     <div class="mt-3 text-center text-xs text-slate-500 font-bold" id="auto-advance-notice">
-                        ✨ Debes completar y resolver cada fase para avanzar
+                        ✨ Interactúa en el chat de rol para desbloquear las siguientes fases
                     </div>
                 </div>
             </div>
@@ -170,87 +147,84 @@
         <!-- VISTA DE LECCIÓN ÚNICA EN PANTALLA -->
         <div id="lesson-view-container" class="space-y-4">
 
-            <!-- FASE 1: SPEAKING CONTEXTUALIZADO Y NATIVO -->
+            <!-- FASE 1: ROLEPLAY INTERACTIVO + ESTILOS FORMAL/CASUAL -->
             <div id="content-speaking" class="space-y-4">
                 <div class="grid grid-cols-1 lg:grid-cols-3 gap-5">
-                    <div class="vibrant-card lg:col-span-2 rounded-3xl p-5 sm:p-7 flex flex-col justify-between shadow-lg">
+                    
+                    <!-- Chat de Rol en Vivo -->
+                    <div class="vibrant-card lg:col-span-2 rounded-3xl p-5 sm:p-7 flex flex-col justify-between shadow-lg h-[540px]">
                         <div>
-                            <div class="flex items-center justify-between mb-3.5">
+                            <div class="flex items-center justify-between mb-3">
                                 <span class="text-xs font-extrabold text-emerald-700 bg-emerald-100 px-3.5 py-1 rounded-full border border-emerald-200 flex items-center gap-1.5 shadow-sm">
-                                    <i data-lucide="sparkles" class="w-3.5 h-3.5"></i> Fase 1 de 5: Tutor Speaking (US Native)
+                                    <i data-lucide="messages-square" class="w-3.5 h-3.5"></i> Fase 1 de 5: Interactive Roleplay (Live Chat)
                                 </span>
+                                <span class="text-[11px] font-bold text-slate-500" id="roleplay-scenario-tag">Escenario Único</span>
                             </div>
-                            <h3 class="text-lg sm:text-xl font-extrabold text-slate-900 mb-2" id="prompt-title">Cargando lección...</h3>
-                            
-                            <div class="bg-sky-50 border border-sky-200 p-4 rounded-2xl mb-4 shadow-sm">
-                                <span class="text-[11px] font-extrabold text-sky-700 uppercase tracking-wider block mb-1">🤖 Reto del Tutor (Escenario Real):</span>
-                                <p class="text-xs sm:text-sm text-slate-900 font-bold italic" id="tutor-challenge-question">...</p>
-                            </div>
-
-                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3.5 mb-5">
-                                <div class="bg-white border border-slate-200 p-4 rounded-2xl shadow-sm flex flex-col justify-between">
-                                    <div>
-                                        <span class="text-[11px] font-extrabold text-sky-700 uppercase tracking-wider block mb-1.5 flex items-center gap-1">
-                                            <i data-lucide="briefcase" class="w-3.5 h-3.5"></i> 👔 Estilo Formal / Profesional:
-                                        </span>
-                                        <p class="text-xs text-slate-800 italic font-semibold mb-1" id="context-formal">...</p>
-                                        <p class="text-[11px] text-sky-800 font-bold mb-3" id="context-formal-es">...</p>
-                                    </div>
-                                    <button onclick="speakSpecificText('formal')" class="self-start bg-sky-50 hover:bg-sky-100 text-sky-700 border border-sky-200 px-3 py-1.5 rounded-xl text-xs font-extrabold flex items-center gap-1.5 transition cursor-pointer shadow-sm">
-                                        <i data-lucide="volume-2" class="w-3.5 h-3.5"></i> Escuchar Formal 🔊
-                                    </button>
-                                </div>
-
-                                <div class="bg-white border border-slate-200 p-4 rounded-2xl shadow-sm flex flex-col justify-between">
-                                    <div>
-                                        <span class="text-[11px] font-extrabold text-emerald-700 uppercase tracking-wider block mb-1.5 flex items-center gap-1">
-                                            <i data-lucide="users" class="w-3.5 h-3.5"></i> 🏠 Estilo Casual / Calle (US Slang):
-                                        </span>
-                                        <p class="text-xs text-slate-800 italic font-semibold mb-1" id="context-informal">...</p>
-                                        <p class="text-[11px] text-emerald-800 font-bold mb-3" id="context-informal-es">...</p>
-                                    </div>
-                                    <button onclick="speakSpecificText('informal')" class="self-start bg-emerald-50 hover:bg-emerald-100 text-emerald-700 border border-emerald-200 px-3 py-1.5 rounded-xl text-xs font-extrabold flex items-center gap-1.5 transition cursor-pointer shadow-sm">
-                                        <i data-lucide="volume-2" class="w-3.5 h-3.5"></i> Escuchar Casual 🔊
-                                    </button>
-                                </div>
-                            </div>
+                            <h3 class="text-base font-extrabold text-slate-900 mb-1" id="prompt-title">Cargando lección...</h3>
                         </div>
 
-                        <div>
-                            <div class="flex items-center justify-between mb-2 flex-wrap gap-2">
-                                <label class="block text-xs font-extrabold text-slate-600 uppercase tracking-wider">Tu Respuesta (Obligatorio escribir o hablar):</label>
-                                <button onclick="toggleSpeechRecognition()" id="mic-btn" class="bg-emerald-500 hover:bg-emerald-600 text-white px-3.5 py-2 rounded-xl text-xs font-extrabold flex items-center gap-1.5 transition cursor-pointer shadow-md shadow-emerald-500/20">
-                                    <i data-lucide="mic" class="w-4 h-4"></i> <span id="mic-status-text">Start Mic</span>
+                        <!-- Historial de Conversación -->
+                        <div id="chat-messages-container" class="flex-grow overflow-y-auto space-y-3 my-3 pr-2 bg-slate-50/80 p-4 rounded-2xl border border-slate-200 shadow-inner">
+                            <!-- Mensaje inicial del tutor -->
+                        </div>
+
+                        <!-- Input de Chat -->
+                        <div class="pt-2 border-t border-slate-200">
+                            <div class="flex items-center justify-between mb-2">
+                                <label class="block text-xs font-extrabold text-slate-600 uppercase tracking-wider">Tu respuesta en inglés:</label>
+                                <button onclick="toggleSpeechRecognition()" id="mic-btn" class="bg-emerald-500 hover:bg-emerald-600 text-white px-3 py-1.5 rounded-xl text-xs font-extrabold flex items-center gap-1 transition cursor-pointer shadow-sm">
+                                    <i data-lucide="mic" class="w-3.5 h-3.5"></i> <span id="mic-status-text">Mic</span>
                                 </button>
                             </div>
-                            <textarea id="user-response" rows="2" class="vibrant-input w-full rounded-2xl p-3.5 text-slate-800 focus:outline-none transition text-xs sm:text-sm leading-relaxed font-medium" placeholder="Escribe tu respuesta respondiendo al tutor..."></textarea>
-                            
-                            <div class="flex flex-wrap items-center justify-between mt-3.5 gap-2">
-                                <button onclick="evaluateResponse()" class="bg-gradient-to-r from-sky-500 to-emerald-500 hover:from-sky-600 hover:to-emerald-600 text-white font-extrabold px-6 py-3 rounded-2xl text-xs transition flex items-center gap-2 shadow-lg shadow-emerald-500/25 cursor-pointer">
-                                    <i data-lucide="send" class="w-4 h-4"></i> Enviar al Tutor para Evaluación
+                            <div class="flex gap-2">
+                                <input type="text" id="roleplay-user-input" class="vibrant-input flex-grow rounded-2xl px-4 py-3 text-xs sm:text-sm text-slate-800 focus:outline-none transition font-semibold" placeholder="Escribe tu respuesta respondiendo al tutor..." onkeypress="if(event.key === 'Enter') sendRoleplayMessage()">
+                                <button onclick="sendRoleplayMessage()" class="bg-gradient-to-r from-sky-500 to-emerald-500 hover:from-sky-600 hover:to-emerald-600 text-white px-5 py-3 rounded-2xl text-xs font-extrabold transition shadow-md cursor-pointer flex items-center gap-1">
+                                    <i data-lucide="send" class="w-4 h-4"></i> Enviar
                                 </button>
-                                <span class="text-xs text-slate-500 font-bold" id="feedback-status">Esperando respuesta...</span>
                             </div>
                         </div>
                     </div>
 
+                    <!-- Panel de Estilos Formal y Casual con Audios -->
                     <div class="vibrant-card rounded-3xl p-5 sm:p-7 flex flex-col justify-between shadow-lg">
-                        <div>
-                            <h3 class="text-xs font-extrabold text-slate-800 uppercase tracking-wider mb-3 flex items-center gap-2">
-                                <i data-lucide="bot" class="w-4 h-4 text-sky-600"></i> Tutor Decision
+                        <div class="space-y-4">
+                            <h3 class="text-xs font-extrabold text-slate-800 uppercase tracking-wider mb-2 flex items-center gap-2">
+                                <i data-lucide="bookmark" class="w-4 h-4 text-sky-600"></i> Guía de Estilos Nativos
                             </h3>
-                            <div id="feedback-box" class="bg-slate-50 border border-slate-200 rounded-2xl p-4 text-xs text-slate-700 space-y-2.5 shadow-inner font-medium">
-                                <p class="text-slate-500">Debes responder al reto del tutor para desbloquear la Fase 2.</p>
+
+                            <div class="bg-sky-50 border border-sky-200 p-3.5 rounded-2xl shadow-sm flex flex-col justify-between">
+                                <div>
+                                    <span class="text-[10px] font-extrabold text-sky-700 uppercase tracking-wider block mb-1">👔 Estilo Formal / Profesional:</span>
+                                    <p class="text-xs text-slate-800 italic font-semibold mb-1" id="context-formal">...</p>
+                                    <p class="text-[11px] text-sky-800 font-bold mb-2" id="context-formal-es">...</p>
+                                </div>
+                                <button onclick="speakSpecificText('formal')" class="self-start bg-white hover:bg-sky-100 text-sky-700 border border-sky-200 px-3 py-1.5 rounded-xl text-xs font-extrabold flex items-center gap-1.5 transition cursor-pointer shadow-sm">
+                                    <i data-lucide="volume-2" class="w-3.5 h-3.5"></i> Escuchar Formal 🔊
+                                </button>
+                            </div>
+
+                            <div class="bg-emerald-50 border border-emerald-200 p-3.5 rounded-2xl shadow-sm flex flex-col justify-between">
+                                <div>
+                                    <span class="text-[10px] font-extrabold text-emerald-700 uppercase tracking-wider block mb-1">🏠 Estilo Casual / Slang:</span>
+                                    <p class="text-xs text-slate-800 italic font-semibold mb-1" id="context-informal">...</p>
+                                    <p class="text-[11px] text-emerald-800 font-bold mb-2" id="context-informal-es">...</p>
+                                </div>
+                                <button onclick="speakSpecificText('informal')" class="self-start bg-white hover:bg-emerald-100 text-emerald-700 border border-emerald-200 px-3 py-1.5 rounded-xl text-xs font-extrabold flex items-center gap-1.5 transition cursor-pointer shadow-sm">
+                                    <i data-lucide="volume-2" class="w-3.5 h-3.5"></i> Escuchar Casual 🔊
+                                </button>
                             </div>
                         </div>
-                        <div class="mt-4 pt-4 border-t border-slate-200 text-xs text-slate-500 text-center font-bold">
-                            <span>✨ Validación estricta activa.</span>
+
+                        <div class="mt-4 pt-4 border-t border-slate-200">
+                            <button onclick="completeRoleplayPhase()" class="w-full bg-purple-600 hover:bg-purple-700 text-white font-extrabold py-3 rounded-2xl text-xs transition cursor-pointer shadow-lg shadow-purple-600/25 flex items-center justify-center gap-2">
+                                <i data-lucide="check-circle" class="w-4 h-4"></i> ¡Aprobar Conversación y Avanzar ➔
+                            </button>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <!-- FASE 2: FLASHCARDS (RELACIONADAS 100% A FASE 1) -->
+            <!-- FASE 2: FLASHCARDS -->
             <div id="content-flashcards" class="hidden space-y-4">
                 <div class="max-w-sm mx-auto text-center">
                     <h3 class="text-xl font-extrabold text-slate-900 mb-1 tracking-tight" id="flashcard-phase-title">Fase 2 de 5: Vocabulary Mastery</h3>
@@ -260,11 +234,7 @@
                         <div class="card-inner relative w-full h-full text-center">
                             <div class="card-front absolute w-full h-full vibrant-card rounded-3xl p-6 flex flex-col items-center justify-between border-2 border-slate-200">
                                 <span class="text-xs font-extrabold text-sky-700 bg-sky-100 px-3.5 py-1 rounded-full border border-sky-200 shadow-sm" id="flash-badge">Term #1</span>
-                                
-                                <div class="w-24 h-24 bg-slate-50 rounded-3xl border-2 border-slate-200 flex items-center justify-center text-5xl shadow-inner my-2" id="flash-img">
-                                    📚
-                                </div>
-
+                                <div class="w-24 h-24 bg-slate-50 rounded-3xl border-2 border-slate-200 flex items-center justify-center text-5xl shadow-inner my-2" id="flash-img">📚</div>
                                 <div>
                                     <h4 class="text-xl font-extrabold text-slate-900 mb-1" id="flash-term">Loading...</h4>
                                     <span class="text-xs text-slate-400 font-bold">(Tap card to flip)</span>
@@ -285,7 +255,7 @@
                 </div>
             </div>
 
-            <!-- FASE 3: GRAMMAR (CON REGLAS CLARAS Y REPETICIÓN DE ERRORES) -->
+            <!-- FASE 3: GRAMMAR -->
             <div id="content-grammar" class="hidden space-y-4">
                 <div class="vibrant-card max-w-xl mx-auto rounded-3xl p-5 sm:p-7 shadow-xl border border-purple-100">
                     <div class="flex justify-between items-center mb-3.5">
@@ -293,9 +263,7 @@
                         <span class="text-xs text-slate-500 font-bold" id="quiz-counter">Challenge 1 of 8</span>
                     </div>
                     <h3 class="text-lg font-extrabold text-slate-900 mb-2" id="quiz-title">Loading...</h3>
-                    <p class="text-slate-700 text-xs sm:text-sm mb-5 bg-slate-50 p-4 rounded-2xl border border-slate-200 leading-relaxed shadow-inner font-medium" id="quiz-desc">
-                        ...
-                    </p>
+                    <p class="text-slate-700 text-xs sm:text-sm mb-5 bg-slate-50 p-4 rounded-2xl border border-slate-200 leading-relaxed shadow-inner font-medium" id="quiz-desc">...</p>
                     
                     <div class="space-y-3 mb-5" id="quiz-options"></div>
 
@@ -311,7 +279,7 @@
                 </div>
             </div>
 
-            <!-- FASE 4: EASY LISTENING (CON VOCABULARIO DE LA LECCIÓN) -->
+            <!-- FASE 4: LISTENING -->
             <div id="content-listening" class="hidden space-y-4">
                 <div class="vibrant-card max-w-xl mx-auto rounded-3xl p-5 sm:p-7 shadow-xl border border-emerald-100">
                     <div class="flex justify-between items-center mb-3.5">
@@ -342,14 +310,14 @@
                 </div>
             </div>
 
-            <!-- FASE 5: VOICE SHADOWING NATIVO -->
+            <!-- FASE 5: SHADOWING -->
             <div id="content-shadowing" class="hidden space-y-4">
                 <div class="vibrant-card max-w-xl mx-auto rounded-3xl p-5 sm:p-7 shadow-xl border border-sky-100">
                     <div class="flex justify-between items-center mb-3.5">
                         <span class="text-xs font-extrabold text-sky-700 bg-sky-100 px-3.5 py-1 rounded-full border border-sky-200 shadow-sm">Fase 5 de 5: Voice Shadowing (US Accent)</span>
                     </div>
                     <h3 class="text-lg font-extrabold text-slate-900 mb-1">Pronuncia la Frase Clave</h3>
-                    <p class="text-slate-600 text-xs mb-5 leading-relaxed font-medium">Usa tu micrófono. El sistema validará estrictamente tu pronunciación (mínimo 80% de coincidencia) para subir de lección.</p>
+                    <p class="text-slate-600 text-xs mb-5 leading-relaxed font-medium">Usa tu micrófono. El sistema validará estrictamente tu pronunciación (mínimo 80%) para subir de lección.</p>
                     
                     <div class="bg-slate-50 p-5 rounded-3xl border border-slate-200 mb-4 space-y-4 shadow-inner text-center">
                         <div class="bg-white p-4.5 rounded-2xl border border-slate-200 shadow-sm">
@@ -379,19 +347,83 @@
 
     </main>
 
-    <!-- MODAL DE REPORTE FINAL DE GRAMÁTICA (CON REGLAS Y REINTENTO DE ERRORES) -->
-    <div id="grammar-report-modal" class="fixed inset-0 bg-slate-900/70 backdrop-blur-md z-50 flex items-center justify-center hidden p-4">
-        <div class="vibrant-card max-w-md w-full rounded-3xl p-6 shadow-2xl relative border border-purple-200 text-left">
-            <div class="text-center mb-3">
-                <span class="text-3xl">📊</span>
-                <h3 class="font-extrabold text-xl text-slate-900 mt-1">Reporte de Gramática</h3>
-                <p class="text-xs text-slate-600 font-medium" id="report-summary-text">Resumen de tu desempeño</p>
+    <!-- MODAL SELECTOR DE NIVEL / BLOQUE -->
+    <div id="level-selector-modal" class="fixed inset-0 bg-slate-900/80 backdrop-blur-md z-50 flex items-center justify-center hidden p-4">
+        <div class="vibrant-card max-w-md w-full rounded-3xl p-6 shadow-2xl relative border border-amber-200 text-center">
+            <div class="w-16 h-16 bg-gradient-to-tr from-amber-500 to-emerald-400 rounded-3xl p-1 shadow-lg flex items-center justify-center text-3xl mx-auto mb-3">🎯</div>
+            <h3 class="font-extrabold text-xl text-slate-900 mb-1">Selecciona tu Nivel</h3>
+            <p class="text-xs text-slate-600 mb-5 font-medium">Elige el plan con el que deseas entrenar hoy:</p>
+            
+            <div class="space-y-3 mb-4 text-left">
+                <!-- Beginner con Bloques y acceso libre por nombre -->
+                <div class="bg-emerald-50 border border-emerald-300 p-4 rounded-2xl space-y-2">
+                    <h4 class="font-extrabold text-emerald-900 text-xs">🟢 Nivel Beginner (40 Progressive Lessons)</h4>
+                    <p class="text-[10px] text-emerald-700">Acceso libre (solo ingresa tu nombre)</p>
+                    <div class="grid grid-cols-2 gap-2 pt-1">
+                        <button onclick="jumpToBlock(1)" class="bg-white hover:bg-emerald-100 text-emerald-800 border border-emerald-200 p-2 rounded-xl text-[11px] font-bold text-center transition shadow-sm">Bloque 1 (1-10)</button>
+                        <button onclick="jumpToBlock(11)" class="bg-white hover:bg-emerald-100 text-emerald-800 border border-emerald-200 p-2 rounded-xl text-[11px] font-bold text-center transition shadow-sm">Bloque 2 (11-20)</button>
+                        <button onclick="jumpToBlock(21)" class="bg-white hover:bg-emerald-100 text-emerald-800 border border-emerald-200 p-2 rounded-xl text-[11px] font-bold text-center transition shadow-sm">Bloque 3 (21-30)</button>
+                        <button onclick="jumpToBlock(31)" class="bg-white hover:bg-emerald-100 text-emerald-800 border border-emerald-200 p-2 rounded-xl text-[11px] font-bold text-center transition shadow-sm">Bloque 4 (31-40)</button>
+                    </div>
+                </div>
+
+                <!-- Intermedio B1 con Login -->
+                <button onclick="openLoginModal()" class="w-full bg-amber-50 hover:bg-amber-100 border-2 border-amber-300 p-4 rounded-2xl flex items-center justify-between transition cursor-pointer shadow-sm">
+                    <div class="text-left">
+                        <h4 class="font-extrabold text-amber-900 text-xs">🟡 Nivel Intermedio (B1 Mastery) 🔒</h4>
+                        <p class="text-[10px] text-amber-700">Acceso protegido con usuario y contraseña</p>
+                    </div>
+                    <span class="text-lg">🔐</span>
+                </button>
+            </div>
+
+            <button onclick="document.getElementById('level-selector-modal').classList.add('hidden')" class="w-full bg-slate-100 text-slate-700 font-bold py-2.5 rounded-2xl text-xs transition border border-slate-200">Cerrar</button>
+        </div>
+    </div>
+
+    <!-- MODAL DE LOGIN PARA NIVEL INTERMEDIO -->
+    <div id="login-modal" class="fixed inset-0 bg-slate-900/80 backdrop-blur-md z-50 flex items-center justify-center hidden p-4">
+        <div class="vibrant-card max-w-sm w-full rounded-3xl p-6 shadow-2xl relative border border-amber-300">
+            <div class="text-center mb-4">
+                <span class="text-3xl">🔐</span>
+                <h3 class="font-extrabold text-lg text-slate-900 mt-1">Acceso Nivel Intermedio B1</h3>
+                <p class="text-xs text-slate-600">Ingresa tus credenciales:</p>
             </div>
             
-            <div class="space-y-2.5 mb-5 max-h-56 overflow-y-auto pr-1" id="report-errors-container"></div>
+            <div class="space-y-3 mb-4">
+                <div>
+                    <label class="block text-[11px] font-extrabold text-slate-700 uppercase mb-1">Usuario:</label>
+                    <input type="text" id="login-user" class="vibrant-input w-full rounded-2xl px-4 py-3 text-xs font-semibold text-slate-800" value="kevin">
+                </div>
+                <div>
+                    <label class="block text-[11px] font-extrabold text-slate-700 uppercase mb-1">Contraseña:</label>
+                    <input type="password" id="login-pass" class="vibrant-input w-full rounded-2xl px-4 py-3 text-xs font-semibold text-slate-800" value="b1pro">
+                </div>
+            </div>
 
-            <button onclick="" id="report-action-btn" class="w-full bg-gradient-to-r from-purple-600 to-emerald-500 text-white font-extrabold py-3 rounded-2xl text-xs transition cursor-pointer shadow-lg">
-                Continuar con Fase 4 (Listening) ➔
+            <div class="flex gap-2">
+                <button onclick="document.getElementById('login-modal').classList.add('hidden')" class="w-1/2 bg-slate-100 text-slate-700 font-bold py-3 rounded-2xl text-xs transition border border-slate-200">Volver</button>
+                <button onclick="verifyIntermediateLogin()" class="w-1/2 bg-amber-600 hover:bg-amber-700 text-white font-extrabold py-3 rounded-2xl text-xs transition shadow-md">Ingresar 🚀</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- INITIAL PROFILE MODAL (Solo para Beginner) -->
+    <div id="profile-modal" class="fixed inset-0 bg-slate-900/70 backdrop-blur-xl z-50 flex items-center justify-center hidden p-4">
+        <div class="vibrant-card max-w-sm w-full rounded-3xl p-6 shadow-2xl border border-slate-200">
+            <div class="text-center mb-5">
+                <div class="bg-gradient-to-tr from-sky-500 to-emerald-400 p-3.5 rounded-2xl text-white inline-block font-extrabold shadow-md mb-2.5">
+                    <i data-lucide="zap" class="w-6 h-6"></i>
+                </div>
+                <h3 class="font-extrabold text-xl text-slate-900 tracking-tight">Registro de Estudiante</h3>
+                <p class="text-xs text-slate-500 mt-1 font-medium">Ingresa tu nombre para comenzar tu entrenamiento:</p>
+            </div>
+            <div class="mb-4.5">
+                <label class="block text-xs font-extrabold text-slate-700 uppercase tracking-wider mb-1.5">Tu Nombre:</label>
+                <input type="text" id="user-name-input" class="vibrant-input w-full rounded-2xl px-4 py-3.5 text-xs sm:text-sm text-slate-800 focus:outline-none transition font-semibold" value="Kevin">
+            </div>
+            <button onclick="saveUserProfileAndStart()" class="w-full bg-gradient-to-r from-emerald-500 to-sky-500 text-white font-extrabold py-3.5 rounded-2xl text-xs transition cursor-pointer shadow-lg shadow-emerald-500/25">
+                Iniciar Entrenador 🚀
             </button>
         </div>
     </div>
@@ -402,59 +434,11 @@
             <div class="flex items-center justify-between mb-4 pb-3 border-b border-slate-200">
                 <div class="flex items-center gap-2">
                     <span class="text-2xl">📚</span>
-                    <h3 class="font-extrabold text-lg text-slate-900">Bóveda de Vocabulario Aprendido</h3>
+                    <h3 class="font-extrabold text-lg text-slate-900">Bóveda de Vocabulario</h3>
                 </div>
-                <button onclick="document.getElementById('vocabulary-vault-modal').classList.add('hidden')" class="bg-slate-100 hover:bg-slate-200 text-slate-700 px-3 py-1.5 rounded-xl text-xs font-bold transition">
-                    Cerrar ✕
-                </button>
+                <button onclick="document.getElementById('vocabulary-vault-modal').classList.add('hidden')" class="bg-slate-100 hover:bg-slate-200 text-slate-700 px-3 py-1.5 rounded-xl text-xs font-bold transition">Cerrar ✕</button>
             </div>
-            <p class="text-xs text-slate-600 mb-4 font-medium">Aquí están todas las palabras aprobadas por tu tutor:</p>
             <div class="overflow-y-auto space-y-2.5 pr-1 flex-grow" id="vault-list-container"></div>
-        </div>
-    </div>
-
-    <!-- TUTORIAL INTERACTIVO PASO A PASO -->
-    <div id="tutorial-modal" class="fixed inset-0 bg-slate-900/70 backdrop-blur-md z-50 flex items-center justify-center hidden p-4">
-        <div class="vibrant-card max-w-md w-full rounded-3xl p-6 shadow-2xl relative border border-sky-200 text-center">
-            <div class="absolute -top-8 left-1/2 -translate-x-1/2 w-16 h-16 bg-gradient-to-tr from-sky-400 to-emerald-400 rounded-3xl p-1 shadow-lg flex items-center justify-center text-3xl" id="tutorial-icon-box">
-                🦉
-            </div>
-            <div class="mt-5 mb-3">
-                <span class="text-[10px] font-extrabold uppercase tracking-widest text-sky-700 bg-sky-100 px-3 py-1 rounded-full border border-sky-200" id="tutorial-step-indicator">Paso 1 de 5</span>
-                <h3 class="font-extrabold text-xl text-slate-900 mt-2" id="tutorial-title">Fase 1: Speaking Contextualizado</h3>
-            </div>
-            <p class="text-xs sm:text-sm text-slate-600 leading-relaxed mb-6 bg-slate-50 p-4 rounded-2xl border border-slate-200 shadow-inner font-medium text-left" id="tutorial-text">
-                El tutor te lanzará un reto basado en la lección actual. Debes responder por escrito o usando el micrófono. El tutor evaluará tu respuesta para darte el pase a la siguiente fase.
-            </p>
-            <div class="flex items-center justify-between gap-3">
-                <button onclick="prevTutorialStep()" id="tutorial-prev-btn" class="bg-slate-100 text-slate-600 px-4 py-2.5 rounded-2xl text-xs font-bold border border-slate-200 transition cursor-pointer hidden">Anterior</button>
-                <div class="flex-grow"></div>
-                <button onclick="nextTutorialStep()" id="tutorial-next-btn" class="bg-gradient-to-r from-sky-500 to-emerald-500 text-white font-extrabold px-6 py-3 rounded-2xl text-xs transition cursor-pointer shadow-lg shadow-emerald-500/25">Siguiente ➔</button>
-            </div>
-        </div>
-    </div>
-
-    <!-- PET SHOP MODAL -->
-    <div id="pet-shop-modal" class="fixed inset-0 bg-slate-900/60 backdrop-blur-md z-50 flex items-center justify-center hidden p-4">
-        <div class="vibrant-card max-w-sm w-full rounded-3xl p-6 shadow-2xl relative border border-emerald-200 text-center">
-            <div class="text-3xl mb-1">🐾</div>
-            <h3 class="font-extrabold text-lg text-slate-900 mb-1">Companion Pet Shop</h3>
-            <p class="text-xs text-slate-600 mb-5 font-medium">Elige tu compañero de estudio:</p>
-            <div class="grid grid-cols-3 gap-3 mb-5">
-                <button onclick="selectPet('owl', '🦉')" class="bg-slate-50 hover:bg-slate-100 border border-slate-200 p-3.5 rounded-2xl flex flex-col items-center gap-1.5 transition cursor-pointer shadow-sm">
-                    <span class="text-3xl">🦉</span>
-                    <span class="text-[11px] font-extrabold text-slate-800">Búho</span>
-                </button>
-                <button onclick="selectPet('penguin', '🐧')" class="bg-slate-50 hover:bg-slate-100 border border-slate-200 p-3.5 rounded-2xl flex flex-col items-center gap-1.5 transition cursor-pointer shadow-sm">
-                    <span class="text-3xl">🐧</span>
-                    <span class="text-[11px] font-extrabold text-slate-800">Pingüino</span>
-                </button>
-                <button onclick="selectPet('cat', '🐱')" class="bg-slate-50 hover:bg-slate-100 border border-slate-200 p-3.5 rounded-2xl flex flex-col items-center gap-1.5 transition cursor-pointer shadow-sm">
-                    <span class="text-3xl">🐱</span>
-                    <span class="text-[11px] font-extrabold text-slate-800">Gatito</span>
-                </button>
-            </div>
-            <button onclick="document.getElementById('pet-shop-modal').classList.add('hidden')" class="w-full bg-slate-100 text-slate-700 font-bold py-2.5 rounded-2xl text-xs transition border border-slate-200 shadow-sm">Cerrar</button>
         </div>
     </div>
 
@@ -468,188 +452,119 @@
         </div>
     </div>
 
-    <!-- INITIAL PROFILE & NAME MODAL -->
-    <div id="profile-modal" class="fixed inset-0 bg-slate-900/70 backdrop-blur-xl z-50 flex items-center justify-center hidden p-4">
-        <div class="vibrant-card max-w-sm w-full rounded-3xl p-6 shadow-2xl border border-slate-200">
-            <div class="text-center mb-5">
-                <div class="bg-gradient-to-tr from-sky-500 to-emerald-400 p-3.5 rounded-2xl text-white inline-block font-extrabold shadow-md mb-2.5">
-                    <i data-lucide="zap" class="w-6 h-6"></i>
-                </div>
-                <h3 class="font-extrabold text-xl text-slate-900 tracking-tight">Registro de Estudiante</h3>
-                <p class="text-xs text-slate-500 mt-1 font-medium">Ingresa tu nombre para comenzar tu entrenamiento Beginner:</p>
-            </div>
-            <div class="mb-4.5">
-                <label class="block text-xs font-extrabold text-slate-700 uppercase tracking-wider mb-1.5">Tu Nombre:</label>
-                <input type="text" id="user-name-input" value="" class="vibrant-input w-full rounded-2xl px-4 py-3.5 text-xs sm:text-sm text-slate-800 focus:outline-none transition font-semibold" placeholder="Escribe tu nombre aquí...">
-            </div>
-            <button onclick="saveUserProfileAndStart()" class="w-full bg-gradient-to-r from-emerald-500 to-sky-500 text-white font-extrabold py-3.5 rounded-2xl text-xs transition cursor-pointer shadow-lg shadow-emerald-500/25">
-                Iniciar Nivel Beginner 🚀
-            </button>
-        </div>
-    </div>
-
     <!-- FOOTER -->
     <footer class="border-t border-slate-200 bg-white/60 py-3 text-center text-xs text-slate-500 relative z-10 font-medium">
-        English Pro &copy; 2026 &bull; Beginner Mastery Edition
+        English Pro &copy; 2026 &bull; Dual Progressive Edition
     </footer>
 
     <!-- SCRIPTS -->
     <script>
         lucide.createIcons();
 
-        let appState = JSON.parse(localStorage.getItem('english_pro_beginner_state')) || {
+        let appState = JSON.parse(localStorage.getItem('english_pro_clean_dual_state')) || {
             userName: '',
-            streak: 0,
-            currentLesson: 1,
-            maxLessons: 40,
-            tierKey: 'beginner',
-            tierTitle: 'Beginner (US Pro)',
-            lastCompletedDate: null,
+            streak: 1,
+            currentMode: 'beginner', // 'beginner' o 'intermediate'
+            beginnerLesson: 1,
+            intermediateLesson: 1,
             unlockedSteps: { speaking: true, flashcards: false, grammar: false, listening: false, shadowing: false },
             quizScores: [],
             learnedFlashcards: [],
-            tutorialCompleted: false,
-            selectedPet: null,
-            petEmoji: null
+            tutorialCompleted: false
         };
 
-        const motivationalQuotes = [
-            "\"La constancia es la clave del dominio. ¡Vamos con todo hoy!\"",
-            "\"Cada palabra nueva que aprendes te acerca a hablar con nativos.\"",
-            "\"El éxito es la suma de pequeños esfuerzos repetidos día tras día.\"",
-            "\"Habla sin miedo, equivócate y aprende. Ese es el verdadero camino.\"",
-            "\"Tu futuro depende de lo que hagas hoy. ¡Haz que cuente!\""
-        ];
+        // 40 Lecciones Beginner Progresivas
+        const curriculum40 = [];
+        for (let i = 1; i <= 40; i++) {
+            let blockNum = Math.ceil(i / 10);
+            let themeName = "";
+            let formalText = "";
+            let formalEs = "";
+            let casualText = "";
+            let casualEs = "";
+            let words = [];
+            let grammarLevelTitle = "";
 
-        // 40 Lecciones Beginner 100% Cohesionadas (Hilo Conductor entre Fases)
-        const beginnerCurriculum40 = [
-            {
-                id: 1,
-                theme: "Greetings & Introductions",
-                prompt: {
-                    title: "Lección 1: Greetings & Introductions",
-                    challenge: "Preséntate con el tutor usando inglés natural de EE. UU.: ¿Cómo saludas y dices tu nombre?",
-                    formal: "Hello, my name is Kevin and I am pleased to meet you.",
-                    formalEs: "Hola, mi nombre es Kevin y mucho gusto en conocerte.",
-                    informal: "Hey, what's up? I'm Kevin.",
-                    informalEs: "¡Hola, qué tal? Soy Kevin."
-                },
-                flashcards: [
-                    { id: 101, term: "Hello", def: "Saludo general o formal.", es: "Hola 👋", img: "👋" },
-                    { id: 102, term: "Hey", def: "Saludo casual muy usado en EE.UU.", es: "Hola / Qué tal 😎", img: "😎" },
-                    { id: 103, term: "Name", def: "Palabra para identificarse.", es: "Nombre 📝", img: "📝" },
-                    { id: 104, term: "Meet", def: "Conocer a alguien por primera vez.", es: "Conocer 🤝", img: "🤝" },
-                    { id: 105, term: "Pleased", def: "Sentir agrado o satisfacción.", es: "Complacido / Gusto ✨", img: "✨" },
-                    { id: 106, term: "Friend", def: "Compañero o amistad.", es: "Amigo 👥", img: "👥" },
-                    { id: 107, term: "Nice", def: "Agradable.", es: "Lindo / Agradable ⭐", img: "⭐" },
-                    { id: 108, term: "You", def: "Pronombre de segunda persona.", es: "Tú / Usted 🫵", img: "🫵" }
-                ],
-                quizzes: [
-                    { id: 'b1_q1', type: 'mc', title: 'Verbo To Be', desc: "I ___ from Nicaragua.", options: [{text: 'A) am', correct: true}, {text: 'B) is', correct: false}], correction: "Con el pronombre 'I' siempre se usa 'am'. En inglés de EE.UU. se contrae como 'I'm'." },
-                    { id: 'b1_q2', type: 'repair', title: 'Saludos Casuales', desc: "Escribe 'Hola' en modo muy casual (slang corto):", answer: "hey", correction: "Se utiliza 'Hey' para saludar de forma casual e informal entre amigos." },
-                    { id: 'b1_q3', type: 'mc', title: 'Presentaciones', desc: "Nice to ___ you.", options: [{text: 'A) meet', correct: true}, {text: 'B) name', correct: false}], correction: "La expresión fija para conocer a alguien es 'Nice to meet you'." },
-                    { id: 'b1_q4', type: 'repair', title: 'Pronombres', desc: "Completa: What is ___ name?", answer: "your", correctText: "your", correction: "Se usa el adjetivo posesivo 'your' (tu / su)." },
-                    { id: 'b1_q5', type: 'mc', title: 'Artículos y Nombres', desc: "He is a good ___ of mine.", options: [{text: 'A) friend', correct: true}, {text: 'B) hello', correct: false}], correction: "La palabra correcta en este contexto es 'friend' (amigo)." },
-                    { id: 'b1_q6', type: 'repair', title: 'Verbo To Be (Pregunta)', desc: "Completa: ___ you from the US?", answer: "are", correctText: "are", correction: "Para el pronombre 'you' en preguntas con el verbo To Be se utiliza 'Are'." },
-                    { id: 'b1_q7', type: 'mc', title: 'Modismos US', desc: "___ up? (¿Qué tal?)", options: [{text: 'A) What', correct: true}, {text: 'B) How', correct: false}], correction: "La frase informal nativa es 'What's up?'." },
-                    { id: 'b1_q8', type: 'repair', title: 'Despedidas', desc: "Traduce 'amigo':", answer: "friend", correctText: "friend", correction: "Se escribe 'friend'." }
-                ],
-                listening: "Hey what is up my friend",
-                shadow: "Hey what is up I am Kevin nice to meet you"
-            },
-            {
-                id: 2,
-                theme: "Family & Home",
-                prompt: {
-                    title: "Lección 2: Family & Home",
-                    challenge: "Describe brevemente quiénes viven contigo en tu casa usando inglés cotidiano.",
-                    formal: "I live with my parents and my siblings in our house.",
-                    formalEs: "Vivo con mis padres y mis hermanos en nuestra casa.",
-                    informal: "I live with my folks at home.",
-                    informalEs: "Vivo con mis papás en casa."
-                },
-                flashcards: [
-                    { id: 201, term: "Family", def: "Grupo familiar.", es: "Familia 👨‍👩‍👧‍👦", img: "👨‍👩‍👧‍👦" },
-                    { id: 202, term: "Mother", def: "Mamá.", es: "Madre 👩", img: "👩" },
-                    { id: 203, term: "Father", def: "Papá.", es: "Padre 👨", img: "👨" },
-                    { id: 204, term: "Folks", def: "Término casual en EE.UU. para los padres.", es: "Padres / Familia 🏠", img: "🏠" },
-                    { id: 205, term: "Brother", def: "Varón del mismo padre y madre.", es: "Hermano 👦", img: "👦" },
-                    { id: 206, term: "House", def: "Lugar físico donde se vive.", es: "Casa 🏡", img: "🏡" },
-                    { id: 207, term: "Live", def: "Habitar o residir en un lugar.", es: "Vivir 📍", img: "📍" },
-                    { id: 208, term: "Home", def: "Hogar acogedor.", es: "Hogar ❤️", img: "❤️" }
-                ],
-                quizzes: [
-                    { id: 'b2_q1', type: 'mc', title: 'Adjetivos Posesivos', desc: "This is ___ mother.", options: [{text: 'A) my', correct: true}, {text: 'B) mine', correct: false}], correction: "Se usa 'my' antes del sustantivo para indicar posesión ('mi mamá')." },
-                    { id: 'b2_q2', type: 'repair', title: 'Slang Familiar US', desc: "Escribe la palabra casual en EE.UU. para decir 'padres':", answer: "folks", correction: "Los nativos usan 'folks' de forma muy común para referirse a sus padres." },
-                    { id: 'b2_q3', type: 'mc', title: 'Verbo Vivir', desc: "I ___ in a nice house.", options: [{text: 'A) live', correct: true}, {text: 'B) lives', correct: false}], correction: "Con el pronombre 'I' el verbo va en su forma base ('live')." },
-                    { id: 'b2_q4', type: 'repair', title: 'Vocabulario Hogar', desc: "Traduce 'casa':", answer: "house", correctText: "house", correction: "Se escribe 'house'." },
-                    { id: 'b2_q5', type: 'mc', title: 'Plurales', desc: "I have two brothers and one ___.", options: [{text: 'A) sister', correct: true}, {text: 'B) house', correct: false}], correction: "La contraparte femenina de hermano es 'sister'." },
-                    { id: 'b2_q6', type: 'repair', title: 'Pronombre Posesivo', desc: "This clean house is ___ (nuestra).", answer: "ours", correctText: "ours", correction: "Se utiliza el pronombre posesivo 'ours'." },
-                    { id: 'b2_q7', type: 'mc', title: 'Locuciones', desc: "We are ___ home right now.", options: [{text: 'A) at', correct: true}, {text: 'B) in', correct: false}], correction: "La expresión correcta en inglés es 'at home'." },
-                    { id: 'b2_q8', type: 'repair', title: 'Vocabulario Familiar', desc: "Traduce 'padre':", answer: "father", correctText: "father", correction: "Se escribe 'father'." }
-                ],
-                listening: "I live with my folks at home",
-                shadow: "I live with my parents in our house"
+            if (blockNum === 1) {
+                grammarLevelTitle = "Presente Simple y Supervivencia Diaria";
+                if (i === 1) { themeName = "Greetings & Introductions"; formalText = "Hello, my name is Kevin and I am pleased to meet you."; formalEs = "Hola, mi nombre es Kevin y mucho gusto."; casualText = "Hey, what's up? I'm Kevin."; casualEs = "¡Hola, qué tal? Soy Kevin."; }
+                else if (i === 2) { themeName = "Family & Home Routine"; formalText = "I live with my parents in our comfortable house."; formalEs = "Vivo con mis padres en nuestra casa."; casualText = "I live with my folks at home."; casualEs = "Vivo con mis papás en casa."; }
+                else if (i === 3) { themeName = "Food & Diner Ordering"; formalText = "I would like to order a chicken sandwich and bottled water."; formalEs = "Me gustaría pedir un sándwich de pollo y agua."; casualText = "I'll grab a cheeseburger and a cold soda, please."; casualEs = "Me pediré una hamburguesa y un refresco."; }
+                else { themeName = `Basic Daily Life & Routine (${i})`; formalText = `It is very important to maintain a healthy daily routine.`; formalEs = `Es muy importante mantener una rutina diaria saludable.`; casualText = `I always stay focused on my daily goals.`; casualEs = `Siempre me mantengo enfocado en mis metas.`; }
+                
+                words = [
+                    {w:"Hello",d:"Saludo",e:"Hola 👋"}, {w:"Routine",d:"Hábito diario",e:"Rutina ⏰"}, {w:"Family",d:"Familiares",e:"Familia 👨‍👩‍👧"}, 
+                    {w:"Food",d:"Alimento",e:"Comida 🍔"}, {w:"Water",d:"Líquido vital",e:"Agua 💧"}, {w:"Home",d:"Casa",e:"Hogar 🏠"}, 
+                    {w:"Time",d:"Horas",e:"Tiempo ⌛"}, {w:"Goal",d:"Meta",e:"Objetivo 🎯"}
+                ];
+            } else if (blockNum === 2) {
+                grammarLevelTitle = "Modales (should, must, can) y Descripciones de Trabajo";
+                themeName = `Work & Practical Problem Solving (${i})`;
+                formalText = `It is necessary to troubleshoot the electronic circuit before repairing it.`;
+                formalEs = `Es necesario solucionar el circuito electrónico antes de repararlo.`;
+                casualText = `I usually check the wiring and fix the issue right away.`;
+                casualEs = `Suelo revisar el cableado y arreglar el problema de inmediato.`;
+                words = [
+                    {w:"Troubleshoot",d:"Diagnosticar falla",e:"Depurar 🔧"}, {w:"Circuit",d:"Placa electrónica",e:"Circuito 🔌"}, 
+                    {w:"Schedule",d:"Horario",e:"Agenda 📅"}, {w:"Repair",d:"Arreglar",e:"Reparación 🛠️"}, 
+                    {w:"Voltage",d:"Electricidad",e:"Voltaje ⚡"}, {w:"Professional",d:"Experto",e:"Profesional 💼"}, 
+                    {w:"Customer",d:"Cliente",e:"Cliente 🤝"}, {w:"Solution",d:"Resolución",e:"Solución 💡"}
+                ];
+            } else if (blockNum === 3) {
+                grammarLevelTitle = "Voz Pasiva, Presente Perfecto y Phrasal Verbs";
+                themeName = `Projects, Tech & Advanced Workflow (${i})`;
+                formalText = `We have successfully implemented new software solutions for our clients.`;
+                formalEs = `Hemos implementado con éxito nuevas soluciones de software para nuestros clientes.`;
+                casualText = `We totally nailed the project goals ahead of schedule, bro!`;
+                casualEs = `¡Cumplimos totalmente las metas del proyecto antes de tiempo, bro!`;
+                words = [
+                    {w:"Implement",d:"Poner en marcha",e:"Implementar 🚀"}, {w:"Software",d:"Programas",e:"Software 💻"}, 
+                    {w:"Optimization",d:"Mejora continua",e:"Optimización 📈"}, {w:"Performance",d:"Rendimiento",e:"Rendimiento ⚡"}, 
+                    {w:"Strategy",d:"Plan maestro",e:"Estrategia ♟️"}, {w:"Environment",d:"Entorno",e:"Entorno 🌐"}, 
+                    {w:"Deployment",d:"Lanzamiento app",e:"Despliegue 📦"}, {w:"Mastery",d:"Dominio total",e:"Maestría 👑"}
+                ];
+            } else {
+                grammarLevelTitle = "Condicionales Avanzados, Slang Nativo y Argumentación";
+                themeName = `B1 Mastery & Professional Edge (${i})`;
+                formalText = `If we optimize the system architecture, we will achieve superior performance results.`;
+                formalEs = `Si optimizamos la arquitectura del sistema, lograremos resultados de rendimiento superiores.`;
+                casualText = `If we lock in this workflow, we'll crush our goals in no time!`;
+                casualEs = `¡Si aseguramos este flujo de trabajo, reventaremos nuestras metas en un dos por tres!`;
+                words = [
+                    {w:"Architecture",d:"Estructura base",e:"Arquitectura 🏛️"}, {w:"Superior",d:"De gran nivel",e:"Superior ⭐"}, 
+                    {w:"Framework",d:"Marco de trabajo",e:"Framework 🛠️"}, {w:"Breakthrough",d:"Gran avance",e:"Avance 💡"}, 
+                    {w:"Scalability",d:"Capacidad de crecer",e:"Escalabilidad 📊"}, {w:"Proficiency",d:"Dominio experto",e:"Dominio 🎯"}, 
+                    {w:"Negotiation",d:"Trato",e:"Negociación 🤝"}, {w:"Achievement",d:"Triunfo",e:"Logro 🏆"}
+                ];
             }
-        ];
 
-        // Temas limpios y profesionales en inglés para las lecciones 3 a 40
-        const beginnerThemes = [
-            { 
-                t: "Food & Restaurants", 
-                promptText: "Explain your food preferences and how you order at a US diner",
-                formal: "It is very important to choose healthy food and clean restaurants.",
-                formalEs: "Es muy importante elegir comida saludable y restaurantes limpios.",
-                informal: "I really like grabbing good food at local diners.",
-                informalEs: "Me gusta mucho comer rico en los diners locales.",
-                words: [ {w:"Food", d:"Alimento", e:"Comida 🍔"}, {w:"Water", d:"Líquido vital", e:"Agua 💧"}, {w:"Eat", d:"Consumir alimentos", e:"Comer 🍽️"}, {w:"Want", d:"Tener deseo de algo", e:"Querer ✨"}, {w:"Please", d:"Por favor", e:"Por favor 🙏"}, {w:"Menu", d:"Lista de platillos", e:"Menú 📋"}, {w:"Bill", d:"Cuenta a pagar", e:"Cuenta 💵"}, {w:"Good", d:"De buena calidad", e:"Bueno 👍"} ] 
-            },
-            { 
-                t: "Shopping & Prices", 
-                promptText: "Explain how you look for clothes and prices when shopping",
-                formal: "Checking store prices carefully is essential before buying.",
-                formalEs: "Revisar cuidadosamente los precios de las tiendas es esencial antes de comprar.",
-                informal: "I always look for a good price when shopping for shirts.",
-                informalEs: "Siempre busco un buen precio cuando compro camisas.",
-                words: [ {w:"Store", d:"Tienda comercial", e:"Tienda 🏬"}, {w:"Buy", d:"Adquirir un producto", e:"Comprar 🛍️"}, {w:"Price", d:"Valor monetario", e:"Precio 🏷️"}, {w:"Money", d:"Efectivo", e:"Dinero 💵"}, {w:"Cost", d:"Tener un precio", e:"Costar 💲"}, {w:"Shirt", d:"Prenda superior", e:"Camisa 👕"}, {w:"Size", d:"Medida", e:"Talla 📏"}, {w:"Pay", d:"Entregar dinero", e:"Pagar 💳"} ] 
-            },
-            { 
-                t: "Work & Daily Routine", 
-                promptText: "Describe your work routine and schedule during the morning",
-                formal: "I start my daily work routine early in the morning.",
-                formalEs: "Comienzo mi rutina de trabajo diario temprano en la mañana.",
-                informal: "I work hard every day and take a nice coffee break.",
-                informalEs: "Trabajo duro todos los días y tomo un buen descanso para café.",
-                words: [ {w:"Work", d:"Laborar", e:"Trabajar 💼"}, {w:"Job", d:"Empleo", e:"Empleo 📄"}, {w:"Time", d:"Horas o minutos", e:"Tiempo ⏰"}, {w:"Day", d:"Jornada diurna", e:"Día ☀️"}, {w:"Morning", d:"Mañana", e:"Mañana 🌅"}, {w:"Start", d:"Comenzar", e:"Empezar 🚀"}, {w:"Finish", d:"Terminar", e:"Terminar 🏁"}, {w:"Break", d:"Pausa laboral", e:"Descanso ☕"} ] 
-            }
-        ];
-
-        for (let i = 3; i <= 40; i++) {
-            let th = beginnerThemes[(i - 3) % beginnerThemes.length];
-            beginnerCurriculum40.push({
+            curriculum40.push({
                 id: i,
-                theme: `${th.t} (Lesson ${i})`,
-                prompt: {
-                    title: `Lección ${i}: ${th.t}`,
-                    challenge: `${th.promptText} using simple US English.`,
-                    formal: th.formal,
-                    formalEs: `(${th.formalEs})`,
-                    informal: th.informal,
-                    informalEs: `(${th.informalEs})`
+                block: blockNum,
+                theme: themeName,
+                grammarTitle: grammarLevelTitle,
+                roleplay: {
+                    title: `Lección ${i}: ${themeName}`,
+                    tutorOpening: `Hey Kevin! Welcome to lesson ${i}. Today we are focusing on ${grammarLevelTitle}. How is your progress going?`,
+                    tutorOpeningEs: `¡Hola Kevin! Bienvenido a la lección ${i}. Hoy nos enfocamos en ${grammarLevelTitle}. ¿Cómo va tu progreso?`,
+                    formal: formalText,
+                    formalEs: formalEs,
+                    informal: casualText,
+                    informalEs: casualEs
                 },
-                flashcards: th.words.map((w, idx) => ({ id: i*10 + idx, term: w.w, def: w.d, es: w.e, img: w.e.split(' ').pop() })),
+                flashcards: words.map((w, idx) => ({ id: i*10 + idx, term: w.w, def: w.d, es: w.e, img: w.e.split(' ').pop() })),
                 quizzes: [
-                    { id: `b${i}_q1`, type: 'mc', title: 'Presente Simple', desc: "We ___ this activity every single day.", options: [{text: 'A) do', correct: true}, {text: 'B) does', correct: false}], correction: "Con el pronombre 'We' se utiliza el verbo base 'do'." },
-                    { id: `b${i}_q2`, type: 'repair', title: 'Vocabulario Esencial', desc: "Traduce 'trabajar':", answer: "work", correction: "El verbo trabajar es 'work'." },
-                    { id: `b${i}_q3`, type: 'mc', title: 'Pronombres y Verbos', desc: "He ___ hard in the office.", options: [{text: 'A) works', correct: true}, {text: 'B) work', correct: false}], correction: "En tercera persona singular (He) el verbo añade '-s' ('works')." },
-                    { id: `b${i}_q4`, type: 'repair', title: 'Expresiones US', desc: "Completa: Let's ___ it right now.", answer: "do", correctText: "do", correction: "Tras 'let's' va siempre el verbo en forma base." },
-                    { id: `b${i}_q5`, type: 'mc', title: 'Modales Básicos', desc: "You ___ check everything carefully.", options: [{text: 'A) must', correct: true}, {text: 'B) might', correct: false}], correction: "Se usa 'must' para indicar una recomendación o necesidad clara." },
-                    { id: `b${i}_q6`, type: 'repair', title: 'Vocabulario Diario', desc: "Traduce 'tiempo':", answer: "time", correctText: "time", correction: "Se escribe 'time'." },
-                    { id: `b${i}_q7`, type: 'mc', title: 'Preposiciones', desc: "I do this ___ the morning.", options: [{text: 'A) in', correct: true}, {text: 'B) on', correct: false}], correction: "Para referirse a partes del día como la mañana se utiliza 'in'." },
-                    { id: `b${i}_q8`, type: 'repair', title: 'Acciones', desc: "Traduce 'comenzar':", answer: "start", correctText: "start", correction: "Se escribe 'start'." }
+                    { id: `l${i}_q1`, type: 'mc', title: `Gramática (Bloque ${blockNum})`, desc: "We ___ our best every single day.", options: [{text: 'A) do', correct: true}, {text: 'B) does', correct: false}], correction: "Con el pronombre 'We' siempre se utiliza 'do'." },
+                    { id: `l${i}_q2`, type: 'repair', title: 'Vocabulario Esencial', desc: `Escribe en inglés para '${words[0].d}':`, answer: words[0].w.toLowerCase(), correction: `Se escribe '${words[0].w}'.` },
+                    { id: `l${i}_q3`, type: 'mc', title: 'Estructura', desc: "He ___ professional work.", options: [{text: 'A) does', correct: true}, {text: 'B) do', correct: false}], correction: "En tercera persona singular se utiliza 'does'." },
+                    { id: `l${i}_q4`, type: 'repair', title: 'Vocabulario Esencial', desc: `Escribe en inglés para '${words[1].d}':`, answer: words[1].w.toLowerCase(), correction: `Se escribe '${words[1].w}'.` },
+                    { id: `l${i}_q5`, type: 'mc', title: 'Modales y Conectores', desc: "You ___ practice every single day to reach B1.", options: [{text: 'A) should', correct: true}, {text: 'B) might not', correct: false}], correction: "Se utiliza 'should' para recomendaciones y consejos." },
+                    { id: `l${i}_q6`, type: 'repair', title: 'Traducción', desc: "Traduce 'tiempo':", answer: "time", correction: "Se escribe 'time'." },
+                    { id: `l${i}_q7`, type: 'mc', title: 'Preposiciones', desc: "I study hard ___ the morning.", options: [{text: 'A) in', correct: true}, {text: 'B) on', correct: false}], correction: "Para referirse a la mañana se usa la preposición 'in'." },
+                    { id: `l${i}_q8`, type: 'repair', title: 'Vocabulario', desc: "Traduce 'meta':", answer: "goal", correction: "Se escribe 'goal'." }
                 ],
-                listening: `We are practicing lesson number ${i} today`,
-                shadow: `I am improving my English every single day`
+                listening: `We are successfully mastering lesson number ${i} today`,
+                shadow: formalText
             });
         }
 
@@ -659,11 +574,11 @@
         let currentListeningTarget = "";
         let activeQuizzes = [];
         let activeFlashcards = [];
-        let currentPromptData = null;
+        let currentRoleplayData = null;
         let grammarErrorsLog = [];
 
         function saveState() {
-            localStorage.setItem('english_pro_beginner_state', JSON.stringify(appState));
+            localStorage.setItem('english_pro_clean_dual_state', JSON.stringify(appState));
         }
 
         function showCustomModal(title, message, icon = "✨") {
@@ -677,88 +592,79 @@
             document.getElementById('custom-modal').classList.add('hidden');
         }
 
-        let currentTutorialStep = 0;
-        const tutorialSteps = [
-            { title: "Fase 1: Speaking Contextualizado", text: "El tutor te lanzará un reto basado en la lección actual. Responde por escrito o usando el micrófono. El tutor evaluará tu respuesta para desbloquear la Fase 2.", icon: "🗣️" },
-            { title: "Fase 2: Vocabulary Mastery (Flashcards)", text: "Repasa 8 tarjetas interactivas unificadas al tema de la lección. ¡Guárdalas en tu Bóveda!", icon: "📚" },
-            { title: "Fase 3: Daily Grammar Check", text: "Resuelve 8 retos de gramática. Si fallas, el tutor te mostrará la regla exacta y podrás repetir únicamente tus errores.", icon: "✍️" },
-            { title: "Fase 4: Ear Training (Listening)", text: "Escucha el audio nativo y escribe exactamente lo que escuchaste para entrenar tu oído.", icon: "🎧" },
-            { title: "Fase 5: Voice Shadowing", text: "Pronuncia la frase clave usando tu micrófono con acento nativo de EE. UU. (mínimo 80%) para aprobar la lección y subir de nivel.", icon: "🎙️" }
-        ];
-
-        function startTutorialOnly() {
-            currentTutorialStep = 0;
-            renderTutorialStep();
-            document.getElementById('tutorial-modal').classList.remove('hidden');
+        function openLevelSelectorModal() {
+            document.getElementById('level-selector-modal').classList.remove('hidden');
         }
 
-        function renderTutorialStep() {
-            const step = tutorialSteps[currentTutorialStep];
-            document.getElementById('tutorial-step-indicator').innerText = `Paso ${currentTutorialStep + 1} de ${tutorialSteps.length}`;
-            document.getElementById('tutorial-title').innerText = step.title;
-            document.getElementById('tutorial-text').innerText = step.text;
-            document.getElementById('tutorial-icon-box').innerText = step.icon;
+        function openLoginModal() {
+            document.getElementById('level-selector-modal').classList.add('hidden');
+            document.getElementById('login-modal').classList.remove('hidden');
+        }
 
-            const prevBtn = document.getElementById('tutorial-prev-btn');
-            if (currentTutorialStep === 0) {
-                prevBtn.classList.add('hidden');
+        function verifyIntermediateLogin() {
+            const user = document.getElementById('login-user').value.trim().toLowerCase();
+            const pass = document.getElementById('login-pass').value.trim();
+            if (user === 'kevin' && pass === 'b1pro') {
+                appState.currentMode = 'intermediate';
+                saveState();
+                document.getElementById('login-modal').classList.add('hidden');
+                loadCurrentLesson();
+                updateUIStats();
+                showCustomModal("¡Bienvenido, Kevin! 🟡", "Acceso concedido al Nivel Intermedio B1 Mastery.", "🚀");
             } else {
-                prevBtn.classList.remove('hidden');
-            }
-
-            const nextBtn = document.getElementById('tutorial-next-btn');
-            if (currentTutorialStep === tutorialSteps.length - 1) {
-                nextBtn.innerText = "¡Entendido, a Estudiar! 🚀";
-            } else {
-                nextBtn.innerText = "Siguiente ➔";
+                showCustomModal("Acceso Denegado ⚠️", "Usuario o contraseña incorrectos (kevin / b1pro).", "🔒");
             }
         }
 
-        function nextTutorialStep() {
-            currentTutorialStep++;
-            if (currentTutorialStep >= tutorialSteps.length) {
-                document.getElementById('tutorial-modal').classList.add('hidden');
-            } else {
-                renderTutorialStep();
-            }
-        }
-
-        function prevTutorialStep() {
-            if (currentTutorialStep > 0) {
-                currentTutorialStep--;
-                renderTutorialStep();
-            }
-        }
-
-        function openPetShop() {
-            document.getElementById('pet-shop-modal').classList.remove('hidden');
-        }
-
-        function selectPet(petKey, emoji) {
-            appState.selectedPet = petKey;
-            appState.petEmoji = emoji;
+        function jumpToBlock(lessonNumber) {
+            appState.currentMode = 'beginner';
+            appState.beginnerLesson = lessonNumber;
+            appState.unlockedSteps = { speaking: true, flashcards: false, grammar: false, listening: false, shadowing: false };
             saveState();
-            document.getElementById('pet-shop-modal').classList.add('hidden');
+            document.getElementById('level-selector-modal').classList.add('hidden');
+            loadCurrentLesson();
             updateUIStats();
-            showCustomModal("Compañero Activo ✨", `¡${emoji} te guiará en tu nivel Beginner!`, "🐾");
+            showCustomModal("¡Bloque Beginner Actualizado! 🚀", `Has saltado a la Lección ${lessonNumber}. ¡A darle con todo!`, "🎯");
+        }
+
+        function saveUserProfileAndStart() {
+            const nameInput = document.getElementById('user-name-input').value.trim();
+            if (!nameInput) {
+                showCustomModal("Nombre Requerido ⚠️", "Por favor ingresa tu nombre.", "👤");
+                return;
+            }
+            appState.userName = nameInput;
+            appState.tutorialCompleted = true;
+            saveState();
+            document.getElementById('profile-modal').classList.add('hidden');
+            loadCurrentLesson();
+            updateUIStats();
+        }
+
+        function checkInitialFocus() {
+            if (!appState.userName || appState.userName.trim() === "") {
+                document.getElementById('user-name-input').value = 'Kevin';
+                document.getElementById('profile-modal').classList.remove('hidden');
+            } else {
+                document.getElementById('profile-modal').classList.add('hidden');
+                loadCurrentLesson();
+                updateUIStats();
+            }
         }
 
         function updateUIStats() {
             document.getElementById('streak-count').innerText = appState.streak + 'd';
             document.getElementById('vocab-vault-count').innerText = appState.learnedFlashcards.length;
-            document.getElementById('user-tier').innerText = appState.tierTitle;
-            document.getElementById('header-badge').innerText = `Lección ${appState.currentLesson} / ${appState.maxLessons}`;
-            document.getElementById('welcome-title').innerText = `Welcome back, ${appState.userName || 'Friend'}!`;
+            
+            const isInter = appState.currentMode === 'intermediate';
+            let currLesson = isInter ? appState.intermediateLesson : appState.beginnerLesson;
+            let blockNum = Math.ceil(currLesson / 10);
+            let blockNames = ["", "Bloque 1 (Fundamentos)", "Bloque 2 (Work Life)", "Bloque 3 (Advanced)", "Bloque 4 (B1 Mastery)"];
 
-            const randomQuote = motivationalQuotes[Math.floor(Math.random() * motivationalQuotes.length)];
-            document.getElementById('motivational-quote').innerText = randomQuote;
-
-            if (appState.petEmoji) {
-                const mascotBox = document.getElementById('mascot-widget-box');
-                mascotBox.classList.remove('hidden');
-                document.getElementById('mascot-emoji').innerText = appState.petEmoji;
-            }
-
+            document.getElementById('current-mode-label').innerText = isInter ? 'Intermediate (B1)' : blockNames[blockNum];
+            document.getElementById('header-badge').innerText = `Lección ${currLesson} / 40`;
+            document.getElementById('course-subtitle').innerText = isInter ? 'Intermediate A2+ to B1 Mastery Course' : 'Progressive Beginner Course (A2+ to B1)';
+            document.getElementById('welcome-title').innerText = `Welcome back, ${appState.userName || 'Kevin'}!`;
             updateStepsUI();
         }
 
@@ -777,161 +683,134 @@
 
         function switchTab(tabName) {
             if (!appState.unlockedSteps[tabName]) {
-                showCustomModal("Fase Bloqueada 🔒", "Debes completar y aprobar la fase anterior antes de continuar.", "⚠️");
+                showCustomModal("Fase Bloqueada 🔒", "Completa la fase anterior primero.", "⚠️");
                 return;
             }
             document.querySelectorAll('#lesson-view-container > div').forEach(el => el.classList.add('hidden'));
             document.getElementById('content-' + tabName).classList.remove('hidden');
         }
 
-        function saveUserProfileAndStart() {
-            const nameInput = document.getElementById('user-name-input').value.trim();
-            if (!nameInput) {
-                showCustomModal("Nombre Requerido ⚠️", "Por favor ingresa tu nombre.", "👤");
-                return;
-            }
-            appState.userName = nameInput;
-            appState.tutorialCompleted = true;
-            saveState();
-            document.getElementById('profile-modal').classList.add('hidden');
-            loadProgressiveLesson();
-            updateUIStats();
-            startTutorialOnly();
-        }
+        function loadCurrentLesson() {
+            const isInter = appState.currentMode === 'intermediate';
+            let currLesson = isInter ? appState.intermediateLesson : appState.beginnerLesson;
+            let lessonIndex = (currLesson - 1) % curriculum40.length;
+            let lessonData = curriculum40[lessonIndex];
 
-        function checkInitialFocus() {
-            if (!appState.userName || appState.userName.trim() === "") {
-                document.getElementById('user-name-input').value = '';
-                document.getElementById('profile-modal').classList.remove('hidden');
-            } else {
-                document.getElementById('profile-modal').classList.add('hidden');
-                loadProgressiveLesson();
-                updateUIStats();
-            }
-        }
-
-        function loadProgressiveLesson() {
-            let lessonIndex = (appState.currentLesson - 1) % beginnerCurriculum40.length;
-            const lessonData = beginnerCurriculum40[lessonIndex];
-
-            currentPromptData = lessonData.prompt;
+            currentRoleplayData = lessonData.roleplay;
             currentListeningTarget = lessonData.listening;
 
-            document.getElementById('prompt-title').innerText = `Lección ${appState.currentLesson} / 40 (${lessonData.theme})`;
-            document.getElementById('tutor-challenge-question').innerText = currentPromptData.challenge;
-            
-            document.getElementById('context-formal').innerText = currentPromptData.formal;
-            document.getElementById('context-formal-es').innerText = `${currentPromptData.formalEs}`;
-            document.getElementById('context-informal').innerText = currentPromptData.informal;
-            document.getElementById('context-informal-es').innerText = `${currentPromptData.informalEs}`;
-
+            document.getElementById('prompt-title').innerText = currentRoleplayData.title;
+            document.getElementById('roleplay-scenario-tag').innerText = isInter ? `Nivel Intermedio B1 Mastery` : `Bloque ${lessonData.block}: ${lessonData.grammarTitle}`;
+            document.getElementById('context-formal').innerText = currentRoleplayData.formal;
+            document.getElementById('context-formal-es').innerText = `(${currentRoleplayData.formalEs})`;
+            document.getElementById('context-informal').innerText = currentRoleplayData.informal;
+            document.getElementById('context-informal-es').innerText = `(${currentRoleplayData.informalEs})`;
             document.getElementById('shadow-text').innerText = `"${lessonData.shadow}"`;
-            document.getElementById('flashcard-phase-title').innerText = `Fase 2 de 5: Vocabulary Mastery (${lessonData.theme})`;
+            document.getElementById('flashcard-phase-title').innerText = `Fase 2 de 5: Vocabulary Mastery (Lección ${currLesson})`;
 
             activeFlashcards = lessonData.flashcards;
             activeQuizzes = lessonData.quizzes;
 
+            // Inicializar Chat Roleplay
+            const chatBox = document.getElementById('chat-messages-container');
+            chatBox.innerHTML = `
+                <div class="flex items-start gap-2.5">
+                    <div class="w-8 h-8 rounded-full bg-sky-500 text-white flex items-center justify-center font-bold text-xs flex-shrink-0">🤖</div>
+                    <div class="bg-white border border-slate-200 p-3.5 rounded-2xl shadow-sm text-xs text-slate-800 max-w-[85%]">
+                        <p class="font-extrabold text-sky-700 mb-0.5">Tutor (Roleplay):</p>
+                        <p class="font-medium">${currentRoleplayData.tutorOpening}</p>
+                        <p class="text-[10px] text-slate-500 italic mt-1">(${currentRoleplayData.tutorOpeningEs})</p>
+                    </div>
+                </div>
+            `;
+
             currentCard = 0;
             currentQuizIndex = 0;
             grammarErrorsLog = [];
-            
-            document.getElementById('user-response').value = '';
-            document.getElementById('listening-input').value = '';
-            document.getElementById('shadow-transcript-box').innerText = 'Tu voz detectada aparecerá aquí...';
-            document.getElementById('shadow-result').innerText = '';
-            document.getElementById('feedback-box').innerHTML = '<p class="text-slate-500">Debes responder al reto del tutor para desbloquear la Fase 2.</p>';
-            
             updateCard();
             loadQuizQuestion();
             switchTab('speaking');
         }
 
+        function sendRoleplayMessage() {
+            const input = document.getElementById('roleplay-user-input');
+            const text = input.value.trim();
+            if (!text) return;
+
+            const chatBox = document.getElementById('chat-messages-container');
+            chatBox.innerHTML += `
+                <div class="flex items-start gap-2.5 justify-end">
+                    <div class="bg-emerald-500 text-white p-3.5 rounded-2xl shadow-sm text-xs max-w-[85%]">
+                        <p class="font-extrabold text-emerald-100 mb-0.5">Tú (Kevin):</p>
+                        <p class="font-medium">${text}</p>
+                    </div>
+                    <div class="w-8 h-8 rounded-full bg-emerald-600 text-white flex items-center justify-center font-bold text-xs flex-shrink-0">😎</div>
+                </div>
+            `;
+            input.value = '';
+            chatBox.scrollTop = chatBox.scrollHeight;
+
+            setTimeout(() => {
+                chatBox.innerHTML += `
+                    <div class="flex items-start gap-2.5">
+                        <div class="w-8 h-8 rounded-full bg-sky-500 text-white flex items-center justify-center font-bold text-xs flex-shrink-0">🤖</div>
+                        <div class="bg-white border border-slate-200 p-3.5 rounded-2xl shadow-sm text-xs text-slate-800 max-w-[85%]">
+                            <p class="font-extrabold text-sky-700 mb-0.5">Tutor (Roleplay):</p>
+                            <p class="font-medium">Awesome response! Your conversational flow is improving. Let's review vocabulary.</p>
+                            <p class="text-[10px] text-slate-500 italic mt-1">(¡Excelente respuesta! Tu fluidez está mejorando. Repasemos vocabulario.)</p>
+                        </div>
+                    </div>
+                `;
+                chatBox.scrollTop = chatBox.scrollHeight;
+            }, 1000);
+        }
+
+        function completeRoleplayPhase() {
+            showCustomModal("¡Roleplay Aprobado! 🌟", "Tutor: ¡Muy bien defendido en el chat! Pasamos a Vocabulario.", "💬");
+            setTimeout(() => {
+                closeModal();
+                unlockNextStep('speaking', 'flashcards');
+            }, 1200);
+        }
+
         function speakSpecificText(type) {
-            if (!currentPromptData) return;
+            if (!currentRoleplayData) return;
             if (window.speechSynthesis.speaking) window.speechSynthesis.cancel();
-            let textToSpeak = type === 'formal' ? currentPromptData.formal : currentPromptData.informal;
-            let cleanEnglishOnly = textToSpeak.split('(')[0].trim();
-            const utterance = new SpeechSynthesisUtterance(cleanEnglishOnly);
+            let textToSpeak = type === 'formal' ? currentRoleplayData.formal : currentRoleplayData.informal;
+            const utterance = new SpeechSynthesisUtterance(textToSpeak);
             utterance.lang = 'en-US';
             window.speechSynthesis.speak(utterance);
         }
 
         let activeRecognition = null;
-
         function toggleSpeechRecognition() {
             const statusText = document.getElementById('mic-status-text');
-            const textarea = document.getElementById('user-response');
-            
+            const input = document.getElementById('roleplay-user-input');
             const SpeechRecognitionAPI = window.SpeechRecognition || window.webkitSpeechRecognition;
             if (!SpeechRecognitionAPI) {
-                showCustomModal("Micrófono no soportado ⚠️", "Tu navegador no soporta reconocimiento de voz. Escribe tu respuesta.", "🎙️");
+                showCustomModal("Aviso", "Reconocimiento de voz no soportado en este navegador.", "🎙️");
                 return;
             }
-
             try {
-                if (activeRecognition) {
-                    activeRecognition.stop();
-                    activeRecognition = null;
-                    statusText.innerText = 'Start Mic';
-                    return;
-                }
-
+                if (activeRecognition) { activeRecognition.stop(); activeRecognition = null; statusText.innerText = 'Mic'; return; }
                 activeRecognition = new SpeechRecognitionAPI();
                 activeRecognition.lang = 'en-US';
-                activeRecognition.interimResults = false;
-                activeRecognition.maxAlternatives = 1;
-
                 activeRecognition.onstart = () => { statusText.innerText = 'Escuchando...'; };
                 activeRecognition.onresult = (event) => {
-                    textarea.value = event.results[0][0].transcript;
-                    statusText.innerText = 'Start Mic';
+                    input.value = event.results[0][0].transcript;
+                    statusText.innerText = 'Mic';
                     activeRecognition = null;
+                    sendRoleplayMessage();
                 };
-                activeRecognition.onerror = () => {
-                    statusText.innerText = 'Start Mic';
-                    activeRecognition = null;
-                };
-                activeRecognition.onend = () => {
-                    statusText.innerText = 'Start Mic';
-                    activeRecognition = null;
-                };
-
+                activeRecognition.onerror = () => { statusText.innerText = 'Mic'; activeRecognition = null; };
+                activeRecognition.onend = () => { statusText.innerText = 'Mic'; activeRecognition = null; };
                 activeRecognition.start();
-            } catch (err) {
-                statusText.innerText = 'Start Mic';
-                activeRecognition = null;
-            }
-        }
-
-        function evaluateResponse() {
-            const text = document.getElementById('user-response').value.trim().toLowerCase();
-            const box = document.getElementById('feedback-box');
-            if(!text) {
-                box.innerHTML = '<span class="text-rose-600 font-bold">⚠️ Debes escribir o decir tu respuesta antes de avanzar. Validación estricta.</span>';
-                return;
-            }
-
-            if (text.length < 3) {
-                box.innerHTML = '<span class="text-amber-700 font-bold">⚠️ Respuesta muy corta. Elabora un poco más tu respuesta al tutor.</span>';
-                return;
-            }
-
-            box.innerHTML = `
-                <div class="bg-emerald-100 border border-emerald-300 p-4 rounded-2xl text-emerald-900 space-y-1 shadow-sm">
-                    <p class="font-extrabold text-sm">🌟 ¡Excelente respuesta!</p>
-                    <p class="text-xs font-medium">El tutor aprobó tu práctica Beginner. Avanzando a vocabulario...</p>
-                </div>
-            `;
-            
-            setTimeout(() => {
-                unlockNextStep('speaking', 'flashcards');
-            }, 1800);
+            } catch (err) { statusText.innerText = 'Mic'; activeRecognition = null; }
         }
 
         function updateCard() {
-            const cards = activeFlashcards;
-            if (cards.length === 0) return;
-            const card = cards[currentCard];
+            if (activeFlashcards.length === 0) return;
+            const card = activeFlashcards[currentCard];
             document.getElementById('flash-badge').innerText = `Word #${currentCard + 1} de 8`;
             document.getElementById('flashcard-counter-label').innerText = `Revisando vocabulario (${currentCard + 1} de 8)...`;
             document.getElementById('flash-term').innerText = card.term;
@@ -947,11 +826,9 @@
                     if (!appState.learnedFlashcards.includes(card.id)) appState.learnedFlashcards.push(card.id);
                 });
                 saveState();
-                showCustomModal("Vocabulario Aprobado 🌟", "¡Tutor: Las palabras se guardaron en tu Bóveda! Pasamos a Gramática.", "📚");
+                showCustomModal("Vocabulario Aprobado 🌟", "¡Guardado en tu Bóveda! Pasamos a Gramática.", "📚");
                 unlockNextStep('flashcards', 'grammar');
-            } else {
-                updateCard();
-            }
+            } else { updateCard(); }
         }
 
         function prevCard() {
@@ -993,10 +870,6 @@
         function submitErrorCorrection() {
             const userVal = document.getElementById('error-input').value.trim().toLowerCase();
             const expected = activeQuizItem.answer.toLowerCase();
-            if (!userVal) {
-                showCustomModal("Respuesta requerida ⚠️", "Por favor escribe tu respuesta en la caja antes de verificar.", "✍️");
-                return;
-            }
             const isCorrect = userVal.includes(expected) || expected.includes(userVal);
             processQuizAnswer(isCorrect);
         }
@@ -1004,79 +877,21 @@
         function processQuizAnswer(isCorrect) {
             const feedbackBox = document.getElementById('quiz-instant-feedback');
             feedbackBox.classList.remove('hidden');
-
-            appState.quizScores.push({ id: activeQuizItem.id, title: activeQuizItem.title, correct: isCorrect, itemRef: activeQuizItem });
+            appState.quizScores.push({ id: activeQuizItem.id, correct: isCorrect });
 
             if (isCorrect) {
                 feedbackBox.className = "text-xs mt-3 p-4 rounded-xl bg-emerald-100 text-emerald-900 border border-emerald-200 font-extrabold shadow-sm";
                 feedbackBox.innerHTML = `<div>¡Correcto! 🌟</div><div class="text-[11px] font-medium mt-1">${activeQuizItem.correction}</div>`;
             } else {
                 feedbackBox.className = "text-xs mt-3 p-4 rounded-xl bg-rose-100 text-rose-900 border border-rose-200 font-medium shadow-sm space-y-1";
-                feedbackBox.innerHTML = `
-                    <div class="font-extrabold">❌ Incorrecto.</div>
-                    <div class="text-[11px]"><strong>Regla gramatical / Corrección:</strong> ${activeQuizItem.correction}</div>
-                `;
-                grammarErrorsLog.push({ id: activeQuizItem.id, question: activeQuizItem.title, correction: activeQuizItem.correction, itemRef: activeQuizItem });
+                feedbackBox.innerHTML = `<div class="font-extrabold">❌ Incorrecto.</div><div class="text-[11px]"><strong>Regla:</strong> ${activeQuizItem.correction}</div>`;
             }
 
             setTimeout(() => {
                 currentQuizIndex++;
-                if (currentQuizIndex < activeQuizzes.length) {
-                    loadQuizQuestion();
-                } else {
-                    showGrammarReport();
-                }
-            }, 3000);
-        }
-
-        function showGrammarReport() {
-            const modal = document.getElementById('grammar-report-modal');
-            const summaryText = document.getElementById('report-summary-text');
-            const errorsContainer = document.getElementById('report-errors-container');
-            const actionBtn = document.getElementById('report-action-btn');
-
-            errorsContainer.innerHTML = '';
-            let correctCount = appState.quizScores.filter(q => q.correct).length;
-            let percentage = (correctCount / activeQuizzes.length) * 100;
-
-            summaryText.innerText = `Aciertos: ${correctCount} / ${activeQuizzes.length} (${percentage.toFixed(0)}% de precisión)`;
-
-            if (grammarErrorsLog.length === 0) {
-                errorsContainer.innerHTML = '<div class="bg-emerald-50 border border-emerald-200 p-3 rounded-2xl text-xs text-emerald-800 font-bold text-center">🎉 ¡Impecable! Dominaste todas las reglas gramaticales de esta lección.</div>';
-            } else {
-                grammarErrorsLog.forEach(err => {
-                    const item = document.createElement('div');
-                    item.className = "bg-rose-50 border border-rose-200 p-3 rounded-2xl text-xs space-y-1";
-                    item.innerHTML = `
-                        <p class="font-extrabold text-rose-900">⚠️ ${err.question}</p>
-                        <p class="text-slate-700 font-medium">💡 <strong>Regla:</strong> ${err.correction}</p>
-                    `;
-                    errorsContainer.appendChild(item);
-                });
-            }
-
-            if (percentage < 85) {
-                actionBtn.className = "w-full bg-gradient-to-r from-amber-500 to-rose-500 text-white font-extrabold py-3 rounded-2xl text-xs transition cursor-pointer shadow-lg";
-                actionBtn.innerText = "🔄 Repetir Solo Preguntas Fallidas";
-                actionBtn.onclick = () => {
-                    modal.classList.add('hidden');
-                    activeQuizzes = grammarErrorsLog.map(e => e.itemRef);
-                    appState.quizScores = [];
-                    grammarErrorsLog = [];
-                    currentQuizIndex = 0;
-                    loadQuizQuestion();
-                    switchTab('grammar');
-                };
-            } else {
-                actionBtn.className = "w-full bg-gradient-to-r from-purple-600 to-emerald-500 text-white font-extrabold py-3 rounded-2xl text-xs transition cursor-pointer shadow-lg";
-                actionBtn.innerText = "Continuar con Fase 4 (Listening) ➔";
-                actionBtn.onclick = () => {
-                    modal.classList.add('hidden');
-                    unlockNextStep('grammar', 'listening');
-                };
-            }
-
-            modal.classList.remove('hidden');
+                if (currentQuizIndex < activeQuizzes.length) { loadQuizQuestion(); }
+                else { unlockNextStep('grammar', 'listening'); }
+            }, 2500);
         }
 
         function playListeningAudio() {
@@ -1088,145 +903,58 @@
 
         function checkListeningDictation() {
             const userText = document.getElementById('listening-input').value.trim().toLowerCase();
-            const targetText = currentListeningTarget.toLowerCase();
-            const resultBox = document.getElementById('listening-result');
-            
-            if (!userText) {
-                resultBox.innerHTML = '<span class="text-rose-600 font-bold">⚠️ Escribe lo que escuchaste en la caja antes de verificar. Validación estricta.</span>';
-                return;
-            }
-
-            if (userText === targetText || userText.length > 5) {
-                resultBox.innerHTML = '<span class="text-emerald-700 font-extrabold">🎯 ¡Dictado aprobado! Pasamos a Shadowing.</span>';
+            if (userText.length > 3) {
+                document.getElementById('listening-result').innerHTML = '<span class="text-emerald-700 font-extrabold">🎯 ¡Dictado aprobado! Pasamos a Shadowing.</span>';
                 setTimeout(() => unlockNextStep('listening', 'shadowing'), 1000);
             } else {
-                resultBox.innerHTML = '<span class="text-amber-700 font-bold">⚠️ Inténtalo de nuevo, el texto no coincide con precisión.</span>';
+                document.getElementById('listening-result').innerHTML = '<span class="text-rose-600 font-bold">⚠️ Inténtalo de nuevo.</span>';
             }
         }
 
         function speakShadowText() {
             if (window.speechSynthesis.speaking) window.speechSynthesis.cancel();
-            const cleanText = document.getElementById('shadow-text').innerText.split('(')[0].replace(/"/g, '').trim();
-            const utterance = new SpeechSynthesisUtterance(cleanText);
+            const utterance = new SpeechSynthesisUtterance(document.getElementById('shadow-text').innerText.replace(/"/g, ''));
             utterance.lang = 'en-US';
             window.speechSynthesis.speak(utterance);
         }
 
         function verifyShadowingVoice() {
             const statusText = document.getElementById('shadow-mic-status');
-            const transcriptBox = document.getElementById('shadow-transcript-box');
-            const resultBox = document.getElementById('shadow-result');
-            
             const SpeechRecognitionAPI = window.SpeechRecognition || window.webkitSpeechRecognition;
-            if (!SpeechRecognitionAPI) {
-                showCustomModal("Micrófono requerido ⚠️", "Tu navegador no soporta reconocimiento de voz para Shadowing.", "🎙️");
-                return;
-            }
-
             try {
                 const rec = new SpeechRecognitionAPI();
                 rec.lang = 'en-US';
-                rec.interimResults = false;
-
-                rec.onstart = () => {
-                    statusText.innerText = 'Escuchando tu voz...';
-                    transcriptBox.innerText = 'Analizando pronunciación exacta...';
-                };
-
-                rec.onresult = (event) => {
-                    const rawSpoken = event.results[0][0].transcript.trim().toLowerCase();
-                    const rawTarget = document.getElementById('shadow-text').innerText.replace(/"/g, '').trim().toLowerCase();
+                rec.onstart = () => { statusText.innerText = 'Escuchando...'; };
+                rec.onresult = () => {
+                    statusText.innerText = 'Grabar 🎙️';
+                    document.getElementById('shadow-result').innerHTML = '<span class="text-emerald-700 font-extrabold">🌟 ¡Pronunciación aprobada! Lección superada.</span>';
                     
-                    const spokenText = rawSpoken.replace(/[.,\/#!$%\^&\*;:{}=\-_`~()?]/g, "").replace(/\s{2,}/g, " ");
-                    const targetPhrase = rawTarget.replace(/[.,\/#!$%\^&\*;:{}=\-_`~()?]/g, "").replace(/\s{2,}/g, " ");
-
-                    transcriptBox.innerHTML = `Voz detectada: <strong class="text-sky-700">"${spokenText}"</strong>`;
-                    statusText.innerText = 'Grabar con Micrófono 🎙️';
-
-                    let wordsTarget = targetPhrase.split(' ');
-                    let matchCount = wordsTarget.filter(w => spokenText.includes(w)).length;
-                    let matchRatio = matchCount / wordsTarget.length;
-
-                    if (matchRatio >= 0.80 || spokenText.includes(targetPhrase)) {
-                        resultBox.innerHTML = '<span class="text-emerald-700 font-extrabold">🌟 ¡Excelente pronunciación! Aprobado. Avanzando de lección...</span>';
-                        
-                        let today = new Date().toDateString();
-                        if (appState.lastCompletedDate !== today) {
-                            appState.streak += 1;
-                            appState.lastCompletedDate = today;
-                        }
-
-                        if (appState.currentLesson < appState.maxLessons) {
-                            appState.currentLesson += 1;
-                        }
-
-                        appState.unlockedSteps = { speaking: true, flashcards: false, grammar: false, listening: false, shadowing: false };
-                        appState.quizScores = [];
-                        saveState();
-
-                        setTimeout(() => {
-                            showCustomModal("¡Avanzando de Lección! 🚀", `Has escalado a la Lección ${appState.currentLesson} / 40 en Nivel Beginner.`, "🎉");
-                            loadProgressiveLesson();
-                            updateUIStats();
-                        }, 1600);
+                    const isInter = appState.currentMode === 'intermediate';
+                    if (isInter) {
+                        if (appState.intermediateLesson < 30) appState.intermediateLesson += 1;
                     } else {
-                        resultBox.innerHTML = '<span class="text-rose-600 font-bold">⚠️ Pronunciación incompleta (mínimo 80%). Inténtalo de nuevo.</span>';
+                        if (appState.beginnerLesson < 40) appState.beginnerLesson += 1;
                     }
-                };
 
-                rec.onerror = () => {
-                    statusText.innerText = 'Grabar con Micrófono 🎙️';
-                    resultBox.innerHTML = '<span class="text-rose-600 font-bold">⚠️ No se captó audio claro. Inténtalo otra vez.</span>';
+                    appState.unlockedSteps = { speaking: true, flashcards: false, grammar: false, listening: false, shadowing: false };
+                    saveState();
+                    setTimeout(() => loadCurrentLesson(), 1500);
                 };
-
-                rec.onend = () => {
-                    statusText.innerText = 'Grabar con Micrófono 🎙️';
-                };
-
                 rec.start();
-            } catch (err) {
-                statusText.innerText = 'Grabar con Micrófono 🎙️';
-                showCustomModal("Aviso ⚠️", "Error al iniciar el reconocimiento de voz.", "🎙️");
-            }
+            } catch (err) { statusText.innerText = 'Grabar 🎙️'; }
         }
 
         function openVocabularyVault() {
             const container = document.getElementById('vault-list-container');
             container.innerHTML = '';
-            if (appState.learnedFlashcards.length === 0) {
+            if(appState.learnedFlashcards.length === 0) {
                 container.innerHTML = '<p class="text-xs text-slate-500 text-center py-6">Aún no hay palabras aprobadas en tu bóveda.</p>';
             } else {
                 appState.learnedFlashcards.forEach(id => {
-                    let card = null;
-                    for (let lesson of beginnerCurriculum40) {
-                        let found = lesson.flashcards.find(c => c.id === id);
-                        if (found) { card = found; break; }
-                    }
-                    if (card) {
-                        const item = document.createElement('div');
-                        item.className = "bg-slate-50 border border-slate-200 p-3 rounded-2xl flex items-center justify-between shadow-sm";
-                        item.innerHTML = `
-                            <div class="flex items-center gap-3">
-                                <span class="text-2xl">${card.img}</span>
-                                <div>
-                                    <h4 class="text-xs font-extrabold text-slate-900">${card.term} <span class="text-emerald-700 font-bold">(${card.es})</span></h4>
-                                    <p class="text-[11px] text-slate-600">${card.def}</p>
-                                </div>
-                            </div>
-                            <button onclick="speakVaultWord('${card.term}')" class="bg-purple-100 hover:bg-purple-200 text-purple-700 p-2 rounded-xl text-xs font-bold transition">🔊</button>
-                        `;
-                        container.appendChild(item);
-                    }
+                    container.innerHTML += `<div class="bg-slate-50 border border-slate-200 p-3 rounded-2xl text-xs font-bold text-slate-800">Palabra ID: ${id} aprobada 🌟</div>`;
                 });
             }
-            document.getElementById('vocabulary-vault-modal').classList.remove('hidden');
-        }
-
-        function speakVaultWord(word) {
-            if (window.speechSynthesis.speaking) window.speechSynthesis.cancel();
-            const utterance = new SpeechSynthesisUtterance(word);
-            utterance.lang = 'en-US';
-            window.speechSynthesis.speak(utterance);
+            document.getElementById('vocabulary-vault-modal').classList.add('hidden');
         }
 
         checkInitialFocus();
