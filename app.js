@@ -486,6 +486,46 @@ if (!appState.hasStarted) {
     appState.hasStarted = true;
     saveState();
 }
+let selectedSetupMode = 'intermediate';
 
-loadCurrentLesson();
-updateUIStats();
+function setInitialMode(mode) {
+    selectedSetupMode = mode;
+    const btnBeg = document.getElementById('btn-mode-beginner');
+    const btnInt = document.getElementById('btn-mode-intermediate');
+    
+    if (!btnBeg || !btnInt) return;
+
+    if (mode === 'beginner') {
+        btnBeg.className = "p-3.5 rounded-2xl border-2 border-sky-500 bg-sky-50 text-xs font-extrabold text-sky-800 transition cursor-pointer shadow-sm";
+        btnInt.className = "p-3.5 rounded-2xl border-2 border-slate-200 bg-slate-50 text-xs font-extrabold text-slate-700 transition cursor-pointer hover:border-emerald-400";
+    } else {
+        btnInt.className = "p-3.5 rounded-2xl border-2 border-emerald-500 bg-emerald-50 text-xs font-extrabold text-emerald-800 transition cursor-pointer shadow-sm";
+        btnBeg.className = "p-3.5 rounded-2xl border-2 border-slate-200 bg-slate-50 text-xs font-extrabold text-slate-700 transition cursor-pointer hover:border-sky-400";
+    }
+}
+
+function completeSetupAndStart() {
+    const nameInput = document.getElementById('setup-name-input');
+    if (nameInput && nameInput.value.trim()) {
+        appState.userName = nameInput.value.trim();
+    }
+    
+    appState.currentMode = selectedSetupMode;
+    appState.hasStarted = true;
+    saveState();
+
+    const setupContainer = document.getElementById('welcome-setup-container');
+    if (setupContainer) setupContainer.classList.add('hidden');
+    
+    updateUIStats();
+    loadCurrentLesson();
+}
+
+// Verificación de inicio
+if (!appState.hasStarted) {
+    const setupContainer = document.getElementById('welcome-setup-container');
+    if (setupContainer) setupContainer.classList.remove('hidden');
+} else {
+    loadCurrentLesson();
+    updateUIStats();
+}
