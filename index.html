@@ -329,7 +329,7 @@
         </div>
     </div>
 
-   <!-- PANTALLA DE BIENVENIDA Y SELECTOR DE NIVEL -->
+  <!-- PANTALLA DE BIENVENIDA Y SELECTOR DE NIVEL -->
     <div id="welcome-setup-container" class="hidden fixed inset-0 bg-slate-900/70 backdrop-blur-md z-50 flex items-center justify-center p-4">
         <div class="vibrant-card max-w-md w-full rounded-3xl p-6 sm:p-8 shadow-2xl border border-emerald-200 text-center space-y-4 bg-white">
             <div class="w-14 h-14 bg-gradient-to-tr from-sky-500 to-emerald-400 rounded-2xl flex items-center justify-center mx-auto text-white shadow-lg shadow-emerald-500/30 text-xl font-bold">
@@ -341,18 +341,12 @@
             </div>
 
             <div class="space-y-3 text-left">
-                <!-- Input de Nombre (Sin valor por defecto) -->
-                <div>
-                    <label class="block text-xs font-extrabold text-slate-700 uppercase tracking-wider mb-1">Tu Nombre:</label>
-                    <input type="text" id="setup-name-input" placeholder="Ej. Kevin" class="vibrant-input w-full rounded-2xl px-4 py-2.5 text-xs sm:text-sm text-slate-800 font-semibold focus:outline-none border border-slate-200">
-                </div>
-
                 <!-- Botones de Selección de Nivel -->
                 <div>
                     <label class="block text-xs font-extrabold text-slate-700 uppercase tracking-wider mb-1">Selecciona tu Nivel:</label>
                     <div class="grid grid-cols-2 gap-3">
                         <button type="button" onclick="setInitialMode('beginner')" id="btn-mode-beginner" class="p-3 rounded-2xl border-2 border-slate-200 bg-slate-50 text-xs font-extrabold text-slate-700 transition cursor-pointer hover:border-sky-400">
-                            🌱 Beginner (A2+)
+                            🌱 Beginner
                         </button>
                         <button type="button" onclick="setInitialMode('intermediate')" id="btn-mode-intermediate" class="p-3 rounded-2xl border-2 border-emerald-500 bg-emerald-50 text-xs font-extrabold text-emerald-800 transition cursor-pointer shadow-sm">
                             🔥 Intermedio B1
@@ -360,10 +354,19 @@
                     </div>
                 </div>
 
-                <!-- Campo de Contraseña (Visible por defecto porque inicia en Intermedio) -->
-                <div id="password-container" class="transition-all">
-                    <label class="block text-xs font-extrabold text-emerald-700 uppercase tracking-wider mb-1">🔑 Contraseña de Acceso:</label>
-                    <input type="password" id="setup-password-input" placeholder="Introduce tu contraseña..." class="vibrant-input w-full rounded-2xl px-4 py-2.5 text-xs sm:text-sm text-slate-800 font-semibold focus:outline-none border border-emerald-300 bg-emerald-50/30">
+                <!-- Contenedor dinámico (Nombre y Contraseña se reordenan según el nivel) -->
+                <div id="dynamic-inputs-container" class="space-y-3">
+                    <!-- Input de Nombre -->
+                    <div id="name-input-wrapper">
+                        <label class="block text-xs font-extrabold text-slate-700 uppercase tracking-wider mb-1">Tu Nombre:</label>
+                        <input type="text" id="setup-name-input" placeholder="Ej. Kevin" class="vibrant-input w-full rounded-2xl px-4 py-2.5 text-xs sm:text-sm text-slate-800 font-semibold focus:outline-none border border-slate-200">
+                    </div>
+
+                    <!-- Campo de Contraseña (Solo para Intermedio) -->
+                    <div id="password-container" class="transition-all">
+                        <label class="block text-xs font-extrabold text-emerald-700 uppercase tracking-wider mb-1">🔑 Contraseña de Acceso:</label>
+                        <input type="password" id="setup-password-input" placeholder="Introduce tu contraseña..." class="vibrant-input w-full rounded-2xl px-4 py-2.5 text-xs sm:text-sm text-slate-800 font-semibold focus:outline-none border border-emerald-300 bg-emerald-50/30">
+                    </div>
                 </div>
             </div>
 

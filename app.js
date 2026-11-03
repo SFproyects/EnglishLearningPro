@@ -164,27 +164,37 @@ function switchTab(tabName) {
 // 5. CONFIGURACIÓN INICIAL Y MODAL DE ACCESO
 // ==========================================
 
-// Seleccionar nivel en el modal de bienvenida (Beginner vs Intermedio)
+// Seleccionar nivel en el modal de bienvenida y reordenar inputs dinámicamente
 function setInitialMode(mode) {
     selectedSetupMode = mode;
     const btnBeg = document.getElementById('btn-mode-beginner');
     const btnInt = document.getElementById('btn-mode-intermediate');
     const passContainer = document.getElementById('password-container');
+    const nameWrapper = document.getElementById('name-input-wrapper');
+    const dynamicContainer = document.getElementById('dynamic-inputs-container');
     
     if (!btnBeg || !btnInt) return;
 
     if (mode === 'beginner') {
         btnBeg.className = "p-3 rounded-2xl border-2 border-sky-500 bg-sky-50 text-xs font-extrabold text-sky-800 transition cursor-pointer shadow-sm";
         btnInt.className = "p-3 rounded-2xl border-2 border-slate-200 bg-slate-50 text-xs font-extrabold text-slate-700 transition cursor-pointer hover:border-emerald-400";
-        if (passContainer) passContainer.classList.add('hidden'); // Ocultar campo de contraseña en beginner
+        
+        if (passContainer) passContainer.classList.add('hidden'); // Ocultar contraseña
+        if (dynamicContainer && nameWrapper) {
+            dynamicContainer.prepend(nameWrapper); // Poner nombre arriba si es beginner
+        }
     } else {
         btnInt.className = "p-3 rounded-2xl border-2 border-emerald-500 bg-emerald-50 text-xs font-extrabold text-emerald-800 transition cursor-pointer shadow-sm";
         btnBeg.className = "p-3 rounded-2xl border-2 border-slate-200 bg-slate-50 text-xs font-extrabold text-slate-700 transition cursor-pointer hover:border-sky-400";
-        if (passContainer) passContainer.classList.remove('hidden'); // Mostrar campo de contraseña para intermedio
+        
+        if (passContainer) passContainer.classList.remove('hidden'); // Mostrar contraseña
+        if (dynamicContainer && nameWrapper) {
+            dynamicContainer.appendChild(nameWrapper); // Mover el nombre ABAJO, justo encima de la contraseña
+        }
     }
 }
 
-// Validar credenciales de forma privada y segura
+// Validar credenciales y arrancar la app sin congelarse
 function completeSetupAndStart() {
     const nameInput = document.getElementById('setup-name-input');
     const userName = nameInput ? nameInput.value.trim() : '';
@@ -195,11 +205,10 @@ function completeSetupAndStart() {
     }
     appState.userName = userName;
     
-    // Si selecciona Intermedio B1, validar la contraseña requerida de forma privada
+    // Si selecciona Intermedio B1, validar la contraseña de forma privada
     if (selectedSetupMode === 'intermediate') {
         const passInput = document.getElementById('setup-password-input');
         if (!passInput || passInput.value.trim() !== 'kevin b1pro') {
-            // MENSAJE SEGURO: NUNCA revela la contraseña en pantalla
             showCustomModal("Acceso Denegado 🔒", "La contraseña introducida es incorrecta. Acceso restringido.", "⚠️");
             return;
         }
@@ -209,13 +218,16 @@ function completeSetupAndStart() {
     appState.hasStarted = true;
     saveState();
 
+    // Ocultar el modal de forma inmediata y limpia
     const setupContainer = document.getElementById('welcome-setup-container');
-    if (setupContainer) setupContainer.classList.add('hidden');
+    if (setupContainer) {
+        setupContainer.classList.add('hidden');
+    }
     
+    // Cargar datos y lección sin bloqueos
     updateUIStats();
     loadCurrentLesson();
 }
-
 // ==========================================
 // 6. CARGA Y LÓGICA DE LECCIONES Y FASES
 // ==========================================
