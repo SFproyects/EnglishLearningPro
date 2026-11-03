@@ -1,7 +1,3 @@
-// ==========================================
-// 1. INICIALIZACIÓN Y ESTADO DE LA APLICACIÓN
-// ==========================================
-
 lucide.createIcons();
 
 let appState = JSON.parse(localStorage.getItem('english_pro_ultimate_state')) || {
@@ -16,43 +12,19 @@ let appState = JSON.parse(localStorage.getItem('english_pro_ultimate_state')) ||
     hasStarted: false
 };
 
-
-// ==========================================
-// 2. CURRICULUM DE LECCIONES (BEGINNER E INTERMEDIO)
-// ==========================================
-
 const curriculumBeginner = [];
 for (let i = 1; i <= 40; i++) {
     let blockNum = Math.ceil(i / 10);
-    let themeName = `Beginner Foundation Topic ${i}`;
-    
-    let words = [
-        {w:"Hello",d:"Hola",e:"👋"}, {w:"Family",d:"Familia",e:"👨‍👩‍👧‍👦"}, 
-        {w:"Water",d:"Agua",e:"💧"}, {w:"House",d:"Casa",e:"🏠"}
-    ];
-
+    let words = [{w:"Hello",d:"Hola",e:"👋"}, {w:"Family",d:"Familia",e:"👨‍👩‍👧‍👦"}];
     curriculumBeginner.push({
-        id: i,
-        block: blockNum,
-        theme: themeName,
-        grammarTitle: "Beginner Essential Grammar",
-        roleplay: {
-            title: `Beginner Lesson ${i}: ${themeName}`,
-            turns: 4,
-            introLine: "Hello! How are you today? Let's practice simple English.",
-            gSlang1: "I am fine, thank you.", gSlang1Es: "Estoy bien, gracias.",
-            gSlang2: "Nice to meet you.", gSlang2Es: "Mucho gusto.",
-            fForm1: "Have a good day.", fForm1Es: "Que tengas un buen día.",
-            fForm2: "Goodbye, see you.", fForm2Es: "Adiós, nos vemos.",
-            fSlang1: "See you later!", fSlang1Es: "¡Hasta luego!",
-            fSlang2: "Take care!", fSlang2Es: "¡Cuídate!"
-        },
-        flashcards: words.map((w) => ({ term: w.w, def: w.d, es: w.e, emoji: w.e })),
+        id: i, block: blockNum, theme: `Beginner Topic ${i}`,
+        roleplay: { introLine: "Hello! How are you today? Let's practice simple English." },
+        flashcards: words.map(w => ({ term: w.w, def: w.d, es: w.e, emoji: w.e })),
         quizzes: [
-            { id: `b_l${i}_q1`, type: 'mc', title: `Grammar (Block ${blockNum})`, desc: "She ___ to the store every morning.", options: [{text: 'A) goes', correct: true}, {text: 'B) go', correct: false}], correction: "Con la tercera persona singular (She) se usa 'goes'." },
-            { id: `b_l${i}_q2`, type: 'repair', title: 'Essential Vocabulary', desc: `Type in English for '${words[0].d}':`, answer: words[0].w.toLowerCase(), correction: `Se escribe '${words[0].w}'.` }
+            { id: `b_l${i}_q1`, type: 'mc', title: 'Grammar', desc: "She ___ to the store.", options: [{text: 'A) goes', correct: true}, {text: 'B) go', correct: false}], correction: "Se usa 'goes'." },
+            { id: `b_l${i}_q2`, type: 'repair', title: 'Vocabulary', desc: `Type in English for 'Hola':`, answer: 'hello', correction: "Se escribe 'Hello'." }
         ],
-        listening: `I am learning basic English sentences every single day`,
+        listening: `I am learning basic English sentences every day`,
         shadow: "Hello! I am learning English."
     });
 }
@@ -60,59 +32,22 @@ for (let i = 1; i <= 40; i++) {
 const curriculumIntermediate = [];
 for (let i = 1; i <= 40; i++) {
     let blockNum = Math.ceil(i / 10);
-    let themeName = `Intermediate Professional Topic ${i}`;
-    
-    let words = [
-        {w:"Improvement",d:"Mejora",e:"📈"}, {w:"Strategy",d:"Estrategia",e:"🎯"}, 
-        {w:"Challenge",d:"Desafío",e:"⚡"}, {w:"Achievement",d:"Logro",e:"🏆"}
-    ];
-
+    let words = [{w:"Improvement",d:"Mejora",e:"📈"}, {w:"Strategy",d:"Estrategia",e:"🎯"}];
     curriculumIntermediate.push({
-        id: i,
-        block: blockNum,
-        theme: themeName,
-        grammarTitle: "Intermediate Mastery Core Workflow",
-        roleplay: {
-            title: `Intermediate Lesson ${i}: ${themeName}`,
-            turns: 4,
-            introLine: `Hey! What's up man? Just grabbing a quick coffee. How's it going with your projects?`,
-            gSlang1: "Pretty good, working on my game development.", gSlang1Es: "Bastante bien, trabajando en mi desarrollo de videojuegos.",
-            gSlang2: "Not much, just optimizing the system workflow.", gSlang2Es: "Nada en especial, solo optimizando el flujo del sistema.",
-            fForm1: "Thank you for your valuable time.", fForm1Es: "Gracias por su valioso tiempo.",
-            fForm2: "It was a highly productive meeting.", fForm2Es: "Fue una reunión altamente productiva.",
-            fSlang1: "Catch you later! Keep in touch.", fSlang1Es: "¡Nos vemos luego! Seguimos en contacto.",
-            fSlang2: "Alright, I'm heading out. Take care!", fSlang2Es: "Bien, ya me voy. ¡Cuídate!"
-        },
-        flashcards: words.map((w) => ({ term: w.w, def: w.d, es: w.e, emoji: w.e })),
+        id: i, block: blockNum, theme: `Intermediate Topic ${i}`,
+        roleplay: { introLine: "Hey! What's up man? How's it going with your projects?" },
+        flashcards: words.map(w => ({ term: w.w, def: w.d, es: w.e, emoji: w.e })),
         quizzes: [
-            { id: `i_l${i}_q1`, type: 'mc', title: `Grammar (Block ${blockNum})`, desc: "We ___ our best to optimize the system every single day.", options: [{text: 'A) do', correct: true}, {text: 'B) does', correct: false}], correction: "Con el pronombre 'We' siempre se utiliza 'do'." },
-            { id: `i_l${i}_q2`, type: 'repair', title: 'Essential Vocabulary', desc: `Type in English for '${words[0].d}':`, answer: words[0].w.toLowerCase(), correction: `Se escribe '${words[0].w}'.` }
+            { id: `i_l${i}_q1`, type: 'mc', title: 'Grammar', desc: "We ___ our best every day.", options: [{text: 'A) do', correct: true}, {text: 'B) does', correct: false}], correction: "Con 'We' se usa 'do'." },
+            { id: `i_l${i}_q2`, type: 'repair', title: 'Vocabulary', desc: `Type in English for 'Mejora':`, answer: 'improvement', correction: "Se escribe 'Improvement'." }
         ],
         listening: `We are successfully mastering advanced English expressions today`,
         shadow: "Hey! Great to meet you."
     });
 }
 
-
-// ==========================================
-// 3. VARIABLES DE CONTROL DE SESIÓN
-// ==========================================
-
-let currentCard = 0;
-let currentQuizIndex = 0;
-let activeQuizItem = null;
-let currentListeningTarget = "";
-let activeQuizzes = [];
-let activeFlashcards = [];
-let currentRoleplayData = null;
-let roleplayInteractionCount = 0;
-let requiredRoleplayTurns = 4;
-let selectedSetupMode = 'intermediate';
-
-
-// ==========================================
-// 4. FUNCIONES DE UTILIDAD Y PERSISTENCIA
-// ==========================================
+let currentCard = 0, currentQuizIndex = 0, activeQuizItem = null, currentListeningTarget = "";
+let activeQuizzes = [], activeFlashcards = [], roleplayInteractionCount = 0, selectedSetupMode = 'intermediate';
 
 function saveState() {
     localStorage.setItem('english_pro_ultimate_state', JSON.stringify(appState));
@@ -139,22 +74,20 @@ function updateUIStats() {
     document.getElementById('current-block-label').innerText = isInter ? 'Nivel: Intermedio' : 'Nivel: Beginner';
     document.getElementById('header-badge').innerText = `Lesson ${currLesson} / 40`;
     document.getElementById('course-subtitle').innerText = isInter ? 'Intermediate Professional Course' : 'Beginner Foundation Course';
-    document.getElementById('welcome-title').innerText = `Welcome back, ${appState.userName || 'Student'}!`;
+    document.getElementById('welcome-title').innerText = `Welcome back, ${appState.userName || 'Kevin'}!`;
     
-    // Inyectar el nombre del usuario dinámicamente en los ejemplos de Slang
     const nameToUse = appState.userName || 'Kevin';
-    const slang1El = document.getElementById('g-slang1');
-    const slang2El = document.getElementById('g-slang2');
-    if (slang1El) slang1El.innerText = `Hey! I'm ${nameToUse}, great to meet you.`;
-    if (slang2El) slang2El.innerText = `What's up? I'm ${nameToUse}, let's chat!`;
+    const s1 = document.getElementById('g-slang1');
+    const s2 = document.getElementById('g-slang2');
+    if (s1) s1.innerText = `Hey! I'm ${nameToUse}, great to meet you.`;
+    if (s2) s2.innerText = `What's up? I'm ${nameToUse}, let's chat!`;
 
     updateStepsUI();
 }
 
 function speakDynamicSlang(type) {
     const nameToUse = appState.userName || 'Kevin';
-    const text = type === 1 ? `Hey! I am ${nameToUse}, great to meet you.` : `What is up? I am ${nameToUse}, let us chat!`;
-    speakSpecificTextCustom(text);
+    speakSpecificTextCustom(type === 1 ? `Hey! I am ${nameToUse}, great to meet you.` : `What is up? I am ${nameToUse}, let us chat!`);
 }
 
 function updateStepsUI() {
@@ -163,26 +96,21 @@ function updateStepsUI() {
     document.getElementById('session-bar').style.width = `${(unlockedCount / 5) * 100}%`;
 }
 
-function unlockNextStep(currentStepKey, nextStepKey) {
-    appState.unlockedSteps[nextStepKey] = true;
+function unlockNextStep(currentKey, nextKey) {
+    appState.unlockedSteps[nextKey] = true;
     saveState();
     updateStepsUI();
-    switchTab(nextStepKey);
+    switchTab(nextKey);
 }
 
 function switchTab(tabName) {
     if (!appState.unlockedSteps[tabName]) {
-        showCustomModal("Phase Locked 🔒", "Complete the previous phase first.", "⚠️");
+        showCustomModal("Phase Locked 🔒", "Complete previous phase first.", "⚠️");
         return;
     }
     document.querySelectorAll('#lesson-view-container > div').forEach(el => el.classList.add('hidden'));
     document.getElementById('content-' + tabName).classList.remove('hidden');
 }
-
-
-// ==========================================
-// 5. CONFIGURACIÓN INICIAL Y MODAL DE ACCESO
-// ==========================================
 
 function setInitialMode(mode) {
     selectedSetupMode = mode;
@@ -190,34 +118,28 @@ function setInitialMode(mode) {
     const btnInt = document.getElementById('btn-mode-intermediate');
     const passContainer = document.getElementById('password-container');
     
-    if (!btnBeg || !btnInt) return;
-
     if (mode === 'beginner') {
-        btnBeg.className = "p-3 rounded-2xl border-2 border-sky-500 bg-sky-50 text-xs font-extrabold text-sky-800 transition cursor-pointer shadow-sm";
-        btnInt.className = "p-3 rounded-2xl border-2 border-slate-200 bg-slate-50 text-xs font-extrabold text-slate-700 transition cursor-pointer hover:border-emerald-400";
+        btnBeg.className = "p-3 rounded-2xl border-2 border-sky-500 bg-sky-50 text-xs font-extrabold text-sky-800 shadow-sm cursor-pointer";
+        btnInt.className = "p-3 rounded-2xl border-2 border-slate-200 bg-slate-50 text-xs font-extrabold text-slate-700 cursor-pointer";
         if (passContainer) passContainer.classList.add('hidden');
     } else {
-        btnInt.className = "p-3 rounded-2xl border-2 border-emerald-500 bg-emerald-50 text-xs font-extrabold text-emerald-800 transition cursor-pointer shadow-sm";
-        btnBeg.className = "p-3 rounded-2xl border-2 border-slate-200 bg-slate-50 text-xs font-extrabold text-slate-700 transition cursor-pointer hover:border-sky-400";
+        btnInt.className = "p-3 rounded-2xl border-2 border-emerald-500 bg-emerald-50 text-xs font-extrabold text-emerald-800 shadow-sm cursor-pointer";
+        btnBeg.className = "p-3 rounded-2xl border-2 border-slate-200 bg-slate-50 text-xs font-extrabold text-slate-700 cursor-pointer";
         if (passContainer) passContainer.classList.remove('hidden');
     }
 }
 
 function completeSetupAndStart() {
-    const nameInput = document.getElementById('setup-name-input');
-    const userName = nameInput ? nameInput.value.trim() : '';
-
+    const userName = document.getElementById('setup-name-input').value.trim();
     if (!userName) {
-        showCustomModal("Nombre Requerido ⚠️", "Por favor, escribe tu nombre para continuar.", "✍️");
+        showCustomModal("Nombre Requerido ⚠️", "Escribe tu nombre para continuar.", "✍️");
         return;
     }
 
     if (selectedSetupMode === 'intermediate') {
-        const passInput = document.getElementById('setup-password-input');
-        const passwordValue = passInput ? passInput.value.trim() : '';
-        
-        if (passwordValue !== 'b1pro') {
-            showCustomModal("Acceso Denegado 🔒", "La contraseña introducida es incorrecta. Acceso restringido.", "⚠️");
+        const pass = document.getElementById('setup-password-input').value.trim();
+        if (pass !== 'b1pro') {
+            showCustomModal("Acceso Denegado 🔒", "La contraseña introducida es incorrecta (b1pro).", "⚠️");
             return;
         }
     }
@@ -227,46 +149,32 @@ function completeSetupAndStart() {
     appState.hasStarted = true;
     saveState();
 
-    const setupContainer = document.getElementById('welcome-setup-container');
-    if (setupContainer) setupContainer.classList.add('hidden');
-    
+    document.getElementById('welcome-setup-container').classList.add('hidden');
     updateUIStats();
     loadCurrentLesson();
 }
 
-
-// ==========================================
-// 6. CARGA Y LÓGICA DE LECCIONES Y FASES
-// ==========================================
-
 function loadCurrentLesson() {
     const isInter = appState.currentMode === 'intermediate';
     let currLesson = isInter ? appState.intermediateLesson : appState.beginnerLesson;
-    
-    let activeCurriculum = isInter ? curriculumIntermediate : curriculumBeginner;
-    let lessonIndex = (currLesson - 1) % activeCurriculum.length;
-    let lessonData = activeCurriculum[lessonIndex];
+    let lessonData = (isInter ? curriculumIntermediate : curriculumBeginner)[(currLesson - 1) % 40];
 
-    currentRoleplayData = lessonData.roleplay;
     currentListeningTarget = lessonData.listening;
     roleplayInteractionCount = 0;
-    requiredRoleplayTurns = 4;
+    activeFlashcards = lessonData.flashcards;
+    activeQuizzes = lessonData.quizzes;
 
     document.getElementById('roleplay-scenario-tag').innerText = `Lesson ${currLesson}: ${lessonData.theme}`;
     document.getElementById('shadow-text').innerText = `"${lessonData.shadow}"`;
-    document.getElementById('flashcard-phase-title').innerText = `Phase 2: Vocabulary Mastery (Lesson ${currLesson})`;
     document.getElementById('roleplay-counter-label').innerText = `Turns: 0 / 4 completed`;
-
-    activeFlashcards = lessonData.flashcards;
-    activeQuizzes = lessonData.quizzes;
 
     const chatBox = document.getElementById('chat-messages-container');
     chatBox.innerHTML = `
         <div class="flex items-start gap-2.5">
-            <div class="w-8 h-8 rounded-full bg-sky-500 text-white flex items-center justify-center font-bold text-xs flex-shrink-0">🤖</div>
+            <div class="w-8 h-8 rounded-full bg-sky-500 text-white flex items-center justify-center font-bold text-xs">🤖</div>
             <div class="bg-white border border-slate-200 p-3.5 rounded-2xl shadow-sm text-xs text-slate-800 max-w-[85%]">
-                <p class="font-extrabold text-sky-700 mb-0.5">Tutor (Nativo):</p>
-                <p class="font-medium">${currentRoleplayData.introLine}</p>
+                <p class="font-extrabold text-sky-700 mb-0.5">Tutor:</p>
+                <p class="font-medium">${lessonData.roleplay.introLine}</p>
             </div>
         </div>
     `;
@@ -284,66 +192,34 @@ function sendRoleplayMessage() {
     if (!text) return;
 
     const chatBox = document.getElementById('chat-messages-container');
-    const wordCount = text.split(/\s+/).length;
-    const hasValidContext = wordCount >= 2;
-
-    if (!hasValidContext) {
-        chatBox.innerHTML += `
-            <div class="flex items-start gap-2.5 justify-end">
-                <div class="bg-rose-500 text-white p-3.5 rounded-2xl shadow-sm text-xs max-w-[85%]">
-                    <p class="font-extrabold text-rose-100 mb-0.5">Tú (${appState.userName || 'Kevin'}):</p>
-                    <p class="font-medium">${text}</p>
-                </div>
-                <div class="w-8 h-8 rounded-full bg-rose-600 text-white flex items-center justify-center font-bold text-xs flex-shrink-0">⚠️</div>
-            </div>
-            <div class="flex items-start gap-2.5">
-                <div class="w-8 h-8 rounded-full bg-amber-500 text-white flex items-center justify-center font-bold text-xs flex-shrink-0">🤖</div>
-                <div class="bg-amber-50 border border-amber-200 p-3.5 rounded-2xl shadow-sm text-xs text-amber-900 max-w-[85%]">
-                    <p class="font-extrabold mb-0.5">Tutor:</p>
-                    <p class="font-medium">⚠️ ¡Escribe al menos 2 palabras en inglés!</p>
-                </div>
-            </div>
-        `;
-        input.value = '';
-        chatBox.scrollTop = chatBox.scrollHeight;
+    if (text.split(/\s+/).length < 2) {
+        showCustomModal("Aviso", "Escribe al menos 2 palabras en inglés.", "⚠️");
         return;
     }
 
     chatBox.innerHTML += `
         <div class="flex items-start gap-2.5 justify-end">
             <div class="bg-emerald-500 text-white p-3.5 rounded-2xl shadow-sm text-xs max-w-[85%]">
-                <p class="font-extrabold text-emerald-100 mb-0.5">Tú (${appState.userName || 'Kevin'}):</p>
+                <p class="font-extrabold text-emerald-100 mb-0.5">Tú (${appState.userName}):</p>
                 <p class="font-medium">${text}</p>
             </div>
-            <div class="w-8 h-8 rounded-full bg-emerald-600 text-white flex items-center justify-center font-bold text-xs flex-shrink-0">😎</div>
+            <div class="w-8 h-8 rounded-full bg-emerald-600 text-white flex items-center justify-center font-bold text-xs">😎</div>
         </div>
     `;
     input.value = '';
     chatBox.scrollTop = chatBox.scrollHeight;
 
     setTimeout(() => {
-        let roleplayReplies = [
-            `Oh, nice! Pretty good here too, man. Hey, I gotta run soon. Catch you later!`,
-            `Sounds good! Take care, see you around!`,
-            `Alright man, have a great rest of your day!`
-        ];
-
         roleplayInteractionCount++;
         document.getElementById('roleplay-counter-label').innerText = `Turns: ${roleplayInteractionCount} / 4 completed`;
-
-        let tutorReply = "";
-        if (roleplayInteractionCount <= 3) {
-            tutorReply = roleplayReplies[roleplayInteractionCount - 1];
-        } else {
-            tutorReply = `¡Excelente práctica nativa! Completaste los 4 turnos. Haz clic en 'Validate Roleplay & Proceed'.`;
-        }
-
+        let reply = roleplayInteractionCount < 4 ? "Sounds great! Keep going, tell me more." : "¡Excelente práctica! Haz clic en 'Validate Roleplay & Proceed'.";
+        
         chatBox.innerHTML += `
             <div class="flex items-start gap-2.5">
-                <div class="w-8 h-8 rounded-full bg-sky-500 text-white flex items-center justify-center font-bold text-xs flex-shrink-0">🤖</div>
+                <div class="w-8 h-8 rounded-full bg-sky-500 text-white flex items-center justify-center font-bold text-xs">🤖</div>
                 <div class="bg-white border border-slate-200 p-3.5 rounded-2xl shadow-sm text-xs text-slate-800 max-w-[85%]">
-                    <p class="font-extrabold text-sky-700 mb-0.5">Tutor (Nativo):</p>
-                    <p class="font-medium">${tutorReply}</p>
+                    <p class="font-extrabold text-sky-700 mb-0.5">Tutor:</p>
+                    <p class="font-medium">${reply}</p>
                 </div>
             </div>
         `;
@@ -353,55 +229,39 @@ function sendRoleplayMessage() {
 
 function completeRoleplayPhase() {
     if (roleplayInteractionCount < 4) {
-        showCustomModal("Incomplete Conversation ⚠️", `Completa los 4 turnos de charla conversacional primero (llevas ${roleplayInteractionCount}).`, "💬");
+        showCustomModal("Incomplete", "Completa los 4 turnos conversacionales primero.", "💬");
         return;
     }
-
-    showCustomModal("Roleplay Approved! 🌟", "Tutor: ¡Excelente fluidez nativa! Pasamos a la Bóveda de Vocabulario.", "💬");
-    setTimeout(() => {
-        closeModal();
-        unlockNextStep('speaking', 'flashcards');
-    }, 1200);
+    unlockNextStep('speaking', 'flashcards');
 }
 
 function speakSpecificTextCustom(text) {
     if (window.speechSynthesis.speaking) window.speechSynthesis.cancel();
-    const utterance = new SpeechSynthesisUtterance(text);
-    utterance.lang = 'en-US';
-    window.speechSynthesis.speak(utterance);
+    const u = new SpeechSynthesisUtterance(text);
+    u.lang = 'en-US';
+    window.speechSynthesis.speak(u);
 }
 
 let activeRecognition = null;
 function toggleSpeechRecognition() {
-    const statusText = document.getElementById('mic-status-text');
-    const input = document.getElementById('roleplay-user-input');
-    const SpeechRecognitionAPI = window.SpeechRecognition || window.webkitSpeechRecognition;
-    if (!SpeechRecognitionAPI) {
-        showCustomModal("Notice", "Speech recognition not supported in this browser.", "🎙️");
-        return;
-    }
-    try {
-        if (activeRecognition) { activeRecognition.stop(); activeRecognition = null; statusText.innerText = 'Mic'; return; }
-        activeRecognition = new SpeechRecognitionAPI();
-        activeRecognition.lang = 'en-US';
-        activeRecognition.onstart = () => { statusText.innerText = 'Listening...'; };
-        activeRecognition.onresult = (event) => {
-            input.value = event.results[0][0].transcript;
-            statusText.innerText = 'Mic';
-            activeRecognition = null;
-            sendRoleplayMessage();
-        };
-        activeRecognition.onerror = () => { statusText.innerText = 'Mic'; activeRecognition = null; };
-        activeRecognition.onend = () => { statusText.innerText = 'Mic'; activeRecognition = null; };
-        activeRecognition.start();
-    } catch (err) { statusText.innerText = 'Mic'; activeRecognition = null; }
+    const SpeechAPI = window.SpeechRecognition || window.webkitSpeechRecognition;
+    if (!SpeechAPI) return;
+    if (activeRecognition) { activeRecognition.stop(); activeRecognition = null; return; }
+    activeRecognition = new SpeechAPI();
+    activeRecognition.lang = 'en-US';
+    activeRecognition.onresult = (e) => {
+        document.getElementById('roleplay-user-input').value = e.results[0][0].transcript;
+        sendRoleplayMessage();
+        activeRecognition = null;
+    };
+    activeRecognition.onerror = () => { activeRecognition = null; };
+    activeRecognition.start();
 }
 
 function updateCard() {
     if (activeFlashcards.length === 0) return;
     const card = activeFlashcards[currentCard];
-    document.getElementById('flash-badge').innerText = `Word #${currentCard + 1} de 4`;
-    document.getElementById('flashcard-counter-label').innerText = `Reviewing vocabulary (${currentCard + 1} de 4)...`;
+    document.getElementById('flash-badge').innerText = `Word #${currentCard + 1} of ${activeFlashcards.length}`;
     document.getElementById('flash-term').innerText = card.term;
     document.getElementById('flash-def').innerText = card.def;
     document.getElementById('flash-es').innerText = card.es;
@@ -412,13 +272,11 @@ function nextCard() {
     currentCard++;
     if (currentCard >= activeFlashcards.length) {
         activeFlashcards.forEach(card => {
-            let entryObj = { term: card.term, def: card.def, es: card.es, emoji: card.emoji || "📖" };
-            if (!appState.learnedFlashcards.some(item => item.term === entryObj.term)) {
-                appState.learnedFlashcards.push(entryObj);
+            if (!appState.learnedFlashcards.some(item => item.term === card.term)) {
+                appState.learnedFlashcards.push(card);
             }
         });
         saveState();
-        showCustomModal("Vocabulary Approved 🌟", "Words saved to your Vault! Moving to Grammar Check.", "📚");
         unlockNextStep('flashcards', 'grammar');
     } else { updateCard(); }
 }
@@ -435,138 +293,105 @@ function loadQuizQuestion() {
     document.getElementById('quiz-title').innerText = activeQuizItem.title;
     document.getElementById('quiz-desc').innerText = activeQuizItem.desc;
     
-    const optionsContainer = document.getElementById('quiz-options');
-    const errorContainer = document.getElementById('error-repair-container');
-    const feedbackBox = document.getElementById('quiz-instant-feedback');
-    
-    optionsContainer.innerHTML = '';
-    feedbackBox.classList.add('hidden');
-    document.getElementById('error-input').value = '';
+    const optContainer = document.getElementById('quiz-options');
+    const errContainer = document.getElementById('error-repair-container');
+    document.getElementById('quiz-instant-feedback').classList.add('hidden');
+    optContainer.innerHTML = '';
 
     if (activeQuizItem.type === "repair") {
-        optionsContainer.classList.add('hidden');
-        errorContainer.classList.remove('hidden');
+        optContainer.classList.add('hidden');
+        errContainer.classList.remove('hidden');
+        document.getElementById('error-input').value = '';
     } else {
-        errorContainer.classList.add('hidden');
-        optionsContainer.classList.remove('hidden');
+        errContainer.classList.add('hidden');
+        optContainer.classList.remove('hidden');
         activeQuizItem.options.forEach(opt => {
             const btn = document.createElement('button');
-            btn.className = "w-full text-left bg-slate-50 hover:bg-slate-100 border border-slate-200 p-3.5 rounded-2xl text-xs text-slate-800 transition cursor-pointer font-bold shadow-sm";
+            btn.className = "w-full text-left bg-slate-50 hover:bg-slate-100 border border-slate-200 p-3.5 rounded-2xl text-xs text-slate-800 font-bold shadow-sm cursor-pointer";
             btn.innerText = opt.text;
             btn.onclick = () => processQuizAnswer(opt.correct);
-            optionsContainer.appendChild(btn);
+            optContainer.appendChild(btn);
         });
     }
 }
 
 function submitErrorCorrection() {
     const userVal = document.getElementById('error-input').value.trim().toLowerCase();
-    const expected = activeQuizItem.answer.toLowerCase();
-    const isCorrect = userVal.includes(expected) || expected.includes(userVal);
-    processQuizAnswer(isCorrect);
+    processQuizAnswer(userVal.includes(activeQuizItem.answer.toLowerCase()));
 }
 
 function processQuizAnswer(isCorrect) {
-    const feedbackBox = document.getElementById('quiz-instant-feedback');
-    feedbackBox.classList.remove('hidden');
-    appState.quizScores.push({ id: activeQuizItem.id, correct: isCorrect });
-
-    if (isCorrect) {
-        feedbackBox.className = "text-xs mt-3 p-4 rounded-xl bg-emerald-100 text-emerald-900 border border-emerald-200 font-extrabold shadow-sm";
-        feedbackBox.innerHTML = `<div>Correct! 🌟</div><div class="text-[11px] font-medium mt-1">${activeQuizItem.correction}</div>`;
-    } else {
-        feedbackBox.className = "text-xs mt-3 p-4 rounded-xl bg-rose-100 text-rose-900 border border-rose-200 font-medium shadow-sm space-y-1";
-        feedbackBox.innerHTML = `<div class="font-extrabold">❌ Incorrect.</div><div class="text-[11px]"><strong>Rule:</strong> ${activeQuizItem.correction}</div>`;
-    }
+    const fb = document.getElementById('quiz-instant-feedback');
+    fb.classList.remove('hidden');
+    fb.className = isCorrect ? "text-xs mt-3 p-4 rounded-xl bg-emerald-100 text-emerald-900 font-extrabold" : "text-xs mt-3 p-4 rounded-xl bg-rose-100 text-rose-900 font-medium";
+    fb.innerHTML = isCorrect ? "<div>Correct! 🌟</div>" : `<div>Incorrect. Rule: ${activeQuizItem.correction}</div>`;
 
     setTimeout(() => {
         currentQuizIndex++;
         if (currentQuizIndex < activeQuizzes.length) { loadQuizQuestion(); }
         else { unlockNextStep('grammar', 'listening'); }
-    }, 2500);
+    }, 2000);
 }
 
 function playListeningAudio() {
     if (window.speechSynthesis.speaking) window.speechSynthesis.cancel();
-    const utterance = new SpeechSynthesisUtterance(currentListeningTarget);
-    utterance.lang = 'en-US';
-    window.speechSynthesis.speak(utterance);
+    const u = new SpeechSynthesisUtterance(currentListeningTarget);
+    u.lang = 'en-US';
+    window.speechSynthesis.speak(u);
 }
 
 function checkListeningDictation() {
-    const userText = document.getElementById('listening-input').value.trim().toLowerCase();
-    if (userText.length > 3) {
-        document.getElementById('listening-result').innerHTML = '<span class="text-emerald-700 font-extrabold">🎯 Dictation approved! Moving to Shadowing.</span>';
-        setTimeout(() => unlockNextStep('listening', 'shadowing'), 1000);
+    const val = document.getElementById('listening-input').value.trim();
+    if (val.length > 3) {
+        document.getElementById('listening-result').innerHTML = '<span class="text-emerald-700 font-extrabold">🎯 Approved! Moving to Shadowing.</span>';
+        setTimeout(() => unlockNextTestOrStep(), 1000);
     } else {
         document.getElementById('listening-result').innerHTML = '<span class="text-rose-600 font-bold">⚠️ Try again.</span>';
     }
 }
 
+function unlockNextTestOrStep() {
+    unlockNextStep('listening', 'shadowing');
+}
+
 function speakShadowText() {
-    if (window.speechSynthesis.speaking) window.speechSynthesis.cancel();
-    const utterance = new SpeechSynthesisUtterance(document.getElementById('shadow-text').innerText.replace(/"/g, ''));
-    utterance.lang = 'en-US';
-    window.speechSynthesis.speak(utterance);
+    speakSpecificTextCustom(document.getElementById('shadow-text').innerText.replace(/"/g, ''));
 }
 
 function verifyShadowingVoice() {
-    const statusText = document.getElementById('shadow-mic-status');
-    const SpeechRecognitionAPI = window.SpeechRecognition || window.webkitSpeechRecognition;
-    try {
-        const rec = new SpeechRecognitionAPI();
-        rec.lang = 'en-US';
-        rec.onstart = () => { statusText.innerText = 'Listening...'; };
-        rec.onresult = () => {
-            statusText.innerText = 'Record with Mic 🎙️';
-            document.getElementById('shadow-result').innerHTML = '<span class="text-emerald-700 font-extrabold">🌟 Pronunciation approved! Lesson completed.</span>';
-            
-            const isInter = appState.currentMode === 'intermediate';
-            if (isInter) {
-                if (appState.intermediateLesson < 40) appState.intermediateLesson += 1;
-            } else {
-                if (appState.beginnerLesson < 40) appState.beginnerLesson += 1;
-            }
-
-            appState.unlockedSteps = { speaking: true, flashcards: false, grammar: false, listening: false, shadowing: false };
-            saveState();
-            setTimeout(() => loadCurrentLesson(), 1500);
-        };
-        rec.start();
-    } catch (err) { statusText.innerText = 'Record with Mic 🎙️'; }
+    const SpeechAPI = window.SpeechRecognition || window.webkitSpeechRecognition;
+    if (!SpeechAPI) return;
+    const rec = new SpeechAPI();
+    rec.lang = 'en-US';
+    rec.onresult = () => {
+        document.getElementById('shadow-result').innerHTML = '<span class="text-emerald-700 font-extrabold">🌟 Lesson completed! Next lesson unlocked.</span>';
+        const isInter = appState.currentMode === 'intermediate';
+        if (isInter) appState.intermediateLesson++;
+        else appState.beginnerLesson++;
+        appState.unlockedSteps = { speaking: true, flashcards: false, grammar: false, listening: false, shadowing: false };
+        saveState();
+        setTimeout(() => loadCurrentLesson(), 1500);
+    };
+    rec.start();
 }
 
 function openVocabularyVault() {
     const container = document.getElementById('vault-list-container');
     container.innerHTML = '';
-    
-    if (appState.learnedFlashcards && appState.learnedFlashcards.length > 0) {
-        appState.learnedFlashcards = appState.learnedFlashcards.map(item => {
-            return { term: item.term, def: item.def || 'Vocabulario', es: item.es || '', emoji: item.emoji || '📖' };
-        });
-    }
-
-    if (!appState.learnedFlashcards || appState.learnedFlashcards.length === 0) {
-        container.innerHTML = `
-            <div class="text-center py-8 space-y-2">
-                <span class="text-4xl">📭</span>
-                <p class="text-xs text-slate-500 font-semibold">Tu Bóveda está vacía aún. Completa la Fase 2.</p>
-            </div>
-        `;
+    if (appState.learnedFlashcards.length === 0) {
+        container.innerHTML = `<div class="text-center py-8 text-xs text-slate-500 font-semibold">Bóveda vacía. Completa la Fase 2.</div>`;
     } else {
         appState.learnedFlashcards.forEach(item => {
             container.innerHTML += `
-                <div class="bg-gradient-to-r from-purple-50/60 to-sky-50/60 border border-purple-100 p-3.5 rounded-2xl flex items-center justify-between shadow-sm">
+                <div class="bg-purple-50/60 border border-purple-100 p-3.5 rounded-2xl flex items-center justify-between shadow-sm">
                     <div class="flex items-center space-x-3.5">
-                        <div class="w-11 h-11 bg-white rounded-2xl border border-purple-200 flex items-center justify-center text-xl shadow-inner flex-shrink-0">${item.emoji || '📖'}</div>
+                        <div class="w-11 h-11 bg-white rounded-2xl flex items-center justify-center text-xl shadow-inner">${item.emoji || '📖'}</div>
                         <div>
-                            <h4 class="text-xs sm:text-sm font-extrabold text-slate-900">${item.term} <span class="text-slate-500 font-semibold">(${item.def})</span></h4>
-                            <p class="text-[11px] text-purple-700 font-extrabold mt-0.5">${item.es || ''}</p>
+                            <h4 class="text-xs sm:text-sm font-extrabold text-slate-900">${item.term} (${item.def})</h4>
+                            <p class="text-[11px] text-purple-700 font-extrabold">${item.es || ''}</p>
                         </div>
                     </div>
-                    <button onclick="speakSpecificTextCustom('${item.term}')" class="bg-white hover:bg-purple-100 text-purple-700 border border-purple-200 px-3.5 py-1.5 rounded-xl text-xs font-extrabold shadow-sm cursor-pointer inline-flex items-center gap-1.5 transition flex-shrink-0">
-                        🔊 Listen
-                    </button>
+                    <button onclick="speakSpecificTextCustom('${item.term}')" class="bg-white text-purple-700 border border-purple-200 px-3 py-1 rounded-xl text-xs font-extrabold">🔊</button>
                 </div>
             `;
         });
@@ -574,21 +399,12 @@ function openVocabularyVault() {
     document.getElementById('vocabulary-vault-modal').classList.remove('hidden');
 }
 
-
-// ==========================================
-// 7. ARRANQUE AUTOMÁTICO AL CARGAR EL DOM
-// ==========================================
-
+// ARRANQUE LIMPIO
 const setupContainer = document.getElementById('welcome-setup-container');
-
 if (!appState.hasStarted) {
-    if (setupContainer) {
-        setupContainer.classList.remove('hidden');
-    }
+    if (setupContainer) setupContainer.classList.remove('hidden');
 } else {
-    if (setupContainer) {
-        setupContainer.classList.add('hidden');
-    }
+    if (setupContainer) setupContainer.classList.add('hidden');
     loadCurrentLesson();
     updateUIStats();
 }
