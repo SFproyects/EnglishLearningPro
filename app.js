@@ -9,7 +9,7 @@ let appState = JSON.parse(localStorage.getItem('english_pro_ultimate_state')) ||
     unlockedSteps: { speaking: true, flashcards: false, grammar: false, listening: false, shadowing: false },
     quizScores: [],
     learnedFlashcards: [],
-    hasStarted: true
+    hasStarted: false
 };
 
 const curriculum40 = [];
@@ -478,6 +478,13 @@ function openVocabularyVault() {
         });
     }
     document.getElementById('vocabulary-vault-modal').classList.remove('hidden');
+}
+
+if (!appState.hasStarted) {
+    // Aquí puedes mostrar un modal o pantalla de bienvenida para elegir nivel
+    showCustomModal("Welcome to English Pro 🚀", "Selecciona tu nivel para comenzar.", "👋");
+    appState.hasStarted = true;
+    saveState();
 }
 
 loadCurrentLesson();
