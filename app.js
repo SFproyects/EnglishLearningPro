@@ -1,16 +1,27 @@
+// ==========================================
+// 1. INICIALIZACIÓN Y ESTADO DE LA APLICACIÓN
+// ==========================================
+
+// Inicializar iconos de Lucide
 lucide.createIcons();
 
+// Cargar el estado guardado en el navegador (localStorage) o usar valores por defecto
 let appState = JSON.parse(localStorage.getItem('english_pro_ultimate_state')) || {
     userName: 'Kevin',
     streak: 1,
-    currentMode: 'intermediate',
+    currentMode: 'intermediate', // Nivel seleccionado por defecto
     beginnerLesson: 1,
     intermediateLesson: 1,
     unlockedSteps: { speaking: true, flashcards: false, grammar: false, listening: false, shadowing: false },
     quizScores: [],
     learnedFlashcards: [],
-    hasStarted: false
+    hasStarted: false // Indica si ya pasó la pantalla de bienvenida/configuración
 };
+
+
+// ==========================================
+// 2. CURRICULUM DE LECCIONES (40 LECCIONES)
+// ==========================================
 
 const curriculum40 = [];
 for (let i = 1; i <= 40; i++) {
@@ -69,6 +80,11 @@ for (let i = 1; i <= 40; i++) {
     });
 }
 
+
+// ==========================================
+// 3. VARIABLES DE CONTROL DE SESIÓN
+// ==========================================
+
 let currentCard = 0;
 let currentQuizIndex = 0;
 let activeQuizItem = null;
@@ -78,11 +94,19 @@ let activeFlashcards = [];
 let currentRoleplayData = null;
 let roleplayInteractionCount = 0;
 let requiredRoleplayTurns = 4;
+let selectedSetupMode = 'intermediate'; // Modo seleccionado en la bienvenida
 
+
+// ==========================================
+// 4. FUNCIONES DE UTILIDAD Y PERSISTENCIA
+// ==========================================
+
+// Guardar estado actual en el almacenamiento local
 function saveState() {
     localStorage.setItem('english_pro_ultimate_state', JSON.stringify(appState));
 }
 
+// Mostrar modal de alertas personalizado
 function showCustomModal(title, message, icon = "✨") {
     document.getElementById('modal-title').innerText = title;
     document.getElementById('modal-message').innerText = message;
@@ -90,10 +114,12 @@ function showCustomModal(title, message, icon = "✨") {
     document.getElementById('custom-modal').classList.remove('hidden');
 }
 
+// Cerrar modal de alertas
 function closeModal() {
     document.getElementById('custom-modal').classList.add('hidden');
 }
 
+// Actualizar contadores y estadísticas en el Header
 function updateUIStats() {
     document.getElementById('streak-count').innerText = appState.streak + 'd';
     document.getElementById('vocab-vault-count').innerText = appState.learnedFlashcards.length;
@@ -108,12 +134,14 @@ function updateUIStats() {
     updateStepsUI();
 }
 
+// Actualizar barra de progreso de las 5 fases
 function updateStepsUI() {
     let unlockedCount = Object.values(appState.unlockedSteps).filter(Boolean).length;
     document.getElementById('session-progress-text').innerText = `Phase ${unlockedCount} / 5`;
     document.getElementById('session-bar').style.width = `${(unlockedCount / 5) * 100}%`;
 }
 
+// Desbloquear la siguiente fase de estudio
 function unlockNextStep(currentStepKey, nextStepKey) {
     appState.unlockedSteps[nextStepKey] = true;
     saveState();
@@ -121,6 +149,7 @@ function unlockNextStep(currentStepKey, nextStepKey) {
     switchTab(nextStepKey);
 }
 
+// Cambiar de pestaña/fase en la interfaz
 function switchTab(tabName) {
     if (!appState.unlockedSteps[tabName]) {
         showCustomModal("Phase Locked 🔒", "Complete the previous phase first.", "⚠️");
@@ -130,6 +159,64 @@ function switchTab(tabName) {
     document.getElementById('content-' + tabName).classList.remove('hidden');
 }
 
+
+// ==========================================
+// 5. CONFIGURACIÓN INICIAL Y MODAL DE ACCESO
+// ==========================================
+
+// Seleccionar nivel en el modal de bienvenida (Beginner vs Intermedio)
+function setInitialMode(mode) {
+    selectedSetupMode = mode;
+    const btnBeg = document.getElementById('btn-mode-beginner');
+    const btnInt = document.getElementById('btn-mode-intermediate');
+    const passContainer = document.getElementById('password-container');
+    
+    if (!btnBeg || !btnInt) return;
+
+    if (mode === 'beginner') {
+        btnBeg.className = "p-3 rounded-2xl border-2 border-sky-500 bg-sky-50 text-xs font-extrabold text-sky-800 transition cursor-pointer shadow-sm";
+        btnInt.className = "p-3 rounded-2xl border-2 border-slate-200 bg-slate-50 text-xs font-extrabold text-slate-700 transition cursor-pointer hover:border-emerald-400";
+        if (passContainer) passContainer.classList.add('hidden'); // Ocultar campo de contraseña en beginner
+    } else {
+        btnInt.className = "p-3 rounded-2xl border-2 border-emerald-500 bg-emerald-50 text-xs font-extrabold text-emerald-800 transition cursor-pointer shadow-sm";
+        btnBeg.className = "p-3 rounded-2xl border-2 border-slate-200 bg-slate-50 text-xs font-extrabold text-slate-700 transition cursor-pointer hover:border-sky-400";
+        if (passContainer) passContainer.classList.remove('hidden'); // Mostrar campo de contraseña para intermedio
+    }
+}
+
+// Validar credenciales (contraseña "kevin b1pro") y arrancar la app
+function completeSetupAndStart() {
+    const nameInput = document.getElementById('setup-name-input');
+    if (nameInput && nameInput.value.trim()) {
+        appState.userName = nameInput.value.trim();
+    }
+    
+    // Si selecciona Intermedio B1, validar la contraseña requerida
+    if (selectedSetupMode === 'intermediate') {
+        const passInput = document.getElementById('setup-password-input');
+        if (!passInput || passInput.value.trim() !== 'kevin b1pro') {
+            showCustomModal("Acceso Denegado 🔒", "La contraseña para el nivel Intermedio B1 es incorrecta ('kevin b1pro').", "⚠️");
+            return;
+        }
+    }
+
+    appState.currentMode = selectedSetupMode;
+    appState.hasStarted = true;
+    saveState();
+
+    const setupContainer = document.getElementById('welcome-setup-container');
+    if (setupContainer) setupContainer.classList.add('hidden');
+    
+    updateUIStats();
+    loadCurrentLesson();
+}
+
+
+// ==========================================
+// 6. CARGA Y LÓGICA DE LECCIONES Y FASES
+// ==========================================
+
+// Cargar la lección correspondiente al nivel actual
 function loadCurrentLesson() {
     const isInter = appState.currentMode === 'intermediate';
     let currLesson = isInter ? appState.intermediateLesson : appState.beginnerLesson;
@@ -167,6 +254,7 @@ function loadCurrentLesson() {
     switchTab('speaking');
 }
 
+// Enviar mensajes en la Fase 1 (Chat de Roleplay con Tutor Nativo)
 function sendRoleplayMessage() {
     const input = document.getElementById('roleplay-user-input');
     const text = input.value.trim();
@@ -215,7 +303,7 @@ function sendRoleplayMessage() {
         let correctionNotice = "";
 
         if (lowerText.includes("goof")) {
-            correctionNotice = "💡 <strong>Corrección rápida:</strong> Escribiste <em>'goof'</em> (payaso/bobo). Para decir que estás bien se escribe <strong>'good'</strong> (con 'd'). ¡Inténtalo de nuevo con la corrección!<br><br>";
+            correctionNotice = "💡 <strong>Corrección rápida:</strong> Escribiste <em>'goof'</em>. Para decir bien se escribe <strong>'good'</strong>.<br><br>";
         } else {
             roleplayInteractionCount++;
             document.getElementById('roleplay-counter-label').innerText = `Turns: ${roleplayInteractionCount} / 4 completed`;
@@ -225,13 +313,13 @@ function sendRoleplayMessage() {
         if (correctionNotice !== "") {
             tutorReply = correctionNotice + "Vuelve a enviar tu respuesta corregida.";
         } else if (roleplayInteractionCount === 1) {
-            tutorReply = `Oh, nice! Pretty good here too, man. Hey, I gotta run soon. Catch you later! (Prueba respondiendo con una despedida).`;
+            tutorReply = `Oh, nice! Pretty good here too, man. Hey, I gotta run soon. Catch you later!`;
         } else if (roleplayInteractionCount === 2) {
             tutorReply = `Sounds good! Take care, see you around!`;
         } else if (roleplayInteractionCount === 3) {
             tutorReply = `Alright man, have a great rest of your day!`;
         } else {
-            tutorReply = `¡Excelente práctica nativa! Completaste los 4 turnos. Haz clic en 'Validate Roleplay & Proceed' para continuar.`;
+            tutorReply = `¡Excelente práctica nativa! Completaste los 4 turnos. Haz clic en 'Validate Roleplay & Proceed'.`;
         }
 
         chatBox.innerHTML += `
@@ -247,6 +335,7 @@ function sendRoleplayMessage() {
     }, 1000);
 }
 
+// Validar que se completaron los 4 turnos de chat
 function completeRoleplayPhase() {
     if (roleplayInteractionCount < 4) {
         showCustomModal("Incomplete Conversation ⚠️", `Completa los 4 turnos de charla conversacional primero (llevas ${roleplayInteractionCount}).`, "💬");
@@ -260,6 +349,7 @@ function completeRoleplayPhase() {
     }, 1200);
 }
 
+// Reproductor de texto a voz (SpeechSynthesis)
 function speakSpecificTextCustom(text) {
     if (window.speechSynthesis.speaking) window.speechSynthesis.cancel();
     const utterance = new SpeechSynthesisUtterance(text);
@@ -267,6 +357,7 @@ function speakSpecificTextCustom(text) {
     window.speechSynthesis.speak(utterance);
 }
 
+// Reconocimiento de voz por micrófono en el Chat
 let activeRecognition = null;
 function toggleSpeechRecognition() {
     const statusText = document.getElementById('mic-status-text');
@@ -293,6 +384,7 @@ function toggleSpeechRecognition() {
     } catch (err) { statusText.innerText = 'Mic'; activeRecognition = null; }
 }
 
+// Actualizar tarjeta actual en Fase 2 (Flashcards)
 function updateCard() {
     if (activeFlashcards.length === 0) return;
     const card = activeFlashcards[currentCard];
@@ -304,6 +396,7 @@ function updateCard() {
     document.getElementById('flash-img').innerText = card.emoji || "📚";
 }
 
+// Siguiente flashcard o pasar a Gramática
 function nextCard() {
     currentCard++;
     if (currentCard >= activeFlashcards.length) {
@@ -324,6 +417,7 @@ function prevCard() {
     updateCard();
 }
 
+// Cargar pregunta de gramática (Fase 3)
 function loadQuizQuestion() {
     if (currentQuizIndex >= activeQuizzes.length) return;
     activeQuizItem = activeQuizzes[currentQuizIndex];
@@ -382,6 +476,7 @@ function processQuizAnswer(isCorrect) {
     }, 2500);
 }
 
+// Reproducir audio nativo para dictado (Fase 4)
 function playListeningAudio() {
     if (window.speechSynthesis.speaking) window.speechSynthesis.cancel();
     const utterance = new SpeechSynthesisUtterance(currentListeningTarget);
@@ -399,6 +494,7 @@ function checkListeningDictation() {
     }
 }
 
+// Reproducir audio de Shadowing (Fase 5)
 function speakShadowText() {
     if (window.speechSynthesis.speaking) window.speechSynthesis.cancel();
     const utterance = new SpeechSynthesisUtterance(document.getElementById('shadow-text').innerText.replace(/"/g, ''));
@@ -406,6 +502,7 @@ function speakShadowText() {
     window.speechSynthesis.speak(utterance);
 }
 
+// Verificar pronunciación mediante micrófono para completar la lección
 function verifyShadowingVoice() {
     const statusText = document.getElementById('shadow-mic-status');
     const SpeechRecognitionAPI = window.SpeechRecognition || window.webkitSpeechRecognition;
@@ -432,6 +529,7 @@ function verifyShadowingVoice() {
     } catch (err) { statusText.innerText = 'Record with Mic 🎙️'; }
 }
 
+// Abrir modal de Bóveda de Vocabulario guardado
 function openVocabularyVault() {
     const container = document.getElementById('vault-list-container');
     container.innerHTML = '';
@@ -447,7 +545,7 @@ function openVocabularyVault() {
                 else if (t.includes('disc')) cleanEmoji = "🏷️";
                 return { term: item.term, def: item.def || 'Vocabulario', es: item.es || '', emoji: cleanEmoji };
             }
-            return { term: "Vocabulary", def: "Término guardado", es: "Recordatorio de vocabulario B1", emoji: "📖" };
+            return { term: "Vocabulary", def: "Término guardado", es: "Recordatorio B1", emoji: "📖" };
         });
     }
 
@@ -455,7 +553,7 @@ function openVocabularyVault() {
         container.innerHTML = `
             <div class="text-center py-8 space-y-2">
                 <span class="text-4xl">📭</span>
-                <p class="text-xs text-slate-500 font-semibold">Tu Bóveda está vacía aún. Completa la Fase 2 (Flashcards) para guardar tus palabras.</p>
+                <p class="text-xs text-slate-500 font-semibold">Tu Bóveda está vacía aún. Completa la Fase 2.</p>
             </div>
         `;
     } else {
@@ -467,7 +565,6 @@ function openVocabularyVault() {
                         <div>
                             <h4 class="text-xs sm:text-sm font-extrabold text-slate-900">${item.term} <span class="text-slate-500 font-semibold">(${item.def})</span></h4>
                             <p class="text-[11px] text-purple-700 font-extrabold mt-0.5">${item.es || ''}</p>
-                            <p class="text-[10px] text-slate-400 font-medium italic mt-0.5">💡 Recordatorio de dominio B1</p>
                         </div>
                     </div>
                     <button onclick="speakSpecificTextCustom('${item.term}')" class="bg-white hover:bg-purple-100 text-purple-700 border border-purple-200 px-3.5 py-1.5 rounded-xl text-xs font-extrabold shadow-sm cursor-pointer inline-flex items-center gap-1.5 transition flex-shrink-0">
@@ -480,60 +577,17 @@ function openVocabularyVault() {
     document.getElementById('vocabulary-vault-modal').classList.remove('hidden');
 }
 
+
+// ==========================================
+// 7. ARRANQUE AUTOMÁTICO AL CARGAR EL DOM
+// ==========================================
+
 if (!appState.hasStarted) {
-    // Aquí puedes mostrar un modal o pantalla de bienvenida para elegir nivel
-    showCustomModal("Welcome to English Pro 🚀", "Selecciona tu nivel para comenzar.", "👋");
-    appState.hasStarted = true;
-    saveState();
-}
-let selectedSetupMode = 'intermediate';
-
-function setInitialMode(mode) {
-    selectedSetupMode = mode;
-    const btnBeg = document.getElementById('btn-mode-beginner');
-    const btnInt = document.getElementById('btn-mode-intermediate');
-    
-    if (!btnBeg || !btnInt) return;
-
-    if (mode === 'beginner') {
-        btnBeg.className = "p-3.5 rounded-2xl border-2 border-sky-500 bg-sky-50 text-xs font-extrabold text-sky-800 transition cursor-pointer shadow-sm";
-        btnInt.className = "p-3.5 rounded-2xl border-2 border-slate-200 bg-slate-50 text-xs font-extrabold text-slate-700 transition cursor-pointer hover:border-emerald-400";
-    } else {
-        btnInt.className = "p-3.5 rounded-2xl border-2 border-emerald-500 bg-emerald-50 text-xs font-extrabold text-emerald-800 transition cursor-pointer shadow-sm";
-        btnBeg.className = "p-3.5 rounded-2xl border-2 border-slate-200 bg-slate-50 text-xs font-extrabold text-slate-700 transition cursor-pointer hover:border-sky-400";
-    }
-}
-
-function completeSetupAndStart() {
-    const nameInput = document.getElementById('setup-name-input');
-    if (nameInput && nameInput.value.trim()) {
-        appState.userName = nameInput.value.trim();
-    }
-    
-    appState.currentMode = selectedSetupMode;
-    appState.hasStarted = true;
-    saveState();
-
-    const setupContainer = document.getElementById('welcome-setup-container');
-    if (setupContainer) setupContainer.classList.add('hidden');
-    
-    updateUIStats();
-    loadCurrentLesson();
-}
-
-// Verificación de inicio
-if (!appState.hasStarted) {
+    // Si no ha iniciado, mostrar el modal de configuración y selección de nivel
     const setupContainer = document.getElementById('welcome-setup-container');
     if (setupContainer) setupContainer.classList.remove('hidden');
 } else {
-    loadCurrentLesson();
-    updateUIStats();
-}
-// Verificación automática de inicio limpio
-if (!appState.hasStarted) {
-    const setupContainer = document.getElementById('welcome-setup-container');
-    if (setupContainer) setupContainer.classList.remove('hidden');
-} else {
+    // Si ya configuró su perfil, cargar la lección directamente
     loadCurrentLesson();
     updateUIStats();
 }
