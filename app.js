@@ -582,12 +582,18 @@ function openVocabularyVault() {
 // 7. ARRANQUE AUTOMÁTICO AL CARGAR EL DOM
 // ==========================================
 
+const setupContainer = document.getElementById('welcome-setup-container');
+
 if (!appState.hasStarted) {
-    // Si no ha iniciado, mostrar el modal de configuración y selección de nivel
-    const setupContainer = document.getElementById('welcome-setup-container');
-    if (setupContainer) setupContainer.classList.remove('hidden');
+    // Forzar la aparición del modal de configuración quitando la clase hidden
+    if (setupContainer) {
+        setupContainer.classList.remove('hidden');
+    }
 } else {
-    // Si ya configuró su perfil, cargar la lección directamente
+    // Si ya inició, ocultar el setup y cargar lección
+    if (setupContainer) {
+        setupContainer.classList.add('hidden');
+    }
     loadCurrentLesson();
     updateUIStats();
 }
