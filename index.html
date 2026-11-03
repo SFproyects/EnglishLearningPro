@@ -42,7 +42,7 @@
             <div class="flex items-center justify-center flex-wrap gap-2 text-xs w-full sm:w-auto">
                 <div class="flex items-center space-x-1.5 bg-amber-50 px-3.5 py-1.5 rounded-xl border border-amber-200 font-bold text-amber-800 shadow-sm">
                     <i data-lucide="layers" class="w-3.5 h-3.5 text-amber-600"></i>
-                    <span id="current-block-label">Nivel: Intermedio B1 Mastery</span>
+                    <span id="current-block-label">Nivel: Intermedio</span>
                 </div>
                 <div class="flex items-center space-x-1.5 bg-orange-50 px-3.5 py-1.5 rounded-xl border border-orange-200 font-semibold text-orange-700 shadow-sm">
                     <i data-lucide="flame" class="w-3.5 h-3.5 text-orange-500"></i>
@@ -68,7 +68,7 @@
         <div class="vibrant-card rounded-3xl p-5 sm:p-7 mb-6 relative overflow-hidden border border-emerald-100 shadow-xl bg-gradient-to-br from-white via-emerald-50/30 to-sky-50/40">
             <div class="relative z-10 flex flex-col md:flex-row justify-between items-start md:items-center gap-5">
                 <div class="flex-grow">
-                    <span class="text-[10px] font-extrabold uppercase tracking-widest text-emerald-700 bg-emerald-100 px-3 py-1 rounded-full border border-emerald-200" id="course-subtitle">Intermediate B1 Mastery Course</span>
+                    <span class="text-[10px] font-extrabold uppercase tracking-widest text-emerald-700 bg-emerald-100 px-3 py-1 rounded-full border border-emerald-200" id="course-subtitle">Intermediate Professional Course</span>
                     <h2 class="text-2xl sm:text-3xl font-extrabold text-slate-900 mt-2 tracking-tight" id="welcome-title">Welcome back!</h2>
                     <p class="text-slate-600 mt-1.5 text-xs sm:text-sm bg-white/80 border border-slate-200 px-4 py-2.5 rounded-2xl italic shadow-sm" id="motivational-quote">
                         "Real native flow: talk naturally and get instant corrections!"
@@ -126,14 +126,14 @@
                                     <span class="text-[10px] font-extrabold text-emerald-700 uppercase block">🔥 Slang 1:</span>
                                     <p class="text-xs text-slate-800 italic font-semibold mb-1" id="g-slang1">Hey! I'm Kevin, great to meet you.</p>
                                 </div>
-                                <button onclick="speakSpecificTextCustom('Hey! I am Kevin, great to meet you.')" class="self-start bg-white hover:bg-emerald-100 text-emerald-700 px-2 py-1 rounded-lg text-[10px] font-bold border border-emerald-200 cursor-pointer">🔊 Listen</button>
+                                <button onclick="speakDynamicSlang(1)" class="self-start bg-white hover:bg-emerald-100 text-emerald-700 px-2 py-1 rounded-lg text-[10px] font-bold border border-emerald-200 cursor-pointer">🔊 Listen</button>
                             </div>
                             <div class="bg-emerald-50 border border-emerald-200 p-3 rounded-2xl flex flex-col justify-between">
                                 <div>
                                     <span class="text-[10px] font-extrabold text-emerald-700 uppercase block">🔥 Slang 2:</span>
                                     <p class="text-xs text-slate-800 italic font-semibold mb-1" id="g-slang2">What's up? I'm Kevin, let's chat!</p>
                                 </div>
-                                <button onclick="speakSpecificTextCustom('What is up? I am Kevin, let us chat!')" class="self-start bg-white hover:bg-emerald-100 text-emerald-700 px-2 py-1 rounded-lg text-[10px] font-bold border border-emerald-200 cursor-pointer">🔊 Listen</button>
+                                <button onclick="speakDynamicSlang(2)" class="self-start bg-white hover:bg-emerald-100 text-emerald-700 px-2 py-1 rounded-lg text-[10px] font-bold border border-emerald-200 cursor-pointer">🔊 Listen</button>
                             </div>
                         </div>
                     </div>
@@ -348,8 +348,9 @@
                         <button type="button" onclick="setInitialMode('beginner')" id="btn-mode-beginner" class="p-3 rounded-2xl border-2 border-slate-200 bg-slate-50 text-xs font-extrabold text-slate-700 transition cursor-pointer hover:border-sky-400">
                             🌱 Beginner
                         </button>
+                        <!-- CORREGIDO: Dice solo "Intermedio" sin etiquetas B1 -->
                         <button type="button" onclick="setInitialMode('intermediate')" id="btn-mode-intermediate" class="p-3 rounded-2xl border-2 border-emerald-500 bg-emerald-50 text-xs font-extrabold text-emerald-800 transition cursor-pointer shadow-sm">
-                            🔥 Intermedio B1
+                            🔥 Intermedio
                         </button>
                     </div>
                 </div>
