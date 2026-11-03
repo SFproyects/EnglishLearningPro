@@ -529,3 +529,11 @@ if (!appState.hasStarted) {
     loadCurrentLesson();
     updateUIStats();
 }
+// Verificación automática de inicio limpio
+if (!appState.hasStarted) {
+    const setupContainer = document.getElementById('welcome-setup-container');
+    if (setupContainer) setupContainer.classList.remove('hidden');
+} else {
+    loadCurrentLesson();
+    updateUIStats();
+}
