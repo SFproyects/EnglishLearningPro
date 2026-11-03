@@ -184,18 +184,23 @@ function setInitialMode(mode) {
     }
 }
 
-// Validar credenciales (contraseña "kevin b1pro") y arrancar la app
+// Validar credenciales de forma privada y segura
 function completeSetupAndStart() {
     const nameInput = document.getElementById('setup-name-input');
-    if (nameInput && nameInput.value.trim()) {
-        appState.userName = nameInput.value.trim();
+    const userName = nameInput ? nameInput.value.trim() : '';
+
+    if (!userName) {
+        showCustomModal("Nombre Requerido ⚠️", "Por favor, escribe tu nombre para continuar.", "✍️");
+        return;
     }
+    appState.userName = userName;
     
-    // Si selecciona Intermedio B1, validar la contraseña requerida
+    // Si selecciona Intermedio B1, validar la contraseña requerida de forma privada
     if (selectedSetupMode === 'intermediate') {
         const passInput = document.getElementById('setup-password-input');
         if (!passInput || passInput.value.trim() !== 'kevin b1pro') {
-            showCustomModal("Acceso Denegado 🔒", "La contraseña para el nivel Intermedio B1 es incorrecta ('kevin b1pro').", "⚠️");
+            // MENSAJE SEGURO: NUNCA revela la contraseña en pantalla
+            showCustomModal("Acceso Denegado 🔒", "La contraseña introducida es incorrecta. Acceso restringido.", "⚠️");
             return;
         }
     }
@@ -210,7 +215,6 @@ function completeSetupAndStart() {
     updateUIStats();
     loadCurrentLesson();
 }
-
 
 // ==========================================
 // 6. CARGA Y LÓGICA DE LECCIONES Y FASES

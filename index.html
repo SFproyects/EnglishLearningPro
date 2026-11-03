@@ -13,9 +13,13 @@
 </head>
 <body class="min-h-screen flex flex-col justify-between relative overflow-x-hidden">
 
-    <!-- HEADER / NAVBAR -->
+    <!-- ========================================== -->
+    <!-- 1. ENCABEZADO Y BARRA DE ESTADÍSTICAS     -->
+    <!-- ========================================== -->
     <header class="border-b border-slate-200 bg-white/90 sticky top-0 z-40 backdrop-blur-xl shadow-sm">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3.5 flex flex-col sm:flex-row items-center justify-between gap-3">
+            
+            <!-- Logo y Título -->
             <div class="flex items-center space-x-3 w-full sm:w-auto justify-between sm:justify-start">
                 <div class="flex items-center space-x-2.5">
                     <div class="bg-gradient-to-tr from-sky-500 to-emerald-400 p-2.5 rounded-2xl text-white font-bold shadow-lg shadow-emerald-500/20">
@@ -26,6 +30,7 @@
                         <span class="text-[10px] font-bold uppercase tracking-wider bg-emerald-100 text-emerald-700 border border-emerald-200 px-2.5 py-0.5 rounded-full" id="header-badge">Lesson 1 / 40</span>
                     </h1>
                 </div>
+                <!-- Botón de Bóveda móvil -->
                 <div class="flex items-center gap-2 sm:hidden">
                     <button onclick="openVocabularyVault()" class="bg-purple-100 text-purple-700 border border-purple-200 px-3.5 py-1.5 rounded-xl text-xs font-extrabold flex items-center gap-1.5 shadow-sm">
                         📚 Bóveda
@@ -33,7 +38,7 @@
                 </div>
             </div>
 
-            <!-- Stats Bar -->
+            <!-- Contadores de Racha, Nivel y Vocabulario -->
             <div class="flex items-center justify-center flex-wrap gap-2 text-xs w-full sm:w-auto">
                 <div class="flex items-center space-x-1.5 bg-amber-50 px-3.5 py-1.5 rounded-xl border border-amber-200 font-bold text-amber-800 shadow-sm">
                     <i data-lucide="layers" class="w-3.5 h-3.5 text-amber-600"></i>
@@ -54,10 +59,12 @@
         </div>
     </header>
 
-    <!-- MAIN CONTENT -->
+    <!-- ========================================== -->
+    <!-- 2. CONTENIDO PRINCIPAL Y LECCIONES          -->
+    <!-- ========================================== -->
     <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-5 w-full flex-grow relative z-10">
         
-        <!-- Welcome Banner -->
+        <!-- Banner de Bienvenida y Progreso -->
         <div class="vibrant-card rounded-3xl p-5 sm:p-7 mb-6 relative overflow-hidden border border-emerald-100 shadow-xl bg-gradient-to-br from-white via-emerald-50/30 to-sky-50/40">
             <div class="relative z-10 flex flex-col md:flex-row justify-between items-start md:items-center gap-5">
                 <div class="flex-grow">
@@ -68,7 +75,7 @@
                     </p>
                 </div>
 
-                <!-- Session Progress -->
+                <!-- Barra de Progreso de la Lección -->
                 <div class="vibrant-card border border-slate-200 p-4.5 rounded-2xl w-full md:w-85 shadow-md bg-white">
                     <div class="flex justify-between text-xs mb-2 font-bold">
                         <span class="text-slate-600">Lesson Progress:</span>
@@ -84,13 +91,13 @@
             </div>
         </div>
 
-        <!-- VISTA DE LECCIÓN ÚNICA EN PANTALLA -->
+        <!-- CONTENEDOR DE FASES DE APRENDIZAJE -->
         <div id="lesson-view-container" class="space-y-4">
 
-            <!-- FASE 1: TEORÍA + CHAT NATIVO -->
+            <!-- FASE 1: TEORÍA Y CHAT NATIVO -->
             <div id="content-speaking" class="space-y-4">
                 
-                <!-- Guía Teórica de Saludos y Despedidas -->
+                <!-- Tarjetas de Guía Teórica (Saludos y Despedidas) -->
                 <div class="vibrant-card rounded-3xl p-5 sm:p-7 shadow-lg border border-sky-100 space-y-4">
                     <h3 class="text-xs font-extrabold text-slate-800 uppercase tracking-wider flex items-center gap-2">
                         <i data-lucide="book-open" class="w-4 h-4 text-sky-600"></i> Step 1: Core Expressions & Quick Replies (Guía de Respuestas)
@@ -98,13 +105,12 @@
                     
                     <!-- Saludos -->
                     <div>
-                        <span class="text-[11px] font-extrabold text-sky-700 uppercase tracking-wider block mb-2">👋 Section A: Greetings & Quick Replies (Cómo responder)</span>
+                        <span class="text-[11px] font-extrabold text-sky-700 uppercase tracking-wider block mb-2">👋 Section A: Greetings & Quick Replies</span>
                         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
                             <div class="bg-sky-50 border border-sky-200 p-3 rounded-2xl flex flex-col justify-between">
                                 <div>
                                     <span class="text-[10px] font-extrabold text-sky-700 uppercase block">💬 Responder "¿Qué tal?":</span>
                                     <p class="text-xs text-slate-800 italic font-semibold mb-1">"Pretty good, thanks!"</p>
-                                    <p class="text-[10px] text-sky-800 font-bold mb-2">(Bastante bien, ¡gracias!)</p>
                                 </div>
                                 <button onclick="speakSpecificTextCustom('Pretty good, thanks!')" class="self-start bg-white hover:bg-sky-100 text-sky-700 px-2 py-1 rounded-lg text-[10px] font-bold border border-sky-200 cursor-pointer">🔊 Listen</button>
                             </div>
@@ -112,7 +118,6 @@
                                 <div>
                                     <span class="text-[10px] font-extrabold text-sky-700 uppercase block">💬 Responder "¿Qué hay?":</span>
                                     <p class="text-xs text-slate-800 italic font-semibold mb-1">"Not much, just chilling!"</p>
-                                    <p class="text-[10px] text-sky-800 font-bold mb-2">(Nada del otro mundo, ¡relajado!)</p>
                                 </div>
                                 <button onclick="speakSpecificTextCustom('Not much, just chilling!')" class="self-start bg-white hover:bg-sky-100 text-sky-700 px-2 py-1 rounded-lg text-[10px] font-bold border border-sky-200 cursor-pointer">🔊 Listen</button>
                             </div>
@@ -120,7 +125,6 @@
                                 <div>
                                     <span class="text-[10px] font-extrabold text-emerald-700 uppercase block">🔥 Slang 1:</span>
                                     <p class="text-xs text-slate-800 italic font-semibold mb-1" id="g-slang1">Hey! I'm Kevin, great to meet you.</p>
-                                    <p class="text-[10px] text-emerald-800 font-bold mb-2" id="g-slang1-es">(¡Ey! Soy Kevin, qué gusto conocerte.)</p>
                                 </div>
                                 <button onclick="speakSpecificTextCustom('Hey! I am Kevin, great to meet you.')" class="self-start bg-white hover:bg-emerald-100 text-emerald-700 px-2 py-1 rounded-lg text-[10px] font-bold border border-emerald-200 cursor-pointer">🔊 Listen</button>
                             </div>
@@ -128,54 +132,14 @@
                                 <div>
                                     <span class="text-[10px] font-extrabold text-emerald-700 uppercase block">🔥 Slang 2:</span>
                                     <p class="text-xs text-slate-800 italic font-semibold mb-1" id="g-slang2">What's up? I'm Kevin, let's chat!</p>
-                                    <p class="text-[10px] text-emerald-800 font-bold mb-2" id="g-slang2-es">(¿Qué tal? Soy Kevin, ¡hablemos!)</p>
                                 </div>
                                 <button onclick="speakSpecificTextCustom('What is up? I am Kevin, let us chat!')" class="self-start bg-white hover:bg-emerald-100 text-emerald-700 px-2 py-1 rounded-lg text-[10px] font-bold border border-emerald-200 cursor-pointer">🔊 Listen</button>
                             </div>
                         </div>
                     </div>
-
-                    <!-- Despedidas -->
-                    <div class="pt-2 border-t border-slate-200">
-                        <span class="text-[11px] font-extrabold text-purple-700 uppercase tracking-wider block mb-2">🛑 Section B: Farewells (Despedidas)</span>
-                        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
-                            <div class="bg-purple-50 border border-purple-200 p-3 rounded-2xl flex flex-col justify-between">
-                                <div>
-                                    <span class="text-[10px] font-extrabold text-purple-700 uppercase block">👔 Formal 1:</span>
-                                    <p class="text-xs text-slate-800 italic font-semibold mb-1" id="f-form1">Thank you for your time. Have a wonderful day.</p>
-                                    <p class="text-[10px] text-purple-800 font-bold mb-2" id="f-form1-es">(Gracias por su tiempo. Que tenga un día maravilloso.)</p>
-                                </div>
-                                <button onclick="speakSpecificTextCustom('Thank you for your time. Have a wonderful day.')" class="self-start bg-white hover:bg-purple-100 text-purple-700 px-2 py-1 rounded-lg text-[10px] font-bold border border-purple-200 cursor-pointer">🔊 Listen</button>
-                            </div>
-                            <div class="bg-purple-50 border border-purple-200 p-3 rounded-2xl flex flex-col justify-between">
-                                <div>
-                                    <span class="text-[10px] font-extrabold text-purple-700 uppercase block">👔 Formal 2:</span>
-                                    <p class="text-xs text-slate-800 italic font-semibold mb-1" id="f-form2">It was a productive conversation. Goodbye.</p>
-                                    <p class="text-[10px] text-purple-800 font-bold mb-2" id="f-form2-es">(Fue una conversación productiva. Adiós.)</p>
-                                </div>
-                                <button onclick="speakSpecificTextCustom('It was a productive conversation. Goodbye.')" class="self-start bg-white hover:bg-purple-100 text-purple-700 px-2 py-1 rounded-lg text-[10px] font-bold border border-purple-200 cursor-pointer">🔊 Listen</button>
-                            </div>
-                            <div class="bg-pink-50 border border-pink-200 p-3 rounded-2xl flex flex-col justify-between">
-                                <div>
-                                    <span class="text-[10px] font-extrabold text-pink-700 uppercase block">🔥 Slang 1:</span>
-                                    <p class="text-xs text-slate-800 italic font-semibold mb-1" id="f-slang1">Catch you later! See you around.</p>
-                                    <p class="text-[10px] text-pink-800 font-bold mb-2" id="f-slang1-es">(¡Nos vemos luego! Te veo por ahí.)</p>
-                                </div>
-                                <button onclick="speakSpecificTextCustom('Catch you later! See you around.')" class="self-start bg-white hover:bg-pink-100 text-pink-700 px-2 py-1 rounded-lg text-[10px] font-bold border border-pink-200 cursor-pointer">🔊 Listen</button>
-                            </div>
-                            <div class="bg-pink-50 border border-pink-200 p-3 rounded-2xl flex flex-col justify-between">
-                                <div>
-                                    <span class="text-[10px] font-extrabold text-pink-700 uppercase block">🔥 Slang 2:</span>
-                                    <p class="text-xs text-slate-800 italic font-semibold mb-1" id="f-slang2">Alright, I'm heading out. Take care!</p>
-                                    <p class="text-[10px] text-pink-800 font-bold mb-2" id="f-slang2-es">(Bien, ya me voy. ¡Cuídate!)</p>
-                                </div>
-                                <button onclick="speakSpecificTextCustom('Alright, I am heading out. Take care!')" class="self-start bg-white hover:bg-pink-100 text-pink-700 px-2 py-1 rounded-lg text-[10px] font-bold border border-pink-200 cursor-pointer">🔊 Listen</button>
-                            </div>
-                        </div>
-                    </div>
                 </div>
 
-                <!-- Chat Nativo Real con Corrección y Respuestas Naturales -->
+                <!-- Chat de Práctica Conversacional (Roleplay con Corrección Instantánea) -->
                 <div class="grid grid-cols-1 lg:grid-cols-3 gap-5">
                     <div class="vibrant-card lg:col-span-3 rounded-3xl p-5 sm:p-7 flex flex-col justify-between shadow-lg h-[480px]">
                         <div>
@@ -187,10 +151,10 @@
                             </div>
                         </div>
 
-                        <!-- Historial de Conversación -->
+                        <!-- Historial de Mensajes del Chat -->
                         <div id="chat-messages-container" class="flex-grow overflow-y-auto space-y-3 my-3 pr-2 bg-slate-50/80 p-4 rounded-2xl border border-slate-200 shadow-inner"></div>
 
-                        <!-- Input de Chat -->
+                        <!-- Caja de Entrada y Micrófono -->
                         <div class="pt-2 border-t border-slate-200">
                             <div class="flex items-center justify-end mb-2">
                                 <button onclick="toggleSpeechRecognition()" id="mic-btn" class="bg-emerald-500 hover:bg-emerald-600 text-white px-3 py-1.5 rounded-xl text-xs font-extrabold flex items-center gap-1 transition cursor-pointer shadow-sm">
@@ -214,12 +178,13 @@
                 </div>
             </div>
 
-            <!-- FASE 2: FLASHCARDS -->
+            <!-- FASE 2: FLASHCARDS (VOCABULARIO) -->
             <div id="content-flashcards" class="hidden space-y-4">
                 <div class="max-w-sm mx-auto text-center">
                     <h3 class="text-xl font-extrabold text-slate-900 mb-1 tracking-tight" id="flashcard-phase-title">Phase 2: Vocabulary Mastery</h3>
                     <p class="text-xs text-slate-500 mb-5 font-semibold" id="flashcard-counter-label">Reviewing words...</p>
                     
+                    <!-- Tarjeta interactiva con volteo -->
                     <div class="card-flip h-72 w-full cursor-pointer mb-5 shadow-2xl" onclick="this.classList.toggle('flipped')">
                         <div class="card-inner relative w-full h-full text-center">
                             <div class="card-front absolute w-full h-full vibrant-card rounded-3xl p-6 flex flex-col items-center justify-between border-2 border-slate-200">
@@ -245,7 +210,7 @@
                 </div>
             </div>
 
-            <!-- FASE 3: GRAMMAR -->
+            <!-- FASE 3: GRAMMAR CHECK (QUIZ) -->
             <div id="content-grammar" class="hidden space-y-4">
                 <div class="vibrant-card max-w-xl mx-auto rounded-3xl p-5 sm:p-7 shadow-xl border border-purple-100">
                     <div class="flex justify-between items-center mb-3.5">
@@ -269,7 +234,7 @@
                 </div>
             </div>
 
-            <!-- FASE 4: LISTENING -->
+            <!-- FASE 4: LISTENING (ENTRENAMIENTO AUDITIVO) -->
             <div id="content-listening" class="hidden space-y-4">
                 <div class="vibrant-card max-w-xl mx-auto rounded-3xl p-5 sm:p-7 shadow-xl border border-emerald-100">
                     <div class="flex justify-between items-center mb-3.5">
@@ -292,7 +257,6 @@
                             <button onclick="checkListeningDictation()" class="bg-sky-500 hover:bg-sky-600 text-white font-extrabold px-6 py-3 rounded-2xl text-xs transition cursor-pointer shadow-lg shadow-sky-500/25">
                                 Verify Dictation ✓
                             </button>
-                            <span class="text-xs text-slate-500 font-bold" id="listening-hint">Required accuracy</span>
                         </div>
 
                         <div id="listening-result" class="text-xs font-extrabold text-slate-600 mt-2"></div>
@@ -300,14 +264,14 @@
                 </div>
             </div>
 
-            <!-- FASE 5: SHADOWING -->
+            <!-- FASE 5: VOICE SHADOWING (PRONUNCIACIÓN) -->
             <div id="content-shadowing" class="hidden space-y-4">
                 <div class="vibrant-card max-w-xl mx-auto rounded-3xl p-5 sm:p-7 shadow-xl border border-sky-100">
                     <div class="flex justify-between items-center mb-3.5">
                         <span class="text-xs font-extrabold text-sky-700 bg-sky-100 px-3.5 py-1 rounded-full border border-sky-200 shadow-sm">Phase 5: Voice Shadowing (US Accent)</span>
                     </div>
                     <h3 class="text-lg font-extrabold text-slate-900 mb-1">Pronounce Target Phrase</h3>
-                    <p class="text-slate-600 text-xs mb-5 leading-relaxed font-medium">Use your microphone. The system will validate your pronunciation to level up.</p>
+                    <p class="text-slate-600 text-xs mb-5 leading-relaxed font-medium">Use your microphone. The system will validate your pronunciation.</p>
                     
                     <div class="bg-slate-50 p-5 rounded-3xl border border-slate-200 mb-4 space-y-4 shadow-inner text-center">
                         <div class="bg-white p-4.5 rounded-2xl border border-slate-200 shadow-sm">
@@ -324,10 +288,6 @@
                             </button>
                         </div>
 
-                        <div class="bg-white p-3.5 rounded-2xl border border-slate-200 text-xs text-slate-700 font-semibold" id="shadow-transcript-box">
-                            Your voice transcript will appear here...
-                        </div>
-
                         <div id="shadow-result" class="text-xs font-extrabold text-slate-600 pt-2"></div>
                     </div>
                 </div>
@@ -337,7 +297,11 @@
 
     </main>
 
-    <!-- VOCABULARY VAULT MODAL -->
+    <!-- ========================================== -->
+    <!-- 3. MODALES (BÓVEDA Y ALERTAS)             -->
+    <!-- ========================================== -->
+
+    <!-- Modal de Bóveda de Vocabulario -->
     <div id="vocabulary-vault-modal" class="fixed inset-0 bg-slate-900/60 backdrop-blur-md z-50 flex items-center justify-center hidden p-4">
         <div class="vibrant-card max-w-lg w-full rounded-3xl p-6 shadow-2xl relative border border-purple-200 flex flex-col max-h-[85vh]">
             <div class="flex items-center justify-between mb-4 pb-3 border-b border-slate-200">
@@ -355,7 +319,7 @@
         </div>
     </div>
 
-    <!-- CUSTOM APP MODAL -->
+    <!-- Modal General para Mensajes -->
     <div id="custom-modal" class="fixed inset-0 bg-slate-900/60 backdrop-blur-md z-50 flex items-center justify-center hidden p-4">
         <div class="vibrant-card max-w-xs w-full rounded-3xl p-6 text-center space-y-3.5 border border-slate-200 shadow-2xl">
             <div class="w-14 h-14 bg-sky-100 border border-sky-200 rounded-2xl flex items-center justify-center mx-auto text-2xl shadow-inner" id="modal-icon">✨</div>
@@ -365,48 +329,57 @@
         </div>
     </div>
 
-    <!-- FOOTER -->
-    <footer class="border-t border-slate-200 bg-white/60 py-3 text-center text-xs text-slate-500 relative z-10 font-medium">
-        English Pro &copy; 2026 &bull; Ultimate Progressive Edition
-    </footer>
-
-    <!-- PANTALLA DE BIENVENIDA Y SELECTOR DE NIVEL (Oculto por defecto con clase hidden) -->
+   <!-- PANTALLA DE BIENVENIDA Y SELECTOR DE NIVEL -->
     <div id="welcome-setup-container" class="hidden fixed inset-0 bg-slate-900/70 backdrop-blur-md z-50 flex items-center justify-center p-4">
-        <div class="vibrant-card max-w-md w-full rounded-3xl p-6 sm:p-8 shadow-2xl border border-emerald-200 text-center space-y-5 bg-white">
-            <div class="w-16 h-16 bg-gradient-to-tr from-sky-500 to-emerald-400 rounded-3xl flex items-center justify-center mx-auto text-white shadow-lg shadow-emerald-500/30 text-2xl font-bold">
+        <div class="vibrant-card max-w-md w-full rounded-3xl p-6 sm:p-8 shadow-2xl border border-emerald-200 text-center space-y-4 bg-white">
+            <div class="w-14 h-14 bg-gradient-to-tr from-sky-500 to-emerald-400 rounded-2xl flex items-center justify-center mx-auto text-white shadow-lg shadow-emerald-500/30 text-xl font-bold">
                 ⚡
             </div>
             <div>
                 <h3 class="text-xl sm:text-2xl font-extrabold text-slate-900 tracking-tight">Welcome to English Pro</h3>
-                <p class="text-xs sm:text-sm text-slate-600 mt-1.5 font-medium">Tu plataforma de dominio de inglés con flujo nativo y corrección instantánea.</p>
+                <p class="text-xs sm:text-sm text-slate-600 mt-1 font-medium">Configura tu perfil y nivel de acceso.</p>
             </div>
 
             <div class="space-y-3 text-left">
+                <!-- Input de Nombre (Sin valor por defecto) -->
                 <div>
                     <label class="block text-xs font-extrabold text-slate-700 uppercase tracking-wider mb-1">Tu Nombre:</label>
-                    <input type="text" id="setup-name-input" value="Kevin" class="vibrant-input w-full rounded-2xl px-4 py-3 text-xs sm:text-sm text-slate-800 font-semibold focus:outline-none">
+                    <input type="text" id="setup-name-input" placeholder="Ej. Kevin" class="vibrant-input w-full rounded-2xl px-4 py-2.5 text-xs sm:text-sm text-slate-800 font-semibold focus:outline-none border border-slate-200">
                 </div>
 
+                <!-- Botones de Selección de Nivel -->
                 <div>
                     <label class="block text-xs font-extrabold text-slate-700 uppercase tracking-wider mb-1">Selecciona tu Nivel:</label>
                     <div class="grid grid-cols-2 gap-3">
-                        <button type="button" onclick="setInitialMode('beginner')" id="btn-mode-beginner" class="p-3.5 rounded-2xl border-2 border-slate-200 bg-slate-50 text-xs font-extrabold text-slate-700 transition cursor-pointer hover:border-sky-400">
+                        <button type="button" onclick="setInitialMode('beginner')" id="btn-mode-beginner" class="p-3 rounded-2xl border-2 border-slate-200 bg-slate-50 text-xs font-extrabold text-slate-700 transition cursor-pointer hover:border-sky-400">
                             🌱 Beginner (A2+)
                         </button>
-                        <button type="button" onclick="setInitialMode('intermediate')" id="btn-mode-intermediate" class="p-3.5 rounded-2xl border-2 border-emerald-500 bg-emerald-50 text-xs font-extrabold text-emerald-800 transition cursor-pointer shadow-sm">
+                        <button type="button" onclick="setInitialMode('intermediate')" id="btn-mode-intermediate" class="p-3 rounded-2xl border-2 border-emerald-500 bg-emerald-50 text-xs font-extrabold text-emerald-800 transition cursor-pointer shadow-sm">
                             🔥 Intermedio B1
                         </button>
                     </div>
                 </div>
+
+                <!-- Campo de Contraseña (Visible por defecto porque inicia en Intermedio) -->
+                <div id="password-container" class="transition-all">
+                    <label class="block text-xs font-extrabold text-emerald-700 uppercase tracking-wider mb-1">🔑 Contraseña de Acceso:</label>
+                    <input type="password" id="setup-password-input" placeholder="Introduce tu contraseña..." class="vibrant-input w-full rounded-2xl px-4 py-2.5 text-xs sm:text-sm text-slate-800 font-semibold focus:outline-none border border-emerald-300 bg-emerald-50/30">
+                </div>
             </div>
 
-            <button onclick="completeSetupAndStart()" class="w-full bg-gradient-to-r from-sky-500 to-emerald-500 text-white font-extrabold py-3.5 rounded-2xl text-xs sm:text-sm transition cursor-pointer shadow-lg shadow-emerald-500/25">
+            <!-- Botón de Inicio -->
+            <button onclick="completeSetupAndStart()" class="w-full bg-gradient-to-r from-sky-500 to-emerald-500 text-white font-extrabold py-3 rounded-2xl text-xs sm:text-sm transition cursor-pointer shadow-lg shadow-emerald-500/25">
                 Comenzar Aprendizaje ➔
             </button>
         </div>
     </div>
 
-    <!-- Lógica Externa al final para que el DOM esté completamente listo -->
+    <!-- Footer -->
+    <footer class="border-t border-slate-200 bg-white/60 py-3 text-center text-xs text-slate-500 relative z-10 font-medium">
+        English Pro &copy; 2026 &bull; Ultimate Progressive Edition
+    </footer>
+
+    <!-- Script Principal al final del DOM -->
     <script src="app.js"></script>
 </body>
 </html>
