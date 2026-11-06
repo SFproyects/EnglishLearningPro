@@ -6,43 +6,68 @@ let appState = JSON.parse(localStorage.getItem('english_pro_ultimate_state')) ||
     currentMode: 'intermediate',
     beginnerLesson: 1,
     intermediateLesson: 1,
+    roleplayMode: 'casual', // 'formal' o 'casual'
     unlockedSteps: { speaking: true, flashcards: false, grammar: false, listening: false, shadowing: false },
     quizScores: [],
     learnedFlashcards: [],
     hasStarted: false
 };
 
+// CURRICULUM BEGINNER: Enfoque en bases, vocabulario cotidiano y estructuras simples
 const curriculumBeginner = [];
+const beginnerTopics = [
+    {theme: "Greetings & Introductions", word: {w: "Hello", d: "Hola", e: "👋"}, sentence: "Hello, nice to meet you.", shadow: "Hello! I am learning English."},
+    {theme: "Common Objects & Colors", word: {w: "Book", d: "Libro", e: "📖"}, sentence: "This is a red book on the table.", shadow: "This is my favorite book."},
+    {theme: "Family Members", word: {w: "Family", d: "Familia", e: "👨‍👩‍👧‍👦"}, sentence: "My family lives in a nice house.", shadow: "I love my family very much."},
+    {theme: "Daily Routines", word: {w: "Morning", d: "Mañana", e: "🌅"}, sentence: "I wake up early every morning.", shadow: "I wake up early in the morning."},
+    {theme: "Food & Drinks", word: {w: "Water", d: "Agua", e: "💧"}, sentence: "I drink a glass of water every day.", shadow: "I like to drink cold water."}
+];
+
 for (let i = 1; i <= 40; i++) {
+    let tData = beginnerTopics[(i - 1) % beginnerTopics.length];
     let blockNum = Math.ceil(i / 10);
-    let words = [{w:"Hello",d:"Hola",e:"👋"}, {w:"Family",d:"Familia",e:"👨‍👩‍👧‍👦"}];
     curriculumBeginner.push({
-        id: i, block: blockNum, theme: `Beginner Topic ${i}`,
-        roleplay: { introLine: "Hello! How are you today? Let's practice simple English." },
-        flashcards: words.map(w => ({ term: w.w, def: w.d, es: w.e, emoji: w.e })),
-        quizzes: [
-            { id: `b_l${i}_q1`, type: 'mc', title: 'Grammar', desc: "She ___ to the store.", options: [{text: 'A) goes', correct: true}, {text: 'B) go', correct: false}], correction: "Se usa 'goes'." },
-            { id: `b_l${i}_q2`, type: 'repair', title: 'Vocabulary', desc: `Type in English for 'Hola':`, answer: 'hello', correction: "Se escribe 'Hello'." }
+        id: i, block: blockNum, theme: `Beginner Lesson ${i}: ${tData.theme}`,
+        roleplay: { introLine: `Hello! Let's practice beginner English. Lesson ${i}: ${tData.theme}.` },
+        flashcards: [
+            { term: tData.word.w, def: tData.word.d, es: tData.word.e, emoji: tData.word.e },
+            { term: "Friend", def: "Amigo", es: "🤝", emoji: "🤝" }
         ],
-        listening: `I am learning basic English sentences every day`,
-        shadow: "Hello! I am learning English."
+        quizzes: [
+            { id: `b_l${i}_q1`, type: 'mc', title: 'Grammar Basics', desc: "Choose the correct verb form: 'She ___ to school.'", options: [{text: 'A) goes', correct: true}, {text: 'B) go', correct: false}], correction: "En tercera persona singular (She) se usa 'goes'." },
+            { id: `b_l${i}_q2`, type: 'repair', title: 'Vocabulary Check', desc: `Type in English for '${tData.word.d}':`, answer: tData.word.w.toLowerCase(), correction: `Se escribe '${tData.word.w}'.` }
+        ],
+        listening: tData.sentence,
+        shadow: tData.shadow
     });
 }
 
+// CURRICULUM INTERMEDIATE (GENERAL/CONVERSACIONAL): Viajes, compras, restaurantes, vida diaria y situaciones reales
 const curriculumIntermediate = [];
+const intermediateTopics = [
+    {theme: "Travel & Airport Logistics", word: {w: "Boarding", d: "Embarque", e: "✈️"}, sentence: "What time is final boarding call for gate four?", shadow: "We need to find our boarding gate quickly."},
+    {theme: "Shopping & Bargaining", word: {w: "Discount", d: "Descuento", e: "🏷️"}, sentence: "Is there any discount available on this jacket?", shadow: "I am looking for a good discount today."},
+    {theme: "Restaurants & Dining Out", word: {w: "Reservation", d: "Reservación", e: "🍽️"}, sentence: "We have a table reservation under the name Smith.", shadow: "Could we see the menu, please?"},
+    {theme: "Hotels & Accommodation", word: {w: "Check-in", d: "Registro de entrada", e: "🏨"}, sentence: "I would like to check in and get my room key.", shadow: "What time is checkout tomorrow morning?"},
+    {theme: "Emergency & City Directions", word: {w: "Pharmacy", d: "Farmacia", e: "💊"}, sentence: "Excuse me, where is the nearest open pharmacy?", shadow: "Can you help me find the train station?"}
+];
+
 for (let i = 1; i <= 40; i++) {
+    let tData = intermediateTopics[(i - 1) % intermediateTopics.length];
     let blockNum = Math.ceil(i / 10);
-    let words = [{w:"Improvement",d:"Mejora",e:"📈"}, {w:"Strategy",d:"Estrategia",e:"🎯"}];
     curriculumIntermediate.push({
-        id: i, block: blockNum, theme: `Intermediate Topic ${i}`,
-        roleplay: { introLine: "Hey! What's up man? How's it going with your projects?" },
-        flashcards: words.map(w => ({ term: w.w, def: w.d, es: w.e, emoji: w.e })),
-        quizzes: [
-            { id: `i_l${i}_q1`, type: 'mc', title: 'Grammar', desc: "We ___ our best every day.", options: [{text: 'A) do', correct: true}, {text: 'B) does', correct: false}], correction: "Con 'We' se usa 'do'." },
-            { id: `i_l${i}_q2`, type: 'repair', title: 'Vocabulary', desc: `Type in English for 'Mejora':`, answer: 'improvement', correction: "Se escribe 'Improvement'." }
+        id: i, block: blockNum, theme: `Intermediate Lesson ${i}: ${tData.theme}`,
+        roleplay: { introLine: `Hey there! Ready to practice Intermediate Lesson ${i} about ${tData.theme.toLowerCase()}? Let's chat!` },
+        flashcards: [
+            { term: tData.word.w, def: tData.word.d, es: tData.word.e, emoji: tData.word.e },
+            { term: "Luggage", def: "Equipaje", es: "🧳", emoji: "🧳" }
         ],
-        listening: `We are successfully mastering advanced English expressions today`,
-        shadow: "Hey! Great to meet you."
+        quizzes: [
+            { id: `i_l${i}_q1`, type: 'mc', title: 'Intermediate Grammar', desc: "Choose the correct phrase: 'If I ___ time tomorrow, I will visit the museum.'", options: [{text: 'A) have', correct: true}, {text: 'B) had', correct: false}], correction: "En el primer condicional se usa el presente simple ('have') en la cláusula principal." },
+            { id: `i_l${i}_q2`, type: 'repair', title: 'Conversational Vocabulary', desc: `Type in English for '${tData.word.d}':`, answer: tData.word.w.toLowerCase(), correction: `El término correcto es '${tData.word.w}'.` }
+        ],
+        listening: tData.sentence,
+        shadow: tData.shadow
     });
 }
 
@@ -71,9 +96,9 @@ function updateUIStats() {
     const isInter = appState.currentMode === 'intermediate';
     let currLesson = isInter ? appState.intermediateLesson : appState.beginnerLesson;
     
-    document.getElementById('current-block-label').innerText = isInter ? 'Nivel: Intermedio' : 'Nivel: Beginner';
+    document.getElementById('current-block-label').innerText = isInter ? 'Nivel: Intermedio (General)' : 'Nivel: Beginner';
     document.getElementById('header-badge').innerText = `Lesson ${currLesson} / 40`;
-    document.getElementById('course-subtitle').innerText = isInter ? 'Intermediate Professional Course' : 'Beginner Foundation Course';
+    document.getElementById('course-subtitle').innerText = isInter ? 'Intermediate Conversational & Travel Course' : 'Beginner Foundation Course';
     document.getElementById('welcome-title').innerText = `Welcome back, ${appState.userName || 'Kevin'}!`;
     
     const nameToUse = appState.userName || 'Kevin';
@@ -130,15 +155,19 @@ function setInitialMode(mode) {
 }
 
 function completeSetupAndStart() {
-    const userName = document.getElementById('setup-name-input').value.trim();
+    const nameInput = document.getElementById('setup-name-input');
+    const userName = nameInput ? nameInput.value.trim() : '';
+
     if (!userName) {
-        showCustomModal("Nombre Requerido ⚠️", "Escribe tu nombre para continuar.", "✍️");
+        showCustomModal("Nombre Requerido ⚠️", "Por favor, escribe tu nombre para continuar.", "✍️");
         return;
     }
 
     if (selectedSetupMode === 'intermediate') {
-        const pass = document.getElementById('setup-password-input').value.trim();
-        if (pass !== 'b1pro') {
+        const passInput = document.getElementById('setup-password-input');
+        const passwordValue = passInput ? passInput.value.trim() : '';
+        
+        if (passwordValue !== 'b1pro') {
             showCustomModal("Acceso Denegado 🔒", "La contraseña introducida es incorrecta (b1pro).", "⚠️");
             return;
         }
@@ -149,9 +178,36 @@ function completeSetupAndStart() {
     appState.hasStarted = true;
     saveState();
 
-    document.getElementById('welcome-setup-container').classList.add('hidden');
+    const setupContainer = document.getElementById('welcome-setup-container');
+    if (setupContainer) setupContainer.classList.add('hidden');
+    
     updateUIStats();
     loadCurrentLesson();
+}
+
+// Obtener el límite de turnos según el bloque de la lección activa
+function getRequiredTurns() {
+    const isInter = appState.currentMode === 'intermediate';
+    let currLesson = isInter ? appState.intermediateLesson : appState.beginnerLesson;
+    if (currLesson <= 10) return 4;
+    if (currLesson <= 25) return 6;
+    return 8;
+}
+
+function setRoleplayMode(mode) {
+    appState.roleplayMode = mode;
+    saveState();
+    
+    const btnFormal = document.getElementById('btn-mode-formal');
+    const btnCasual = document.getElementById('btn-mode-casual');
+    
+    if (mode === 'formal') {
+        btnFormal.className = "px-3 py-1.5 rounded-xl text-xs font-extrabold bg-blue-600 text-white shadow-sm cursor-pointer";
+        btnCasual.className = "px-3 py-1.5 rounded-xl text-xs font-extrabold bg-slate-100 text-slate-700 hover:bg-slate-200 cursor-pointer";
+    } else {
+        btnCasual.className = "px-3 py-1.5 rounded-xl text-xs font-extrabold bg-emerald-600 text-white shadow-sm cursor-pointer";
+        btnFormal.className = "px-3 py-1.5 rounded-xl text-xs font-extrabold bg-slate-100 text-slate-700 hover:bg-slate-200 cursor-pointer";
+    }
 }
 
 function loadCurrentLesson() {
@@ -164,16 +220,35 @@ function loadCurrentLesson() {
     activeFlashcards = lessonData.flashcards;
     activeQuizzes = lessonData.quizzes;
 
-    document.getElementById('roleplay-scenario-tag').innerText = `Lesson ${currLesson}: ${lessonData.theme}`;
+    const maxTurns = getRequiredTurns();
+    document.getElementById('roleplay-scenario-tag').innerText = lessonData.theme;
     document.getElementById('shadow-text').innerText = `"${lessonData.shadow}"`;
-    document.getElementById('roleplay-counter-label').innerText = `Turns: 0 / 4 completed`;
+    document.getElementById('roleplay-counter-label').innerText = `Turns: 0 / ${maxTurns} completed`;
+
+    // Inyectar controles de modo Formal/Casual justo arriba del chat si no existen
+    let chatContainerWrapper = document.getElementById('chat-messages-container').parentElement;
+    let modeSelector = document.getElementById('roleplay-mode-selector');
+    if (!modeSelector) {
+        modeSelector = document.createElement('div');
+        modeSelector.id = 'roleplay-mode-selector';
+        modeSelector.className = "flex items-center justify-between mb-3 bg-slate-50 p-2.5 rounded-2xl border border-slate-200 text-xs";
+        modeSelector.innerHTML = `
+            <span class="font-extrabold text-slate-700">Modo de Tutoría:</span>
+            <div class="flex gap-2">
+                <button id="btn-mode-formal" onclick="setRoleplayMode('formal')" class="px-3 py-1.5 rounded-xl text-xs font-extrabold bg-slate-100 text-slate-700 hover:bg-slate-200 cursor-pointer">👔 Formal / Profesional</button>
+                <button id="btn-mode-casual" onclick="setRoleplayMode('casual')" class="px-3 py-1.5 rounded-xl text-xs font-extrabold bg-emerald-600 text-white shadow-sm cursor-pointer">😎 Casual / Slang</button>
+            </div>
+        `;
+        chatContainerWrapper.insertBefore(modeSelector, document.getElementById('chat-messages-container'));
+    }
+    setRoleplayMode(appState.roleplayMode || 'casual');
 
     const chatBox = document.getElementById('chat-messages-container');
     chatBox.innerHTML = `
         <div class="flex items-start gap-2.5">
             <div class="w-8 h-8 rounded-full bg-sky-500 text-white flex items-center justify-center font-bold text-xs">🤖</div>
             <div class="bg-white border border-slate-200 p-3.5 rounded-2xl shadow-sm text-xs text-slate-800 max-w-[85%]">
-                <p class="font-extrabold text-sky-700 mb-0.5">Tutor:</p>
+                <p class="font-extrabold text-sky-700 mb-0.5">Tutor (${lessonData.theme}):</p>
                 <p class="font-medium">${lessonData.roleplay.introLine}</p>
             </div>
         </div>
@@ -197,11 +272,19 @@ function sendRoleplayMessage() {
         return;
     }
 
+    // Regla de oro: Detección y corrección estricta de errores con explicación en español
+    let grammarNotice = "";
+    let cleanText = text.toLowerCase();
+    
+    if (cleanText.includes("i don't now") || cleanText.includes("i dont now")) {
+        grammarNotice = "<br><span class='text-[10px] text-amber-800 bg-amber-50 px-2.5 py-1 rounded-lg block mt-1.5 border border-amber-200'>💡 <b>Corrección del tutor:</b> Se escribe <b>'I don't know'</b>. <i>¿Por qué?</i> Usas 'know' (con k) para el verbo saber, y no 'now' (de ahora).</span>";
+    }
+
     chatBox.innerHTML += `
         <div class="flex items-start gap-2.5 justify-end">
             <div class="bg-emerald-500 text-white p-3.5 rounded-2xl shadow-sm text-xs max-w-[85%]">
                 <p class="font-extrabold text-emerald-100 mb-0.5">Tú (${appState.userName}):</p>
-                <p class="font-medium">${text}</p>
+                <p class="font-medium">${text}${grammarNotice}</p>
             </div>
             <div class="w-8 h-8 rounded-full bg-emerald-600 text-white flex items-center justify-center font-bold text-xs">😎</div>
         </div>
@@ -211,15 +294,32 @@ function sendRoleplayMessage() {
 
     setTimeout(() => {
         roleplayInteractionCount++;
-        document.getElementById('roleplay-counter-label').innerText = `Turns: ${roleplayInteractionCount} / 4 completed`;
-        let reply = roleplayInteractionCount < 4 ? "Sounds great! Keep going, tell me more." : "¡Excelente práctica! Haz clic en 'Validate Roleplay & Proceed'.";
+        const maxTurns = getRequiredTurns();
+        document.getElementById('roleplay-counter-label').innerText = `Turns: ${roleplayInteractionCount} / ${maxTurns} completed`;
+        
+        const isInter = appState.currentMode === 'intermediate';
+        let currLesson = isInter ? appState.intermediateLesson : appState.beginnerLesson;
+        let lessonData = (isInter ? curriculumIntermediate : curriculumBeginner)[(currLesson - 1) % 40];
+        
+        let dynamicReply = "";
+        const mode = appState.roleplayMode || 'casual';
+
+        if (roleplayInteractionCount < maxTurns) {
+            if (mode === 'formal') {
+                dynamicReply = `Thank you for your input. In the context of <b>${lessonData.theme}</b>, could you elaborate further using professional phrasing?`;
+            } else {
+                dynamicReply = `That sounds cool! Regarding <b>${lessonData.theme}</b>, tell me more about how you handle that situation in real life.`;
+            }
+        } else {
+            dynamicReply = `¡Excelente trabajo completando los ${maxTurns} turnos en modo ${mode.toUpperCase()}! Ya puedes hacer clic en **'Validate Roleplay & Proceed ➔'** para desbloquear la Bóveda de Vocabulario.`;
+        }
         
         chatBox.innerHTML += `
             <div class="flex items-start gap-2.5">
                 <div class="w-8 h-8 rounded-full bg-sky-500 text-white flex items-center justify-center font-bold text-xs">🤖</div>
                 <div class="bg-white border border-slate-200 p-3.5 rounded-2xl shadow-sm text-xs text-slate-800 max-w-[85%]">
-                    <p class="font-extrabold text-sky-700 mb-0.5">Tutor:</p>
-                    <p class="font-medium">${reply}</p>
+                    <p class="font-extrabold text-sky-700 mb-0.5">Tutor (${mode.toUpperCase()}):</p>
+                    <p class="font-medium">${dynamicReply}</p>
                 </div>
             </div>
         `;
@@ -228,8 +328,9 @@ function sendRoleplayMessage() {
 }
 
 function completeRoleplayPhase() {
-    if (roleplayInteractionCount < 4) {
-        showCustomModal("Incomplete", "Completa los 4 turnos conversacionales primero.", "💬");
+    const maxTurns = getRequiredTurns();
+    if (roleplayInteractionCount < maxTurns) {
+        showCustomModal("Incomplete", `Completa los ${maxTurns} turnos conversacionales requeridos para esta lección.`, "💬");
         return;
     }
     unlockNextStep('speaking', 'flashcards');
@@ -402,7 +503,7 @@ function openVocabularyVault() {
 // ARRANQUE LIMPIO
 const setupContainer = document.getElementById('welcome-setup-container');
 if (!appState.hasStarted) {
-    if (setupContainer) setupContainer.classList.remove('hidden');
+    if (setupContainer) setupContainer.classList.remove('hidden'); // Corregido: classList.remove
 } else {
     if (setupContainer) setupContainer.classList.add('hidden');
     loadCurrentLesson();
