@@ -21,7 +21,7 @@ const beginnerTopics = [
         word: {w: "Hello", d: "Hola", e: "👋"}, 
         sentence: "Hello, nice to meet you.", 
         shadow: "Hello! I am learning English.",
-        greeting: "Pretty good, thanks!",
+        greeting: "Hello, it is a pleasure to meet you.", // ➔ Apertura formal ajustada
         greetingSlang: "What's up? I'm Kevin, let's chat!",
         farewell: "See you later, have a great day!",
         farewellSlang: "Catch you later, bro!"
@@ -31,7 +31,7 @@ const beginnerTopics = [
         word: {w: "Book", d: "Libro", e: "📖"}, 
         sentence: "This is a red book on the table.", 
         shadow: "This is my favorite book.",
-        greeting: "Good morning! Look at this.",
+        greeting: "Good morning, I am glad to be here.",
         greetingSlang: "Hey! Check this out.",
         farewell: "Goodbye, see you tomorrow.",
         farewellSlang: "See you around!"
@@ -41,7 +41,7 @@ const beginnerTopics = [
         word: {w: "Family", d: "Familia", e: "👨‍👩‍👧‍👦"}, 
         sentence: "My family lives in a nice house.", 
         shadow: "I love my family very much.",
-        greeting: "Hi there! How is your family?",
+        greeting: "Hello, let me introduce my family.",
         greetingSlang: "What's going on with your folks?",
         farewell: "Say hi to your family for me.",
         farewellSlang: "Take care of your family, peace!"
@@ -51,7 +51,7 @@ const beginnerTopics = [
         word: {w: "Morning", d: "Mañana", e: "🌅"}, 
         sentence: "I wake up early every morning.", 
         shadow: "I wake up early in the morning.",
-        greeting: "Good morning! Ready for the day?",
+        greeting: "Good morning, I hope you are doing well.",
         greetingSlang: "Rise and shine!",
         farewell: "Time to rest, good night.",
         farewellSlang: "I'm heading to bed, catch you tomorrow!"
@@ -61,10 +61,10 @@ const beginnerTopics = [
         word: {w: "Water", d: "Agua", e: "💧"}, 
         sentence: "I drink a glass of water every day.", 
         shadow: "I like to drink cold water.",
-        greeting: "Hi! Are you thirsty?",
+        greeting: "Good afternoon, may I ask for some water?",
         greetingSlang: "Hey! Let's grab something to drink.",
         farewell: "Thanks for the meal, see you!",
-        farewellSlang: "Im stuffed, catch you later!"
+        farewellSlang: "I'm stuffed, catch you later!"
     }
 ];
 
@@ -101,7 +101,7 @@ const intermediateTopics = [
         word: {w: "Boarding", d: "Embarque", e: "✈️"}, 
         sentence: "What time is final boarding call for gate four?", 
         shadow: "We need to find our boarding gate quickly.",
-        greeting: "Hello, could you help me with my flight?",
+        greeting: "Good morning, could you assist me please?", // ➔ Apertura formal ajustada
         greetingSlang: "Hey! Quick question about the flight.",
         farewell: "Thank you for your help, have a great flight.",
         farewellSlang: "Thanks a lot, catch my flight now!"
@@ -111,7 +111,7 @@ const intermediateTopics = [
         word: {w: "Discount", d: "Descuento", e: "🏷️"}, 
         sentence: "Is there any discount available on this jacket?", 
         shadow: "I am looking for a good discount today.",
-        greeting: "Hi, I am looking for some new clothes.",
+        greeting: "Good afternoon, I am looking for assistance.",
         greetingSlang: "Hey! Just browsing around.",
         farewell: "Thanks, I will think about it and come back.",
         farewellSlang: "Thanks anyway, see you!"
@@ -141,7 +141,7 @@ const intermediateTopics = [
         word: {w: "Pharmacy", d: "Farmacia", e: "💊"}, 
         sentence: "Excuse me, where is the nearest open pharmacy?", 
         shadow: "Can you help me find the train station?",
-        greeting: "Excuse me, I need some quick assistance.",
+        greeting: "Excuse me, I need some professional assistance.",
         greetingSlang: "Hey! Can you help me out real quick?",
         farewell: "Thank you so much for the directions.",
         farewellSlang: "Appreciate your help, catch you later!"
@@ -202,19 +202,8 @@ function updateUIStats() {
     document.getElementById('header-badge').innerText = `Lesson ${currLesson} / 40`;
     document.getElementById('course-subtitle').innerText = isInter ? 'Intermediate Conversational & Travel Course' : 'Beginner Foundation Course';
     document.getElementById('welcome-title').innerText = `Welcome back, ${appState.userName || 'Kevin'}!`;
-    
-    const nameToUse = appState.userName || 'Kevin';
-    const s1 = document.getElementById('g-slang1');
-    const s2 = document.getElementById('g-slang2');
-    if (s1) s1.innerText = `Hey! I'm ${nameToUse}, great to meet you.`;
-    if (s2) s2.innerText = `What's up? I'm ${nameToUse}, let's chat!`;
 
     updateStepsUI();
-}
-
-function speakDynamicSlang(type) {
-    const nameToUse = appState.userName || 'Kevin';
-    speakSpecificTextCustom(type === 1 ? `Hey! I am ${nameToUse}, great to meet you.` : `What is up? I am ${nameToUse}, let us chat!`);
 }
 
 function updateStepsUI() {
@@ -365,12 +354,11 @@ function loadCurrentLesson() {
     switchTab('speaking');
 }
 
-// Función que dibuja dinámicamente la Apertura y el Cierre de cada lección
+// Función que dibuja dinámicamente la Apertura y el Cierre de cada lección (con fix de audio en slang)
 function renderCoreExpressionsUI(lessonData, lessonNumber) {
     const container = document.querySelector('#content-speaking');
     if (!container) return;
 
-    // Buscar o crear un contenedor dedicado para las expresiones de apertura y cierre arriba del chat
     let exprContainer = document.getElementById('lesson-expressions-container');
     if (!exprContainer) {
         exprContainer = document.createElement('div');
@@ -380,6 +368,13 @@ function renderCoreExpressionsUI(lessonData, lessonNumber) {
     }
 
     const expr = lessonData.expressions;
+    
+    // Limpiar comillas simples para evitar errores en el onclick del navegador
+    const cleanGreeting = expr.greeting.replace(/'/g, "\\'");
+    const cleanSlang = expr.greetingSlang.replace(/'/g, "\\'");
+    const cleanFarewell = expr.farewell.replace(/'/g, "\\'");
+    const cleanFarewellSlang = expr.farewellSlang.replace(/'/g, "\\'");
+
     exprContainer.innerHTML = `
         <div class="bg-white border border-slate-200 rounded-2xl p-5 shadow-sm space-y-4">
             <div class="flex items-center justify-between">
@@ -402,19 +397,19 @@ function renderCoreExpressionsUI(lessonData, lessonNumber) {
                             <p class="text-xs font-bold text-slate-700">💬 Cómo saludar:</p>
                             <p class="text-xs font-semibold text-emerald-600 mt-1">"${expr.greeting}"</p>
                         </div>
-                        <button onclick="speakSpecificTextCustom('${expr.greeting}')" class="text-xs bg-white border border-slate-200 p-2 rounded-xl shadow-xs">🔊</button>
+                        <button onclick="speakSpecificTextCustom('${cleanGreeting}')" class="text-xs bg-white border border-slate-200 p-2 rounded-xl shadow-xs cursor-pointer font-bold">🔊</button>
                     </div>
                     <div class="bg-slate-50 border border-slate-100 p-3 rounded-xl flex items-center justify-between">
                         <div>
                             <p class="text-xs font-bold text-slate-700">🔥 Slang de Apertura:</p>
                             <p class="text-xs font-semibold text-emerald-600 mt-1">"${expr.greetingSlang}"</p>
                         </div>
-                        <button onclick="speakSpecificTextCustom('${expr.greetingSlang}')" class="text-xs bg-white border border-slate-200 p-2 rounded-xl shadow-xs">🔊</button>
+                        <button onclick="speakSpecificTextCustom('${cleanSlang}')" class="text-xs bg-white border border-slate-200 p-2 rounded-xl shadow-xs cursor-pointer font-bold">🔊</button>
                     </div>
                 </div>
             </div>
 
-            <!-- 🔴 SECCIÓN B: CIERRE Y DESPEDIDAS -->
+            <!-- 🚪 SECCIÓN B: CIERRE Y DESPEDIDAS -->
             <div class="space-y-2 pt-2 border-t border-slate-100">
                 <h4 class="text-xs font-bold text-rose-700 uppercase tracking-wide flex items-center gap-1.5">
                     🚪 Section B: Cierre y Despedidas (Farewells)
@@ -425,14 +420,14 @@ function renderCoreExpressionsUI(lessonData, lessonNumber) {
                             <p class="text-xs font-bold text-slate-700">💬 Cómo despedirse:</p>
                             <p class="text-xs font-semibold text-rose-600 mt-1">"${expr.farewell}"</p>
                         </div>
-                        <button onclick="speakSpecificTextCustom('${expr.farewell}')" class="text-xs bg-white border border-slate-200 p-2 rounded-xl shadow-xs">🔊</button>
+                        <button onclick="speakSpecificTextCustom('${cleanFarewell}')" class="text-xs bg-white border border-slate-200 p-2 rounded-xl shadow-xs cursor-pointer font-bold">🔊</button>
                     </div>
                     <div class="bg-slate-50 border border-slate-100 p-3 rounded-xl flex items-center justify-between">
                         <div>
                             <p class="text-xs font-bold text-slate-700">🔥 Slang de Cierre:</p>
                             <p class="text-xs font-semibold text-rose-600 mt-1">"${expr.farewellSlang}"</p>
                         </div>
-                        <button onclick="speakSpecificTextCustom('${expr.farewellSlang}')" class="text-xs bg-white border border-slate-200 p-2 rounded-xl shadow-xs">🔊</button>
+                        <button onclick="speakSpecificTextCustom('${cleanFarewellSlang}')" class="text-xs bg-white border border-slate-200 p-2 rounded-xl shadow-xs cursor-pointer font-bold">🔊</button>
                     </div>
                 </div>
             </div>
@@ -451,7 +446,6 @@ function sendRoleplayMessage() {
         return;
     }
 
-    // Regla de oro: Detección y corrección estricta de errores con explicación en español
     let grammarNotice = "";
     let cleanText = text.toLowerCase();
     
@@ -484,7 +478,6 @@ function sendRoleplayMessage() {
         const mode = appState.roleplayMode || 'casual';
 
         if (roleplayInteractionCount < maxTurns) {
-            // Guía inteligente: En el penúltimo/último turno te pide aplicar la despedida de la Sección B
             if (roleplayInteractionCount === maxTurns - 1) {
                 dynamicReply = `Great conversation! Now, to wrap things up, try using our farewell phrase: "${lessonData.expressions.farewell}" or its slang version.`;
             } else {
