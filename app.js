@@ -446,6 +446,7 @@ function sendRoleplayMessage() {
         return;
     }
 
+    // Corrección gramatical sutil si hay errores comunes
     let grammarNotice = "";
     let cleanText = text.toLowerCase();
     
@@ -479,23 +480,24 @@ function sendRoleplayMessage() {
 
         if (roleplayInteractionCount < maxTurns) {
             if (roleplayInteractionCount === maxTurns - 1) {
-                dynamicReply = `Great conversation! Now, to wrap things up, try using our farewell phrase: "${lessonData.expressions.farewell}" or its slang version.`;
+                dynamicReply = `Nice! By the way, we have to go soon. How would you say goodbye? (Try using: "${lessonData.expressions.farewell}")`;
             } else {
+                // Respuestas conversacionales reales como un nativo
                 if (mode === 'formal') {
-                    dynamicReply = `Thank you for your input. In the context of <b>${lessonData.theme}</b>, could you elaborate further using professional phrasing?`;
+                    dynamicReply = `It is a pleasure to meet you too, ${appState.userName || 'Kevin'}. How are you finding this day so far?`;
                 } else {
-                    dynamicReply = `That sounds cool! Regarding <b>${lessonData.theme}</b>, tell me more about how you handle that situation in real life.`;
+                    dynamicReply = `Nice to meet you too, bro! What are you up to today?`;
                 }
             }
         } else {
-            dynamicReply = `¡Excelente trabajo completando los ${maxTurns} turnos usando apertura y cierre! Haz clic en **'Validate Roleplay & Proceed ➔'** para desbloquear la Bóveda de Vocabulario.`;
+            dynamicReply = `¡Genial! Has completado los ${maxTurns} turnos de charla natural. Haz clic en **'Validate Roleplay & Proceed ➔'** para pasar a la Bóveda de Vocabulario.`;
         }
         
         chatBox.innerHTML += `
             <div class="flex items-start gap-2.5">
                 <div class="w-8 h-8 rounded-full bg-sky-500 text-white flex items-center justify-center font-bold text-xs">🤖</div>
                 <div class="bg-white border border-slate-200 p-3.5 rounded-2xl shadow-sm text-xs text-slate-800 max-w-[85%]">
-                    <p class="font-extrabold text-sky-700 mb-0.5">Tutor (${mode.toUpperCase()}):</p>
+                    <p class="font-extrabold text-sky-700 mb-0.5">Tutor (${mode.toUpperCase()}) &bull; Nativo:</p>
                     <p class="font-medium">${dynamicReply}</p>
                 </div>
             </div>
@@ -503,7 +505,6 @@ function sendRoleplayMessage() {
         chatBox.scrollTop = chatBox.scrollHeight;
     }, 1000);
 }
-
 function completeRoleplayPhase() {
     const maxTurns = getRequiredTurns();
     if (roleplayInteractionCount < maxTurns) {
