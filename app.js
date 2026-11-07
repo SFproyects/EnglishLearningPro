@@ -38,41 +38,14 @@ const masterCurriculum = [
         ],
         listening: "What is up, bro? Let us start the day.",
         chatPrompt: "Hello! Let's practice greetings and slang. Say hello and tell me how you are doing today using a native expression."
-    },
-    {
-        theme: "Common Objects, Tools & Colors",
-        expressions: {
-            formalGreeting: "Good morning, could you assist me with these tools?",
-            slangGreeting: "Hey! Look at this rig.",
-            formalFarewell: "Thank you for your assistance, goodbye.",
-            slangFarewell: "Thanks a lot, see you around!"
-        },
-        flashcards: [
-            { term: "Book", def: "Libro", es: "📖", example: "This is a technical book." },
-            { term: "Wrench", def: "Llave inglesa / Ajustable", es: "🔧", example: "Hand me the wrench, please." },
-            { term: "Red", def: "Rojo", es: "🔴", example: "The positive wire is red." },
-            { term: "Table", def: "Mesa / Banco de trabajo", es: "🪵", example: "Put the circuit on the table." },
-            { term: "Screen", def: "Pantalla", es: "💻", example: "The laptop screen is broken." },
-            { term: "Wire", def: "Cable", es: "⚡", example: "Be careful with that live wire." },
-            { term: "Power", def: "Energía / Potencia", es: "🔋", example: "The power board is fixed." },
-            { term: "Fix", def: "Reparar / Arreglar", es: "🛠️", example: "I need to fix this appliance." },
-            { term: "Rig", def: "Equipo / Instalación", es: "⚙️", example: "That testing rig works great." },
-            { term: "Stuff", def: "Cosas / Materiales", es: "📦", example: "Put your workshop stuff away." }
-        ],
-        quizzes: [
-            { id: 'q1', type: 'mc', title: 'Plural Rules', desc: "Choose the correct plural form of 'wrench':", options: [{text: 'A) wrenchs', correct: false}, {text: 'B) wrenches', correct: true}], correction: "Los sustantivos que terminan en ch añaden 'es' en plural." },
-            { id: 'q2', type: 'repair', title: 'Vocabulary Check', desc: "Type the English word for 'Reparar':", answer: "fix", correction: "Se escribe 'fix'." }
-        ],
-        listening: "Hand me the wrench from the workbench.",
-        chatPrompt: "Let's talk about tools and objects in your workshop. What tool do you use the most?"
     }
 ];
 
 // Generar las 40 lecciones automáticas basadas en los temas base
-for (let i = 3; i <= 40; i++) {
-    let base = masterCurriculum[(i - 1) % masterCurriculum.length];
+for (let i = 2; i <= 40; i++) {
+    let base = masterCurriculum[0];
     masterCurriculum.push({
-        theme: `Advanced Flow & Technical Skills ${i}`,
+        theme: `Lesson ${i}: Advanced Flow & Technical Skills`,
         expressions: {
             formalGreeting: `Good day, welcome to lesson number ${i}.`,
             slangGreeting: `What's crackin'? Ready for lesson ${i}?`,
@@ -170,6 +143,7 @@ function loadCurrentLesson() {
 
     currentCard = 0;
     currentQuizIndex = 0;
+    roleplayTurns = 0;
     updateCardFlip();
     switchTab('speaking');
 }
@@ -183,6 +157,7 @@ function renderPowerExpressionsUI(lessonData, lessonNumber) {
     const cleanSlangG = expr.slangGreeting.replace(/'/g, "\\'");
     const cleanFormalF = expr.formalFarewell.replace(/'/g, "\\'");
     const cleanSlangF = expr.slangFarewell.replace(/'/g, "\\'");
+    const currentUserName = appState.userName || 'Kevin';
 
     container.innerHTML = `
         <div class="bg-white border border-slate-200 rounded-2xl p-6 shadow-sm space-y-6">
@@ -193,24 +168,24 @@ function renderPowerExpressionsUI(lessonData, lessonNumber) {
                 <span class="text-xs text-slate-400 font-bold">Lesson ${lessonNumber} / 40</span>
             </div>
 
-            <!-- BLOQUE DE TEXTOS FORMAL Y SLANG -->
+            <!-- SECCIÓN 1: TEXTOS FORMAL Y SLANG -->
             <div class="space-y-4">
                 <h3 class="text-base font-extrabold text-slate-900">${lessonData.theme}</h3>
-                <p class="text-xs text-slate-600 font-medium">Revisa las expresiones clave antes de iniciar el intercambio conversacional:</p>
+                <p class="text-xs text-slate-600 font-medium">Estudia estas expresiones clave antes de arrancar el roleplay:</p>
 
                 <div class="space-y-2.5">
                     <h4 class="text-xs font-extrabold text-blue-700 uppercase tracking-wide">👔 Estilo Formal / Profesional</h4>
                     <div class="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
                         <div class="bg-slate-50 border border-slate-200 p-3.5 rounded-xl flex items-center justify-between">
                             <div>
-                                <p class="text-[11px] font-bold text-slate-500 uppercase">Cómo saludar:</p>
+                                <p class="text-[11px] font-bold text-slate-500 uppercase">Saludo formal:</p>
                                 <p class="text-xs font-bold text-blue-900 mt-1">"${expr.formalGreeting}"</p>
                             </div>
                             <button onclick="speakSpecificTextCustom('${cleanFormalG}')" class="text-xs bg-white border border-slate-200 px-3 py-2 rounded-xl shadow-xs cursor-pointer font-bold hover:bg-blue-50">🔊</button>
                         </div>
                         <div class="bg-slate-50 border border-slate-200 p-3.5 rounded-xl flex items-center justify-between">
                             <div>
-                                <p class="text-[11px] font-bold text-slate-500 uppercase">Cómo despedirse:</p>
+                                <p class="text-[11px] font-bold text-slate-500 uppercase">Despedida formal:</p>
                                 <p class="text-xs font-bold text-blue-900 mt-1">"${expr.formalFarewell}"</p>
                             </div>
                             <button onclick="speakSpecificTextCustom('${cleanFormalF}')" class="text-xs bg-white border border-slate-200 px-3 py-2 rounded-xl shadow-xs cursor-pointer font-bold hover:bg-blue-50">🔊</button>
@@ -239,8 +214,8 @@ function renderPowerExpressionsUI(lessonData, lessonNumber) {
                 </div>
             </div>
 
-            <!-- BLOQUE DE ROLEPLAY ACTIVO -->
-            <div class="pt-4 border-t border-slate-100 space-y-3">
+            <!-- SECCIÓN 2: ROLEPLAY ACTIVO -->
+            <div class="pt-4 border-t border-slate-200 space-y-3">
                 <div class="flex items-center justify-between">
                     <h4 class="text-xs font-extrabold text-slate-800 uppercase tracking-wide">🤖 Step 2: Native Street Chat (Roleplay)</h4>
                     <div class="flex gap-2">
@@ -252,7 +227,7 @@ function renderPowerExpressionsUI(lessonData, lessonNumber) {
                 <div id="roleplay-chat-box" class="bg-slate-50 border border-slate-200 rounded-xl p-4 h-48 overflow-y-auto space-y-3 text-xs">
                     <div class="text-left">
                         <span class="bg-white border border-slate-200 text-slate-800 px-3.5 py-2 rounded-2xl inline-block font-medium">
-                            Hey, hello ${appState.userName || 'Kevin'}! Let's get started. How is it going today?
+                            Hey, hello ${currentUserName}! Let's get started. How is it going today?
                         </span>
                     </div>
                 </div>
