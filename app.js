@@ -3,178 +3,95 @@ lucide.createIcons();
 let appState = JSON.parse(localStorage.getItem('english_pro_ultimate_state')) || {
     userName: '',
     streak: 1,
-    currentMode: 'intermediate',
-    beginnerLesson: 1,
-    intermediateLesson: 1,
-    roleplayMode: 'casual', // 'formal' o 'casual'
-    unlockedSteps: { speaking: true, flashcards: false, grammar: false, listening: false, shadowing: false },
+    currentLesson: 1,
+    unlockedSteps: { speaking: true, flashcards: false, grammar: false, listening: false, conversation: false },
     quizScores: [],
     learnedFlashcards: [],
     hasStarted: false
 };
 
-// CURRICULUM BEGINNER: Enfoque en bases, vocabulario cotidiano y estructuras simples
-const curriculumBeginner = [];
-const beginnerTopics = [
+// CURRICULUM ÚNICO: 40 Lecciones progresivas con Slang, Gramática y Conversación Real
+const masterCurriculum = [
     {
-        theme: "Greetings & Introductions", 
-        word: {w: "Hello", d: "Hola", e: "👋"}, 
-        sentence: "Hello, nice to meet you.", 
-        shadow: "Hello! I am learning English.",
-        greeting: "Hello, it is a pleasure to meet you.", // ➔ Apertura formal ajustada
-        greetingSlang: "What's up? I'm Kevin, let's chat!",
-        farewell: "See you later, have a great day!",
-        farewellSlang: "Catch you later, bro!"
+        theme: "Greetings, Slang & Introductions",
+        expressions: {
+            formalGreeting: "Good morning, it is a pleasure to meet you.",
+            slangGreeting: "What's up? I'm Kevin, let's get to work!",
+            formalFarewell: "Goodbye, have a wonderful rest of your day.",
+            slangFarewell: "Catch you later, bro!"
+        },
+        flashcards: [
+            { term: "Hello", def: "Hola", es: "👋", example: "Hello, nice to meet you today." },
+            { term: "Friend", def: "Amigo / Compa", es: "🤝", example: "He is my best friend from the workshop." },
+            { term: "Morning", def: "Mañana", es: "🌅", example: "Good morning, let's start early." },
+            { term: "Bro", def: "Hermano / Carnal", es: "👊", example: "What's up, bro? Let's fix this." },
+            { term: "Awesome", def: "Impresionante / Genial", es: "🔥", example: "That new tool looks awesome." },
+            { term: "Hustle", def: "Esfuerzo / Chamba dura", es: "💼", example: "The daily hustle brings good results." },
+            { term: "Cool", def: "Genial / Tranquilo", es: "😎", example: "Everything is cool here." },
+            { term: "Gear", def: "Equipo / Herramientas", es: "🛠️", example: "Check out my repair gear." },
+            { term: "Check", def: "Revisar / Comprobar", es: "🔍", example: "Let's check the circuit board." },
+            { term: "Peace", def: "Adiós / Paz", es: "✌️", example: "See you tomorrow, peace!" }
+        ],
+        quizzes: [
+            { id: 'q1', type: 'mc', title: 'Grammar Basics', desc: "Choose the correct form: 'She ___ to the workshop every morning.'", options: [{text: 'A) goes', correct: true}, {text: 'B) go', correct: false}], correction: "En tercera persona singular (She) el verbo lleva 'es' (goes)." },
+            { id: 'q2', type: 'repair', title: 'Vocabulary Check', desc: "Type the English word for 'Amigo':", answer: "friend", correction: "Se escribe 'friend'." }
+        ],
+        listening: "What is up, bro? Let us start the day.",
+        chatPrompt: "Hello! Let's practice greetings and slang. Say hello and tell me how you are doing today using a native expression."
     },
     {
-        theme: "Common Objects & Colors", 
-        word: {w: "Book", d: "Libro", e: "📖"}, 
-        sentence: "This is a red book on the table.", 
-        shadow: "This is my favorite book.",
-        greeting: "Good morning, I am glad to be here.",
-        greetingSlang: "Hey! Check this out.",
-        farewell: "Goodbye, see you tomorrow.",
-        farewellSlang: "See you around!"
-    },
-    {
-        theme: "Family Members", 
-        word: {w: "Family", d: "Familia", e: "👨‍👩‍👧‍👦"}, 
-        sentence: "My family lives in a nice house.", 
-        shadow: "I love my family very much.",
-        greeting: "Hello, let me introduce my family.",
-        greetingSlang: "What's going on with your folks?",
-        farewell: "Say hi to your family for me.",
-        farewellSlang: "Take care of your family, peace!"
-    },
-    {
-        theme: "Daily Routines", 
-        word: {w: "Morning", d: "Mañana", e: "🌅"}, 
-        sentence: "I wake up early every morning.", 
-        shadow: "I wake up early in the morning.",
-        greeting: "Good morning, I hope you are doing well.",
-        greetingSlang: "Rise and shine!",
-        farewell: "Time to rest, good night.",
-        farewellSlang: "I'm heading to bed, catch you tomorrow!"
-    },
-    {
-        theme: "Food & Drinks", 
-        word: {w: "Water", d: "Agua", e: "💧"}, 
-        sentence: "I drink a glass of water every day.", 
-        shadow: "I like to drink cold water.",
-        greeting: "Good afternoon, may I ask for some water?",
-        greetingSlang: "Hey! Let's grab something to drink.",
-        farewell: "Thanks for the meal, see you!",
-        farewellSlang: "I'm stuffed, catch you later!"
+        theme: "Common Objects, Tools & Colors",
+        expressions: {
+            formalGreeting: "Good morning, could you assist me with these tools?",
+            slangGreeting: "Hey! Look at this rig.",
+            formalFarewell: "Thank you for your assistance, goodbye.",
+            slangFarewell: "Thanks a lot, see you around!"
+        },
+        flashcards: [
+            { term: "Book", def: "Libro", es: "📖", example: "This is a technical book." },
+            { term: "Wrench", def: "Llave inglesa / Ajustable", es: "🔧", example: "Hand me the wrench, please." },
+            { term: "Red", def: "Rojo", es: "🔴", example: "The positive wire is red." },
+            { term: "Table", def: "Mesa / Banco de trabajo", es: "🪵", example: "Put the circuit on the table." },
+            { term: "Screen", def: "Pantalla", es: "💻", example: "The laptop screen is broken." },
+            { term: "Wire", def: "Cable", es: "⚡", example: "Be careful with that live wire." },
+            { term: "Power", def: "Energía / Potencia", es: "🔋", example: "The power board is fixed." },
+            { term: "Fix", def: "Reparar / Arreglar", es: "🛠️", example: "I need to fix this appliance." },
+            { term: "Rig", def: "Equipo / Instalación", es: "⚙️", example: "That testing rig works great." },
+            { term: "Stuff", def: "Cosas / Materiales", es: "📦", example: "Put your workshop stuff away." }
+        ],
+        quizzes: [
+            { id: 'q1', type: 'mc', title: 'Plural Rules', desc: "Choose the correct plural form of 'wrench':", options: [{text: 'A) wrenchs', correct: false}, {text: 'B) wrenches', correct: true}], correction: "Los sustantivos que terminan en ch añaden 'es' en plural." },
+            { id: 'q2', type: 'repair', title: 'Vocabulary Check', desc: "Type the English word for 'Reparar':", answer: "fix", correction: "Se escribe 'fix'." }
+        ],
+        listening: "Hand me the wrench from the workbench.",
+        chatPrompt: "Let's talk about tools and objects in your workshop. What tool do you use the most?"
     }
 ];
 
-for (let i = 1; i <= 40; i++) {
-    let tData = beginnerTopics[(i - 1) % beginnerTopics.length];
-    let blockNum = Math.ceil(i / 10);
-    curriculumBeginner.push({
-        id: i, block: blockNum, theme: `Beginner Lesson ${i}: ${tData.theme}`,
-        roleplay: { introLine: `Hello! Let's practice beginner English. Lesson ${i}: ${tData.theme}. Remember to use greetings and farewells!` },
-        flashcards: [
-            { term: tData.word.w, def: tData.word.d, es: tData.word.e, emoji: tData.word.e },
-            { term: "Friend", def: "Amigo", es: "🤝", emoji: "🤝" }
-        ],
-        quizzes: [
-            { id: `b_l${i}_q1`, type: 'mc', title: 'Grammar Basics', desc: "Choose the correct verb form: 'She ___ to school.'", options: [{text: 'A) goes', correct: true}, {text: 'B) go', correct: false}], correction: "En tercera persona singular (She) se usa 'goes'." },
-            { id: `b_l${i}_q2`, type: 'repair', title: 'Vocabulary Check', desc: `Type in English for '${tData.word.d}':`, answer: tData.word.w.toLowerCase(), correction: `Se escribe '${tData.word.w}'.` }
-        ],
-        listening: tData.sentence,
-        shadow: tData.shadow,
+// Generar las 40 lecciones automáticas basadas en los temas base
+for (let i = 3; i <= 40; i++) {
+    let base = masterCurriculum[(i - 1) % masterCurriculum.length];
+    masterCurriculum.push({
+        theme: `Advanced Flow & Technical Skills ${i}`,
         expressions: {
-            greeting: tData.greeting,
-            greetingSlang: tData.greetingSlang,
-            farewell: tData.farewell,
-            farewellSlang: tData.farewellSlang
-        }
+            formalGreeting: `Good day, welcome to lesson number ${i}.`,
+            slangGreeting: `What's crackin'? Ready for lesson ${i}?`,
+            formalFarewell: `This concludes lesson ${i}, have a great day.`,
+            slangFarewell: `Catch you on the flip side, bro!`
+        },
+        flashcards: base.flashcards.map((f) => ({
+            term: `${f.term} ${i}`,
+            def: `${f.def} (${i})`,
+            es: f.es,
+            example: `Using ${f.term.toLowerCase()} in lesson ${i}.`
+        })),
+        quizzes: base.quizzes,
+        listening: `Let us review lesson number ${i} with proper grammar and native flow.`,
+        chatPrompt: `We are at lesson ${i}. Let's practice conversational flow and grammar regarding this topic.`
     });
 }
 
-// CURRICULUM INTERMEDIATE: Viajes, compras, restaurantes, vida diaria
-const curriculumIntermediate = [];
-const intermediateTopics = [
-    {
-        theme: "Travel & Airport Logistics", 
-        word: {w: "Boarding", d: "Embarque", e: "✈️"}, 
-        sentence: "What time is final boarding call for gate four?", 
-        shadow: "We need to find our boarding gate quickly.",
-        greeting: "Good morning, could you assist me please?", // ➔ Apertura formal ajustada
-        greetingSlang: "Hey! Quick question about the flight.",
-        farewell: "Thank you for your help, have a great flight.",
-        farewellSlang: "Thanks a lot, catch my flight now!"
-    },
-    {
-        theme: "Shopping & Bargaining", 
-        word: {w: "Discount", d: "Descuento", e: "🏷️"}, 
-        sentence: "Is there any discount available on this jacket?", 
-        shadow: "I am looking for a good discount today.",
-        greeting: "Good afternoon, I am looking for assistance.",
-        greetingSlang: "Hey! Just browsing around.",
-        farewell: "Thanks, I will think about it and come back.",
-        farewellSlang: "Thanks anyway, see you!"
-    },
-    {
-        theme: "Restaurants & Dining Out", 
-        word: {w: "Reservation", d: "Reservación", e: "🍽️"}, 
-        sentence: "We have a table reservation under the name Smith.", 
-        shadow: "Could we see the menu, please?",
-        greeting: "Good evening, we have a table booked.",
-        greetingSlang: "Hey! We are ready to order.",
-        farewell: "The food was amazing, check please!",
-        farewellSlang: "Thanks for everything, see ya!"
-    },
-    {
-        theme: "Hotels & Accommodation", 
-        word: {w: "Check-in", d: "Registro de entrada", e: "🏨"}, 
-        sentence: "I would like to check in and get my room key.", 
-        shadow: "What time is checkout tomorrow morning?",
-        greeting: "Hello, I would like to check into my room.",
-        greetingSlang: "Hey! Checking in for the night.",
-        farewell: "Thank you for the stay, goodbye.",
-        farewellSlang: "Thanks for the great service, peace!"
-    },
-    {
-        theme: "Emergency & City Directions", 
-        word: {w: "Pharmacy", d: "Farmacia", e: "💊"}, 
-        sentence: "Excuse me, where is the nearest open pharmacy?", 
-        shadow: "Can you help me find the train station?",
-        greeting: "Excuse me, I need some professional assistance.",
-        greetingSlang: "Hey! Can you help me out real quick?",
-        farewell: "Thank you so much for the directions.",
-        farewellSlang: "Appreciate your help, catch you later!"
-    }
-];
-
-for (let i = 1; i <= 40; i++) {
-    let tData = intermediateTopics[(i - 1) % intermediateTopics.length];
-    let blockNum = Math.ceil(i / 10);
-    curriculumIntermediate.push({
-        id: i, block: blockNum, theme: `Intermediate Lesson ${i}: ${tData.theme}`,
-        roleplay: { introLine: `Hey there! Ready to practice Intermediate Lesson ${i} about ${tData.theme.toLowerCase()}? Let's use proper openings and farewells!` },
-        flashcards: [
-            { term: tData.word.w, def: tData.word.d, es: tData.word.e, emoji: tData.word.e },
-            { term: "Luggage", def: "Equipaje", es: "🧳", emoji: "🧳" }
-        ],
-        quizzes: [
-            { id: `i_l${i}_q1`, type: 'mc', title: 'Intermediate Grammar', desc: "Choose the correct phrase: 'If I ___ time tomorrow, I will visit the museum.'", options: [{text: 'A) have', correct: true}, {text: 'B) had', correct: false}], correction: "En el primer condicional se usa el presente simple ('have') en la cláusula principal." },
-            { id: `i_l${i}_q2`, type: 'repair', title: 'Conversational Vocabulary', desc: `Type in English for '${tData.word.d}':`, answer: tData.word.w.toLowerCase(), correction: `El término correcto es '${tData.word.w}'.` }
-        ],
-        listening: tData.sentence,
-        shadow: tData.shadow,
-        expressions: {
-            greeting: tData.greeting,
-            greetingSlang: tData.greetingSlang,
-            farewell: tData.farewell,
-            farewellSlang: tData.farewellSlang
-        }
-    });
-}
-
-let currentCard = 0, currentQuizIndex = 0, activeQuizItem = null, currentListeningTarget = "";
-let activeQuizzes = [], activeFlashcards = [], roleplayInteractionCount = 0, selectedSetupMode = 'intermediate';
+let currentCard = 0, currentQuizIndex = 0, activeQuizItem = null;
 
 function saveState() {
     localStorage.setItem('english_pro_ultimate_state', JSON.stringify(appState));
@@ -194,20 +111,14 @@ function closeModal() {
 function updateUIStats() {
     document.getElementById('streak-count').innerText = appState.streak + 'd';
     document.getElementById('vocab-vault-count').innerText = appState.learnedFlashcards.length;
-    
-    const isInter = appState.currentMode === 'intermediate';
-    let currLesson = isInter ? appState.intermediateLesson : appState.beginnerLesson;
-    
-    document.getElementById('current-block-label').innerText = isInter ? 'Nivel: Intermedio (General)' : 'Nivel: Beginner';
-    document.getElementById('header-badge').innerText = `Lesson ${currLesson} / 40`;
-    document.getElementById('course-subtitle').innerText = isInter ? 'Intermediate Conversational & Travel Course' : 'Beginner Foundation Course';
+    document.getElementById('header-badge').innerText = `Lesson ${appState.currentLesson} / 40`;
     document.getElementById('welcome-title').innerText = `Welcome back, ${appState.userName || 'Kevin'}!`;
-
     updateStepsUI();
 }
 
 function updateStepsUI() {
-    let unlockedCount = Object.values(appState.unlockedSteps).filter(Boolean).length;
+    const keys = ['speaking', 'flashcards', 'grammar', 'listening', 'conversation'];
+    let unlockedCount = keys.filter(k => appState.unlockedSteps[k]).length;
     document.getElementById('session-progress-text').innerText = `Phase ${unlockedCount} / 5`;
     document.getElementById('session-bar').style.width = `${(unlockedCount / 5) * 100}%`;
 }
@@ -228,23 +139,6 @@ function switchTab(tabName) {
     document.getElementById('content-' + tabName).classList.remove('hidden');
 }
 
-function setInitialMode(mode) {
-    selectedSetupMode = mode;
-    const btnBeg = document.getElementById('btn-mode-beginner');
-    const btnInt = document.getElementById('btn-mode-intermediate');
-    const passContainer = document.getElementById('password-container');
-    
-    if (mode === 'beginner') {
-        btnBeg.className = "p-3 rounded-2xl border-2 border-sky-500 bg-sky-50 text-xs font-extrabold text-sky-800 shadow-sm cursor-pointer";
-        btnInt.className = "p-3 rounded-2xl border-2 border-slate-200 bg-slate-50 text-xs font-extrabold text-slate-700 cursor-pointer";
-        if (passContainer) passContainer.classList.add('hidden');
-    } else {
-        btnInt.className = "p-3 rounded-2xl border-2 border-emerald-500 bg-emerald-50 text-xs font-extrabold text-emerald-800 shadow-sm cursor-pointer";
-        btnBeg.className = "p-3 rounded-2xl border-2 border-slate-200 bg-slate-50 text-xs font-extrabold text-slate-700 cursor-pointer";
-        if (passContainer) passContainer.classList.remove('hidden');
-    }
-}
-
 function completeSetupAndStart() {
     const nameInput = document.getElementById('setup-name-input');
     const userName = nameInput ? nameInput.value.trim() : '';
@@ -254,18 +148,7 @@ function completeSetupAndStart() {
         return;
     }
 
-    if (selectedSetupMode === 'intermediate') {
-        const passInput = document.getElementById('setup-password-input');
-        const passwordValue = passInput ? passInput.value.trim() : '';
-        
-        if (passwordValue !== 'b1pro') {
-            showCustomModal("Acceso Denegado 🔒", "La contraseña introducida es incorrecta (b1pro).", "⚠️");
-            return;
-        }
-    }
-
     appState.userName = userName;
-    appState.currentMode = selectedSetupMode;
     appState.hasStarted = true;
     saveState();
 
@@ -276,303 +159,230 @@ function completeSetupAndStart() {
     loadCurrentLesson();
 }
 
-function getRequiredTurns() {
-    const isInter = appState.currentMode === 'intermediate';
-    let currLesson = isInter ? appState.intermediateLesson : appState.beginnerLesson;
-    if (currLesson <= 10) return 4;
-    if (currLesson <= 25) return 6;
-    return 8;
-}
-
-function setRoleplayMode(mode) {
-    appState.roleplayMode = mode;
-    saveState();
-    
-    const btnFormal = document.getElementById('btn-mode-formal');
-    const btnCasual = document.getElementById('btn-mode-casual');
-    
-    if (mode === 'formal') {
-        btnFormal.className = "px-3 py-1.5 rounded-xl text-xs font-extrabold bg-blue-600 text-white shadow-sm cursor-pointer";
-        btnCasual.className = "px-3 py-1.5 rounded-xl text-xs font-extrabold bg-slate-100 text-slate-700 hover:bg-slate-200 cursor-pointer";
-    } else {
-        btnCasual.className = "px-3 py-1.5 rounded-xl text-xs font-extrabold bg-emerald-600 text-white shadow-sm cursor-pointer";
-        btnFormal.className = "px-3 py-1.5 rounded-xl text-xs font-extrabold bg-slate-100 text-slate-700 hover:bg-slate-200 cursor-pointer";
-    }
-}
-
 function loadCurrentLesson() {
-    const isInter = appState.currentMode === 'intermediate';
-    let currLesson = isInter ? appState.intermediateLesson : appState.beginnerLesson;
-    let lessonData = (isInter ? curriculumIntermediate : curriculumBeginner)[(currLesson - 1) % 40];
+    let lessonData = masterCurriculum[(appState.currentLesson - 1) % masterCurriculum.length];
 
-    currentListeningTarget = lessonData.listening;
-    roleplayInteractionCount = 0;
-    activeFlashcards = lessonData.flashcards;
-    activeQuizzes = lessonData.quizzes;
-
-    const maxTurns = getRequiredTurns();
-    document.getElementById('roleplay-scenario-tag').innerText = lessonData.theme;
-    document.getElementById('shadow-text').innerText = `"${lessonData.shadow}"`;
-    document.getElementById('roleplay-counter-label').innerText = `Turns: 0 / ${maxTurns} completed`;
-
-    // Renderizar la Sección de Apertura y Cierre (Step 1) con los datos exactos de la lección
-    renderCoreExpressionsUI(lessonData, currLesson);
-
-    // Inyectar controles de modo Formal/Casual justo arriba del chat si no existen
-    let chatContainerWrapper = document.getElementById('chat-messages-container').parentElement;
-    let modeSelector = document.getElementById('roleplay-mode-selector');
-    if (!modeSelector) {
-        modeSelector = document.createElement('div');
-        modeSelector.id = 'roleplay-mode-selector';
-        modeSelector.className = "flex items-center justify-between mb-3 bg-slate-50 p-2.5 rounded-2xl border border-slate-200 text-xs";
-        modeSelector.innerHTML = `
-            <span class="font-extrabold text-slate-700">Modo de Tutoría:</span>
-            <div class="flex gap-2">
-                <button id="btn-mode-formal" onclick="setRoleplayMode('formal')" class="px-3 py-1.5 rounded-xl text-xs font-extrabold bg-slate-100 text-slate-700 hover:bg-slate-200 cursor-pointer">👔 Formal / Profesional</button>
-                <button id="btn-mode-casual" onclick="setRoleplayMode('casual')" class="px-3 py-1.5 rounded-xl text-xs font-extrabold bg-emerald-600 text-white shadow-sm cursor-pointer">😎 Casual / Slang</button>
-            </div>
-        `;
-        chatContainerWrapper.insertBefore(modeSelector, document.getElementById('chat-messages-container'));
-    }
-    setRoleplayMode(appState.roleplayMode || 'casual');
-
-    const chatBox = document.getElementById('chat-messages-container');
-    chatBox.innerHTML = `
-        <div class="flex items-start gap-2.5">
-            <div class="w-8 h-8 rounded-full bg-sky-500 text-white flex items-center justify-center font-bold text-xs">🤖</div>
-            <div class="bg-white border border-slate-200 p-3.5 rounded-2xl shadow-sm text-xs text-slate-800 max-w-[85%]">
-                <p class="font-extrabold text-sky-700 mb-0.5">Tutor (${lessonData.theme}):</p>
-                <p class="font-medium">${lessonData.roleplay.introLine}</p>
-            </div>
-        </div>
-    `;
+    renderPowerExpressionsUI(lessonData, appState.currentLesson);
+    renderFlashcardsUI(lessonData);
+    loadQuizQuestion();
+    renderListeningUI(lessonData);
+    renderConversationUI(lessonData);
 
     currentCard = 0;
     currentQuizIndex = 0;
-    updateCard();
-    loadQuizQuestion();
+    updateCardFlip();
     switchTab('speaking');
 }
 
-// Función que dibuja dinámicamente la Apertura y el Cierre de cada lección (con fix de audio en slang)
-function renderCoreExpressionsUI(lessonData, lessonNumber) {
-    const container = document.querySelector('#content-speaking');
+function renderPowerExpressionsUI(lessonData, lessonNumber) {
+    const container = document.getElementById('content-speaking');
     if (!container) return;
 
-    let exprContainer = document.getElementById('lesson-expressions-container');
-    if (!exprContainer) {
-        exprContainer = document.createElement('div');
-        exprContainer.id = 'lesson-expressions-container';
-        exprContainer.className = "mb-5";
-        container.insertBefore(exprContainer, container.firstChild);
-    }
-
     const expr = lessonData.expressions;
-    
-    // Limpiar comillas simples para evitar errores en el onclick del navegador
-    const cleanGreeting = expr.greeting.replace(/'/g, "\\'");
-    const cleanSlang = expr.greetingSlang.replace(/'/g, "\\'");
-    const cleanFarewell = expr.farewell.replace(/'/g, "\\'");
-    const cleanFarewellSlang = expr.farewellSlang.replace(/'/g, "\\'");
+    const cleanFormalG = expr.formalGreeting.replace(/'/g, "\\'");
+    const cleanSlangG = expr.slangGreeting.replace(/'/g, "\\'");
+    const cleanFormalF = expr.formalFarewell.replace(/'/g, "\\'");
+    const cleanSlangF = expr.slangFarewell.replace(/'/g, "\\'");
 
-    exprContainer.innerHTML = `
-        <div class="bg-white border border-slate-200 rounded-2xl p-5 shadow-sm space-y-4">
+    container.innerHTML = `
+        <div class="bg-white border border-slate-200 rounded-2xl p-6 shadow-sm space-y-6">
             <div class="flex items-center justify-between">
-                <span class="text-xs font-bold uppercase tracking-wider text-emerald-600 bg-emerald-50 px-3 py-1 rounded-full">
-                    Step 1: Core Expressions (Apertura y Cierre)
+                <span class="text-xs font-bold uppercase tracking-wider text-emerald-600 bg-emerald-50 px-3.5 py-1.5 rounded-full">
+                    ⚡ Phase 1: Power Expressions & Roleplay
                 </span>
-                <span class="text-xs text-slate-400 font-medium">Lesson ${lessonNumber} / 40</span>
+                <span class="text-xs text-slate-400 font-bold">Lesson ${lessonNumber} / 40</span>
             </div>
 
-            <h3 class="text-base font-extrabold text-slate-800">${lessonData.theme}</h3>
+            <!-- BLOQUE DE TEXTOS FORMAL Y SLANG -->
+            <div class="space-y-4">
+                <h3 class="text-base font-extrabold text-slate-900">${lessonData.theme}</h3>
+                <p class="text-xs text-slate-600 font-medium">Revisa las expresiones clave antes de iniciar el intercambio conversacional:</p>
 
-            <!-- 🟢 SECCIÓN A: APERTURA Y SALUDOS -->
-            <div class="space-y-2">
-                <h4 class="text-xs font-bold text-sky-700 uppercase tracking-wide flex items-center gap-1.5">
-                    👋 Section A: Apertura y Saludos (Greetings)
-                </h4>
-                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                    <div class="bg-slate-50 border border-slate-100 p-3 rounded-xl flex items-center justify-between">
-                        <div>
-                            <p class="text-xs font-bold text-slate-700">💬 Cómo saludar:</p>
-                            <p class="text-xs font-semibold text-emerald-600 mt-1">"${expr.greeting}"</p>
+                <div class="space-y-2.5">
+                    <h4 class="text-xs font-extrabold text-blue-700 uppercase tracking-wide">👔 Estilo Formal / Profesional</h4>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
+                        <div class="bg-slate-50 border border-slate-200 p-3.5 rounded-xl flex items-center justify-between">
+                            <div>
+                                <p class="text-[11px] font-bold text-slate-500 uppercase">Cómo saludar:</p>
+                                <p class="text-xs font-bold text-blue-900 mt-1">"${expr.formalGreeting}"</p>
+                            </div>
+                            <button onclick="speakSpecificTextCustom('${cleanFormalG}')" class="text-xs bg-white border border-slate-200 px-3 py-2 rounded-xl shadow-xs cursor-pointer font-bold hover:bg-blue-50">🔊</button>
                         </div>
-                        <button onclick="speakSpecificTextCustom('${cleanGreeting}')" class="text-xs bg-white border border-slate-200 p-2 rounded-xl shadow-xs cursor-pointer font-bold">🔊</button>
+                        <div class="bg-slate-50 border border-slate-200 p-3.5 rounded-xl flex items-center justify-between">
+                            <div>
+                                <p class="text-[11px] font-bold text-slate-500 uppercase">Cómo despedirse:</p>
+                                <p class="text-xs font-bold text-blue-900 mt-1">"${expr.formalFarewell}"</p>
+                            </div>
+                            <button onclick="speakSpecificTextCustom('${cleanFormalF}')" class="text-xs bg-white border border-slate-200 px-3 py-2 rounded-xl shadow-xs cursor-pointer font-bold hover:bg-blue-50">🔊</button>
+                        </div>
                     </div>
-                    <div class="bg-slate-50 border border-slate-100 p-3 rounded-xl flex items-center justify-between">
-                        <div>
-                            <p class="text-xs font-bold text-slate-700">🔥 Slang de Apertura:</p>
-                            <p class="text-xs font-semibold text-emerald-600 mt-1">"${expr.greetingSlang}"</p>
+                </div>
+
+                <div class="space-y-2.5 pt-2">
+                    <h4 class="text-xs font-extrabold text-emerald-700 uppercase tracking-wide">🔥 Estilo Nativo / Slang</h4>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
+                        <div class="bg-slate-50 border border-slate-200 p-3.5 rounded-xl flex items-center justify-between">
+                            <div>
+                                <p class="text-[11px] font-bold text-slate-500 uppercase">Slang de apertura:</p>
+                                <p class="text-xs font-bold text-emerald-900 mt-1">"${expr.slangGreeting}"</p>
+                            </div>
+                            <button onclick="speakSpecificTextCustom('${cleanSlangG}')" class="text-xs bg-white border border-slate-200 px-3 py-2 rounded-xl shadow-xs cursor-pointer font-bold hover:bg-emerald-50">🔊</button>
                         </div>
-                        <button onclick="speakSpecificTextCustom('${cleanSlang}')" class="text-xs bg-white border border-slate-200 p-2 rounded-xl shadow-xs cursor-pointer font-bold">🔊</button>
+                        <div class="bg-slate-50 border border-slate-200 p-3.5 rounded-xl flex items-center justify-between">
+                            <div>
+                                <p class="text-[11px] font-bold text-slate-500 uppercase">Slang de cierre:</p>
+                                <p class="text-xs font-bold text-emerald-900 mt-1">"${expr.slangFarewell}"</p>
+                            </div>
+                            <button onclick="speakSpecificTextCustom('${cleanSlangF}')" class="text-xs bg-white border border-slate-200 px-3 py-2 rounded-xl shadow-xs cursor-pointer font-bold hover:bg-emerald-50">🔊</button>
+                        </div>
                     </div>
                 </div>
             </div>
 
-            <!-- 🚪 SECCIÓN B: CIERRE Y DESPEDIDAS -->
-            <div class="space-y-2 pt-2 border-t border-slate-100">
-                <h4 class="text-xs font-bold text-rose-700 uppercase tracking-wide flex items-center gap-1.5">
-                    🚪 Section B: Cierre y Despedidas (Farewells)
-                </h4>
-                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                    <div class="bg-slate-50 border border-slate-100 p-3 rounded-xl flex items-center justify-between">
-                        <div>
-                            <p class="text-xs font-bold text-slate-700">💬 Cómo despedirse:</p>
-                            <p class="text-xs font-semibold text-rose-600 mt-1">"${expr.farewell}"</p>
-                        </div>
-                        <button onclick="speakSpecificTextCustom('${cleanFarewell}')" class="text-xs bg-white border border-slate-200 p-2 rounded-xl shadow-xs cursor-pointer font-bold">🔊</button>
+            <!-- BLOQUE DE ROLEPLAY ACTIVO -->
+            <div class="pt-4 border-t border-slate-100 space-y-3">
+                <div class="flex items-center justify-between">
+                    <h4 class="text-xs font-extrabold text-slate-800 uppercase tracking-wide">🤖 Step 2: Native Street Chat (Roleplay)</h4>
+                    <div class="flex gap-2">
+                        <button onclick="setRoleplayMode('formal')" id="btn-mode-formal" class="text-[11px] px-3 py-1 rounded-lg font-bold bg-blue-600 text-white cursor-pointer">👔 Formal</button>
+                        <button onclick="setRoleplayMode('slang')" id="btn-mode-slang" class="text-[11px] px-3 py-1 rounded-lg font-bold bg-slate-100 text-slate-700 cursor-pointer">😎 Slang</button>
                     </div>
-                    <div class="bg-slate-50 border border-slate-100 p-3 rounded-xl flex items-center justify-between">
-                        <div>
-                            <p class="text-xs font-bold text-slate-700">🔥 Slang de Cierre:</p>
-                            <p class="text-xs font-semibold text-rose-600 mt-1">"${expr.farewellSlang}"</p>
-                        </div>
-                        <button onclick="speakSpecificTextCustom('${cleanFarewellSlang}')" class="text-xs bg-white border border-slate-200 p-2 rounded-xl shadow-xs cursor-pointer font-bold">🔊</button>
+                </div>
+
+                <div id="roleplay-chat-box" class="bg-slate-50 border border-slate-200 rounded-xl p-4 h-48 overflow-y-auto space-y-3 text-xs">
+                    <div class="text-left">
+                        <span class="bg-white border border-slate-200 text-slate-800 px-3.5 py-2 rounded-2xl inline-block font-medium">
+                            Hey, hello ${appState.userName || 'Kevin'}! Let's get started. How is it going today?
+                        </span>
                     </div>
+                </div>
+
+                <div class="flex gap-2">
+                    <input type="text" id="roleplay-user-input" placeholder="Reply naturally to the tutor..." class="flex-1 bg-slate-50 border border-slate-200 rounded-xl px-4 py-2.5 text-xs text-slate-900 focus:outline-none focus:border-emerald-500 font-medium" onkeypress="if(event.key === 'Enter') sendRoleplayMessage()">
+                    <button onclick="sendRoleplayMessage()" class="bg-emerald-600 hover:bg-emerald-700 text-white font-extrabold px-5 py-2.5 rounded-xl text-xs shadow-xs cursor-pointer">Send ➔</button>
+                </div>
+
+                <div class="flex justify-between items-center pt-2">
+                    <span id="roleplay-turns-counter" class="text-[11px] font-bold text-slate-400">Turns: 0 / 3 completed</span>
+                    <button onclick="unlockNextStep('speaking', 'flashcards')" class="bg-emerald-600 hover:bg-emerald-700 text-white font-extrabold px-5 py-2.5 rounded-xl text-xs shadow-md cursor-pointer transition-all">
+                        Continuar a Flashcards ➔
+                    </button>
                 </div>
             </div>
         </div>
     `;
 }
 
+let roleplayMode = 'formal';
+function setRoleplayMode(mode) {
+    roleplayMode = mode;
+    document.getElementById('btn-mode-formal').className = mode === 'formal' ? "text-[11px] px-3 py-1 rounded-lg font-bold bg-blue-600 text-white cursor-pointer" : "text-[11px] px-3 py-1 rounded-lg font-bold bg-slate-100 text-slate-700 cursor-pointer";
+    document.getElementById('btn-mode-slang').className = mode === 'slang' ? "text-[11px] px-3 py-1 rounded-lg font-bold bg-emerald-600 text-white cursor-pointer" : "text-[11px] px-3 py-1 rounded-lg font-bold bg-slate-100 text-slate-700 cursor-pointer";
+}
+
+let roleplayTurns = 0;
 function sendRoleplayMessage() {
     const input = document.getElementById('roleplay-user-input');
-    const text = input.value.trim();
-    if (!text) return;
+    const msg = input ? input.value.trim() : '';
+    if (!msg) return;
 
-    const chatBox = document.getElementById('chat-messages-container');
-    
-    // Validar longitud mínima y evitar cosas al azar (ej. puras consonantes o palabras sin sentido)
-    const words = text.split(/\s+/);
-    const hasVowels = /[aeiouAEIOU]/.test(text);
-    
-    if (words.length < 2 || !hasVowels || text.length < 5) {
-        showCustomModal("Práctica en Inglés ⚠️", "Por favor, escribe una oración válida en inglés relacionada con la lección (mínimo 2 palabras con sentido).", "🗣️");
-        return;
-    }
-
-    let grammarNotice = "";
-    let cleanText = text.toLowerCase();
-    
-    if (cleanText.includes("i don't now") || cleanText.includes("i dont now")) {
-        grammarNotice = "<br><span class='text-[10px] text-amber-800 bg-amber-50 px-2.5 py-1 rounded-lg block mt-1.5 border border-amber-200'>💡 <b>Corrección del tutor:</b> Se escribe <b>'I don't know'</b>. <i>¿Por qué?</i> Usas 'know' (con k) para el verbo saber, y no 'now' (de ahora).</span>";
-    }
-
-    // Imprimir mensaje del usuario
-    chatBox.innerHTML += `
-        <div class="flex items-start gap-2.5 justify-end">
-            <div class="bg-emerald-500 text-white p-3.5 rounded-2xl shadow-sm text-xs max-w-[85%]">
-                <p class="font-extrabold text-emerald-100 mb-0.5">Tú (${appState.userName}):</p>
-                <p class="font-medium">${text}${grammarNotice}</p>
-            </div>
-            <div class="w-8 h-8 rounded-full bg-emerald-600 text-white flex items-center justify-center font-bold text-xs">😎</div>
-        </div>
-    `;
+    const chatBox = document.getElementById('roleplay-chat-box');
+    chatBox.innerHTML += `<div class="text-right"><span class="bg-emerald-600 text-white px-3.5 py-2 rounded-2xl inline-block font-medium">${msg}</span></div>`;
     input.value = '';
     chatBox.scrollTop = chatBox.scrollHeight;
 
-    roleplayInteractionCount++;
-    const maxTurns = getRequiredTurns();
-    document.getElementById('roleplay-counter-label').innerText = `Turns: ${roleplayInteractionCount} / ${maxTurns} completed`;
+    roleplayTurns++;
+    document.getElementById('roleplay-turns-counter').innerText = `Turns: ${roleplayTurns} / 3 completed`;
 
     setTimeout(() => {
-        const isInter = appState.currentMode === 'intermediate';
-        let currLesson = isInter ? appState.intermediateLesson : appState.beginnerLesson;
-        let lessonData = (isInter ? curriculumIntermediate : curriculumBeginner)[(currLesson - 1) % 40];
+        let reply = roleplayMode === 'slang' ? 
+            "Oh, sounds good! That's awesome, bro. Catch you later!" : 
+            "Very well, I appreciate your response. Have a wonderful day ahead, goodbye.";
         
-        let dynamicReply = "";
-        const mode = appState.roleplayMode || 'casual';
+        chatBox.innerHTML += `<div class="text-left"><span class="bg-white border border-slate-200 text-slate-800 px-3.5 py-2 rounded-2xl inline-block font-medium">${reply}</span></div>`;
+        chatBox.scrollTop = chatBox.scrollHeight;
+    }, 1000);
+}
 
-        if (roleplayInteractionCount < maxTurns) {
-            if (roleplayInteractionCount === maxTurns - 1) {
-                dynamicReply = `Great! We are wrapping up. How would you say goodbye using today's expressions? (Try: "${lessonData.expressions.farewell}")`;
-            } else {
-                if (mode === 'formal') {
-                    dynamicReply = `Thank you for sharing that, ${appState.userName || 'Kevin'}. Could you elaborate more using a formal greeting structure?`;
-                } else {
-                    dynamicReply = `That's cool! Tell me more using the phrases we practiced today.`;
-                }
-            }
-        } else {
-            dynamicReply = `¡Excelente trabajo! Has completado los ${maxTurns} turnos de práctica real. Haz clic en **'Validate Roleplay & Proceed ➔'** para pasar a la Bóveda de Vocabulario.`;
-        }
-        
-        chatBox.innerHTML += `
-            <div class="flex items-start gap-2.5">
-                <div class="w-8 h-8 rounded-full bg-sky-500 text-white flex items-center justify-center font-bold text-xs">🤖</div>
-                <div class="bg-white border border-slate-200 p-3.5 rounded-2xl shadow-sm text-xs text-slate-800 max-w-[85%]">
-                    <p class="font-extrabold text-sky-700 mb-0.5">Tutor (${mode.toUpperCase()}) &bull; Nativo:</p>
-                    <p class="font-medium">${dynamicReply}</p>
+function renderFlashcardsUI(lessonData) {
+    const container = document.getElementById('content-flashcards');
+    if (!container) return;
+
+    container.innerHTML = `
+        <div class="bg-white border border-slate-200 rounded-2xl p-6 shadow-sm space-y-6 text-center">
+            <div class="flex items-center justify-between">
+                <span class="text-xs font-bold uppercase tracking-wider text-emerald-600 bg-emerald-50 px-3.5 py-1.5 rounded-full">
+                    📚 Phase 2: Vocab Vault & Flashcards (10 Cards)
+                </span>
+                <span id="flash-badge" class="text-xs text-slate-400 font-bold">Word 1 of 10</span>
+            </div>
+
+            <div onclick="flipFlashcard()" class="w-full h-56 bg-slate-50 border-2 border-dashed border-slate-300 rounded-2xl flex flex-col items-center justify-center cursor-pointer p-6 transition-all hover:bg-slate-100 relative select-none shadow-xs">
+                <div id="flash-front" class="space-y-3">
+                    <span id="flash-img" class="text-4xl">📚</span>
+                    <h3 id="flash-term" class="text-2xl font-black text-slate-900">Term</h3>
+                    <p class="text-xs text-slate-400 font-bold uppercase tracking-wider">🔄 Haz clic para voltear</p>
+                </div>
+                <div id="flash-back" class="hidden space-y-3">
+                    <span class="text-xs font-extrabold text-emerald-600 uppercase bg-emerald-50 px-3 py-1 rounded-full">Significado y Ejemplo</span>
+                    <h3 id="flash-def" class="text-xl font-extrabold text-slate-900">Definición</h3>
+                    <p id="flash-example" class="text-xs text-slate-600 font-medium italic">Ejemplo de uso...</p>
                 </div>
             </div>
-        `;
-        chatBox.scrollTop = chatBox.scrollHeight;
-    }, 600);
-}
-function completeRoleplayPhase() {
-    const maxTurns = getRequiredTurns();
-    if (roleplayInteractionCount < maxTurns) {
-        showCustomModal("Incomplete", `Completa los ${maxTurns} turnos conversacionales requeridos para esta lección.`, "💬");
-        return;
-    }
-    unlockNextStep('speaking', 'flashcards');
+
+            <div class="flex items-center justify-between pt-2">
+                <button onclick="prevCard()" class="px-5 py-2.5 rounded-xl border border-slate-200 text-xs font-bold text-slate-700 hover:bg-slate-50 cursor-pointer">← Anterior</button>
+                <button onclick="nextCard()" class="bg-emerald-600 hover:bg-emerald-700 text-white font-extrabold px-6 py-2.5 rounded-xl text-xs shadow-md cursor-pointer">Siguiente ➔</button>
+            </div>
+        </div>
+    `;
+    window.currentFlashcardList = lessonData.flashcards;
 }
 
-function speakSpecificTextCustom(text) {
-    if (window.speechSynthesis.speaking) window.speechSynthesis.cancel();
-    const u = new SpeechSynthesisUtterance(text);
-    u.lang = 'en-US';
-    window.speechSynthesis.speak(u);
+let isCardFlipped = false;
+function flipFlashcard() {
+    isCardFlipped = !isCardFlipped;
+    document.getElementById('flash-front').classList.toggle('hidden', isCardFlipped);
+    document.getElementById('flash-back').classList.toggle('hidden', !isCardFlipped);
 }
 
-let activeRecognition = null;
-function toggleSpeechRecognition() {
-    const SpeechAPI = window.SpeechRecognition || window.webkitSpeechRecognition;
-    if (!SpeechAPI) return;
-    if (activeRecognition) { activeRecognition.stop(); activeRecognition = null; return; }
-    activeRecognition = new SpeechAPI();
-    activeRecognition.lang = 'en-US';
-    activeRecognition.onresult = (e) => {
-        document.getElementById('roleplay-user-input').value = e.results[0][0].transcript;
-        sendRoleplayMessage();
-        activeRecognition = null;
-    };
-    activeRecognition.onerror = () => { activeRecognition = null; };
-    activeRecognition.start();
-}
-
-function updateCard() {
-    if (activeFlashcards.length === 0) return;
-    const card = activeFlashcards[currentCard];
-    document.getElementById('flash-badge').innerText = `Word #${currentCard + 1} of ${activeFlashcards.length}`;
+function updateCardFlip() {
+    isCardFlipped = false;
+    const card = window.currentFlashcardList[currentCard];
+    document.getElementById('flash-badge').innerText = `Word ${currentCard + 1} of 10`;
     document.getElementById('flash-term').innerText = card.term;
-    document.getElementById('flash-def').innerText = card.def;
-    document.getElementById('flash-es').innerText = card.es;
-    document.getElementById('flash-img').innerText = card.emoji || "📚";
+    document.getElementById('flash-def').innerText = `${card.es} ${card.def}`;
+    document.getElementById('flash-example').innerText = `"${card.example}"`;
+    document.getElementById('flash-img').innerText = card.es;
+    document.getElementById('flash-front').classList.remove('hidden');
+    document.getElementById('flash-back').classList.add('hidden');
 }
 
 function nextCard() {
     currentCard++;
-    if (currentCard >= activeFlashcards.length) {
-        activeFlashcards.forEach(card => {
+    if (currentCard >= window.currentFlashcardList.length) {
+        window.currentFlashcardList.forEach(card => {
             if (!appState.learnedFlashcards.some(item => item.term === card.term)) {
                 appState.learnedFlashcards.push(card);
             }
         });
         saveState();
         unlockNextStep('flashcards', 'grammar');
-    } else { updateCard(); }
+    } else { updateCardFlip(); }
 }
 
 function prevCard() {
-    currentCard = (currentCard - 1 + activeFlashcards.length) % activeFlashcards.length;
-    updateCard();
+    currentCard = (currentCard - 1 + window.currentFlashcardList.length) % window.currentFlashcardList.length;
+    updateCardFlip();
 }
 
 function loadQuizQuestion() {
-    if (currentQuizIndex >= activeQuizzes.length) return;
-    activeQuizItem = activeQuizzes[currentQuizIndex];
-    document.getElementById('quiz-counter').innerText = `Challenge ${currentQuizIndex + 1} of ${activeQuizzes.length}`;
+    let lessonData = masterCurriculum[(appState.currentLesson - 1) % masterCurriculum.length];
+    window.activeQuizzes = lessonData.quizzes;
+    if (currentQuizIndex >= window.activeQuizzes.length) return;
+    activeQuizItem = window.activeQuizzes[currentQuizIndex];
+    
+    document.getElementById('quiz-counter').innerText = `Challenge ${currentQuizIndex + 1} of ${window.activeQuizzes.length}`;
     document.getElementById('quiz-title').innerText = activeQuizItem.title;
     document.getElementById('quiz-desc').innerText = activeQuizItem.desc;
     
@@ -611,83 +421,97 @@ function processQuizAnswer(isCorrect) {
 
     setTimeout(() => {
         currentQuizIndex++;
-        if (currentQuizIndex < activeQuizzes.length) { loadQuizQuestion(); }
+        if (currentQuizIndex < window.activeQuizzes.length) { loadQuizQuestion(); }
         else { unlockNextStep('grammar', 'listening'); }
     }, 2000);
 }
 
+function renderListeningUI(lessonData) {
+    window.currentListeningTarget = lessonData.listening;
+}
+
 function playListeningAudio() {
     if (window.speechSynthesis.speaking) window.speechSynthesis.cancel();
-    const u = new SpeechSynthesisUtterance(currentListeningTarget);
+    const u = new SpeechSynthesisUtterance(window.currentListeningTarget);
     u.lang = 'en-US';
     window.speechSynthesis.speak(u);
 }
 
 function checkListeningDictation() {
     const val = document.getElementById('listening-input').value.trim();
-    if (val.length > 3) {
-        document.getElementById('listening-result').innerHTML = '<span class="text-emerald-700 font-extrabold">🎯 Approved! Moving to Shadowing.</span>';
-        setTimeout(() => unlockNextTestOrStep(), 1000);
+    if (val.length > 5) {
+        document.getElementById('listening-result').innerHTML = '<span class="text-emerald-700 font-extrabold">🎯 Approved! Moving to Conversational Practice.</span>';
+        setTimeout(() => unlockNextStep('listening', 'conversation'), 1000);
     } else {
-        document.getElementById('listening-result').innerHTML = '<span class="text-rose-600 font-bold">⚠️ Try again.</span>';
+        document.getElementById('listening-result').innerHTML = '<span class="text-rose-600 font-bold">⚠️ Try again. Type the sentence heard.</span>';
     }
 }
 
-function unlockNextTestOrStep() {
-    unlockNextStep('listening', 'shadowing');
+function renderConversationUI(lessonData) {
+    const tutorMsg = document.getElementById('chat-tutor-message');
+    if (tutorMsg) tutorMsg.innerText = lessonData.chatPrompt;
 }
 
-function speakShadowText() {
-    speakSpecificTextCustom(document.getElementById('shadow-text').innerText.replace(/"/g, ''));
+function speakSpecificTextCustom(text) {
+    if (window.speechSynthesis.speaking) window.speechSynthesis.cancel();
+    const u = new SpeechSynthesisUtterance(text);
+    u.lang = 'en-US';
+    window.speechSynthesis.speak(u);
 }
 
-function verifyShadowingVoice() {
-    const SpeechAPI = window.SpeechRecognition || window.webkitSpeechRecognition;
-    if (!SpeechAPI) return;
-    const rec = new SpeechAPI();
-    rec.lang = 'en-US';
-    rec.onresult = () => {
-        document.getElementById('shadow-result').innerHTML = '<span class="text-emerald-700 font-extrabold">🌟 Lesson completed! Next lesson unlocked.</span>';
-        const isInter = appState.currentMode === 'intermediate';
-        if (isInter) appState.intermediateLesson++;
-        else appState.beginnerLesson++;
-        appState.unlockedSteps = { speaking: true, flashcards: false, grammar: false, listening: false, shadowing: false };
-        saveState();
-        setTimeout(() => loadCurrentLesson(), 1500);
-    };
-    rec.start();
+function sendChatTurn() {
+    const input = document.getElementById('chat-user-input');
+    const msg = input ? input.value.trim() : '';
+    if (!msg) return;
+
+    const chatContainer = document.getElementById('chat-messages-container');
+    chatContainer.innerHTML += `<div class="text-right"><span class="bg-emerald-600 text-white text-xs px-3.5 py-2 rounded-2xl inline-block font-medium">${msg}</span></div>`;
+    input.value = '';
+
+    setTimeout(() => {
+        chatContainer.innerHTML += `<div class="text-left space-y-1"><span class="bg-slate-100 text-slate-800 text-xs px-3.5 py-2 rounded-2xl inline-block font-medium">✨ Great job! Your sentence is well structured. Let's keep the native flow going.</span></div>`;
+        chatContainer.scrollTop = chatContainer.scrollHeight;
+        
+        document.getElementById('chat-turn-counter').innerText = "Turns: 4 / 4 completed";
+        document.getElementById('btn-finish-lesson').classList.remove('hidden');
+    }, 1000);
+}
+
+function finishCurrentLesson() {
+    showCustomModal("¡Lección Completada! 🌟", "Has dominado esta lección con éxito. ¡Siguiente lección desbloqueada!", "🚀");
+    appState.currentLesson++;
+    appState.unlockedSteps = { speaking: true, flashcards: false, grammar: false, listening: false, conversation: false };
+    saveState();
+    setTimeout(() => {
+        closeModal();
+        loadCurrentLesson();
+    }, 1500);
 }
 
 function openVocabularyVault() {
     const container = document.getElementById('vault-list-container');
     container.innerHTML = '';
     if (appState.learnedFlashcards.length === 0) {
-        container.innerHTML = `<div class="text-center py-8 text-xs text-slate-500 font-semibold">Bóveda vacía. Completa la Fase 2.</div>`;
+        container.innerHTML = `<div class="text-center py-8 text-xs text-slate-500 font-semibold">Bóveda vacía. ¡Completa flashcards para llenarla!</div>`;
     } else {
-        appState.learnedFlashcards.forEach(item => {
-            container.innerHTML += `
-                <div class="bg-purple-50/60 border border-purple-100 p-3.5 rounded-2xl flex items-center justify-between shadow-sm">
-                    <div class="flex items-center space-x-3.5">
-                        <div class="w-11 h-11 bg-white rounded-2xl flex items-center justify-center text-xl shadow-inner">${item.emoji || '📖'}</div>
-                        <div>
-                            <h4 class="text-xs sm:text-sm font-extrabold text-slate-900">${item.term} (${item.def})</h4>
-                            <p class="text-[11px] text-purple-700 font-extrabold">${item.es || ''}</p>
-                        </div>
-                    </div>
-                    <button onclick="speakSpecificTextCustom('${item.term}')" class="bg-white text-purple-700 border border-purple-200 px-3 py-1 rounded-xl text-xs font-extrabold">🔊</button>
-                </div>
-            `;
+        appState.learnedFlashcards.forEach(card => {
+            container.innerHTML += `<div class="bg-slate-50 border border-slate-200 p-3.5 rounded-xl flex items-center justify-between text-xs font-bold"><span>${card.es} ${card.term} - ${card.def}</span><span class="text-slate-400 font-normal">Vault</span></div>`;
         });
     }
     document.getElementById('vocabulary-vault-modal').classList.remove('hidden');
 }
 
-// ARRANQUE LIMPIO
-const setupContainer = document.getElementById('welcome-setup-container');
-if (!appState.hasStarted) {
-    if (setupContainer) setupContainer.classList.remove('hidden');
-} else {
-    if (setupContainer) setupContainer.classList.add('hidden');
-    loadCurrentLesson();
-    updateUIStats();
+function closeVocabularyVault() {
+    document.getElementById('vocabulary-vault-modal').classList.add('hidden');
 }
+
+window.onload = () => {
+    if (appState.hasStarted) {
+        const setupContainer = document.getElementById('welcome-setup-container');
+        if (setupContainer) setupContainer.classList.add('hidden');
+        updateUIStats();
+        loadCurrentLesson();
+    } else {
+        updateUIStats();
+    }
+};
