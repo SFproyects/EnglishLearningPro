@@ -441,12 +441,16 @@ function sendRoleplayMessage() {
     if (!text) return;
 
     const chatBox = document.getElementById('chat-messages-container');
-    if (text.split(/\s+/).length < 2) {
-        showCustomModal("Aviso", "Escribe al menos 2 palabras en inglés.", "⚠️");
+    
+    // Validar longitud mínima y evitar cosas al azar (ej. puras consonantes o palabras sin sentido)
+    const words = text.split(/\s+/);
+    const hasVowels = /[aeiouAEIOU]/.test(text);
+    
+    if (words.length < 2 || !hasVowels || text.length < 5) {
+        showCustomModal("Práctica en Inglés ⚠️", "Por favor, escribe una oración válida en inglés relacionada con la lección (mínimo 2 palabras con sentido).", "🗣️");
         return;
     }
 
-    // Corrección gramatical sutil si hay errores comunes
     let grammarNotice = "";
     let cleanText = text.toLowerCase();
     
@@ -454,6 +458,7 @@ function sendRoleplayMessage() {
         grammarNotice = "<br><span class='text-[10px] text-amber-800 bg-amber-50 px-2.5 py-1 rounded-lg block mt-1.5 border border-amber-200'>💡 <b>Corrección del tutor:</b> Se escribe <b>'I don't know'</b>. <i>¿Por qué?</i> Usas 'know' (con k) para el verbo saber, y no 'now' (de ahora).</span>";
     }
 
+    // Imprimir mensaje del usuario
     chatBox.innerHTML += `
         <div class="flex items-start gap-2.5 justify-end">
             <div class="bg-emerald-500 text-white p-3.5 rounded-2xl shadow-sm text-xs max-w-[85%]">
@@ -466,11 +471,11 @@ function sendRoleplayMessage() {
     input.value = '';
     chatBox.scrollTop = chatBox.scrollHeight;
 
+    roleplayInteractionCount++;
+    const maxTurns = getRequiredTurns();
+    document.getElementById('roleplay-counter-label').innerText = `Turns: ${roleplayInteractionCount} / ${maxTurns} completed`;
+
     setTimeout(() => {
-        roleplayInteractionCount++;
-        const maxTurns = getRequiredTurns();
-        document.getElementById('roleplay-counter-label').innerText = `Turns: ${roleplayInteractionCount} / ${maxTurns} completed`;
-        
         const isInter = appState.currentMode === 'intermediate';
         let currLesson = isInter ? appState.intermediateLesson : appState.beginnerLesson;
         let lessonData = (isInter ? curriculumIntermediate : curriculumBeginner)[(currLesson - 1) % 40];
@@ -480,17 +485,16 @@ function sendRoleplayMessage() {
 
         if (roleplayInteractionCount < maxTurns) {
             if (roleplayInteractionCount === maxTurns - 1) {
-                dynamicReply = `Nice! By the way, we have to go soon. How would you say goodbye? (Try using: "${lessonData.expressions.farewell}")`;
+                dynamicReply = `Great! We are wrapping up. How would you say goodbye using today's expressions? (Try: "${lessonData.expressions.farewell}")`;
             } else {
-                // Respuestas conversacionales reales como un nativo
                 if (mode === 'formal') {
-                    dynamicReply = `It is a pleasure to meet you too, ${appState.userName || 'Kevin'}. How are you finding this day so far?`;
+                    dynamicReply = `Thank you for sharing that, ${appState.userName || 'Kevin'}. Could you elaborate more using a formal greeting structure?`;
                 } else {
-                    dynamicReply = `Nice to meet you too, bro! What are you up to today?`;
+                    dynamicReply = `That's cool! Tell me more using the phrases we practiced today.`;
                 }
             }
         } else {
-            dynamicReply = `¡Genial! Has completado los ${maxTurns} turnos de charla natural. Haz clic en **'Validate Roleplay & Proceed ➔'** para pasar a la Bóveda de Vocabulario.`;
+            dynamicReply = `¡Excelente trabajo! Has completado los ${maxTurns} turnos de práctica real. Haz clic en **'Validate Roleplay & Proceed ➔'** para pasar a la Bóveda de Vocabulario.`;
         }
         
         chatBox.innerHTML += `
@@ -503,7 +507,7 @@ function sendRoleplayMessage() {
             </div>
         `;
         chatBox.scrollTop = chatBox.scrollHeight;
-    }, 1000);
+    }, 600);
 }
 function completeRoleplayPhase() {
     const maxTurns = getRequiredTurns();
