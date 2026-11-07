@@ -6,7 +6,7 @@
     <title>English Pro - Ultimate Progressive Edition</title>
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Tu archivo CSS original y separado -->
+    <!-- Tu CSS original intacto -->
     <link rel="stylesheet" href="style.css">
     <!-- Lucide Icons -->
     <script src="https://unpkg.com/lucide@latest"></script>
@@ -14,7 +14,7 @@
 <body class="font-sans antialiased min-h-screen flex flex-col justify-between selection:bg-emerald-500 selection:text-white">
 
     <!-- HEADER SUPERIOR -->
-    <header class="vibrant-card sticky top-0 z-40 text-slate-900 border-b border-slate-200/80 shadow-xs">
+    <header class="vibrant-card sticky top-0 z-50 text-slate-900 border-b border-slate-200/80 shadow-xs">
         <div class="max-w-4xl mx-auto px-4 py-3 flex items-center justify-between">
             <div class="flex items-center space-x-3">
                 <div class="bg-emerald-600 text-white p-2 rounded-xl shadow-xs">
@@ -40,6 +40,17 @@
     <!-- ESTADÍSTICAS Y PROGRESO DE SESIÓN -->
     <main class="max-w-4xl mx-auto px-4 py-6 w-full flex-1 space-y-6">
         
+        <!-- SELECTOR DE LECCIONES -->
+        <div class="vibrant-card p-4 rounded-2xl flex flex-col sm:flex-row items-center justify-between gap-3 text-slate-900">
+            <div class="flex items-center space-x-2">
+                <span class="text-xs font-extrabold text-slate-700">📌 Selección de Lección:</span>
+                <select id="lesson-selector" onchange="changeLessonDirectly(this.value)" class="vibrant-input rounded-xl px-3 py-1.5 text-xs font-bold text-slate-800 focus:outline-none cursor-pointer">
+                    <!-- Dinámico desde JS -->
+                </select>
+            </div>
+            <span class="text-[11px] font-bold text-emerald-600 bg-emerald-50 px-3 py-1 rounded-lg">⚡ Modo Progresivo Activo</span>
+        </div>
+
         <!-- BARRA DE DATOS Y Racha -->
         <div class="grid grid-cols-2 gap-3">
             <div class="vibrant-card p-3.5 rounded-2xl flex items-center space-x-3">
@@ -73,14 +84,10 @@
         <div id="lesson-view-container" class="space-y-6">
 
             <!-- FASE 1: POWER EXPRESSIONS & ROLEPLAY -->
-            <div id="content-speaking" class="space-y-4">
-                <!-- Inyectado dinámicamente desde app.js -->
-            </div>
+            <div id="content-speaking" class="space-y-4"></div>
 
             <!-- FASE 2: BÓVEDA DE FLASHCARDS -->
-            <div id="content-flashcards" class="hidden space-y-4">
-                <!-- Inyectado dinámicamente desde app.js -->
-            </div>
+            <div id="content-flashcards" class="hidden space-y-4"></div>
 
             <!-- FASE 3: GRAMÁTICA & RETOS DE CORRECCIÓN -->
             <div id="content-grammar" class="hidden space-y-4">
@@ -97,12 +104,8 @@
                         <p id="quiz-desc" class="text-xs text-slate-600 font-medium">Instrucción del reto gramatical...</p>
                     </div>
 
-                    <!-- OPCIONES MÚLTIPLES -->
-                    <div id="quiz-options" class="space-y-2.5">
-                        <!-- Inyectado por JS -->
-                    </div>
+                    <div id="quiz-options" class="space-y-2.5"></div>
 
-                    <!-- REPARACIÓN DE ERRORES -->
                     <div id="error-repair-container" class="hidden space-y-3">
                         <input type="text" id="error-input" placeholder="Type the correct English sentence here..." class="w-full vibrant-input rounded-xl px-4 py-3 text-xs text-slate-900 focus:outline-none font-medium">
                         <button onclick="submitErrorCorrection()" class="bg-emerald-600 hover:bg-emerald-700 text-white font-extrabold px-6 py-3 rounded-xl text-xs shadow-md cursor-pointer w-full">Corregir y Validar ➔</button>
@@ -178,9 +181,7 @@
                 <h3 class="text-base font-black flex items-center gap-2">📚 Bóveda de Flashcards Aprendidas</h3>
                 <button onclick="closeVocabularyVault()" class="text-slate-400 hover:text-slate-700 font-bold text-lg cursor-pointer">✕</button>
             </div>
-            <div id="vault-list-container" class="max-h-64 overflow-y-auto space-y-2">
-                <!-- Inyectado por JS -->
-            </div>
+            <div id="vault-list-container" class="max-h-64 overflow-y-auto space-y-2"></div>
         </div>
     </div>
 
