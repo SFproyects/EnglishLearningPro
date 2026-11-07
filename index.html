@@ -6,7 +6,7 @@
     <title>English Pro - Ultimate Progressive Edition</title>
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Tu CSS original intacto -->
+    <!-- Tu archivo CSS original y separado -->
     <link rel="stylesheet" href="style.css">
     <!-- Lucide Icons -->
     <script src="https://unpkg.com/lucide@latest"></script>
@@ -37,20 +37,9 @@
         </div>
     </header>
 
-    <!-- ESTADÍSTICAS Y PROGRESO DE SESIÓN -->
-    <main class="max-w-4xl mx-auto px-4 py-6 w-full flex-1 space-y-6">
+    <!-- CONTENEDOR PRINCIPAL CON ESPACIADO CORREGIDO -->
+    <main class="max-w-4xl mx-auto px-4 pt-6 pb-6 w-full flex-1 space-y-6">
         
-        <!-- SELECTOR DE LECCIONES -->
-        <div class="vibrant-card p-4 rounded-2xl flex flex-col sm:flex-row items-center justify-between gap-3 text-slate-900">
-            <div class="flex items-center space-x-2">
-                <span class="text-xs font-extrabold text-slate-700">📌 Selección de Lección:</span>
-                <select id="lesson-selector" onchange="changeLessonDirectly(this.value)" class="vibrant-input rounded-xl px-3 py-1.5 text-xs font-bold text-slate-800 focus:outline-none cursor-pointer">
-                    <!-- Dinámico desde JS -->
-                </select>
-            </div>
-            <span class="text-[11px] font-bold text-emerald-600 bg-emerald-50 px-3 py-1 rounded-lg">⚡ Modo Progresivo Activo</span>
-        </div>
-
         <!-- BARRA DE DATOS Y Racha -->
         <div class="grid grid-cols-2 gap-3">
             <div class="vibrant-card p-3.5 rounded-2xl flex items-center space-x-3">
