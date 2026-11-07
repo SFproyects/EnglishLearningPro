@@ -1,16 +1,14 @@
 lucide.createIcons();
 
 let appState = JSON.parse(localStorage.getItem('english_pro_ultimate_state')) || {
-    userName: '',
+    userName: 'Kevin',
     streak: 1,
     currentLesson: 1,
     unlockedSteps: { speaking: true, flashcards: false, grammar: false, listening: false, conversation: false },
     quizScores: [],
-    learnedFlashcards: [],
-    hasStarted: false
+    learnedFlashcards: []
 };
 
-// CURRICULUM ÚNICO: 40 Lecciones progresivas con Slang, Gramática y Conversación Real
 const masterCurriculum = [
     {
         theme: "Greetings, Slang & Introductions",
@@ -41,7 +39,6 @@ const masterCurriculum = [
     }
 ];
 
-// Generar las 40 lecciones automáticas basadas en los temas base
 for (let i = 2; i <= 40; i++) {
     let base = masterCurriculum[0];
     masterCurriculum.push({
@@ -112,26 +109,6 @@ function switchTab(tabName) {
     document.getElementById('content-' + tabName).classList.remove('hidden');
 }
 
-function completeSetupAndStart() {
-    const nameInput = document.getElementById('setup-name-input');
-    const userName = nameInput ? nameInput.value.trim() : '';
-
-    if (!userName) {
-        showCustomModal("Nombre Requerido ⚠️", "Por favor, escribe tu nombre para continuar.", "✍️");
-        return;
-    }
-
-    appState.userName = userName;
-    appState.hasStarted = true;
-    saveState();
-
-    const setupContainer = document.getElementById('welcome-setup-container');
-    if (setupContainer) setupContainer.classList.add('hidden');
-    
-    updateUIStats();
-    loadCurrentLesson();
-}
-
 function loadCurrentLesson() {
     let lessonData = masterCurriculum[(appState.currentLesson - 1) % masterCurriculum.length];
 
@@ -160,7 +137,7 @@ function renderPowerExpressionsUI(lessonData, lessonNumber) {
     const currentUserName = appState.userName || 'Kevin';
 
     container.innerHTML = `
-        <div class="bg-white border border-slate-200 rounded-2xl p-6 shadow-sm space-y-6">
+        <div class="vibrant-card rounded-2xl p-6 space-y-6">
             <div class="flex items-center justify-between">
                 <span class="text-xs font-bold uppercase tracking-wider text-emerald-600 bg-emerald-50 px-3.5 py-1.5 rounded-full">
                     ⚡ Phase 1: Power Expressions & Roleplay
@@ -168,7 +145,6 @@ function renderPowerExpressionsUI(lessonData, lessonNumber) {
                 <span class="text-xs text-slate-400 font-bold">Lesson ${lessonNumber} / 40</span>
             </div>
 
-            <!-- SECCIÓN 1: TEXTOS FORMAL Y SLANG -->
             <div class="space-y-4">
                 <h3 class="text-base font-extrabold text-slate-900">${lessonData.theme}</h3>
                 <p class="text-xs text-slate-600 font-medium">Estudia estas expresiones clave antes de arrancar el roleplay:</p>
@@ -214,7 +190,6 @@ function renderPowerExpressionsUI(lessonData, lessonNumber) {
                 </div>
             </div>
 
-            <!-- SECCIÓN 2: ROLEPLAY ACTIVO -->
             <div class="pt-4 border-t border-slate-200 space-y-3">
                 <div class="flex items-center justify-between">
                     <h4 class="text-xs font-extrabold text-slate-800 uppercase tracking-wide">🤖 Step 2: Native Street Chat (Roleplay)</h4>
@@ -233,7 +208,7 @@ function renderPowerExpressionsUI(lessonData, lessonNumber) {
                 </div>
 
                 <div class="flex gap-2">
-                    <input type="text" id="roleplay-user-input" placeholder="Reply naturally to the tutor..." class="flex-1 bg-slate-50 border border-slate-200 rounded-xl px-4 py-2.5 text-xs text-slate-900 focus:outline-none focus:border-emerald-500 font-medium" onkeypress="if(event.key === 'Enter') sendRoleplayMessage()">
+                    <input type="text" id="roleplay-user-input" placeholder="Reply naturally to the tutor..." class="flex-1 vibrant-input rounded-xl px-4 py-2.5 text-xs text-slate-900 focus:outline-none font-medium" onkeypress="if(event.key === 'Enter') sendRoleplayMessage()">
                     <button onclick="sendRoleplayMessage()" class="bg-emerald-600 hover:bg-emerald-700 text-white font-extrabold px-5 py-2.5 rounded-xl text-xs shadow-xs cursor-pointer">Send ➔</button>
                 </div>
 
@@ -284,7 +259,7 @@ function renderFlashcardsUI(lessonData) {
     if (!container) return;
 
     container.innerHTML = `
-        <div class="bg-white border border-slate-200 rounded-2xl p-6 shadow-sm space-y-6 text-center">
+        <div class="vibrant-card rounded-2xl p-6 space-y-6 text-center">
             <div class="flex items-center justify-between">
                 <span class="text-xs font-bold uppercase tracking-wider text-emerald-600 bg-emerald-50 px-3.5 py-1.5 rounded-full">
                     📚 Phase 2: Vocab Vault & Flashcards (10 Cards)
@@ -292,7 +267,7 @@ function renderFlashcardsUI(lessonData) {
                 <span id="flash-badge" class="text-xs text-slate-400 font-bold">Word 1 of 10</span>
             </div>
 
-            <div onclick="flipFlashcard()" class="w-full h-56 bg-slate-50 border-2 border-dashed border-slate-300 rounded-2xl flex flex-col items-center justify-center cursor-pointer p-6 transition-all hover:bg-slate-100 relative select-none shadow-xs">
+            <div onclick="flipFlashcard()" class="card-flip w-full h-56 bg-slate-50 border-2 border-dashed border-slate-300 rounded-2xl flex flex-col items-center justify-center cursor-pointer p-6 transition-all hover:bg-slate-100 relative select-none shadow-xs">
                 <div id="flash-front" class="space-y-3">
                     <span id="flash-img" class="text-4xl">📚</span>
                     <h3 id="flash-term" class="text-2xl font-black text-slate-900">Term</h3>
@@ -481,12 +456,6 @@ function closeVocabularyVault() {
 }
 
 window.onload = () => {
-    if (appState.hasStarted) {
-        const setupContainer = document.getElementById('welcome-setup-container');
-        if (setupContainer) setupContainer.classList.add('hidden');
-        updateUIStats();
-        loadCurrentLesson();
-    } else {
-        updateUIStats();
-    }
+    updateUIStats();
+    loadCurrentLesson();
 };
